@@ -1,0 +1,3 @@
+-- DML
+
+DELETE FROM tb_bloqueio_repasse_funcao WHERE PAP_CODIGO_ORIGEM = '2' AND PAP_CODIGO_DESTINO = '2' AND FUN_CODIGO = '240';

@@ -1,0 +1,3 @@
+-- DESENV-17041
+INSERT INTO tb_tipo_dispositivo (TDI_CODIGO, TDI_DESCRICAO) VALUES ('9', 'OUTROS');
+

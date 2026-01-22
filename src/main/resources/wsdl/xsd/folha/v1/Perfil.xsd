@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="Perfil">
+  <xsd:complexType name="Perfil">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="1" name="codigo" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="descricao" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="ativo" nillable="true" type="xsd:short"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="dataExpiracao" nillable="true" type="xsd:date"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="ipAcesso" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="ddnsAcesso" nillable="true" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,2 @@
+-- DESENV-13535
+UPDATE tb_menu SET MNU_IMAGEM = 'i-beneficios' WHERE MNU_CODIGO = '5';

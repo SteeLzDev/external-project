@@ -1,0 +1,775 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ModeloDirf" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="49da7362-7e69-41e8-9ea3-2cf5ac3b2fb6">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="877"/>
+	<parameter name="declaracao" class="com.zetra.econsig.folha.dirf.ConteudoDirf"/>
+    <parameter name="CAMINHO_LOGO" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="66">
+			<rectangle>
+				<reportElement x="1" y="0" width="276" height="62" uuid="1b2eea0b-58bc-40c5-8890-e69c0a54a27e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="277" y="0" width="276" height="62" uuid="a9a2b33c-4189-4640-9a46-c7fd1a736844"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="118" y="0" width="115" height="20" uuid="bc69e498-6940-4930-a847-2485b66521cf"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ministério da Fazenda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="87" y="13" width="186" height="20" uuid="1e3d5487-1bfd-43ae-89d1-e38950e7cc34"/>
+				<text><![CDATA[Secretaria da Receita Federal do Brasil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="76" y="27" width="197" height="20" uuid="4d8b976c-0ee4-4f63-b7a7-98656463260a"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Imposto sobre a Renda da Pessoa Física]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="119" y="42" width="100" height="20" uuid="eee83a68-ee4d-4fbc-9f2e-6a38fdf0d854"/>
+				<textElement>
+					<font fontName="Arial" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Exercício de " + $P{declaracao}.getDeclaracaoExercicio()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="309" y="9" width="209" height="40" uuid="f101a4ac-ac7d-45da-a01b-8e6c82f0e447"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Comprovante de Rendimentos Pagos e de Imposto sobre a Renda Retido na Fonte]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="351" y="42" width="122" height="20" uuid="7c2b7788-0072-4241-a6e8-deb8495df39e"/>
+				<textElement>
+					<font fontName="Arial" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ano-calendário de " + $P{declaracao}.getDeclaracaoAnoCalendario()]]></textFieldExpression>
+			</textField>
+			<image onErrorType="Blank" isLazy="true" isUsingCache="true">
+				<reportElement x="4" y="1" width="60" height="62" uuid="03ff0a6c-1408-45ef-848d-82331df6b157"/>
+				<imageExpression><![CDATA[$P{CAMINHO_LOGO}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="559" splitType="Stretch">
+			<rectangle>
+				<reportElement x="39" y="0" width="477" height="30" uuid="55c9d197-94a2-4c45-8bed-6b9925e7c8b6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="46" width="119" height="23" uuid="45c35449-4697-425d-b106-0b65c01e0e8d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="119" y="46" width="434" height="23" uuid="e952f48f-e48d-4f49-9f8f-ad3f45d4f0e8"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="86" width="119" height="23" uuid="801b5ce2-f933-4027-898c-f38278c8bdbd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="119" y="86" width="434" height="23" uuid="d94e76e2-e9d0-4abd-a48c-8c23a0ffbe35"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="108" width="552" height="20" uuid="91179aa3-34ba-481d-8c66-30f48d611afc"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="146" width="489" height="15" uuid="2df7d951-5a79-431a-b0dd-bea6502597b3"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="489" y="146" width="64" height="15" uuid="377b8f7b-ce78-4565-9cd2-6fdde4040644"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="161" width="489" height="15" uuid="0bc5bf1c-98bb-4694-8eed-72219bc8b57d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="489" y="161" width="64" height="15" uuid="247e38c7-6101-4a50-84ac-bc4ddacf2f09"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="175" width="489" height="25" uuid="c5bc83b6-750f-43f2-a7f6-f3cb078b57db"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="489" y="175" width="64" height="25" uuid="dabd7da6-a72d-49bb-9f33-cf74bc661efa"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="199" width="489" height="15" uuid="38595c55-041f-4057-a937-19d3f9e588bd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="489" y="199" width="64" height="15" uuid="42a07e38-24a2-4ffe-9992-1ea63ebb062c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="213" width="489" height="15" uuid="d6c4fa1a-d479-49df-883f-439165494ac0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="489" y="213" width="64" height="15" uuid="fd740e08-069a-492f-995a-fc6fe3290f4d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="246" width="489" height="15" uuid="1c1c3e40-8b5b-4f9d-afdd-a97713cd6a3a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="489" y="246" width="64" height="15" uuid="a61735b6-05ee-4df1-a488-3659436d3b8c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="260" width="489" height="15" uuid="00ca89fe-7d53-419b-a166-753a3680a6d0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="489" y="260" width="64" height="15" uuid="ddd44bda-526a-4c37-b4ec-d03244a85f32"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="274" width="489" height="15" uuid="cb5e99a5-b0db-4182-87d6-a1e4115dd01d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="489" y="274" width="64" height="15" uuid="c9488641-90af-40dd-9ed9-5351874f8d5b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="288" width="489" height="15" uuid="4652ce52-b833-43fd-8d26-2f551cba61b8"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="489" y="288" width="64" height="15" uuid="77516c30-0af4-40d0-800a-d42b989e3fb6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="302" width="489" height="15" uuid="16d7e482-07a6-4298-aacf-1b0d3bde728c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="489" y="302" width="64" height="15" uuid="05c64104-2814-41b6-b45a-cc880832d150"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="316" width="489" height="15" uuid="74f4d718-94da-472c-9a16-88401d3b9e30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="489" y="316" width="64" height="15" uuid="50a6aa26-ee92-4445-b0d0-b5fc108ae0ae"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="330" width="489" height="15" uuid="0aa14450-bbf3-4b90-b7f7-32b33d5c0a66"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="489" y="330" width="64" height="15" uuid="823cb830-1b03-46c8-afd8-c820eeb72c0b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="364" width="489" height="15" uuid="0c62a608-da81-4e40-9c35-868737efcfdb"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="489" y="364" width="64" height="15" uuid="f112212d-7fbe-4521-a72b-a97af545cbe9"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="378" width="489" height="15" uuid="ccfe6c7d-e32a-4713-85b1-09a8de828683"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="489" y="378" width="64" height="15" uuid="8d0b5316-0aa8-4887-b18f-4ea330dd18fe"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="392" width="489" height="15" uuid="74e43a09-a411-41cd-8269-0416563c19e6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="489" y="392" width="64" height="15" uuid="2965ab35-ed9a-415c-a45c-439392c36d50"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="427" width="299" height="15" uuid="e676ba4c-19a3-405e-8d74-5d28e38c9958"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="299" y="427" width="91" height="15" uuid="aecf2228-f410-42d2-8c2b-bb177292fe1c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="390" y="427" width="94" height="15" uuid="9e3d5b42-c465-448b-a67d-289aea84ecff"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="441" width="483" height="15" uuid="b5f70f78-22f6-4fd3-8372-e8213f84a933"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="463" width="489" height="15" uuid="d2bc84d4-e30f-4d82-863f-d8de53be736a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="489" y="463" width="64" height="15" uuid="f3e0b475-027e-4657-a91e-ac29e5942fcb"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="477" width="489" height="15" uuid="03ad5265-1663-43c2-bf45-1ad843544905"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="489" y="477" width="64" height="15" uuid="549ef70d-365a-42e9-8ae2-2e7d0edc3310"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="491" width="489" height="15" uuid="24c6d744-f37b-4a9d-ae10-53434af629e2"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="489" y="491" width="64" height="15" uuid="3d3642fc-cc70-405c-9095-57987a1d9397"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="505" width="489" height="15" uuid="b14f14f9-d6f9-4c8a-945d-6c082b18b63e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="489" y="505" width="64" height="15" uuid="97a39474-ff27-4b11-b077-b886e3f7ea10"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="519" width="489" height="15" uuid="13274854-cce9-40c7-a3fe-fe297ac1a23e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="489" y="519" width="64" height="15" uuid="58febcf6-e65c-4757-855a-d42d5ea9d922"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="533" width="489" height="25" uuid="7226afa9-3833-47c1-afb2-ca1722a3df5d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="489" y="533" width="64" height="25" uuid="6a226986-875e-4c43-996f-9e16b32df05c"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="43" y="5" width="470" height="21" uuid="7dafe3c0-2955-49be-80f6-6c15eeb10173"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Verifique as condições e o prazo para a apresentação da Declaração do Imposto sobre a Renda da Pessoa Física para este ano-calendário no sítio da Secretaria da Receita Federal do Brasil na Internet, no endereço <www.receita.fazenda.gov.br>.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="34" width="383" height="20" uuid="632481bd-90b0-41e0-b8e5-b14f5f5d7320"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[1. Fonte Pagadora Pessoa Jurídica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="47" width="26" height="14" uuid="2d37c735-b16a-4543-907e-05e7162ad289"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[CNPJ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="121" y="47" width="58" height="14" uuid="5f9a9ce0-fa79-455f-a09f-9970a821f92f"/>
+				<textElement>
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<text><![CDATA[Nome Empresarial]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="2" y="57" width="116" height="20" uuid="61aa56c4-16ea-420d-9239-944c5e021ea8"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{declaracao}.getDeclaranteCnpj()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="123" y="57" width="430" height="20" uuid="79bbde8e-9ee6-47fa-ac87-171a79cfd2fe"/>
+				<textFieldExpression><![CDATA[$P{declaracao}.getDeclaranteNome()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="73" width="383" height="20" uuid="1c9447d6-99fa-4b53-96f3-4b388652fb70"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[2. Pessoa Física Beneficiária dos Rendimentos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="86" width="26" height="14" uuid="ceacb4b5-a267-4600-81e7-25193b7b5993"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[CPF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="121" y="87" width="58" height="14" uuid="740e249d-0634-48f5-86ce-e2cf73dcd312"/>
+				<textElement>
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<text><![CDATA[Nome Completo]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1" y="95" width="116" height="20" uuid="ef7f524a-0daf-4092-b1e5-b11cb8c04ff5"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{declaracao}.getBeneficiarioCpf()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="123" y="95" width="430" height="20" uuid="b199cb42-0864-45ad-999e-0d1538757843"/>
+				<textFieldExpression><![CDATA[$P{declaracao}.getBeneficiarioNome()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="109" width="118" height="14" uuid="c10c94b3-0657-423a-a50a-b92d18f52e33"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[Natureza do Rendimento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="118" width="550" height="14" uuid="263baa68-99e8-4fc4-a8e3-66b5e5560453"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[Rendimentos do trabalho assalariado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="133" width="430" height="20" uuid="d01de0a4-4cdd-442a-a690-5ec2ff91a72f"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[3. Rendimentos Tributáveis, Deduções e Imposto sobre a Renda Retido da Fonte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="491" y="135" width="65" height="20" uuid="6d03f329-9b10-4f32-947a-dab810374c0c"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valores em reais]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="149" width="485" height="16" uuid="f9d9e09b-bad1-440f-96d4-c0b4aaf8b26f"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[1. Total dos rendimentos (inclusive férias)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="164" width="485" height="16" uuid="f4dbe304-608f-4241-a53f-105f78ec91db"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[2. Contribuição previdenciária oficial]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="178" width="485" height="19" uuid="f4a1d182-43ee-49c9-9672-570ba0a486a6"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[3. Contribuição a entidades de previdência complementar, pública ou privada, e a fundos de aposentadoria programada individual (Fapi)(preencher também o quadro 7)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="202" width="485" height="16" uuid="96b0cf94-6deb-4d7d-afc8-abf8c8f71ae4"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[4. Pensão alimentícia (preencher também o quadro 7)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="217" width="485" height="16" uuid="f8a26bb1-dc52-4fda-8f6f-d162f1a1db15"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[5. Imposto sobre a renda retido na fonte]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="489" y="149" width="61" height="16" uuid="6db1a37a-9b63-4674-bbc3-e6c81ddc8891"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{declaracao}.getValorItem_3_1()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="489" y="164" width="61" height="16" uuid="aafe0634-5501-4d27-85e2-5622ead51c50"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{declaracao}.getValorItem_3_2()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="489" y="178" width="61" height="19" uuid="d0ce4909-2d0a-4b91-a0d2-76132e50cd6c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{declaracao}.getValorItem_3_3()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="489" y="202" width="61" height="16" uuid="fbf42fc1-49e7-4fd8-81d8-1fb9a0526fc4"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{declaracao}.getValorItem_3_4()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="489" y="217" width="61" height="16" uuid="d4666a7a-af2c-44d4-99e8-2b627c8c22d9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{declaracao}.getValorItem_3_5()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="233" width="430" height="20" uuid="1f3590c1-1f05-4ce4-81f0-cfe3ca4555ac"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[4. Rendimentos Isentos e Não Tributáveis]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="491" y="235" width="65" height="20" uuid="9af95e0c-3be4-408b-b873-7e5a7a4941b5"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valores em reais]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="248" width="485" height="16" uuid="cbe9f692-a32f-4871-97e7-beadd7a60ff2"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[1. Parcela isenta dos proventos de aposentadoria, reserva remunerada, reforma e pensão (65 anos ou mais)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="263" width="485" height="16" uuid="08b43989-d39b-4e45-af98-349a92fee4b9"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[2. Diárias e ajuda de custo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="277" width="485" height="16" uuid="7b62432a-f8b3-4abf-9348-cc16b3ef7ab1"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[3. Pensão e proventos de aposentadoria ou reforma por moléstia grave; proventos de aposentadoria ou reforma por acidente em serviço]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="291" width="485" height="16" uuid="2d48d2f5-6154-4504-a518-338814021419"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[4. Lucros e dividendos, apurados a partir de 1996, pagos por pessoa jurídica (lucro real, presumido ou arbitrado)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="306" width="485" height="16" uuid="5752de75-066e-45b0-89cb-b6da2dad1ae1"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[5. Valores pagos ao titular ou sócio da microempresa ou empresa de pequeno porte, exceto pro labore, aluguéis ou serviços prestados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="319" width="485" height="16" uuid="faa70765-e41f-4d67-b6be-4873543ab473"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[6. Indenizações por rescisão de contrato de trabalho, inclusive a título de PDV e por acidente de trabalho]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="334" width="485" height="16" uuid="ad90de9b-5472-4119-8cd3-a84491eb81f3"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[7. Outros]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="489" y="248" width="61" height="16" uuid="64cc8430-9810-4d09-90d4-549c78c05b2e"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{declaracao}.getValorItem_4_1()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="489" y="263" width="61" height="16" uuid="cd91e7ae-2890-48ff-80b6-8fc4be0626ae"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{declaracao}.getValorItem_4_2()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="489" y="277" width="61" height="16" uuid="8c9a9da8-2a0c-4d57-8410-2b938dbc86a8"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{declaracao}.getValorItem_4_3()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="489" y="291" width="61" height="16" uuid="3a2063a0-ae5e-4566-ae4a-bc7d2de9040e"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{declaracao}.getValorItem_4_4()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="489" y="306" width="61" height="16" uuid="04f6d21f-88ff-41a2-8320-63a521a0e21b"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{declaracao}.getValorItem_4_5()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="489" y="319" width="61" height="16" uuid="e03f7923-694a-46b9-b06e-558836c2955f"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{declaracao}.getValorItem_4_6()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="489" y="334" width="61" height="16" uuid="ba4c41eb-8c37-4f30-a56c-bdb45692201b"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{declaracao}.getValorItem_4_7()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="351" width="430" height="20" uuid="3d81345d-f3a8-46ac-bcef-16ddb6551c8d"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5. Rendimentos Sujeitos à Tributação Exclusiva (rendimento líquido)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="491" y="352" width="65" height="20" uuid="8c32ff27-0da0-4912-822d-eeb3bd31deab"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valores em reais]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="367" width="485" height="16" uuid="538a2a7e-2133-40b4-bcc5-979b909b1438"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[1. Décimo terceiro salário]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="381" width="485" height="16" uuid="00ccb0f6-e650-4bd2-ad3c-322a777d96d0"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[2. Imposto sobre a renda retido na fonte sobre 13o salário]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="396" width="485" height="16" uuid="ab047655-fe4e-484c-98c9-ce506a5dc851"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[3. Outros]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="489" y="367" width="61" height="16" uuid="377f31d8-003e-4137-baee-40cc70f7117a"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{declaracao}.getValorItem_5_1()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="489" y="381" width="61" height="16" uuid="76b6ea9d-0193-4016-88f2-7efdc70d3c69"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{declaracao}.getValorItem_5_2()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="489" y="396" width="61" height="16" uuid="769504d7-2d05-48dc-8346-fa9ccc6d64f0"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{declaracao}.getValorItem_5_3()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="414" width="552" height="20" uuid="cc5ecb65-13b6-498d-8500-64268857be88"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[6. Rendimentos Recebidos Acumuladamente - Art. 12-A da Lei no 7.713, de 1988 (sujeitos à tributação exclusiva)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="430" width="229" height="16" uuid="59d1a0fe-97c9-48bf-88a9-ecb855853bed"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[6.1 Número do processo: (especificar)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="304" y="430" width="88" height="16" uuid="dca93d95-1b49-460f-813e-484d247718ba"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Quantidade de meses]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="394" y="430" width="88" height="16" uuid="2f8bfe80-5d71-42cb-b0e7-3b2243ee9292"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[0,0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="445" width="485" height="16" uuid="ee815156-d2fa-41d4-91cd-9d499743b500"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Natureza do rendimento: (especificar)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="491" y="452" width="65" height="20" uuid="c0d05754-b18b-4877-b00f-ea0c599a72bb"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valores em reais]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="466" width="485" height="16" uuid="137bb5b9-cca8-4332-aadd-9e5ee70a17b6"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[1. Total dos rendimentos tributáveis (inclusive férias e décimo terceiro salário)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="480" width="485" height="16" uuid="87e4b4ed-6d7b-42cd-887c-0c884d8c1daa"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[2. Exclusão: Despesas com a ação judicial]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="494" width="485" height="16" uuid="db961176-0a40-4f5c-8277-649ac969c595"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[3. Dedução: Contribuição previdenciária oficial]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="508" width="485" height="16" uuid="b338970f-b575-4080-bf07-fa2fd488f670"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[4. Dedução: Pensão alimentícia (preencher também o quadro 7)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="522" width="485" height="16" uuid="9e870c2e-5841-4db8-aa4d-848874fd3cc6"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[5. Imposto sobre a renda retido na fonte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="536" width="485" height="20" uuid="7090c83f-8808-4c41-b196-323492c57914"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[6. Rendimentos isentos de pensão, proventos de aposentadoria ou reforma por moléstia grave ou aposentadoria ou reforma por acidente em serviço]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="489" y="466" width="61" height="16" uuid="ed4b9c57-635a-4f98-80b4-817f4d160598"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{declaracao}.getValorItem_6_1()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="489" y="480" width="61" height="16" uuid="0b52a43a-307a-4b88-ae87-7c05e5f0dbdb"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{declaracao}.getValorItem_6_2()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="489" y="494" width="61" height="16" uuid="197deb9f-cde4-4833-b3e1-c02adce16baa"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{declaracao}.getValorItem_6_3()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="489" y="508" width="61" height="16" uuid="fe616186-6bb5-4e03-a898-47379babc15e"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{declaracao}.getValorItem_6_4()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="489" y="522" width="61" height="16" uuid="5d97bf11-4489-4ad7-ade4-db4d626106ed"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{declaracao}.getValorItem_6_5()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement x="489" y="538" width="61" height="16" uuid="7674c428-55b1-4b1f-a0fa-38385f2e6efc"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{declaracao}.getValorItem_6_6()]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="156" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="140" width="546" height="13" uuid="8fa005ba-e1bd-4d92-b5bb-dca090870331"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Aprovado pela IN RFB no 1.682, de 28 de dezembro de 2016.]]></text>
+			</staticText>
+			<elementGroup>
+				<staticText>
+					<reportElement x="1" y="102" width="552" height="20" uuid="43985885-b54d-4d8d-b088-652207243e49"/>
+					<textElement>
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[8. Responsável pelas Informações]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement x="1" y="116" width="220" height="20" uuid="89bdb748-32ac-45ca-b47b-18d08506f695"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="2" y="117" width="26" height="14" uuid="69d720d4-0a17-4f42-b830-4f69699993a9"/>
+					<textElement>
+						<font fontName="Arial" size="7"/>
+					</textElement>
+					<text><![CDATA[Nome]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="3" y="125" width="216" height="16" uuid="91095d57-e281-46e0-8e51-ee6716da1ecb"/>
+					<textElement>
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{declaracao}.getDeclaracaoResponsavel()]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement x="220" y="116" width="113" height="20" uuid="c4d0b434-dd21-470b-bf35-89ad97c2247c"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="222" y="117" width="26" height="14" uuid="17f7d3b0-a252-44fa-bfd0-732bd952408a"/>
+					<textElement>
+						<font fontName="Arial" size="7"/>
+					</textElement>
+					<text><![CDATA[Data]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="219" y="125" width="114" height="16" uuid="3ea00d6b-7daf-4bf5-83da-f3697287b287"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.zetra.econsig.helper.texto.DateHelper.format($P{declaracao}.getDeclaracaoData(), com.zetra.econsig.helper.texto.LocaleHelper.getDatePattern())]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement x="333" y="116" width="220" height="20" uuid="2a63ae0c-276f-4089-8a85-b9080c093580"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="335" y="117" width="49" height="14" uuid="1d350963-90c9-44fb-8920-3969609345fd"/>
+					<textElement>
+						<font fontName="Arial" size="7"/>
+					</textElement>
+					<text><![CDATA[Assinatura]]></text>
+				</staticText>
+			</elementGroup>
+			<elementGroup>
+				<staticText>
+					<reportElement x="1" y="3" width="552" height="20" uuid="4aadbadc-e960-4b41-9436-b3212fbc02b1"/>
+					<textElement>
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[7. Informações Complementares]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement stretchType="RelativeToBandHeight" x="1" y="17" width="552" height="82" uuid="ef7b3abd-b1d8-49c5-b8c7-02dd1f1de2e8"/>
+				</rectangle>
+				<textField isStretchWithOverflow="true">
+					<reportElement stretchType="RelativeToBandHeight" x="4" y="18" width="549" height="81" uuid="80b90562-7299-4e62-993a-77a3a7c9d7ed"/>
+					<textElement>
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{declaracao}.getComplemento()]]></textFieldExpression>
+				</textField>
+			</elementGroup>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement x="518" y="4" width="39" height="11" uuid="a218ac2b-6bb5-4dd4-8dd0-30b5a4559cda"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="bdab80f8-d5a7-4af3-b44f-6e803c04bc8c"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

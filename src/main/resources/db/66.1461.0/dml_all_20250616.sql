@@ -1,0 +1,3 @@
+-- DESENV-23581
+UPDATE tb_item_menu SET ITM_ATIVO = 1 WHERE ITM_CODIGO = '228';
+

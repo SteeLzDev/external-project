@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenc11="http://schemas.xmlsoap.org/soap/encoding/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="Anexo">
+  <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" schemaLocation="../../schemas.xmlsoap.org_soap_encoding.xsd"/>
+  <xsd:complexType name="Anexo">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="1" name="nomeArquivo" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="arquivo" type="soapenc11:base64"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,22 @@
+-- DESENV-20329
+INSERT INTO tb_tipo_param_sist_consignante (TPC_CODIGO, TPC_DESCRICAO, TPC_DOMINIO, TPC_VLR_DEFAULT, TPC_CSE_ALTERA, TPC_CSE_CONSULTA, TPC_SUP_ALTERA, TPC_SUP_CONSULTA, GPS_CODIGO)
+VALUES ('936', 'Simulador com CET por tipo de operação', 'SN', 'N', 'N', 'N', 'N', 'N', NULL);
+
+INSERT INTO tb_param_sist_consignante (TPC_CODIGO, CSE_CODIGO, PSI_VLR)
+VALUES ('936', '1', 'N');
+
+INSERT INTO tb_tipo_param_sist_consignante (TPC_CODIGO, TPC_DESCRICAO, TPC_DOMINIO, TPC_VLR_DEFAULT, TPC_CSE_ALTERA, TPC_CSE_CONSULTA, TPC_SUP_ALTERA, TPC_SUP_CONSULTA, GPS_CODIGO)
+VALUES ('937', 'Portabilidade sem leilão', 'SN', 'N', 'N', 'N', 'N', 'N', NULL);
+
+INSERT INTO tb_param_sist_consignante (TPC_CODIGO, CSE_CODIGO, PSI_VLR)
+VALUES ('937', '1', 'N');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16858', '6', '532', '/v3/solicitarPortabilidade', 'acao', 'portabilidadeSemLeilao', 1, 'S', 'S', NULL, 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16859', '6', '532', '/v3/solicitarPortabilidade', 'acao', 'detalhesPortabilidade', 1, 'S', 'S', NULL, 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16860', '6', '532', '/v3/solicitarPortabilidade', 'acao', 'efetivarPortabilidade', 1, 'S', 'S', NULL, 'N', '2');
+

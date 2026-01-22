@@ -1,0 +1,73 @@
+-- DESENV-17191
+INSERT INTO tb_item_menu (ITM_CODIGO, MNU_CODIGO, ITM_DESCRICAO, ITM_ATIVO, ITM_SEQUENCIA, ITM_SEPARADOR, ITM_CENTRALIZADOR) 
+VALUES ('268', '1', 'Registrar Valor Liberado', 1, 25, 'N', 'S');
+
+INSERT INTO tb_tipo_ocorrencia (TOC_CODIGO, TOC_DESCRICAO) 
+VALUES ('196', 'Registrado que o valor foi liberado ao servidor');
+
+INSERT INTO tb_funcao (FUN_CODIGO, GRF_CODIGO, FUN_DESCRICAO, FUN_PERMITE_BLOQUEIO, FUN_EXIGE_TMO, FUN_EXIGE_SEGUNDA_SENHA_CSE, FUN_AUDITAVEL, FUN_RESTRITA_NCA, FUN_EXIGE_SEGUNDA_SENHA_SUP, FUN_EXIGE_SEGUNDA_SENHA_ORG, FUN_EXIGE_SEGUNDA_SENHA_CSA, FUN_EXIGE_SEGUNDA_SENHA_COR, FUN_LIBERA_MARGEM)
+VALUES ('522', '1', 'Registrar Valor Liberado', 'N', 'S', 'P', 'S', 'N', 'P', 'P', 'P', 'N', 'N');
+
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16501', '1', '522', '/v3/registrarValorLiberadoServidor', 'acao', 'iniciar', 1, 'S', 'S', '268', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16502', '2', '522', '/v3/registrarValorLiberadoServidor', 'acao', 'iniciar', 1, 'S', 'S', '268', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16503', '3', '522', '/v3/registrarValorLiberadoServidor', 'acao', 'iniciar', 1, 'S', 'S', '268', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16504', '4', '522', '/v3/registrarValorLiberadoServidor', 'acao', 'iniciar', 1, 'S', 'S', '268', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16505', '7', '522', '/v3/registrarValorLiberadoServidor', 'acao', 'iniciar', 1, 'S', 'S', '268', 'N', '2');
+
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16506', '1', '522', '/v3/registrarValorLiberadoServidor', 'acao', 'pesquisarConsignacao', 1, 'S', 'S', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16507', '2', '522', '/v3/registrarValorLiberadoServidor', 'acao', 'pesquisarConsignacao', 1, 'S', 'S', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16508', '3', '522', '/v3/registrarValorLiberadoServidor', 'acao', 'pesquisarConsignacao', 1, 'S', 'S', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16509', '4', '522', '/v3/registrarValorLiberadoServidor', 'acao', 'pesquisarConsignacao', 1, 'S', 'S', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16510', '7', '522', '/v3/registrarValorLiberadoServidor', 'acao', 'pesquisarConsignacao', 1, 'S', 'S', 'N', '2');
+
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16511', '1', '522', '/v3/registrarValorLiberadoServidor', 'acao', 'pesquisarServidor', 1, 'S', 'S', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16512', '2', '522', '/v3/registrarValorLiberadoServidor', 'acao', 'pesquisarServidor', 1, 'S', 'S', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16513', '3', '522', '/v3/registrarValorLiberadoServidor', 'acao', 'pesquisarServidor', 1, 'S', 'S', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16514', '4', '522', '/v3/registrarValorLiberadoServidor', 'acao', 'pesquisarServidor', 1, 'S', 'S', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16515', '7', '522', '/v3/registrarValorLiberadoServidor', 'acao', 'pesquisarServidor', 1, 'S', 'S', 'N', '2');
+
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16516', '1', '522', '/v3/registrarValorLiberadoServidor', 'acao', 'confirmarRegistro', 1, 'S', 'S', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16517', '2', '522', '/v3/registrarValorLiberadoServidor', 'acao', 'confirmarRegistro', 1, 'S', 'S', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16518', '3', '522', '/v3/registrarValorLiberadoServidor', 'acao', 'confirmarRegistro', 1, 'S', 'S', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16519', '4', '522', '/v3/registrarValorLiberadoServidor', 'acao', 'confirmarRegistro', 1, 'S', 'S', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16520', '7', '522', '/v3/registrarValorLiberadoServidor', 'acao', 'confirmarRegistro', 1, 'S', 'S', 'N', '2');

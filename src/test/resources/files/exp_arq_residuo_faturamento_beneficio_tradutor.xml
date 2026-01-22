@@ -1,0 +1,43 @@
+<Documento>
+
+        <Mapeamento Entrada="RSE_MATRICULA" Saida="RSE_MATRICULA" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="BFC_CPF" Saida="BFC_CPF" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="MARGEM_NAO_CONSIGNAVEL" Saida="MARGEM_NAO_CONSIGNAVEL" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="ADE_ANO_MES_INI_POS" Saida="ADE_ANO_MES_INI_POS" Tipo="Data" FormatoEntrada="yyyy-MM-dd" FormatoSaida="dd/MM/yyyy" Default="" />
+        <Mapeamento Entrada="PRAZO" Saida="PRAZO" Tipo="Texto" Default="1" />
+        <Mapeamento Entrada="PRD_PAGAS" Saida="PRD_PAGAS" Tipo="Texto" Default="0" />
+        <Mapeamento Entrada="CNV_COD_VERBA_RESIDUO" Saida="CNV_COD_VERBA_RESIDUO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="SVC_DESCRICAO_RESIDUO" Saida="SVC_DESCRICAO_RESIDUO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="CBE_NUMERO" Saida="CBE_NUMERO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="BFC_CPF" Saida="BFC_CPF_VIDA" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="ENS_CEP" Saida="ENS_CEP" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="BEN_CODIGO_REGISTRO" Saida="BEN_CODIGO_REGISTRO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="ORG_IDENTIFICADOR_BENEFICIO" Saida="ORG_IDENTIFICADOR_BENEFICIO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="ENS_CODIGO_MUNICIPIO" Saida="ENS_CODIGO_MUNICIPIO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="BEN_CODIGO_PLANO" Saida="BEN_CODIGO_PLANO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="BFC_DATA_NASCIMENTO" Saida="BFC_DATA_NASCIMENTO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="DATA_CORRENTE" Saida="DATA_CORRENTE" Tipo="Data" FormatoEntrada="yyyy-MM-dd HH:mm:ss" FormatoSaida="dd/MM/yyyy HH:mm:ss" Default="" />
+        <Mapeamento Entrada="ENS_BAIRRO" Saida="ENS_BAIRRO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="ENS_MUNICIPIO" Saida="ENS_MUNICIPIO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="ENS_COMPLEMENTO" Saida="ENS_COMPLEMENTO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="ENS_NUMERO" Saida="ENS_NUMERO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="ENS_LOGRADOURO" Saida="ENS_LOGRADOURO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="BFC_ESTADO_CIVIL" Saida="BFC_ESTADO_CIVIL" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="GRP_CODIGO" Saida="GRP_CODIGO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="MDE_CODIGO" Saida="MDE_CODIGO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="AFB_ITEM_LOTE" Saida="AFB_ITEM_LOTE" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="BFC_NOME_MAE" Saida="BFC_NOME_MAE" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="BFC_NOME" Saida="BFC_NOME" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="BEN_CODIGO_CONTRATO" Saida="BEN_CODIGO_CONTRATO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="AFB_NUMERO_LOTE" Saida="AFB_NUMERO_LOTE" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="BFC_ORDEM_DEPENDENCIA" Saida="BFC_ORDEM_DEPENDENCIA" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="BFC_RG" Saida="BFC_RG" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="BFC_SEXO" Saida="BFC_SEXO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="VALOR_SUBSIDIO" Saida="VALOR_SUBSIDIO" Tipo="Texto" Default="0" />
+        <Mapeamento Entrada="BFC_TELEFONE" Saida="BFC_TELEFONE" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="TIB_CODIGO" Saida="TIB_CODIGO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="ENS_UF" Saida="ENS_UF" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="MARGEM_NAO_CONSIGNAVEL" Saida="MARGEM_NAO_CONSIGNAVEL" Tipo="Texto" Default="" />
+
+</Documento>
+

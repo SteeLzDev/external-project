@@ -1,0 +1,3 @@
+-- DESENV-17524
+UPDATE tb_tipo_dado_adicional SET TDA_DOMINIO = 'ALFA' WHERE TDA_CODIGO = '53';
+

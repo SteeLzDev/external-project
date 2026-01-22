@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="Servidor"
+    xmlns:ns13="SituacaoServidor">
+  <xsd:import namespace="SituacaoServidor" schemaLocation="SituacaoServidor.xsd"/>
+  <xsd:complexType name="Servidor">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="1" name="servidor" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="cpf" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="matricula" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="estabelecimentoCodigo" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="estabelecimento" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="orgaoCodigo" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="orgao" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="dataNascimento" nillable="true" type="xsd:date"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="situacaoServidor" nillable="true" type="ns13:SituacaoServidor"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="categoria" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="dataAdmissao" nillable="true" type="xsd:date"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="prazoServidor" nillable="true" type="xsd:int"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="salarioLiquido" nillable="true" type="xsd:double"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="salarioBruto" nillable="true" type="xsd:double"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

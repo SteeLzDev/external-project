@@ -1,0 +1,102 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="GerencialGeral" language="java" pageWidth="535" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" scriptletClass="com.zetra.econsig.report.reports.HeadingsScriptlet" uuid="e2f3483c-e4a9-4a78-b220-f4ec47b87da6">
+	<property name="ireport.scriptlethandling" value="2"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="60"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box padding="0" leftPadding="2" rightPadding="2"/>
+	</style>
+	<parameter name="CAMINHO_LOGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SUBTITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Subtitulo do relatório]]></description>
+	</parameter>
+	<parameter name="TEXTO_RODAPE" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Nome do Gestor(Consignante)]]></description>
+	</parameter>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Titulo do relatorio]]></description>
+	</parameter>
+	<parameter name="HeadingsCollection" forPrompting="false" class="java.util.Collection"/>
+	<parameter name="QTDE_SVC_TOTAL" forPrompting="false" class="java.lang.Integer"/>
+	<parameter name="QTDE_SVC_ATIVOS_TOTAL" forPrompting="false" class="java.lang.Integer"/>
+	<parameter name="QTDE_SVC_INATIVOS_TOTAL" forPrompting="false" class="java.lang.Integer"/>
+	<parameter name="QTDE_CONTRATOS_POR_SVC" forPrompting="false" class="java.lang.Integer"/>
+	<parameter name="TOTAL_PRESTACAO_EMPRESTIMO" forPrompting="false" class="java.math.BigDecimal"/>
+	<parameter name="SALDO_DEVEDOR_EMPRESTIMO" forPrompting="false" class="java.math.BigDecimal"/>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<parameter name="QTDE_CONTRATOS_ATIVOS" forPrompting="false" class="java.lang.Integer"/>
+	<parameter name="QTDE_CONTRATOS_POR_CATEGORIA" forPrompting="false" class="java.lang.Integer"/>
+	<parameter name="QTDE_TOTAL_CONTRATOS_ATIVOS" forPrompting="false" class="java.lang.Integer"/>
+	<query language="sql"><![CDATA[SELECT DISTINCT tb_usuario.usu_codigo,tb_usuario.usu_login,tb_usuario.usu_nome,tb_usuario.stu_codigo,tb_usuario.usu_tipo_bloq,tb_perfil.per_codigo,tb_perfil.per_descricao,tb_usuario.usu_data_cad,tb_usuario.usu_data_exp_senha,IF(tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo, 'CSE', (IF(tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo, 'CSA', (IF(tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo, 'COR', 'ORG'))))) AS TIPO,IF(tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo, tb_consignante.cse_nome, (IF(tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo, tb_consignataria.csa_nome, (IF(tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo, CONCAT(CONCAT(CSA_COR.csa_nome,  ' - '  ), tb_correspondente.cor_nome), tb_orgao.org_nome))))) AS ENTIDADE FROM tb_usuario LEFT OUTER JOIN tb_usuario_cse ON (tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo) LEFT OUTER JOIN tb_consignante ON (tb_usuario_cse.cse_codigo = tb_consignante.cse_codigo) LEFT OUTER JOIN tb_usuario_csa ON (tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo) LEFT OUTER JOIN tb_consignataria ON (tb_usuario_csa.csa_codigo = tb_consignataria.csa_codigo) LEFT OUTER JOIN tb_usuario_cor ON (tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo) LEFT OUTER JOIN tb_correspondente ON (tb_usuario_cor.cor_codigo = tb_correspondente.cor_codigo) LEFT OUTER JOIN tb_consignataria CSA_COR ON (tb_correspondente.csa_codigo = CSA_COR.csa_codigo) LEFT OUTER JOIN tb_usuario_org ON (tb_usuario.usu_codigo = tb_usuario_org.usu_codigo) LEFT OUTER JOIN tb_orgao ON (tb_usuario_org.org_codigo = tb_orgao.org_codigo) LEFT OUTER JOIN tb_perfil_usuario ON (tb_perfil_usuario.usu_codigo = tb_usuario.usu_codigo) LEFT OUTER JOIN tb_perfil ON (tb_perfil.per_codigo = tb_perfil_usuario.per_codigo) WHERE (tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_org.usu_codigo) AND ( tb_usuario_org.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_cse.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_csa.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_cor.usu_codigo = tb_usuario.usu_codigo )  AND tb_usuario.stu_codigo IN ( 1,2 ) ORDER BY  TIPO, tb_usuario.usu_nome]]></query>
+	<field name="svcDescricao" class="java.lang.String"/>
+	<field name="quantidade" class="java.lang.Long"/>
+	<field name="vlrTotal" class="java.math.BigDecimal"/>
+	<field name="vlrPorcentagemSvc" class="java.math.BigDecimal"/>
+	<field name="qtdPorcentagemSvc" class="java.math.BigDecimal"/>
+	<variable name="IMPRIMIR_SOMENTE_10" class="java.lang.Boolean">
+		<initialValueExpression><![CDATA[new java.lang.Boolean($P{QTDE_SVC_ATIVOS_TOTAL}.intValue() >= 10)]]></initialValueExpression>
+	</variable>
+	<background splitType="Stretch"/>
+	<title height="87" splitType="Stretch">
+		<element kind="textField" uuid="52a4f9c8-005a-41a6-817a-82d8abce2aaf" key="staticText-1" x="26" y="72" width="233" height="14" markup="none" fontName="Arial" fontSize="9.0" bold="true">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialconsignataria.contratosservico.servicos", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="7560efdb-0ac5-4c59-9b94-6db839562b14" key="staticText-2" x="259" y="72" width="175" height="14" markup="none" fontName="Arial" fontSize="9.0" bold="true" hTextAlign="Right">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialconsignataria.contratosservico.quantidade.contratos.porcentagem", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="bfbe683e-8dfa-4152-93c5-977cf52e4300" key="staticText-3" x="1" y="49" width="522" height="17" markup="none" fontName="Arial" fontSize="10.0" bold="false">
+			<printWhenExpression><![CDATA[$V{IMPRIMIR_SOMENTE_10}]]></printWhenExpression>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("mensagem.relatorio.gerencialconsignataria.contratosservico.servicos.mais.utilizados", $P{RESPONSAVEL})+":"]]></expression>
+		</element>
+		<element kind="textField" uuid="db3b961d-edd4-4e6f-9894-65714e1f4d13" key="staticText-8" x="410" y="72" width="113" height="14" markup="none" fontName="Arial" fontSize="9.0" bold="true" hTextAlign="Right">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialconsignataria.contratosservico.valor.total.porcentagem", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="acc7deba-3efd-4654-8092-39364cc6c324" key="textField-4" x="1" y="0" width="522" height="23" fontSize="10.0" blankWhenNull="false" bold="false">
+			<expression><![CDATA["3.2.5. "+com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialconsignataria.contratoscategoria.contratos.servicos", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="67a99cce-7f72-4d49-8d13-0fc15354e55e" key="textField-3" x="1" y="24" width="522" height="25" blankWhenNull="false">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("mensagem.relatorio.gerencialconsignataria.contratoscategoria.existem.contratos.ativos", $P{RESPONSAVEL}, com.zetra.econsig.helper.texto.NumberHelper.formata(Double.parseDouble($P{QTDE_TOTAL_CONTRATOS_ATIVOS}.toString()), "#,###; -#,###"))]]></expression>
+		</element>
+	</title>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader splitType="Stretch"/>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<element kind="textField" uuid="dd6ba689-bb77-4eaf-8004-9de7388f7a27" key="textField-1" x="26" y="0" width="233" height="14" fontSize="8.0" blankWhenNull="false">
+				<expression><![CDATA[$F{svcDescricao}]]></expression>
+			</element>
+			<element kind="textField" uuid="d4fb23f0-5bff-4481-ad1c-1f92ae922ddb" key="textField-2" x="259" y="0" width="175" height="14" fontSize="8.0" pattern="#,###0.00" blankWhenNull="false" hTextAlign="Right">
+				<expression><![CDATA[$F{qtdPorcentagemSvc}]]></expression>
+			</element>
+			<element kind="textField" uuid="8ac3cfc5-e903-4d2a-8186-3a3661eba5d7" key="textField-7" x="410" y="0" width="113" height="14" fontSize="8.0" pattern="#,###0.00" blankWhenNull="false" hTextAlign="Right">
+				<expression><![CDATA[$F{vlrPorcentagemSvc}]]></expression>
+			</element>
+		</band>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter splitType="Stretch"/>
+	<summary height="397" splitType="Stretch">
+		<element kind="chart" chartType="bar3D" uuid="b7513c2d-381e-4ed1-8d10-c3c4f81b7b7d" key="element-1" x="1" y="2" width="528" height="376" showLegend="false" customizerClass="com.zetra.econsig.report.jasper.LabelCustomizer">
+			<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() > 0)]]></printWhenExpression>
+			<dataset kind="category">
+				<series>
+					<seriesExpression><![CDATA[$F{svcDescricao}]]></seriesExpression>
+					<categoryExpression><![CDATA[$F{svcDescricao}]]></categoryExpression>
+					<valueExpression><![CDATA[$F{vlrTotal}]]></valueExpression>
+				</series>
+			</dataset>
+			<plot labelRotation="60.0" categoryAxisTickLabelRotation="60.0">
+				<categoryAxisLabelFont fontSize="8.0"/>
+				<categoryAxisTickLabelFont fontSize="8.0"/>
+				<valueAxisLabelFont fontSize="8.0"/>
+				<valueAxisTickLabelFont fontSize="8.0"/>
+				<itemLabel/>
+			</plot>
+		</element>
+	</summary>
+</jasperReport>

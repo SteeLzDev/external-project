@@ -1,0 +1,3 @@
+-- DESENV-22745
+UPDATE tb_tipo_param_svc SET TPS_CSA_ALTERA = 'S' WHERE TPS_CODIGO = '118';
+UPDATE tb_tipo_param_svc SET TPS_CSA_ALTERA = 'S' WHERE TPS_CODIGO = '119';

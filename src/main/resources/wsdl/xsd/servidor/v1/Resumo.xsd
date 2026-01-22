@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="Resumo">
+  <xsd:complexType name="Resumo">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="1" name="adeNumero" nillable="false" type="xsd:long"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="adeIdentificador" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="indice" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="responsavel" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="servico" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="codVerba" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="dataReserva" nillable="true" type="xsd:dateTime"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="valorParcela" nillable="false" type="xsd:double"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="prazo" nillable="false" type="xsd:int"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="pagas" nillable="true" type="xsd:int"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="situacao" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="servicoCodigo" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="statusCodigo" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="consignataria" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="consignatariaCodigo" nillable="true" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

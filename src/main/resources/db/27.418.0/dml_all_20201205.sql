@@ -1,0 +1,6 @@
+-- DESENV-9277
+UPDATE tb_acesso_recurso SET ACR_RECURSO = '/v3/liberarConsignacao', ACR_PARAMETRO = 'acao', ACR_OPERACAO = 'liberarConsignacao' WHERE ACR_CODIGO in ('10527','11641','11642','11643','12492');
+
+DELETE FROM tb_ajuda WHERE ACR_CODIGO IN ('10525','10526','10528','12112');
+DELETE FROM tb_acesso_usuario WHERE ACR_CODIGO IN ('10525','10526','10528','12112');
+DELETE FROM tb_acesso_recurso WHERE ACR_CODIGO IN ('10525','10526','10528','12112');

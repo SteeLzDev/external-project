@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="ValidarDocumentacao">
+   <xsd:complexType name="ValidarDocumentacao">
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="consignataria" nillable="false" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="consignatariaCodigo" nillable="false" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="responsavel" nillable="false" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="adeNumero" nillable="false" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="adeIdentificador" nillable="false" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="dataReserva" nillable="false" type="xsd:dateTime"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="servico" nillable="false" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="codVerba" nillable="false" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="orgao" nillable="false" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="dataInicial" nillable="true" type="xsd:dateTime"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="dataFinal" nillable="true" type="xsd:dateTime"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="valorParcela" nillable="false" type="xsd:double"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="valorLiberado" nillable="false" type="xsd:double"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="valorDevido" nillable="false" type="xsd:double"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="prazo" nillable="false" type="xsd:int"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="servidor" nillable="false" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="cpf" nillable="false" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="quantValidacao" nillable="false" type="xsd:int"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="origem" nillable="false" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="nomeArquivoRGFrente" nillable="true" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="nomeArquivoRGVerso" nillable="true" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="nomeArquivoMandadoPag" nillable="true" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="nomeArquivoContraCheque" nillable="true" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="nomeArquivoOutro" nillable="true" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="1" name="observacao" nillable="false" type="xsd:string"/>
+       </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

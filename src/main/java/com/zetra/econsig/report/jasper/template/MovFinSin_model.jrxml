@@ -1,0 +1,229 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="Taxas" language="java" pageWidth="842" pageHeight="870" whenNoDataType="AllSectionsNoDetail" columnWidth="782" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" formatFactoryClass="com.zetra.econsig.report.format.DefaultFormatFactory" uuid="16dc8771-54c0-46b7-8981-f4eed010f4a8">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="iso-8859-1"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="93"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="borda" backcolor="#FFFFFF" vTextAlign="Top" vImageAlign="Top" fontName="Arial">
+		<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+			<pen lineWidth="0.5"/>
+			<topPen lineWidth="0.5"/>
+			<leftPen lineWidth="0.5"/>
+			<bottomPen lineWidth="0.5"/>
+			<rightPen lineWidth="0.5"/>
+		</box>
+	</style>
+	<style name="bordaNumerica" hTextAlign="Right" vTextAlign="Top" hImageAlign="Right" vImageAlign="Top" fontName="Arial">
+		<box>
+			<pen lineWidth="0.5"/>
+			<topPen lineWidth="0.5"/>
+			<leftPen lineWidth="0.5"/>
+			<bottomPen lineWidth="0.5"/>
+			<rightPen lineWidth="0.5"/>
+		</box>
+	</style>
+	<style name="cabecalho" mode="Opaque" backcolor="#999999" hTextAlign="Left" vTextAlign="Top" hImageAlign="Left" vImageAlign="Top">
+		<box>
+			<pen lineWidth="0.5"/>
+			<topPen lineWidth="0.5"/>
+			<leftPen lineWidth="0.5"/>
+			<bottomPen lineWidth="0.5"/>
+			<rightPen lineWidth="0.5"/>
+		</box>
+	</style>
+	<parameter name="CAMINHO_LOGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SUBTITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Subtitulo do relatório]]></description>
+	</parameter>
+	<parameter name="TEXTO_RODAPE" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Nome do Gestor(Consignante)]]></description>
+	</parameter>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="CSA" forPrompting="false" class="java.util.List"/>
+	<parameter name="SERVICO" forPrompting="false" class="java.util.List"/>
+	<parameter name="SITUACAO" forPrompting="false" class="java.util.List"/>
+	<parameter name="ORGAO" forPrompting="false" class="java.util.List"/>
+	<parameter name="ESTABELECIMENTO" forPrompting="false" class="java.util.List"/>
+	<parameter name="CORRESPONDENTE" forPrompting="false" class="java.util.List"/>
+	<parameter name="DATA_INICIO" forPrompting="false" class="java.util.List"/>
+	<parameter name="COD_VERBA" forPrompting="false" class="java.util.List"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[".\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CSA_DATA_INICIO_LIQ" forPrompting="false" class="java.util.List"/>
+	<parameter name="CSA_DATA_INICIO_REJ" forPrompting="false" class="java.util.List"/>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<query language="sql"><![CDATA[select csa_nome, 0.00 as cft_vlr from tb_consignataria;]]></query>
+	<field name="NUM_PARCELAS" class="java.lang.Number"/>
+	<field name="TOTAL_PRESTACOES" class="java.math.BigDecimal"/>
+	<field name="TOTAL_PREVISTO" class="java.math.BigDecimal"/>
+	<variable name="TOTAL_PARCELAS" calculation="Sum" class="java.lang.Long">
+		<expression><![CDATA[$F{NUM_PARCELAS} == null ? new java.lang.Long(0) : $F{NUM_PARCELAS}.longValue()]]></expression>
+		<initialValueExpression><![CDATA[new java.lang.Long(0)]]></initialValueExpression>
+	</variable>
+	<variable name="SOMATORIO_PRESTACOES" calculation="Sum" class="java.math.BigDecimal">
+		<expression><![CDATA[$F{TOTAL_PRESTACOES}]]></expression>
+		<initialValueExpression><![CDATA[new java.math.BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="SOMATORIO_PREVISTO" calculation="Sum" class="java.math.BigDecimal">
+		<expression><![CDATA[$F{TOTAL_PREVISTO}]]></expression>
+		<initialValueExpression><![CDATA[new java.math.BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<background splitType="Stretch"/>
+	<title splitType="Stretch"/>
+	<pageHeader height="113" splitType="Stretch">
+		<element kind="image" uuid="67474260-9265-41b9-a9e3-88d1faee7186" key="image-1" x="1" y="1" width="63" height="20" onErrorType="Blank" usingCache="true" lazy="true">
+			<expression><![CDATA[$P{CAMINHO_LOGO}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="b8f0a056-ebbf-467a-965f-2561196a422b" key="textField-11" x="68" y="1" width="708" height="20" blankWhenNull="false">
+			<expression><![CDATA[$P{TITULO}]]></expression>
+		</element>
+		<element kind="textField" uuid="68fcd850-9155-4be5-85ec-209318a5fbf5" key="textField-14" x="2" y="21" width="708" height="86" fontName="Arial" fontSize="8.0" blankWhenNull="false" bold="true">
+			<expression><![CDATA[$P{SUBTITULO}]]></expression>
+		</element>
+	</pageHeader>
+	<columnHeader height="17" splitType="Stretch"/>
+	<detail>
+		<band height="17" splitType="Stretch"/>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter height="31" splitType="Stretch">
+		<element kind="textField" uuid="c9ef1b6f-a108-40ed-b13a-f2887356cfb5" key="textField" x="0" y="4" width="676" height="13" fontName="Times New Roman" fontSize="7.0" blankWhenNull="true">
+			<expression><![CDATA[$P{TEXTO_RODAPE}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="99233cdd-cae2-4e18-a5bd-41a44108bf93" key="textField-9" x="736" y="4" width="45" height="13" evaluationTime="Report" blankWhenNull="false" hTextAlign="Left">
+			<expression><![CDATA[" " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.de.pagina", $P{RESPONSAVEL}, $V{PAGE_NUMBER}.toString())]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="184b2549-631a-42b7-a7ac-a281cd19b637" key="textField-10" x="676" y="4" width="60" height="13" blankWhenNull="false" hTextAlign="Right">
+			<expression><![CDATA[$V{PAGE_NUMBER} + ""]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+	</pageFooter>
+	<summary height="261" splitType="Stretch">
+		<element kind="textField" uuid="4f3123e3-7314-4753-b104-4ab12ee26bd0" key="staticText-1" x="14" y="6" width="105" height="13" markup="none" fontSize="10.0" underline="false">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.sinteticomovfin.total.parcelas", $P{RESPONSAVEL}) + ":"]]></expression>
+		</element>
+		<element kind="textField" uuid="4dc50b21-ee82-4eb9-a909-f21114f39491" key="staticText-2" x="508" y="6" width="179" height="13" markup="none" fontSize="10.0" textAdjust="StretchHeight">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.sinteticomovfin.total.vlr.parcelas.realizadas", $P{RESPONSAVEL}) + ":"]]></expression>
+		</element>
+		<element kind="textField" uuid="b84b7605-eef1-4461-bd7a-ce3c4f03eeb4" key="textField-12" x="119" y="6" width="51" height="13" fontSize="10.0" blankWhenNull="false">
+			<expression><![CDATA[$V{TOTAL_PARCELAS}]]></expression>
+		</element>
+		<element kind="textField" uuid="c0e662ba-8450-472c-98be-4d9554592504" key="textField-13" x="687" y="6" width="88" height="13" fontSize="10.0" pattern="#,##0.00" blankWhenNull="false">
+			<expression><![CDATA[$V{SOMATORIO_PRESTACOES}]]></expression>
+		</element>
+		<element kind="subreport" uuid="226adf99-2581-447c-8721-2747f2a324f9" key="subreport-1" positionType="Float" mode="Transparent" x="14" y="30" width="220" height="29" usingCache="true" removeLineWhenBlank="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!$P{CSA}.isEmpty())]]></printWhenExpression>
+			<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{CSA})]]></dataSourceExpression>
+			<expression><![CDATA[$P{SUBREPORT_DIR} + "CHART-GRID.jasper"]]></expression>
+			<parameter name="TITULO">
+				<expression><![CDATA["" + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.consignataria.singular", $P{RESPONSAVEL}).toUpperCase()]]></expression>
+			</parameter>
+		</element>
+		<element kind="subreport" uuid="e26dda6a-3683-483d-b43b-ec2536fd8e94" key="subreport-2" positionType="Float" mode="Transparent" x="288" y="30" width="220" height="29" usingCache="true" removeLineWhenBlank="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!$P{SERVICO}.isEmpty())]]></printWhenExpression>
+			<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{SERVICO})]]></dataSourceExpression>
+			<expression><![CDATA[$P{SUBREPORT_DIR} + "CHART-GRID.jasper"]]></expression>
+			<parameter name="TITULO">
+				<expression><![CDATA["" + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.servico.singular", $P{RESPONSAVEL}).toUpperCase()]]></expression>
+			</parameter>
+		</element>
+		<element kind="subreport" uuid="9597a374-9abb-4748-96f3-66598e82d0eb" key="subreport-3" positionType="Float" mode="Transparent" x="555" y="30" width="220" height="29" usingCache="true" removeLineWhenBlank="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!$P{SITUACAO}.isEmpty())]]></printWhenExpression>
+			<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{SITUACAO})]]></dataSourceExpression>
+			<expression><![CDATA[$P{SUBREPORT_DIR} + "CHART-GRID.jasper"]]></expression>
+			<parameter name="TITULO">
+				<expression><![CDATA["" + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.consignacao.status", $P{RESPONSAVEL}).toUpperCase()]]></expression>
+			</parameter>
+		</element>
+		<element kind="subreport" uuid="30ac077a-cb8a-45ad-8243-7c3299791400" key="subreport-4" positionType="Float" mode="Transparent" x="14" y="30" width="220" height="29" usingCache="true" removeLineWhenBlank="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!$P{CORRESPONDENTE}.isEmpty())]]></printWhenExpression>
+			<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{CORRESPONDENTE})]]></dataSourceExpression>
+			<expression><![CDATA[$P{SUBREPORT_DIR} + "CHART-GRID.jasper"]]></expression>
+			<parameter name="TITULO">
+				<expression><![CDATA["" + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.correspondente.singular", $P{RESPONSAVEL}).toUpperCase()]]></expression>
+			</parameter>
+		</element>
+		<element kind="subreport" uuid="0380911b-b599-47f9-b999-d18f57cbf72b" key="subreport-5" positionType="Float" mode="Transparent" x="555" y="72" width="220" height="27" usingCache="true" removeLineWhenBlank="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!$P{ORGAO}.isEmpty())]]></printWhenExpression>
+			<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{ORGAO})]]></dataSourceExpression>
+			<expression><![CDATA[$P{SUBREPORT_DIR} + "CHART-GRID.jasper"]]></expression>
+			<parameter name="TITULO">
+				<expression><![CDATA["" + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.orgao.singular", $P{RESPONSAVEL}).toUpperCase()]]></expression>
+			</parameter>
+		</element>
+		<element kind="subreport" uuid="1ab03d07-090e-4f70-b38c-e5d5f97c50e1" key="subreport-6" positionType="Float" mode="Transparent" x="288" y="72" width="220" height="27" usingCache="true" removeLineWhenBlank="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!$P{ESTABELECIMENTO}.isEmpty())]]></printWhenExpression>
+			<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{ESTABELECIMENTO})]]></dataSourceExpression>
+			<expression><![CDATA[$P{SUBREPORT_DIR} + "CHART-GRID.jasper"]]></expression>
+			<parameter name="TITULO">
+				<expression><![CDATA["" + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.estabelecimento.singular", $P{RESPONSAVEL}).toUpperCase()]]></expression>
+			</parameter>
+		</element>
+		<element kind="subreport" uuid="ba4820eb-8356-4952-8639-ae7441d6f916" key="subreport-8" positionType="Float" mode="Transparent" x="14" y="72" width="220" height="27" usingCache="true" removeLineWhenBlank="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!$P{DATA_INICIO}.isEmpty())]]></printWhenExpression>
+			<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{DATA_INICIO})]]></dataSourceExpression>
+			<expression><![CDATA[$P{SUBREPORT_DIR} + "CHART-GRID.jasper"]]></expression>
+			<parameter name="TITULO">
+				<expression><![CDATA["" + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.sinteticomovfin.datainicio", $P{RESPONSAVEL}).toUpperCase()]]></expression>
+			</parameter>
+		</element>
+		<element kind="subreport" uuid="ff11eb6a-dbee-4ebc-beed-a70c7a63d58b" key="subreport-9" positionType="Float" mode="Transparent" x="14" y="114" width="220" height="27" usingCache="true" removeLineWhenBlank="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!$P{COD_VERBA}.isEmpty())]]></printWhenExpression>
+			<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{COD_VERBA})]]></dataSourceExpression>
+			<expression><![CDATA[$P{SUBREPORT_DIR} + "CHART-GRID.jasper"]]></expression>
+			<parameter name="TITULO">
+				<expression><![CDATA["" + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.convenio.codigo.verba", $P{RESPONSAVEL}).toUpperCase()]]></expression>
+			</parameter>
+		</element>
+		<element kind="subreport" uuid="19e4cbde-20f2-4c78-a14b-59d906ec4301" key="subreport-10" positionType="Float" mode="Transparent" x="14" y="159" width="761" height="35" usingCache="true" removeLineWhenBlank="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!$P{CSA_DATA_INICIO_LIQ}.isEmpty())]]></printWhenExpression>
+			<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{CSA_DATA_INICIO_LIQ})]]></dataSourceExpression>
+			<expression><![CDATA[$P{SUBREPORT_DIR} + "CHART-GRID-LINE.jasper"]]></expression>
+			<parameter name="TITULO">
+				<expression><![CDATA["" + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.sinteticomovfin.liquidadas", $P{RESPONSAVEL}).toUpperCase()]]></expression>
+			</parameter>
+		</element>
+		<element kind="subreport" uuid="a17f1b0a-96e3-406c-9f40-de5c245d5f66" key="subreport-11" positionType="Float" mode="Transparent" x="14" y="209" width="761" height="35" usingCache="true" removeLineWhenBlank="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!$P{CSA_DATA_INICIO_REJ}.isEmpty())]]></printWhenExpression>
+			<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{CSA_DATA_INICIO_REJ})]]></dataSourceExpression>
+			<expression><![CDATA[$P{SUBREPORT_DIR} + "CHART-GRID-LINE.jasper"]]></expression>
+			<parameter name="TITULO">
+				<expression><![CDATA["" + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.sinteticomovfin.rejeitadas", $P{RESPONSAVEL}).toUpperCase()]]></expression>
+			</parameter>
+		</element>
+		<element kind="textField" uuid="4b42fec0-3832-4197-be80-3c6915dbe533" key="staticText-2" x="288" y="6" width="114" height="13" markup="none" fontSize="10.0">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.sinteticomovfin.total.vlr.ade", $P{RESPONSAVEL}) + ":"]]></expression>
+		</element>
+		<element kind="textField" uuid="c0e662ba-8450-472c-98be-4d9554592504" key="textField-13" x="403" y="6" width="88" height="13" fontSize="10.0" pattern="#,##0.00" blankWhenNull="false">
+			<expression><![CDATA[$V{SOMATORIO_PREVISTO}]]></expression>
+		</element>
+	</summary>
+</jasperReport>

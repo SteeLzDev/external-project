@@ -1,0 +1,11 @@
+-- DESENV-17457
+UPDATE tb_relatorio_filtro SET RFI_SEQUENCIA = RFI_SEQUENCIA + 1 WHERE REL_CODIGO = 'ocorrencia_autorizacao' AND RFI_SEQUENCIA >= 13;
+
+INSERT INTO tb_relatorio_filtro (REL_CODIGO, TFR_CODIGO, RFI_EXIBE_CSE, RFI_EXIBE_CSA, RFI_EXIBE_COR, RFI_EXIBE_ORG, RFI_EXIBE_SER, RFI_SEQUENCIA, RFI_PARAMETRO, RFI_EXIBE_SUP) 
+VALUES ('ocorrencia_autorizacao', 'campo_info_group_oca_ade', 1, 0, 0, 1, 0, 13, NULL, 1);
+
+UPDATE tb_relatorio_filtro SET RFI_SEQUENCIA = RFI_SEQUENCIA + 1 WHERE REL_CODIGO = 'ocorrencia_autorizacao' AND RFI_SEQUENCIA >= 14;
+
+INSERT INTO tb_relatorio_filtro (REL_CODIGO, TFR_CODIGO, RFI_EXIBE_CSE, RFI_EXIBE_CSA, RFI_EXIBE_COR, RFI_EXIBE_ORG, RFI_EXIBE_SER, RFI_SEQUENCIA, RFI_PARAMETRO, RFI_EXIBE_SUP) 
+VALUES ('ocorrencia_autorizacao', 'campo_ordenacao_ade', 1, 0, 0, 1, 0, 14, NULL, 1);
+

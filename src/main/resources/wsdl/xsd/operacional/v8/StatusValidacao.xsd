@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="StatusValidacao">
+   <xsd:complexType name="StatusValidacao">
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="pendente" nillable="false" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="aprovada" nillable="false" type="xsd:boolean"/>
+       </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

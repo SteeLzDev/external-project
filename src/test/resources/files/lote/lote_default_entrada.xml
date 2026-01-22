@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Documento ID="LEIAUTE DE LOTE - TESTE AUTOMATIZADO">
+  <Parametro Nome="Limite" Valor="30000"/>
+
+  <Atributo Nome="MATRICULA"              Inicio="0"   Tamanho="10"  Alinhamento="Direita"  Complemento="#"/>
+  <Atributo Nome="CPF"                    Inicio="11"  Tamanho="14"  />
+  <Atributo Nome="NOME"                   Inicio="26"  Tamanho="50"  Alinhamento="Esquerda" Complemento="#"/>  
+  <Atributo Nome="VALOR"                  Inicio="77"  Tamanho="9"   Alinhamento="Direita"  Complemento="0"/>
+  <Atributo Nome="DATA_REF"               Inicio="87"  Tamanho="10"  />
+  <Atributo Nome="PRAZO"                  Inicio="98"  Tamanho="3"   Alinhamento="Direita"  Complemento="0"/>
+  <Atributo Nome="VERBA"                  Inicio="102" Tamanho="4"   Alinhamento="Direita"  Complemento="#"/>  
+  <Atributo Nome="CSA_IDENTIFICADOR"      Inicio="107" Tamanho="14"  Alinhamento="Direita"  Complemento="#"/>
+  <Atributo Nome="ACAO"                   Inicio="122" Tamanho="1"   />
+  <Atributo Nome="TMO_IDENTIFICADOR"      Inicio="124" Tamanho="3"   Alinhamento="Direita"  Complemento="#"/>
+  <Atributo Nome="VLR_LIBERADO"           Inicio="128" Tamanho="9"   Alinhamento="Direita"  Complemento="0"/>
+  <Atributo Nome="ORGAO"                  Inicio="138" Tamanho="9"   Alinhamento="Direita"  Complemento="#"/>
+  <Atributo Nome="VALOR_ANTIGO"           Inicio="148" Tamanho="9"   Alinhamento="Direita"  Complemento="0"/>
+  <Atributo Nome="ADE_ALT_ENT_BLOQUEADAS" Inicio="158" Tamanho="1"   />
+  <Atributo Nome="INDICE"                 Inicio="160" Tamanho="5"   Alinhamento="Direita"  Complemento="#"/>
+</Documento>

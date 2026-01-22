@@ -1,0 +1,52 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="InadimplenciaGeral" language="java" pageWidth="525" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="525" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" scriptletClass="com.zetra.econsig.report.reports.HeadingsScriptlet" uuid="957f252b-c414-480d-be51-b1ddb03c082a">
+	<property name="ireport.scriptlethandling" value="2"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="itemMargin" value="0"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box padding="0" leftPadding="2" rightPadding="2"/>
+	</style>
+	<parameter name="HeadingsCollection" forPrompting="false" class="java.util.Collection"/>
+	<query language="sql"><![CDATA[]]></query>
+	<field name="quantidade" class="java.lang.Long"/>
+	<field name="descricao" class="java.lang.String"/>
+	<background splitType="Stretch"/>
+	<title splitType="Stretch"/>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader splitType="Stretch"/>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter splitType="Stretch"/>
+	<summary height="215" splitType="Stretch">
+		<element kind="chart" chartType="bar" uuid="7d3b730b-ceae-41bd-a057-98f353446d4e" x="0" y="0" width="525" height="215" showLegend="false" theme="default" customizerClass="com.zetra.econsig.report.jasper.dinamico.InadimplenciaCustomizer">
+			<dataset kind="category">
+				<series>
+					<seriesExpression><![CDATA[$F{descricao}]]></seriesExpression>
+					<categoryExpression><![CDATA[$F{descricao}]]></categoryExpression>
+					<valueExpression><![CDATA[$F{quantidade}]]></valueExpression>
+					<labelExpression><![CDATA[$F{quantidade}.toString()]]></labelExpression>
+				</series>
+			</dataset>
+			<plot orientation="Horizontal" labelRotation="0.0" categoryAxisVerticalTickLabels="true" valueAxisVerticalTickLabels="false" showTickMarks="true" showTickLabels="true" showLabels="true" categoryAxisTickLabelRotation="0.0">
+				<categoryAxisLabelFont fontSize="8.0"/>
+				<categoryAxisTickLabelFont fontSize="5.0"/>
+				<valueAxisLabelExpression><![CDATA[]]></valueAxisLabelExpression>
+				<valueAxisLabelFont fontSize="8.0"/>
+				<valueAxisTickLabelFont fontSize="8.0"/>
+				<itemLabel>
+					<font fontSize="6.0"/>
+				</itemLabel>
+				<seriesColor order="0" color="#007EFF"/>
+				<seriesColor order="1" color="#007EFF"/>
+			</plot>
+		</element>
+	</summary>
+</jasperReport>

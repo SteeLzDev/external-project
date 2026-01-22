@@ -1,0 +1,513 @@
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 7.0.2-31532122640f516c6d17238ae0e41a08113d5ac0  -->
+<jasperReport name="MarketShareCsa" language="java" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="782" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="83c7c004-0a6a-49dc-8b02-f4437efc04a8">
+	<property name="net.sf.jasperreports.chart.pie.ignore.duplicated.key" value="true"/>
+	<property name="ireport.zoom" value="4.177248169415656"/>
+	<property name="ireport.x" value="1827"/>
+	<property name="ireport.y" value="214"/>
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box leftPadding="2" rightPadding="2"/>
+	</style>
+	<parameter name="CAMINHO_LOGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SUBTITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Subtitulo do relatï¿½rio]]></description>
+	</parameter>
+	<parameter name="TEXTO_RODAPE" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Nome do Gestor(Consignante)]]></description>
+	</parameter>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="FORMATO_ARQUIVO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="TITULO_TAXA_JUROS" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Tï¿½tulo para o campo de taxa (Taxa de juros ou CET).]]></description>
+	</parameter>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<parameter name="DELIMITADOR" forPrompting="false" class="java.lang.String"/>
+	<query language="sql"><![CDATA[select CONSIGNATARIA,
+  sum(case when Tipo = '1' then Total else 0 end) as 'ATIVO_INICIO_MES',
+  sum(case when Tipo = '2' then Total else 0 end) as 'ATIVO_FIM_MES',
+  sum(case when Tipo = '3' then Total else 0 end) as 'QUITADOS',
+  sum(case when Tipo = '4' then Total else 0 end) as 'RENEGOCIADOS',
+  sum(case when Tipo = '5' then Total else 0 end) as 'NOVOS',
+  sum(case when Tipo = '6' then Total else 0 end) as 'TOTAL_VALOR_DESCONTADO_MES',
+  sum(case when Tipo = '7' then Total else 0 end) as 'PARTICIPACAO_TOTAL_SERVIDORES',
+  sum(case when Tipo = '8' then Total else 0 end) as 'PARTICIPACAO_TOTAL_DESCONTADO'
+from
+(
+
+-- 1 = Ativo início do mês
+select csa.csa_nome as Consignataria, '1' as Tipo, count(*) as Total
+from tb_aut_desconto ade
+inner join tb_verba_convenio vco on (ade.vco_codigo = vco.vco_codigo)
+inner join tb_convenio cnv on (vco.cnv_codigo = cnv.cnv_codigo)
+inner join tb_consignataria csa on (cnv.csa_codigo = csa.csa_codigo)
+where ade.ade_data < '2012-08-01 00:00:00'
+and (ade.sad_codigo not in ('3','7','8','9')
+   or (ade.sad_codigo in ('7','8')
+   and exists (
+     select 1 from tb_ocorrencia_autorizacao oca
+     where oca.ade_codigo = ade.ade_codigo
+       and oca.toc_codigo in ('6','7')
+       and oca.oca_data > '2012-08-01 00:00:00'
+    )
+  )
+)
+group by csa.csa_codigo
+
+union
+
+-- 2 = Ativos fim do mês
+select csa.csa_nome, '2' as Tipo, count(*) as Total
+from tb_aut_desconto ade
+inner join tb_verba_convenio vco on (ade.vco_codigo = vco.vco_codigo)
+inner join tb_convenio cnv on (vco.cnv_codigo = cnv.cnv_codigo)
+inner join tb_consignataria csa on (cnv.csa_codigo = csa.csa_codigo)
+where ade.ade_data < '2012-08-30 23:59:59'
+and (ade.sad_codigo not in ('3','7','8','9')
+   or (ade.sad_codigo in ('7','8')
+   and exists (
+     select 1 from tb_ocorrencia_autorizacao oca
+     where oca.ade_codigo = ade.ade_codigo
+       and oca.toc_codigo in ('6','7')
+       and oca.oca_data > '2012-08-30 23:59:59'
+    )
+  )
+)
+group by csa.csa_codigo
+
+union
+
+-- 3 = Quitados no mês
+select csa.csa_nome, '3' as Tipo, count(*) as Total
+from tb_aut_desconto ade
+inner join tb_verba_convenio vco on (ade.vco_codigo = vco.vco_codigo)
+inner join tb_convenio cnv on (vco.cnv_codigo = cnv.cnv_codigo)
+inner join tb_consignataria csa on (cnv.csa_codigo = csa.csa_codigo)
+inner join tb_ocorrencia_autorizacao oca on (oca.ade_codigo = ade.ade_codigo)
+where ade.sad_codigo = '8'
+  and oca.toc_codigo = '6'
+  and oca.oca_data between '2012-08-01 00:00:00' and '2012-08-30 23:59:59'
+group by csa.csa_codigo
+
+union
+
+-- 4 = Renegociados no mês
+select csa.csa_nome, '4' as Tipo, count(*) as Total
+from tb_aut_desconto ade
+inner join tb_verba_convenio vco on (ade.vco_codigo = vco.vco_codigo)
+inner join tb_convenio cnv on (vco.cnv_codigo = cnv.cnv_codigo)
+inner join tb_consignataria csa on (cnv.csa_codigo = csa.csa_codigo)
+inner join tb_relacionamento_autorizacao rad on (rad.ade_codigo_origem = ade.ade_codigo)
+inner join tb_aut_desconto ade2 on (rad.ade_codigo_destino = ade2.ade_codigo)
+where ade.sad_codigo in ('8','9')
+  and rad.tnt_codigo = '6'
+  and ade2.sad_codigo <> '7'
+  and rad.rad_data between '2012-08-01 00:00:00' and '2012-08-30 23:59:59'
+group by csa.csa_codigo
+
+union
+
+-- 5 = Novos no mês
+select csa.csa_nome, '5' as Tipo, count(*) as Total
+from tb_aut_desconto ade
+inner join tb_verba_convenio vco on (ade.vco_codigo = vco.vco_codigo)
+inner join tb_convenio cnv on (vco.cnv_codigo = cnv.cnv_codigo)
+inner join tb_consignataria csa on (cnv.csa_codigo = csa.csa_codigo)
+where ade.ade_data between '2012-08-01 00:00:00' and '2012-08-30 23:59:59'
+group by csa.csa_codigo
+
+union
+
+-- 6 = Total valor descontado no mês
+select csa.csa_nome, '6' as Tipo, sum(prd_vlr_realizado)
+from tb_aut_desconto ade
+inner join tb_verba_convenio vco on (ade.vco_codigo = vco.vco_codigo)
+inner join tb_convenio cnv on (vco.cnv_codigo = cnv.cnv_codigo)
+inner join tb_consignataria csa on (cnv.csa_codigo = csa.csa_codigo)
+inner join tb_parcela_desconto prd on (ade.ade_codigo = prd.ade_codigo)
+where prd.prd_data_desconto = '2012-08-01'
+  and prd.spd_codigo = '6'
+group by csa.csa_codigo
+
+union
+
+-- 7 = Participação da consignatária em relação aos ativos do final do mês pela quantidade total de servidores
+select csa.csa_nome, '7' as Tipo,
+  count(*) / (select count(*) from tb_registro_servidor rse where rse.srs_codigo <> '3') as Total
+from tb_aut_desconto ade
+inner join tb_verba_convenio vco on (ade.vco_codigo = vco.vco_codigo)
+inner join tb_convenio cnv on (vco.cnv_codigo = cnv.cnv_codigo)
+inner join tb_consignataria csa on (cnv.csa_codigo = csa.csa_codigo)
+where (ade.sad_codigo not in ('3','7','8','9')
+   or (ade.sad_codigo in ('7','8')
+   and exists (
+     select 1 from tb_ocorrencia_autorizacao oca
+     where oca.ade_codigo = ade.ade_codigo
+       and oca.toc_codigo in ('6','7')
+       and oca.oca_data > '2012-08-30 23:59:59'
+    )
+  )
+)
+group by csa.csa_codigo
+
+union
+
+-- 8 = Participação da consignatária em relação aos volume total descontado no mês
+select csa.csa_nome, '8' as Tipo,
+  sum(prd.prd_vlr_realizado) / (select sum(prd2.prd_vlr_realizado) from tb_parcela_desconto prd2 where prd2.prd_data_desconto = '2012-08-01' and prd2.spd_codigo = '6') as Total
+from tb_aut_desconto ade
+inner join tb_verba_convenio vco on (ade.vco_codigo = vco.vco_codigo)
+inner join tb_convenio cnv on (vco.cnv_codigo = cnv.cnv_codigo)
+inner join tb_consignataria csa on (cnv.csa_codigo = csa.csa_codigo)
+inner join tb_parcela_desconto prd on (ade.ade_codigo = prd.ade_codigo)
+where prd.prd_data_desconto = '2012-08-01'
+  and prd.spd_codigo = '6'
+group by csa.csa_codigo
+
+
+) as X
+group by Consignataria
+order by 1]]></query>
+	<field name="CONSIGNATARIA" class="java.lang.String"/>
+	<field name="ATIVO_INICIO_MES" class="java.math.BigDecimal"/>
+	<field name="ATIVO_FIM_MES" class="java.math.BigDecimal"/>
+	<field name="QUITADOS" class="java.math.BigDecimal"/>
+	<field name="RENEGOCIADOS" class="java.math.BigDecimal"/>
+	<field name="NOVOS" class="java.math.BigDecimal"/>
+	<field name="TOTAL_VALOR_DESCONTADO_MES" class="java.math.BigDecimal"/>
+	<field name="PARTICIPACAO_TOTAL_SERVIDORES" class="java.math.BigDecimal"/>
+	<field name="PARTICIPACAO_TOTAL_DESCONTADO" class="java.math.BigDecimal"/>
+	<field name="RETENCAO_CONSIGNANTE" class="java.math.BigDecimal"/>
+	<variable name="BACKGROUND" calculation="DistinctCount" class="java.lang.Integer">
+		<expression><![CDATA[$F{CONSIGNATARIA}]]></expression>
+		<initialValueExpression><![CDATA[new java.lang.String("")]]></initialValueExpression>
+	</variable>
+	<variable name="TOTAL_GERAL_DESCONTADO_MES" calculation="Sum" class="java.math.BigDecimal">
+		<expression><![CDATA[$F{TOTAL_VALOR_DESCONTADO_MES}]]></expression>
+		<initialValueExpression><![CDATA[java.math.BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="PARTICIPACAO_TOTAL_GERAL_SERVIDORES" calculation="Sum" class="java.math.BigDecimal">
+		<expression><![CDATA[$F{PARTICIPACAO_TOTAL_SERVIDORES}]]></expression>
+		<initialValueExpression><![CDATA[new java.math.BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="PARTICIPACAO_TOTAL_GERAL_DESCONTADO" calculation="Sum" class="java.math.BigDecimal">
+		<expression><![CDATA[$F{PARTICIPACAO_TOTAL_DESCONTADO}]]></expression>
+		<initialValueExpression><![CDATA[new java.math.BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<background splitType="Stretch"/>
+	<title splitType="Stretch"/>
+	<pageHeader height="111" splitType="Stretch">
+		<element kind="image" uuid="9d00f7ea-c27a-4614-9e44-62dd2e30b041" key="image-1" x="2" y="1" width="63" height="20" onErrorType="Blank" lazy="true" usingCache="true">
+			<expression><![CDATA[$P{CAMINHO_LOGO}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="b3b00c3d-3dd0-4b19-a783-253205e43c88" key="textField-11" x="68" y="3" width="714" height="13" fontName="Arial" blankWhenNull="false" bold="true" hTextAlign="Left">
+			<expression><![CDATA[$P{TITULO}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="34595dfa-b96e-4ada-8fba-317ab28621ec" key="textField-19" x="2" y="25" width="779" height="86" fontName="Arial" fontSize="8.0" blankWhenNull="false" bold="true" hTextAlign="Left">
+			<expression><![CDATA[$P{SUBTITULO}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+	</pageHeader>
+	<columnHeader height="32" splitType="Stretch">
+		<element kind="textField" uuid="b46410cc-d58c-42fa-b290-96b4e87b6c24" key="staticText-17" stretchType="ContainerHeight" mode="Opaque" x="467" y="0" width="70" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="9.0" textAdjust="StretchHeight" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.marketsharecsa.ativos.final", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="df6281cc-683b-4acf-9145-14dc7aeb3bc2" key="header-1" stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="187" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="9.0" textAdjust="StretchHeight" blankWhenNull="false" removeLineWhenBlank="true" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.consignataria.singular", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="8f14d0d7-7a5b-4d1c-8e07-f205b02d41be" key="staticText-25" stretchType="ContainerHeight" mode="Opaque" x="327" y="0" width="70" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="9.0" textAdjust="StretchHeight" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.marketsharecsa.renegociados", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="86ae88b5-142a-4851-b111-408d08207f03" key="staticText-26" stretchType="ContainerHeight" mode="Opaque" x="397" y="0" width="70" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="9.0" textAdjust="StretchHeight" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.marketsharecsa.novos", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="80071053-a81a-41c1-8979-0b402592b8eb" key="staticText-27" stretchType="ContainerHeight" mode="Opaque" x="537" y="0" width="81" height="32" forecolor="#000000" backcolor="#CCCCCC" rotation="None" markup="none" fontName="Arial" fontSize="9.0" pdfEncoding="Cp1252" textAdjust="StretchHeight" pdfEmbedded="false" bold="true" italic="false" underline="false" strikeThrough="false" hTextAlign="Center" vTextAlign="Middle">
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.marketsharecsa.total.valor.descontado", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="609512a4-e25f-482b-a420-930eab38755f" key="staticText-28" stretchType="ContainerHeight" mode="Opaque" x="618" y="0" width="81" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="9.0" textAdjust="StretchHeight" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.marketsharecsa.participacao.total.servidores", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="257c4240-48a0-4dc5-8ebd-00ccb295a7b6" key="header-3" stretchType="ContainerHeight" mode="Opaque" x="257" y="0" width="70" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="9.0" textAdjust="StretchHeight" blankWhenNull="false" removeLineWhenBlank="true" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.marketsharecsa.quitados", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="c9736dd5-ee10-4b28-938e-80649e76cf84" key="header-4" stretchType="ContainerHeight" mode="Opaque" x="699" y="0" width="82" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="9.0" textAdjust="StretchHeight" blankWhenNull="false" removeLineWhenBlank="true" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.marketsharecsa.participacao.total.descontado", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="25927bf4-9d83-4ae4-9fb0-075fb4411098" key="header-5" stretchType="ContainerHeight" mode="Opaque" x="187" y="0" width="70" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="9.0" textAdjust="StretchHeight" blankWhenNull="false" printInFirstWholeBand="true" printWhenDetailOverflows="true" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.marketsharecsa.ativos.inicio", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="c8f7773c-ce01-4212-a3a2-9249d0c74881" key="header-4" stretchType="ContainerHeight" mode="Opaque" x="781" y="0" width="82" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="9.0" textAdjust="StretchHeight" blankWhenNull="false" removeLineWhenBlank="true" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[!$P{FORMATO_ARQUIVO}.equalsIgnoreCase("PDF")]]></printWhenExpression>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.titulo.retencao.arrecadacao", $P{RESPONSAVEL} )]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<element kind="staticText" uuid="807e032d-c205-4b17-98be-1d43af6f5202" key="fundoLinha" stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="782" height="11" backcolor="#DDDDDD">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0)]]></printWhenExpression>
+				<text><![CDATA[ ]]></text>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="cb7a8baa-32b0-461e-ba9b-56a0b41bf236" key="textField" stretchType="ElementGroupHeight" mode="Transparent" x="397" y="0" width="70" height="11" forecolor="#000000" backcolor="#FFFFFF" rotation="None" markup="none" fontName="Arial" fontSize="8.0" pdfEncoding="Cp1252" textAdjust="StretchHeight" pattern="#,##0" blankWhenNull="true" pdfEmbedded="false" bold="false" italic="false" underline="false" strikeThrough="false" hTextAlign="Right" vTextAlign="Top" style="Celula">
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[$F{NOVOS}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.25" lineStyle="Solid"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="f35649ff-a4e2-4821-94ab-0bf03a51bb26" key="textField" stretchType="ElementGroupHeight" mode="Transparent" x="257" y="0" width="70" height="11" forecolor="#000000" backcolor="#FFFFFF" rotation="None" markup="none" fontName="Arial" fontSize="8.0" pdfEncoding="Cp1252" textAdjust="StretchHeight" pattern="#,##0" blankWhenNull="true" pdfEmbedded="false" bold="false" italic="false" underline="false" strikeThrough="false" hTextAlign="Right" vTextAlign="Top" style="Celula">
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[$F{QUITADOS}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.25" lineStyle="Solid"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="0e99b4e8-5b6d-4937-9876-f626c528a46f" key="textField-17" stretchType="ElementGroupHeight" mode="Transparent" x="467" y="0" width="70" height="11" forecolor="#000000" backcolor="#FFFFFF" rotation="None" markup="none" fontName="Arial" fontSize="8.0" pdfEncoding="Cp1252" textAdjust="StretchHeight" pattern="#,##0" blankWhenNull="true" pdfEmbedded="false" bold="false" italic="false" underline="false" strikeThrough="false" hTextAlign="Right" vTextAlign="Top" style="Celula">
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[$F{ATIVO_FIM_MES}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.25" lineStyle="Solid"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="ba6c9414-d8ea-4259-8dbf-bf840787bb3a" key="textField" stretchType="ElementGroupHeight" x="187" y="0" width="70" height="11" fontSize="8.0" textAdjust="StretchHeight" pattern="#,##0" blankWhenNull="true" hTextAlign="Right" vTextAlign="Top" style="Celula">
+				<expression><![CDATA[$F{ATIVO_INICIO_MES}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.25" lineStyle="Solid"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="b5dd311c-0141-43d6-b865-c5d84e992929" key="textField" stretchType="ElementGroupHeight" x="0" y="0" width="187" height="11" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" vTextAlign="Top" style="Celula">
+				<expression><![CDATA[$F{CONSIGNATARIA}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.25" lineStyle="Solid"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="671543a1-d107-4316-bde0-ac51b1340b74" key="textField-20" stretchType="ElementGroupHeight" mode="Transparent" x="327" y="0" width="70" height="11" forecolor="#000000" backcolor="#FFFFFF" rotation="None" markup="none" fontName="Arial" fontSize="8.0" pdfEncoding="Cp1252" textAdjust="StretchHeight" pattern="#,##0" blankWhenNull="true" pdfEmbedded="false" bold="false" italic="false" underline="false" strikeThrough="false" hTextAlign="Right" vTextAlign="Top" style="Celula">
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[$F{RENEGOCIADOS}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.25" lineStyle="Solid"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="ab9d51c9-779c-47a2-9875-70f92459a2c1" key="textField-21" stretchType="ElementGroupHeight" mode="Transparent" x="537" y="0" width="81" height="11" forecolor="#000000" backcolor="#FFFFFF" rotation="None" markup="none" fontName="Arial" fontSize="8.0" pdfEncoding="Cp1252" textAdjust="StretchHeight" pattern="¤ #,##0.00" blankWhenNull="true" pdfEmbedded="false" bold="false" italic="false" underline="false" strikeThrough="false" hTextAlign="Right" vTextAlign="Top" style="Celula">
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[$F{TOTAL_VALOR_DESCONTADO_MES}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.25" lineStyle="Solid"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="93093bb1-a73d-4c14-9855-147495d3ede9" key="textField-22" stretchType="ElementGroupHeight" mode="Transparent" x="618" y="0" width="81" height="11" forecolor="#000000" backcolor="#FFFFFF" rotation="None" markup="none" fontName="Arial" fontSize="8.0" pdfEncoding="Cp1252" textAdjust="StretchHeight" pattern="#,##0.00 %" blankWhenNull="true" pdfEmbedded="false" bold="false" italic="false" underline="false" strikeThrough="false" hTextAlign="Right" vTextAlign="Top" style="Celula">
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[$F{PARTICIPACAO_TOTAL_SERVIDORES}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.25" lineStyle="Solid"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8aa2e052-b680-4e69-8740-d3ed470f2429" key="textField-23" stretchType="ElementGroupHeight" mode="Transparent" x="699" y="0" width="82" height="11" forecolor="#000000" backcolor="#FFFFFF" rotation="None" markup="none" fontName="Arial" fontSize="8.0" pdfEncoding="Cp1252" textAdjust="StretchHeight" pattern="" blankWhenNull="true" pdfEmbedded="false" bold="false" italic="false" underline="false" strikeThrough="false" hTextAlign="Right" vTextAlign="Top" style="Celula">
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.formata($F{PARTICIPACAO_TOTAL_DESCONTADO}.doubleValue(), "#,##0.00 %")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.25" lineStyle="Solid"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="78da288d-1ea6-4881-afd3-a0084863c8f8" key="textField-23" stretchType="ElementGroupHeight" mode="Transparent" x="781" y="0" width="82" height="11" forecolor="#000000" backcolor="#FFFFFF" rotation="None" markup="none" fontName="Arial" fontSize="8.0" pdfEncoding="Cp1252" textAdjust="StretchHeight" pattern="" blankWhenNull="true" pdfEmbedded="false" bold="false" italic="false" underline="false" strikeThrough="false" hTextAlign="Right" vTextAlign="Top" style="Celula">
+				<printWhenExpression><![CDATA[!$P{FORMATO_ARQUIVO}.equalsIgnoreCase("PDF")]]></printWhenExpression>
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.formata($F{RETENCAO_CONSIGNANTE}.doubleValue(), "R$ #,##0.00")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.25" lineStyle="Solid"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid"/>
+				</box>
+			</element>
+		</band>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter height="18" splitType="Stretch">
+		<element kind="textField" uuid="4fa96b2d-ac72-4675-b32e-6165e5d1e349" key="textField" x="0" y="4" width="676" height="13" fontName="Times New Roman" fontSize="7.0" blankWhenNull="true">
+			<expression><![CDATA[$P{TEXTO_RODAPE}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="7bc850e1-3d56-45f5-a427-225521c75771" key="textField-12" x="676" y="4" width="60" height="13" blankWhenNull="false" hTextAlign="Right">
+			<expression><![CDATA[$V{PAGE_NUMBER} + ""]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="6d69b564-7fa3-492c-a491-bbed0cb3aa16" key="textField-13" x="736" y="4" width="45" height="13" evaluationTime="Report" blankWhenNull="false" hTextAlign="Left">
+			<expression><![CDATA[" " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.de.pagina", $P{RESPONSAVEL}, $V{PAGE_NUMBER}.toString())]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+	</pageFooter>
+	<summary height="555" splitType="Stretch">
+		<element kind="textField" uuid="c2191579-ccd2-4806-bd1c-b6a23b5ab0f2" key="staticText-16" x="3" y="534" width="123" height="17" markup="none" fontName="Arial" bold="true" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.total.registros", $P{RESPONSAVEL}) + ":"]]></expression>
+		</element>
+		<element kind="textField" uuid="99278ab4-a3ab-4a25-9eb2-a6e14d1d0c5f" key="textField-16" mode="Transparent" x="130" y="534" width="48" height="17" forecolor="#000000" backcolor="#FFFFFF" rotation="None" markup="none" fontName="Arial" fontSize="8.0" pdfEncoding="Cp1252" pattern="" blankWhenNull="true" pdfEmbedded="false" bold="false" italic="false" underline="false" strikeThrough="false" hTextAlign="Left" vTextAlign="Middle">
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{REPORT_COUNT}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="chart" chartType="pie" uuid="72199373-a9bd-4eb0-970f-09555c84b4b9" x="0" y="10" width="370" height="520" evaluationTime="Report" printRepeatedValues="false" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[($F{PARTICIPACAO_TOTAL_SERVIDORES}.compareTo(java.math.BigDecimal.ZERO) > 0)]]></printWhenExpression>
+			<titleFont fontSize="10.0" bold="true"/>
+			<titleExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.marketsharecsa.titulo.grafico.por.qtde.servidor", $P{RESPONSAVEL})]]></titleExpression>
+			<dataset kind="pie">
+				<series>
+					<keyExpression><![CDATA[$F{CONSIGNATARIA}]]></keyExpression>
+					<valueExpression><![CDATA[$F{PARTICIPACAO_TOTAL_SERVIDORES}]]></valueExpression>
+					<labelExpression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.formata($F{PARTICIPACAO_TOTAL_SERVIDORES}.doubleValue(), "#,##0.00 %")]]></labelExpression>
+				</series>
+			</dataset>
+			<plot>
+				<itemLabel/>
+			</plot>
+		</element>
+		<element kind="chart" chartType="pie" uuid="6e039e7a-8fba-4315-beb4-4c2b8bf427eb" x="420" y="10" width="370" height="520" evaluationTime="Report" printRepeatedValues="false" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[($V{PARTICIPACAO_TOTAL_GERAL_DESCONTADO}.compareTo(java.math.BigDecimal.ZERO) > 0)]]></printWhenExpression>
+			<titleFont fontSize="12.0" bold="true"/>
+			<titleExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.marketsharecsa.titulo.grafico.por.vlr.descontado", $P{RESPONSAVEL})]]></titleExpression>
+			<dataset kind="pie">
+				<series>
+					<keyExpression><![CDATA[$F{CONSIGNATARIA}]]></keyExpression>
+					<valueExpression><![CDATA[$F{PARTICIPACAO_TOTAL_DESCONTADO}]]></valueExpression>
+					<labelExpression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.formata($F{PARTICIPACAO_TOTAL_DESCONTADO}.doubleValue(), "#,##0.00 %")]]></labelExpression>
+				</series>
+			</dataset>
+			<plot>
+				<itemLabel/>
+			</plot>
+		</element>
+	</summary>
+</jasperReport>

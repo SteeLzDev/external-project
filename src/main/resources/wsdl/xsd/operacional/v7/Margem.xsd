@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="Margem">
+  <xsd:complexType name="Margem">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="1" name="codigo" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="descricao" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="valorFolha" nillable="true" type="xsd:double"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="valorUsado" nillable="true" type="xsd:double"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="valorDisponivel" nillable="true" type="xsd:double"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="valorLimite" nillable="true" type="xsd:double"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="mensagem" nillable="true" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

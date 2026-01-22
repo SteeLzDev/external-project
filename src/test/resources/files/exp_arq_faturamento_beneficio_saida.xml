@@ -1,0 +1,91 @@
+<Documento>
+        <Atributo Nome="TIPO_REGISTRO" Indice="0" />
+        <Atributo Nome="DELIMITADOR" Indice="1" Default=";" />
+        <Atributo Nome="COMPETENCIA_FATURAMENTO" Indice="2" />
+        <Atributo Nome="DELIMITADOR" Indice="3" Default=";" />
+        <Atributo Nome="CBE_DATA_INCLUSAO" Indice="4" />
+        <Atributo Nome="DELIMITADOR" Indice="5" Default=";" />
+        <Atributo Nome="CBE_DATA_CANCELAMENTO" Indice="6" />
+        <Atributo Nome="DELIMITADOR" Indice="7" Default=";" />
+        <Atributo Nome="CBE_NUMERO" Indice="8" />
+        <Atributo Nome="DELIMITADOR" Indice="9" Default=";" />
+        <Atributo Nome="BEN_CODIGO_REGISTRO" Indice="10" />
+        <Atributo Nome="DELIMITADOR" Indice="11" Default=";" />
+        <Atributo Nome="RSE_MATRICULA" Indice="12" />
+        <Atributo Nome="DELIMITADOR" Indice="13" Default=";" />
+        <Atributo Nome="BEN_CODIGO_CONTRATO" Indice="14" />
+        <Atributo Nome="DELIMITADOR" Indice="15" Default=";" />
+        <Atributo Nome="ADE_NUMERO" Indice="16" />
+        <Atributo Nome="DELIMITADOR" Indice="17" Default=";" />
+        <Atributo Nome="CODIGO_PROCEDIMENTO" Indice="18" />
+        <Atributo Nome="DELIMITADOR" Indice="19" Default=";" />
+        <Atributo Nome="DESCRICAO_PROCEDIMENTO" Indice="20" />
+        <Atributo Nome="DELIMITADOR" Indice="21" Default=";" />
+        <Atributo Nome="VALOR_DEBITO" Indice="22" />
+        <Atributo Nome="DELIMITADOR" Indice="23" Default=";" />
+        <Atributo Nome="QUANTIDADE" Indice="24" />
+        <Atributo Nome="DELIMITADOR" Indice="25" Default=";" />
+        <Atributo Nome="DATA_PROCEDIMENTO" Indice="26" />
+        <Atributo Nome="DELIMITADOR" Indice="27" Default=";" />
+        <Atributo Nome="TIPO_PRESTADOR" Indice="28" />
+        <Atributo Nome="DELIMITADOR" Indice="29" Default=";" />
+        <Atributo Nome="CNPJ_PRESTADOR" Indice="30" />
+        <Atributo Nome="DELIMITADOR" Indice="31" Default=";" />
+        <Atributo Nome="NOME_PRESTADOR" Indice="32" />
+        <Atributo Nome="DELIMITADOR" Indice="33" Default=";" />
+        <Atributo Nome="TLA_CODIGO" Indice="34" />
+        <Atributo Nome="DELIMITADOR" Indice="35" Default=";" />
+        <Atributo Nome="COMPETENCIA_PRORATA" Indice="36" />
+        <Atributo Nome="DELIMITADOR" Indice="37" Default=";" />
+        <Atributo Nome="REAJUSTE_FAIXA_ETARIA" Indice="38" />
+        <Atributo Nome="DELIMITADOR" Indice="39" Default=";" />
+        <Atributo Nome="REAJUSTE_ANUAL" Indice="40" />
+        <Atributo Nome="DELIMITADOR" Indice="41" Default=";" />
+        <Atributo Nome="MENSAGEM_REAJUSTE_FAIXA_ETARIA" Indice="42" />
+        <Atributo Nome="DELIMITADOR" Indice="43" Default=";" />
+        <Atributo Nome="MENSAGEM_REAJUSTE_ANUAL" Indice="44" />
+        <Atributo Nome="DELIMITADOR" Indice="45" Default=";" />
+        <Atributo Nome="SEQUENCIAL" Indice="46" />
+        <Atributo Nome="DELIMITADOR" Indice="47" Default=";" />
+        <Atributo Nome="AFB_NUMERO_LOTE" Indice="48" />
+        <Atributo Nome="DELIMITADOR" Indice="49" Default=";" />
+        <Atributo Nome="AFB_ITEM_LOTE" Indice="50" />
+        <Atributo Nome="DELIMITADOR" Indice="51" Default=";" />
+        <Atributo Nome="AFB_VALOR_SUBSIDIO" Indice="52" />
+        <Atributo Nome="DELIMITADOR" Indice="53" Default=";" />
+        <Atributo Nome="AFB_VALOR_REALIZADO" Indice="54" />
+        <Atributo Nome="DELIMITADOR" Indice="55" Default=";" />
+        <Atributo Nome="AFB_VALOR_NAO_REALIZADO" Indice="56" />
+        <Atributo Nome="DELIMITADOR" Indice="57" Default=";" />
+        <Atributo Nome="AFB_VALOR_TOTAL" Indice="58" />
+        <Atributo Nome="DELIMITADOR" Indice="59" Default=";" />
+        <Atributo Nome="ENS_CEP" Indice="60" />
+        <Atributo Nome="DELIMITADOR" Indice="61" Default=";" />
+        <Atributo Nome="ENS_LOGRADOURO" Indice="62" />
+        <Atributo Nome="DELIMITADOR" Indice="63" Default=";" />
+        <Atributo Nome="ENS_NUMERO" Indice="64" />
+        <Atributo Nome="DELIMITADOR" Indice="65" Default=";" />
+        <Atributo Nome="ENS_COMPLEMENTO" Indice="66" />
+        <Atributo Nome="DELIMITADOR" Indice="67" Default=";" />
+        <Atributo Nome="ENS_BAIRRO" Indice="68" />
+        <Atributo Nome="DELIMITADOR" Indice="69" Default=";" />
+        <Atributo Nome="ENS_MUNICIPIO" Indice="70" />
+        <Atributo Nome="DELIMITADOR" Indice="71" Default=";" />
+        <Atributo Nome="ENS_UF" Indice="72" />
+        <Atributo Nome="DELIMITADOR" Indice="73" Default=";" />
+        <Atributo Nome="BFC_CELULAR" Indice="74" />
+        <Atributo Nome="DELIMITADOR" Indice="75" Default=";" />
+        <Atributo Nome="SER_EMAIL" Indice="76" />
+        <Atributo Nome="DELIMITADOR" Indice="77" Default=";" />
+        <Atributo Nome="COMPETENCIA_COBRANCA" Indice="78" />
+        <Atributo Nome="DELIMITADOR" Indice="79" Default=";" />
+        <Atributo Nome="ORG_IDENTIFICADOR" Indice="80" />
+        <Atributo Nome="DELIMITADOR" Indice="81" Default=";" />
+        <Atributo Nome="CNV_COD_VERBA" Indice="82" />
+        <Atributo Nome="DELIMITADOR" Indice="83" Default=";" />
+        <Atributo Nome="BFC_CPF" Indice="84" />
+        <Atributo Nome="DELIMITADOR" Indice="85" Default=";" />
+        <Atributo Nome="MARGEM_NAO_CONSIGNAVEL" Indice="86" />
+        <Atributo Nome="DELIMITADOR" Indice="87" Default=";" />
+        <Atributo Nome="BFC_NOME" Indice="88" />
+</Documento>

@@ -1,0 +1,1154 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="Comprometimento" language="java" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" scriptletClass="com.zetra.econsig.report.reports.HeadingsScriptlet" uuid="f5c2c0d0-c296-416c-9b8d-b137e9bc7e92" summaryNewPage="true">
+	<property name="ireport.scriptlethandling" value="2"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="10.09124992398844"/>
+	<property name="ireport.x" value="294"/>
+	<property name="ireport.y" value="2024"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box padding="0" leftPadding="2" rightPadding="2"/>
+	</style>
+	<parameter name="CAMINHO_LOGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SUBTITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Subtitulo do relatório]]></description>
+	</parameter>
+	<parameter name="TEXTO_RODAPE" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Nome do Gestor(Consignante)]]></description>
+	</parameter>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Titulo do relatorio]]></description>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA["./"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CONSIGNANTE" forPrompting="false" class="java.util.ArrayList"/>
+	<parameter name="LINK_ACESSO_SISTEMA" forPrompting="false" class="java.lang.String"/>
+	<parameter name="DATA_IMPLANTACAO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="DIA_CORTE" forPrompting="false" class="java.lang.String"/>
+	<parameter name="DIA_REPASSE" forPrompting="false" class="java.lang.String"/>
+	<parameter name="VERSAO_ATUAL_SISTEMA" forPrompting="false" class="java.lang.String"/>
+	<parameter name="MODULO_COMPRA" forPrompting="false" class="java.lang.Boolean"/>
+	<parameter name="EMAIL_SUPORTE" forPrompting="false" class="java.lang.String"/>
+	<parameter name="TELEFONE_SUPORTE" forPrompting="false" class="java.lang.String"/>
+	<parameter name="ORGAOS" forPrompting="false" class="java.util.ArrayList">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ESTABELECIMENTOS" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SER_POR_EST" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SER_POR_ORG" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CSE_NOME" forPrompting="false" class="java.lang.String"/>
+	<parameter name="MES_ANO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="ANO_ATUAL" forPrompting="false" class="java.lang.String"/>
+	<parameter name="DATA_ATUAL" forPrompting="false" class="java.lang.String"/>
+	<parameter name="CAMINHO_LOGO_ENTIDADE" forPrompting="false" class="java.lang.String"/>
+	<parameter name="QTDE_TOTAL_SER" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_SER_ATIVOS" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_SER_EXCLUIDOS" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_SER_TRANSFERIDOS" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_SER_POR_TIPO" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_SER_POR_CRS" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_CATEGORIAS_SER" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_CARGOS_SER" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="INCIDE_MARGEM" forPrompting="false" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[new java.lang.Boolean(false)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="INCIDE_MARGEM_2" forPrompting="false" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[new java.lang.Boolean(false)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="INCIDE_MARGEM_3" forPrompting="false" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[new java.lang.Boolean(false)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="EXIBE_MARGEM_1" forPrompting="false" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[new java.lang.Boolean(false)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="EXIBE_MARGEM_2" forPrompting="false" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[new java.lang.Boolean(false)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="EXIBE_MARGEM_3" forPrompting="false" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[new java.lang.Boolean(false)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_SER_POR_FAIXA_MARGEM_1" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_SER_POR_FAIXA_MARGEM_2" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_SER_POR_FAIXA_MARGEM_3" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ESTATISTICO_MARGEM" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MARGEM_1" forPrompting="false" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new java.lang.String()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MARGEM_2" forPrompting="false" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new java.lang.String()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MARGEM_3" forPrompting="false" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new java.lang.String()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MARGEM_1_CASADA_3" forPrompting="false" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[new java.lang.Boolean(false)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MARGEM_123_CASADA" forPrompting="false" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[new java.lang.Boolean(false)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="COMPROMETIMENTO_MARGEM_1" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="COMPROMETIMENTO_MARGEM_2" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="COMPROMETIMENTO_MARGEM_3" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_CSA_TOTAL" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_COR_TOTAL" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_CSA_ATIVOS_TOTAL" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_COR_ATIVOS_TOTAL" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_CSA_INATIVOS_TOTAL" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_COR_INATIVOS_TOTAL" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_CONTRATOS_POR_CSA" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LISTA_QTDE_CONTRATOS_POR_CSA" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LISTA_QTDE_COR_POR_CSA" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_SVC_TOTAL" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_SVC_ATIVOS_TOTAL" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_SVC_INATIVOS_TOTAL" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_CONTRATOS_ATIVOS" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_CONTRATOS_POR_CRS" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_CONTRATOS_POR_CATEGORIA" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LISTA_QTDE_CONTRATOS_POR_CRS" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LISTA_QTDE_CONTRATOS_POR_CATEGORIA" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_CONTRATOS_POR_SVC" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LISTA_QTDE_CONTRATOS_POR_SVC" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TOTAL_PRESTACAO_EMPRESTIMO" forPrompting="false" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[java.math.BigDecimal.ZERO]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SALDO_DEVEDOR_EMPRESTIMO" forPrompting="false" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[java.math.BigDecimal.ZERO]]></defaultValueExpression>
+	</parameter>
+	<parameter name="COUNT_TOTAL_CARTEIRA" forPrompting="false" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new java.lang.Long(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PORC_TOTAL_CONTRATOS_INADIMPLENCIA" forPrompting="false" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[new java.lang.Float(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="COUNT_TOTAL_CARTEIRA_EMPRESTIMO" forPrompting="false" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new java.lang.Long(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PORC_EMPRESTIMO_CONTRATOS_INADIMPLENCIA" forPrompting="false" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[new java.lang.Float(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CSA_INADIMPLENCIA" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CAMINHO_LOGO_ECONSIG" forPrompting="false" class="java.lang.String"/>
+	<parameter name="PERIODO_INADIMPLENCIA" class="java.util.Date"/>
+	<parameter name="LISTA_RANKING_TAXAS" forPrompting="false" class="java.util.List">
+		<description><![CDATA[]]></description>
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SVC_RANKING_TAXAS" class="java.lang.String"/>
+	<parameter name="LISTA_TAXAS_EFETIVAS" forPrompting="false" class="java.util.List">
+		<description><![CDATA[]]></description>
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SVC_TAXAS_EFETIVAS" class="java.lang.String"/>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<parameter name="EVOLUCAO" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QUINZENAL" class="java.lang.Boolean">
+		<description><![CDATA[Informa se o período é quinzenal]]></description>
+		<defaultValueExpression><![CDATA[new java.lang.Boolean(false)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PERIODO" class="java.lang.String">
+		<description><![CDATA[PERÍODO DO FILTRO DE PERÍODO]]></description>
+	</parameter>
+	<parameter name="SER_POR_ORG_ATIVO" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_ORGAOS_ATIVOS" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PARAM_EXIBE_MARGEM_NAO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="PARAM_EXIBE_MARGEM_1" forPrompting="false" class="java.lang.String"/>
+	<parameter name="PARAM_EXIBE_MARGEM_2" forPrompting="false" class="java.lang.String"/>
+	<parameter name="PARAM_EXIBE_MARGEM_3" forPrompting="false" class="java.lang.String"/>
+	<parameter name="LISTA_QTDE_CONTRATOS_POR_CSA_ATIVA" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PARAM_EXIBE_TODAS_MARGENS" forPrompting="false" class="java.lang.String"/>
+	<parameter name="LISTA_CONSIGNATARIA_SITUACAO" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<query language="sql"><![CDATA[SELECT DISTINCT tb_usuario.usu_codigo,tb_usuario.usu_login,tb_usuario.usu_nome,tb_usuario.stu_codigo,tb_usuario.usu_tipo_bloq,tb_perfil.per_codigo,tb_perfil.per_descricao,tb_usuario.usu_data_cad,tb_usuario.usu_data_exp_senha,IF(tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo, 'CSE', (IF(tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo, 'CSA', (IF(tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo, 'COR', 'ORG'))))) AS TIPO,IF(tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo, tb_consignante.cse_nome, (IF(tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo, tb_consignataria.csa_nome, (IF(tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo, CONCAT(CONCAT(CSA_COR.csa_nome,  ' - '  ), tb_correspondente.cor_nome), tb_orgao.org_nome))))) AS ENTIDADE FROM tb_usuario LEFT OUTER JOIN tb_usuario_cse ON (tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo) LEFT OUTER JOIN tb_consignante ON (tb_usuario_cse.cse_codigo = tb_consignante.cse_codigo) LEFT OUTER JOIN tb_usuario_csa ON (tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo) LEFT OUTER JOIN tb_consignataria ON (tb_usuario_csa.csa_codigo = tb_consignataria.csa_codigo) LEFT OUTER JOIN tb_usuario_cor ON (tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo) LEFT OUTER JOIN tb_correspondente ON (tb_usuario_cor.cor_codigo = tb_correspondente.cor_codigo) LEFT OUTER JOIN tb_consignataria CSA_COR ON (tb_correspondente.csa_codigo = CSA_COR.csa_codigo) LEFT OUTER JOIN tb_usuario_org ON (tb_usuario.usu_codigo = tb_usuario_org.usu_codigo) LEFT OUTER JOIN tb_orgao ON (tb_usuario_org.org_codigo = tb_orgao.org_codigo) LEFT OUTER JOIN tb_perfil_usuario ON (tb_perfil_usuario.usu_codigo = tb_usuario.usu_codigo) LEFT OUTER JOIN tb_perfil ON (tb_perfil.per_codigo = tb_perfil_usuario.per_codigo) WHERE (tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_org.usu_codigo) AND ( tb_usuario_org.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_cse.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_csa.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_cor.usu_codigo = tb_usuario.usu_codigo )  AND tb_usuario.stu_codigo IN ( 1,2 ) ORDER BY  TIPO, tb_usuario.usu_nome]]></query>
+	<variable name="HeadingsCollection" calculation="System" class="java.util.Collection">
+		<initialValueExpression><![CDATA[new java.util.ArrayList()]]></initialValueExpression>
+	</variable>
+	<variable name="QTDE_SERVIDORES_BLOQUEADOS" class="java.lang.Integer">
+		<expression><![CDATA[$P{QTDE_TOTAL_SER}.intValue() - $P{QTDE_SER_ATIVOS}.intValue() - $P{QTDE_SER_EXCLUIDOS}.intValue() - $P{QTDE_SER_TRANSFERIDOS}.intValue()]]></expression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<background splitType="Stretch"/>
+	<title splitType="Stretch"/>
+	<pageHeader height="40" splitType="Stretch">
+		<element kind="image" uuid="011c6b7b-c957-4d3a-aa98-a4fd995efdd2" key="image-1" x="2" y="1" width="63" height="20" onErrorType="Blank" usingCache="true" lazy="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean($V{PAGE_NUMBER}.compareTo(new java.lang.Integer(1)) != 0)]]></printWhenExpression>
+			<expression><![CDATA[$P{CAMINHO_LOGO}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="8abd9bab-2f80-4c9f-ac41-fd0af599ad6f" key="textField-1" x="68" y="15" width="467" height="18" evaluationTime="Report" pattern="" blankWhenNull="false" hTextAlign="Left">
+			<printWhenExpression><![CDATA[new java.lang.Boolean($V{PAGE_NUMBER}.compareTo(new java.lang.Integer(1)) != 0)]]></printWhenExpression>
+			<expression><![CDATA[$P{SUBTITULO}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="d639d610-0f2b-4ef5-bb99-b05787a68b6f" key="textField-2" x="68" y="1" width="467" height="13" fontName="Arial" evaluationTime="Report" pattern="" blankWhenNull="false" bold="true" hTextAlign="Left">
+			<printWhenExpression><![CDATA[new java.lang.Boolean($V{PAGE_NUMBER}.compareTo(new java.lang.Integer(1)) != 0)]]></printWhenExpression>
+			<expression><![CDATA[$P{TITULO}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+	</pageHeader>
+	<columnHeader splitType="Stretch"/>
+	<detail>
+		<band height="710" splitType="Stretch">
+			<element kind="elementGroup">
+				<element kind="subreport" uuid="aa3a2771-3e73-4e55-9df1-d0e009443d0b" key="subreport-1" x="2" y="26" width="533" height="24" usingCache="true">
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{CONSIGNANTE})]]></dataSourceExpression>
+					<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralObjetivo.jasper"]]></expression>
+					<parameter name="HeadingsCollection">
+						<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+					</parameter>
+					<parameter name="RESPONSAVEL">
+						<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+					</parameter>
+					<parameter name="REPORT_SCRIPTLET">
+						<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+					</parameter>
+					<parameter name="DATA_ATUAL">
+						<expression><![CDATA[$P{DATA_ATUAL}]]></expression>
+					</parameter>
+				</element>
+				<element kind="subreport" uuid="5aa44b80-1770-4ddc-b5e6-0bc8105004a1" key="subreport-3" positionType="Float" x="2" y="51" width="533" height="24" usingCache="true">
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{CONSIGNANTE})]]></dataSourceExpression>
+					<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralZetraSoft.jasper"]]></expression>
+					<parameter name="HeadingsCollection">
+						<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+					</parameter>
+					<parameter name="RESPONSAVEL">
+						<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+					</parameter>
+					<parameter name="REPORT_SCRIPTLET">
+						<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+					</parameter>
+				</element>
+				<element kind="subreport" uuid="d19da689-967d-4b93-b56d-738ca5d7d2b2" key="subreport-4" positionType="Float" x="2" y="76" width="533" height="24" runToBottom="true" usingCache="true">
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{CONSIGNANTE})]]></dataSourceExpression>
+					<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeraleConsig.jasper"]]></expression>
+					<parameter name="EMAIL_SUPORTE">
+						<expression><![CDATA[$P{EMAIL_SUPORTE}]]></expression>
+					</parameter>
+					<parameter name="DIA_REPASSE">
+						<expression><![CDATA[$P{DIA_REPASSE}]]></expression>
+					</parameter>
+					<parameter name="TELEFONE_SUPORTE">
+						<expression><![CDATA[$P{TELEFONE_SUPORTE}]]></expression>
+					</parameter>
+					<parameter name="LINK_ACESSO_SISTEMA">
+						<expression><![CDATA[$P{LINK_ACESSO_SISTEMA}]]></expression>
+					</parameter>
+					<parameter name="REPORT_SCRIPTLET">
+						<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+					</parameter>
+					<parameter name="VERSAO_ATUAL_SISTEMA">
+						<expression><![CDATA[$P{VERSAO_ATUAL_SISTEMA}]]></expression>
+					</parameter>
+					<parameter name="DIA_CORTE">
+						<expression><![CDATA[$P{DIA_CORTE}]]></expression>
+					</parameter>
+					<parameter name="SUBREPORT_DIR">
+						<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+					</parameter>
+					<parameter name="MODULO_COMPRA">
+						<expression><![CDATA[$P{MODULO_COMPRA}]]></expression>
+					</parameter>
+					<parameter name="QUINZENAL">
+						<expression><![CDATA[$P{QUINZENAL}]]></expression>
+					</parameter>
+					<parameter name="HeadingsCollection">
+						<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+					</parameter>
+					<parameter name="RESPONSAVEL">
+						<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+					</parameter>
+					<parameter name="DATA_IMPLANTACAO">
+						<expression><![CDATA[$P{DATA_IMPLANTACAO}]]></expression>
+					</parameter>
+				</element>
+				<element kind="elementGroup">
+					<element kind="subreport" uuid="4272fd98-23b4-4e64-9c57-566d33e37092" key="subreport-5" x="2" y="101" width="533" height="24" usingCache="true">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{CONSIGNANTE})]]></dataSourceExpression>
+						<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeraleConsig1.jasper"]]></expression>
+						<parameter name="QTDE_TOTAL_SER">
+							<expression><![CDATA[$P{QTDE_TOTAL_SER}]]></expression>
+						</parameter>
+						<parameter name="ESTABELECIMENTOS">
+							<expression><![CDATA[$P{ESTABELECIMENTOS}]]></expression>
+						</parameter>
+						<parameter name="ORGAOS">
+							<expression><![CDATA[$P{ORGAOS}]]></expression>
+						</parameter>
+						<parameter name="REPORT_SCRIPTLET">
+							<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+						</parameter>
+						<parameter name="QTDE_SER_ATIVOS">
+							<expression><![CDATA[$P{QTDE_SER_ATIVOS}]]></expression>
+						</parameter>
+						<parameter name="QTDE_CATEGORIAS_SER">
+							<expression><![CDATA[$P{QTDE_CATEGORIAS_SER}]]></expression>
+						</parameter>
+						<parameter name="QTDE_CARGOS_SER">
+							<expression><![CDATA[$P{QTDE_CARGOS_SER}]]></expression>
+						</parameter>
+						<parameter name="SUBREPORT_DIR">
+							<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+						</parameter>
+						<parameter name="QUINZENAL">
+							<expression><![CDATA[$P{QUINZENAL}]]></expression>
+						</parameter>
+						<parameter name="HeadingsCollection">
+							<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+						</parameter>
+						<parameter name="RESPONSAVEL">
+							<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+						</parameter>
+						<parameter name="SER_POR_EST">
+							<expression><![CDATA[$P{SER_POR_EST}]]></expression>
+						</parameter>
+						<parameter name="QTDE_SER_POR_TIPO">
+							<expression><![CDATA[$P{QTDE_SER_POR_TIPO}]]></expression>
+						</parameter>
+						<parameter name="QTDE_SER_POR_CRS">
+							<expression><![CDATA[$P{QTDE_SER_POR_CRS}]]></expression>
+						</parameter>
+						<parameter name="QTDE_SER_EXCLUIDOS">
+							<expression><![CDATA[$P{QTDE_SER_EXCLUIDOS}]]></expression>
+						</parameter>
+					</element>
+					<element kind="break" uuid="d13a9689-00f0-4427-9fef-19f0db713239" key="element-11" x="0" y="127" width="535" height="1">
+						<printWhenExpression><![CDATA[$P{SER_POR_EST}.size() > 1 && $P{SER_POR_ORG}.size() > 1]]></printWhenExpression>
+					</element>
+				</element>
+				<element kind="break" uuid="9d5282fd-7a0c-451a-8e2d-0f9efcbdec51" key="element-4" x="0" y="100" width="535" height="1"/>
+				<element kind="subreport" uuid="fec5265e-d184-47e7-b5ee-988e8716e969" key="subreport-6" x="2" y="1" width="533" height="24" usingCache="true">
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{CONSIGNANTE})]]></dataSourceExpression>
+					<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralCapa.jasper"]]></expression>
+					<parameter name="CAMINHO_LOGO_ECONSIG">
+						<expression><![CDATA[$P{CAMINHO_LOGO_ECONSIG}]]></expression>
+					</parameter>
+					<parameter name="HeadingsCollection">
+						<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+					</parameter>
+					<parameter name="CAMINHO_LOGO">
+						<expression><![CDATA[$P{CAMINHO_LOGO}]]></expression>
+					</parameter>
+					<parameter name="RESPONSAVEL">
+						<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+					</parameter>
+					<parameter name="CSE_NOME">
+						<expression><![CDATA[$P{CSE_NOME}]]></expression>
+					</parameter>
+					<parameter name="MES_ANO">
+						<expression><![CDATA[$P{MES_ANO}]]></expression>
+					</parameter>
+					<parameter name="ANO_ATUAL">
+						<expression><![CDATA[$P{ANO_ATUAL}]]></expression>
+					</parameter>
+					<parameter name="CAMINHO_LOGO_ENTIDADE">
+						<expression><![CDATA[$P{CAMINHO_LOGO_ENTIDADE}]]></expression>
+					</parameter>
+					<parameter name="REPORT_SCRIPTLET">
+						<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+					</parameter>
+				</element>
+				<element kind="break" uuid="d661ff73-d216-4d34-908f-2df861fb225f" key="element-5" x="0" y="25" width="535" height="1"/>
+				<element kind="subreport" uuid="5cd811a4-b783-4d2d-b143-f1fa9fae5262" key="subreport-7" positionType="Float" x="2" y="201" width="533" height="24" usingCache="true" removeLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$P{INCIDE_MARGEM} && $P{EXIBE_MARGEM_1} && ($P{PARAM_EXIBE_MARGEM_1} != null || $P{PARAM_EXIBE_TODAS_MARGENS} != null)]]></printWhenExpression>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{ESTATISTICO_MARGEM})]]></dataSourceExpression>
+					<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralMargem1.jasper"]]></expression>
+					<parameter name="QTDE_SER_POR_FAIXA_MARGEM_1">
+						<expression><![CDATA[$P{QTDE_SER_POR_FAIXA_MARGEM_1}]]></expression>
+					</parameter>
+					<parameter name="MARGEM_3">
+						<expression><![CDATA[$P{MARGEM_3}]]></expression>
+					</parameter>
+					<parameter name="MARGEM_2">
+						<expression><![CDATA[$P{MARGEM_2}]]></expression>
+					</parameter>
+					<parameter name="MARGEM_1_CASADA_3">
+						<expression><![CDATA[$P{MARGEM_1_CASADA_3}]]></expression>
+					</parameter>
+					<parameter name="INDICE_REPORT">
+						<expression><![CDATA[$P{EXIBE_MARGEM_1}.booleanValue() ? new Integer("1"): new Integer("0")]]></expression>
+					</parameter>
+					<parameter name="INCIDE_MARGEM">
+						<expression><![CDATA[$P{INCIDE_MARGEM}]]></expression>
+					</parameter>
+					<parameter name="INCIDE_MARGEM_3">
+						<expression><![CDATA[$P{INCIDE_MARGEM_3}]]></expression>
+					</parameter>
+					<parameter name="MARGEM_1">
+						<expression><![CDATA[$P{MARGEM_1}]]></expression>
+					</parameter>
+					<parameter name="REPORT_SCRIPTLET">
+						<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+					</parameter>
+					<parameter name="INCIDE_MARGEM_2">
+						<expression><![CDATA[$P{INCIDE_MARGEM_2}]]></expression>
+					</parameter>
+					<parameter name="SUBREPORT_DIR">
+						<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+					</parameter>
+					<parameter name="HeadingsCollection">
+						<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+					</parameter>
+					<parameter name="RESPONSAVEL">
+						<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+					</parameter>
+					<parameter name="MARGEM_123_CASADA">
+						<expression><![CDATA[$P{MARGEM_123_CASADA}]]></expression>
+					</parameter>
+				</element>
+				<element kind="elementGroup">
+					<element kind="subreport" uuid="285b8ecc-7ee0-4e4b-b545-8a34db076911" key="subreport-8" positionType="Float" x="2" y="126" width="533" height="24" usingCache="true">
+						<printWhenExpression><![CDATA[$P{SER_POR_EST}.size() > 1]]></printWhenExpression>
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{SER_POR_EST})]]></dataSourceExpression>
+						<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralOrgaoPorServidor.jasper"]]></expression>
+						<parameter name="HeadingsCollection">
+							<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+						</parameter>
+						<parameter name="TITULO">
+							<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.estabelecimento.singular", $P{RESPONSAVEL})]]></expression>
+						</parameter>
+						<parameter name="REPORT_SCRIPTLET">
+							<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+						</parameter>
+					</element>
+					<element kind="subreport" uuid="285b8ecc-7ee0-4e4b-b545-8a34db076911" key="subreport-8" positionType="Float" x="2" y="128" width="533" height="24" usingCache="true">
+						<printWhenExpression><![CDATA[$P{SER_POR_ORG}.size() > 1]]></printWhenExpression>
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{SER_POR_ORG})]]></dataSourceExpression>
+						<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralOrgaoPorServidor.jasper"]]></expression>
+						<parameter name="HeadingsCollection">
+							<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+						</parameter>
+						<parameter name="TITULO">
+							<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.orgao.singular", $P{RESPONSAVEL})]]></expression>
+						</parameter>
+						<parameter name="RESPONSAVEL">
+							<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+						</parameter>
+						<parameter name="REPORT_SCRIPTLET">
+							<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+						</parameter>
+					</element>
+					<element kind="break" uuid="cb28eeb1-cace-42c3-a253-5e450ddc0e87" key="element-9" x="0" y="150" width="535" height="1"/>
+				</element>
+			</element>
+			<element kind="subreport" uuid="40cd9661-d487-4a21-a8d5-e71f44b6a3f5" key="subreport-9" positionType="Float" stretchType="ElementGroupHeight" x="2" y="151" width="533" height="24" usingCache="true">
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource((com.zetra.econsig.helper.parametro.ParamSist.paramEquals(com.zetra.econsig.values.CodedValues.TPC_CATEGORIA_RELATORIO_GERENCIAL_GERAL_CORRESPONDE_CARGO_RSE, com.zetra.econsig.values.CodedValues.TPC_NAO, $P{RESPONSAVEL})) ? $P{QTDE_SER_POR_TIPO} : ((com.zetra.econsig.helper.parametro.ParamSist.paramEquals(com.zetra.econsig.values.CodedValues.TPC_CATEGORIA_RELATORIO_GERENCIAL_GERAL_CORRESPONDE_CARGO_RSE, com.zetra.econsig.values.CodedValues.TPC_SIM, $P{RESPONSAVEL})) ? $P{QTDE_SER_POR_CRS} : $P{QTDE_SER_POR_TIPO}))]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + ((com.zetra.econsig.helper.parametro.ParamSist.paramEquals(com.zetra.econsig.values.CodedValues.TPC_CATEGORIA_RELATORIO_GERENCIAL_GERAL_CORRESPONDE_CARGO_RSE, com.zetra.econsig.values.CodedValues.TPC_NAO, $P{RESPONSAVEL})) ? "GerencialGeralServidores.jasper" : ((com.zetra.econsig.helper.parametro.ParamSist.paramEquals(com.zetra.econsig.values.CodedValues.TPC_CATEGORIA_RELATORIO_GERENCIAL_GERAL_CORRESPONDE_CARGO_RSE, com.zetra.econsig.values.CodedValues.TPC_SIM, $P{RESPONSAVEL})) ? "GerencialGeralServidoresPorCargo.jasper" : "GerencialGeralServidores.jasper"))]]></expression>
+				<parameter name="QTDE_CATEGORIAS_SER">
+					<expression><![CDATA[$P{QTDE_CATEGORIAS_SER}]]></expression>
+				</parameter>
+				<parameter name="QTDE_TOTAL_SER">
+					<expression><![CDATA[$P{QTDE_TOTAL_SER}]]></expression>
+				</parameter>
+				<parameter name="HeadingsCollection">
+					<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+				</parameter>
+				<parameter name="RESPONSAVEL">
+					<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+				</parameter>
+				<parameter name="QTDE_SER_TRANSFERIDOS">
+					<expression><![CDATA[$P{QTDE_SER_TRANSFERIDOS}]]></expression>
+				</parameter>
+				<parameter name="REPORT_SCRIPTLET">
+					<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+				</parameter>
+				<parameter name="QTDE_CARGOS_SER">
+					<expression><![CDATA[$P{QTDE_CARGOS_SER}]]></expression>
+				</parameter>
+				<parameter name="QTDE_SER_POR_CRS">
+					<expression><![CDATA[$P{QTDE_SER_POR_CRS}]]></expression>
+				</parameter>
+				<parameter name="QTDE_SER_POR_TIPO">
+					<expression><![CDATA[$P{QTDE_SER_POR_TIPO}]]></expression>
+				</parameter>
+				<parameter name="QTDE_SER_EXCLUIDOS">
+					<expression><![CDATA[$P{QTDE_SER_EXCLUIDOS}]]></expression>
+				</parameter>
+				<parameter name="QTDE_SER_ATIVOS">
+					<expression><![CDATA[$P{QTDE_SER_ATIVOS}]]></expression>
+				</parameter>
+				<parameter name="QTDE_SER_BLOQUEADOS">
+					<expression><![CDATA[$V{QTDE_SERVIDORES_BLOQUEADOS}]]></expression>
+				</parameter>
+			</element>
+			<element kind="break" uuid="51ff641a-a9d2-462b-a16a-457b052b8846" key="element-8" x="0" y="175" width="535" height="1" removeLineWhenBlank="true"/>
+			<element kind="subreport" uuid="a7538c79-6370-4428-a6b2-c264207e9a0b" key="subreport-10" positionType="Float" x="2" y="226" width="533" height="24" usingCache="true" removeLineWhenBlank="true">
+				<printWhenExpression><![CDATA[$P{INCIDE_MARGEM} && $P{EXIBE_MARGEM_1} && ($P{PARAM_EXIBE_MARGEM_1} != null || $P{PARAM_EXIBE_TODAS_MARGENS} != null)]]></printWhenExpression>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{QTDE_SER_POR_FAIXA_MARGEM_1})]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralFaixaMargem1.jasper"]]></expression>
+				<parameter name="SUBREPORT_DIR">
+					<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+				</parameter>
+				<parameter name="HeadingsCollection">
+					<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+				</parameter>
+				<parameter name="RESPONSAVEL">
+					<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+				</parameter>
+				<parameter name="REPORT_SCRIPTLET">
+					<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+				</parameter>
+			</element>
+			<element kind="break" uuid="d13a9689-00f0-4427-9fef-19f0db713239" key="element-11" positionType="Float" x="0" y="225" width="535" height="1" removeLineWhenBlank="true">
+				<printWhenExpression><![CDATA[$P{INCIDE_MARGEM} && $P{EXIBE_MARGEM_1} && ($P{PARAM_EXIBE_MARGEM_1} != null || $P{PARAM_EXIBE_TODAS_MARGENS} != null)]]></printWhenExpression>
+			</element>
+			<element kind="subreport" uuid="3b2f5bfc-d400-481b-a1a4-5beb8741b06d" key="subreport-11" x="2" y="176" width="533" height="24" usingCache="true">
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{ESTATISTICO_MARGEM})]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralMargem.jasper"]]></expression>
+				<parameter name="MARGEM_3">
+					<expression><![CDATA[$P{MARGEM_3}]]></expression>
+				</parameter>
+				<parameter name="SUBREPORT_DIR">
+					<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+				</parameter>
+				<parameter name="MARGEM_1_CASADA_3">
+					<expression><![CDATA[$P{MARGEM_1_CASADA_3}]]></expression>
+				</parameter>
+				<parameter name="MARGEM_2">
+					<expression><![CDATA[$P{MARGEM_2}]]></expression>
+				</parameter>
+				<parameter name="HeadingsCollection">
+					<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+				</parameter>
+				<parameter name="INCIDE_MARGEM_3">
+					<expression><![CDATA[$P{INCIDE_MARGEM_3}]]></expression>
+				</parameter>
+				<parameter name="INCIDE_MARGEM">
+					<expression><![CDATA[$P{INCIDE_MARGEM}]]></expression>
+				</parameter>
+				<parameter name="RESPONSAVEL">
+					<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+				</parameter>
+				<parameter name="MARGEM_123_CASADA">
+					<expression><![CDATA[$P{MARGEM_123_CASADA}]]></expression>
+				</parameter>
+				<parameter name="MARGEM_1">
+					<expression><![CDATA[$P{MARGEM_1}]]></expression>
+				</parameter>
+				<parameter name="REPORT_SCRIPTLET">
+					<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+				</parameter>
+				<parameter name="INCIDE_MARGEM_2">
+					<expression><![CDATA[$P{INCIDE_MARGEM_2}]]></expression>
+				</parameter>
+			</element>
+			<element kind="break" uuid="6d248258-c6eb-441d-8e8c-39ec8fe607e2" key="element-13" positionType="Float" x="0" y="250" width="535" height="1" removeLineWhenBlank="true">
+				<printWhenExpression><![CDATA[$P{INCIDE_MARGEM} && $P{EXIBE_MARGEM_1} && ($P{PARAM_EXIBE_MARGEM_1} != null || $P{PARAM_EXIBE_TODAS_MARGENS} != null)]]></printWhenExpression>
+			</element>
+			<element kind="subreport" uuid="4389bbcc-e35c-4a20-9258-921712831f18" key="subreport-12" positionType="Float" x="2" y="251" width="533" height="24" usingCache="true" removeLineWhenBlank="true">
+				<printWhenExpression><![CDATA[$P{INCIDE_MARGEM} && $P{EXIBE_MARGEM_1} && $P{COMPROMETIMENTO_MARGEM_1}.size() > 0 && ($P{PARAM_EXIBE_MARGEM_1} != null || $P{PARAM_EXIBE_TODAS_MARGENS} != null)]]></printWhenExpression>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{COMPROMETIMENTO_MARGEM_1})]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralComprometimentoMargem1.jasper"]]></expression>
+				<parameter name="SUBREPORT_DIR">
+					<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+				</parameter>
+				<parameter name="HeadingsCollection">
+					<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+				</parameter>
+				<parameter name="RESPONSAVEL">
+					<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+				</parameter>
+				<parameter name="REPORT_SCRIPTLET">
+					<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+				</parameter>
+			</element>
+			<element kind="break" uuid="8cc18e63-c4ca-4823-8bc5-dee29fb82e5e" key="element-14" positionType="Float" x="0" y="275" width="535" height="1" removeLineWhenBlank="true">
+				<printWhenExpression><![CDATA[$P{INCIDE_MARGEM} && $P{EXIBE_MARGEM_1} && $P{COMPROMETIMENTO_MARGEM_1}.size() > 0 && ($P{PARAM_EXIBE_MARGEM_1} != null || $P{PARAM_EXIBE_TODAS_MARGENS} != null)]]></printWhenExpression>
+			</element>
+			<element kind="subreport" uuid="992ff862-4786-4053-a521-a9d9764c2ba8" key="subreport-13" positionType="Float" x="2" y="276" width="533" height="24" usingCache="true" removeLineWhenBlank="true">
+				<printWhenExpression><![CDATA[$P{INCIDE_MARGEM_2} && $P{EXIBE_MARGEM_2} && ($P{PARAM_EXIBE_MARGEM_2} != null || $P{PARAM_EXIBE_TODAS_MARGENS} != null)]]></printWhenExpression>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{ESTATISTICO_MARGEM})]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralMargem2.jasper"]]></expression>
+				<parameter name="MARGEM_3">
+					<expression><![CDATA[$P{MARGEM_3}]]></expression>
+				</parameter>
+				<parameter name="MARGEM_2">
+					<expression><![CDATA[$P{MARGEM_2}]]></expression>
+				</parameter>
+				<parameter name="MARGEM_1_CASADA_3">
+					<expression><![CDATA[$P{MARGEM_1_CASADA_3}]]></expression>
+				</parameter>
+				<parameter name="INDICE_REPORT">
+					<expression><![CDATA[($P{EXIBE_MARGEM_1}.booleanValue() ? new Integer("1"): new Integer("0")) + ($P{EXIBE_MARGEM_2}.booleanValue() ? new Integer("1"): new Integer("0"))]]></expression>
+				</parameter>
+				<parameter name="QTDE_SER_POR_FAIXA_MARGEM_2">
+					<expression><![CDATA[$P{QTDE_SER_POR_FAIXA_MARGEM_2}]]></expression>
+				</parameter>
+				<parameter name="INCIDE_MARGEM">
+					<expression><![CDATA[$P{INCIDE_MARGEM}]]></expression>
+				</parameter>
+				<parameter name="INCIDE_MARGEM_3">
+					<expression><![CDATA[$P{INCIDE_MARGEM_3}]]></expression>
+				</parameter>
+				<parameter name="MARGEM_1">
+					<expression><![CDATA[$P{MARGEM_1}]]></expression>
+				</parameter>
+				<parameter name="REPORT_SCRIPTLET">
+					<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+				</parameter>
+				<parameter name="INCIDE_MARGEM_2">
+					<expression><![CDATA[$P{INCIDE_MARGEM_2}]]></expression>
+				</parameter>
+				<parameter name="SUBREPORT_DIR">
+					<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+				</parameter>
+				<parameter name="HeadingsCollection">
+					<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+				</parameter>
+				<parameter name="RESPONSAVEL">
+					<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+				</parameter>
+				<parameter name="MARGEM_123_CASADA">
+					<expression><![CDATA[$P{MARGEM_123_CASADA}]]></expression>
+				</parameter>
+			</element>
+			<element kind="break" uuid="c15cc778-7adb-43fa-bbff-17c6caf45ff8" key="element-15" positionType="Float" x="0" y="300" width="535" height="1" removeLineWhenBlank="true">
+				<printWhenExpression><![CDATA[$P{INCIDE_MARGEM_2} && $P{EXIBE_MARGEM_2} && ($P{PARAM_EXIBE_MARGEM_2} != null || $P{PARAM_EXIBE_TODAS_MARGENS} != null)]]></printWhenExpression>
+			</element>
+			<element kind="subreport" uuid="85de57f9-e20a-445a-907f-3fdede2f8668" key="subreport-14" positionType="Float" x="2" y="301" width="533" height="24" usingCache="true" removeLineWhenBlank="true">
+				<printWhenExpression><![CDATA[$P{INCIDE_MARGEM_2} && $P{EXIBE_MARGEM_2} && ($P{PARAM_EXIBE_MARGEM_2} != null || $P{PARAM_EXIBE_TODAS_MARGENS} != null)]]></printWhenExpression>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{QTDE_SER_POR_FAIXA_MARGEM_2})]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralFaixaMargem2.jasper"]]></expression>
+				<parameter name="SUBREPORT_DIR">
+					<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+				</parameter>
+				<parameter name="HeadingsCollection">
+					<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+				</parameter>
+				<parameter name="RESPONSAVEL">
+					<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+				</parameter>
+				<parameter name="REPORT_SCRIPTLET">
+					<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+				</parameter>
+			</element>
+			<element kind="break" uuid="1d8c6f39-414d-41c4-ac2d-dff5afc13a47" key="element-16" positionType="Float" x="0" y="325" width="535" height="1" removeLineWhenBlank="true">
+				<printWhenExpression><![CDATA[$P{INCIDE_MARGEM_2} && $P{EXIBE_MARGEM_2} && ($P{PARAM_EXIBE_MARGEM_2} != null || $P{PARAM_EXIBE_TODAS_MARGENS} != null)]]></printWhenExpression>
+			</element>
+			<element kind="subreport" uuid="f462e6c5-a453-4f8e-a099-da455fae0254" key="subreport-15" positionType="Float" x="2" y="326" width="533" height="24" usingCache="true" removeLineWhenBlank="true">
+				<printWhenExpression><![CDATA[$P{INCIDE_MARGEM_2} && $P{EXIBE_MARGEM_2} && $P{COMPROMETIMENTO_MARGEM_2}.size() > 0 && ($P{PARAM_EXIBE_MARGEM_2} != null || $P{PARAM_EXIBE_TODAS_MARGENS} != null)]]></printWhenExpression>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{COMPROMETIMENTO_MARGEM_2})]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralComprometimentoMargem2.jasper"]]></expression>
+				<parameter name="SUBREPORT_DIR">
+					<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+				</parameter>
+				<parameter name="HeadingsCollection">
+					<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+				</parameter>
+				<parameter name="RESPONSAVEL">
+					<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+				</parameter>
+				<parameter name="REPORT_SCRIPTLET">
+					<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+				</parameter>
+			</element>
+			<element kind="break" uuid="3b2d3fc0-341a-4108-92f7-4addd54815d7" key="element-17" positionType="Float" x="0" y="350" width="535" height="1" removeLineWhenBlank="true">
+				<printWhenExpression><![CDATA[$P{INCIDE_MARGEM_2} && $P{EXIBE_MARGEM_2} && $P{COMPROMETIMENTO_MARGEM_2}.size() > 0 && ($P{PARAM_EXIBE_MARGEM_2} != null || $P{PARAM_EXIBE_TODAS_MARGENS} != null)]]></printWhenExpression>
+			</element>
+			<element kind="subreport" uuid="6d2d0719-5614-4171-bdec-7c78e9ebfda2" key="subreport-16" positionType="Float" x="2" y="351" width="533" height="24" usingCache="true" removeLineWhenBlank="true">
+				<printWhenExpression><![CDATA[$P{INCIDE_MARGEM_3} && $P{EXIBE_MARGEM_3} && ($P{PARAM_EXIBE_MARGEM_3} != null || $P{PARAM_EXIBE_TODAS_MARGENS} != null)]]></printWhenExpression>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{ESTATISTICO_MARGEM})]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralMargem3.jasper"]]></expression>
+				<parameter name="MARGEM_3">
+					<expression><![CDATA[$P{MARGEM_3}]]></expression>
+				</parameter>
+				<parameter name="MARGEM_2">
+					<expression><![CDATA[$P{MARGEM_2}]]></expression>
+				</parameter>
+				<parameter name="MARGEM_1_CASADA_3">
+					<expression><![CDATA[$P{MARGEM_1_CASADA_3}]]></expression>
+				</parameter>
+				<parameter name="INDICE_REPORT">
+					<expression><![CDATA[($P{EXIBE_MARGEM_1}.booleanValue() ? new Integer("1"): new Integer("0")) + ($P{EXIBE_MARGEM_2}.booleanValue() ? new Integer("1"): new Integer("0")) + ($P{EXIBE_MARGEM_3}.booleanValue() ? new Integer("1"): new Integer("0"))]]></expression>
+				</parameter>
+				<parameter name="QTDE_SER_POR_FAIXA_MARGEM_3">
+					<expression><![CDATA[$P{QTDE_SER_POR_FAIXA_MARGEM_3}]]></expression>
+				</parameter>
+				<parameter name="INCIDE_MARGEM">
+					<expression><![CDATA[$P{INCIDE_MARGEM}]]></expression>
+				</parameter>
+				<parameter name="INCIDE_MARGEM_3">
+					<expression><![CDATA[$P{INCIDE_MARGEM_3}]]></expression>
+				</parameter>
+				<parameter name="MARGEM_1">
+					<expression><![CDATA[$P{MARGEM_1}]]></expression>
+				</parameter>
+				<parameter name="REPORT_SCRIPTLET">
+					<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+				</parameter>
+				<parameter name="INCIDE_MARGEM_2">
+					<expression><![CDATA[$P{INCIDE_MARGEM_2}]]></expression>
+				</parameter>
+				<parameter name="SUBREPORT_DIR">
+					<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+				</parameter>
+				<parameter name="HeadingsCollection">
+					<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+				</parameter>
+				<parameter name="RESPONSAVEL">
+					<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+				</parameter>
+				<parameter name="MARGEM_123_CASADA">
+					<expression><![CDATA[$P{MARGEM_123_CASADA}]]></expression>
+				</parameter>
+			</element>
+			<element kind="break" uuid="ec5752f1-4afc-4fde-85e1-8e9dab57a7b4" key="element-18" positionType="Float" x="0" y="375" width="535" height="1" removeLineWhenBlank="true">
+				<printWhenExpression><![CDATA[$P{INCIDE_MARGEM_3} && $P{EXIBE_MARGEM_3} && ($P{PARAM_EXIBE_MARGEM_3} != null || $P{PARAM_EXIBE_TODAS_MARGENS} != null)]]></printWhenExpression>
+			</element>
+			<element kind="subreport" uuid="d379a7ec-0571-4f9c-b1c3-ef9deb48c8b6" key="subreport-17" positionType="Float" x="2" y="376" width="533" height="24" usingCache="true" removeLineWhenBlank="true">
+				<printWhenExpression><![CDATA[$P{INCIDE_MARGEM_3} && $P{EXIBE_MARGEM_3} && ($P{PARAM_EXIBE_MARGEM_3} != null || $P{PARAM_EXIBE_TODAS_MARGENS} != null)]]></printWhenExpression>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{QTDE_SER_POR_FAIXA_MARGEM_3})]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralFaixaMargem3.jasper"]]></expression>
+				<parameter name="REPORT_SCRIPTLET">
+					<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+				</parameter>
+				<parameter name="HeadingsCollection">
+					<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+				</parameter>
+				<parameter name="SUBREPORT_DIR">
+					<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+				</parameter>
+			</element>
+			<element kind="break" uuid="d815f53b-eb0a-4160-b2ef-6a04e458942b" key="element-19" positionType="Float" x="0" y="400" width="535" height="1" removeLineWhenBlank="true">
+				<printWhenExpression><![CDATA[$P{INCIDE_MARGEM_3} && $P{EXIBE_MARGEM_3} && ($P{PARAM_EXIBE_MARGEM_3} != null || $P{PARAM_EXIBE_TODAS_MARGENS} != null)]]></printWhenExpression>
+			</element>
+			<element kind="subreport" uuid="f77aa1be-ffa2-4cfd-b5b9-a9c745fff937" key="subreport-18" positionType="Float" x="2" y="401" width="533" height="24" usingCache="true" removeLineWhenBlank="true">
+				<printWhenExpression><![CDATA[$P{INCIDE_MARGEM_3} && $P{EXIBE_MARGEM_3} && $P{COMPROMETIMENTO_MARGEM_3}.size() > 0 && ($P{PARAM_EXIBE_MARGEM_3} != null || $P{PARAM_EXIBE_TODAS_MARGENS} != null)]]></printWhenExpression>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{COMPROMETIMENTO_MARGEM_3})]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralComprometimentoMargem3.jasper"]]></expression>
+				<parameter name="SUBREPORT_DIR">
+					<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+				</parameter>
+				<parameter name="HeadingsCollection">
+					<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+				</parameter>
+				<parameter name="RESPONSAVEL">
+					<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+				</parameter>
+				<parameter name="REPORT_SCRIPTLET">
+					<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+				</parameter>
+			</element>
+			<element kind="break" uuid="5a4637cd-fbca-4bd8-8ac1-f5696aa3c167" key="element-20" positionType="Float" x="0" y="425" width="535" height="1" removeLineWhenBlank="true">
+				<printWhenExpression><![CDATA[$P{INCIDE_MARGEM_3} && $P{EXIBE_MARGEM_3} && $P{COMPROMETIMENTO_MARGEM_3}.size() > 0 && ($P{PARAM_EXIBE_MARGEM_3} != null || $P{PARAM_EXIBE_TODAS_MARGENS} != null)]]></printWhenExpression>
+			</element>
+			<element kind="subreport" uuid="7789e135-0d92-4380-bd7f-d438a8fe67fb" key="subreport-19" x="2" y="426" width="533" height="24" usingCache="true">
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{LISTA_QTDE_CONTRATOS_POR_CSA})]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralCsa.jasper"]]></expression>
+				<parameter name="SUBREPORT_DIR">
+					<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+				</parameter>
+				<parameter name="HeadingsCollection">
+					<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+				</parameter>
+				<parameter name="QTDE_CSA_TOTAL">
+					<expression><![CDATA[$P{QTDE_CSA_TOTAL}]]></expression>
+				</parameter>
+				<parameter name="RESPONSAVEL">
+					<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+				</parameter>
+				<parameter name="QTDE_CSA_INATIVOS_TOTAL">
+					<expression><![CDATA[$P{QTDE_CSA_INATIVOS_TOTAL}]]></expression>
+				</parameter>
+				<parameter name="REPORT_SCRIPTLET">
+					<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+				</parameter>
+				<parameter name="QTDE_CSA_ATIVOS_TOTAL">
+					<expression><![CDATA[$P{QTDE_CSA_ATIVOS_TOTAL}]]></expression>
+				</parameter>
+				<parameter name="PERIODO">
+					<expression><![CDATA[$P{PERIODO}]]></expression>
+				</parameter>
+			</element>
+			<element kind="break" uuid="e298b698-06be-4d84-aa7a-a8654dcb3559" key="element-21" x="0" y="450" width="535" height="1"/>
+			<element kind="subreport" uuid="820b4dfa-52de-4ed3-9470-f599a2fef514" key="subreport-20" x="2" y="451" width="533" height="24" usingCache="true">
+				<printWhenExpression><![CDATA[$P{QTDE_COR_TOTAL}.intValue() > 0]]></printWhenExpression>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{LISTA_QTDE_COR_POR_CSA})]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralCor.jasper"]]></expression>
+				<parameter name="SUBREPORT_DIR">
+					<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+				</parameter>
+				<parameter name="HeadingsCollection">
+					<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+				</parameter>
+				<parameter name="RESPONSAVEL">
+					<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+				</parameter>
+				<parameter name="QTDE_COR_TOTAL">
+					<expression><![CDATA[$P{QTDE_COR_TOTAL}]]></expression>
+				</parameter>
+				<parameter name="REPORT_SCRIPTLET">
+					<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+				</parameter>
+				<parameter name="QTDE_COR_INATIVOS_TOTAL">
+					<expression><![CDATA[$P{QTDE_COR_INATIVOS_TOTAL}]]></expression>
+				</parameter>
+				<parameter name="QTDE_COR_ATIVOS_TOTAL">
+					<expression><![CDATA[$P{QTDE_COR_ATIVOS_TOTAL}]]></expression>
+				</parameter>
+			</element>
+			<element kind="break" uuid="81784882-a455-45ce-b56a-f6308e3d34d5" key="element-22" x="0" y="475" width="535" height="1"/>
+			<element kind="subreport" uuid="6abd82e9-d754-4707-b733-a542858ac788" key="subreport-21" x="2" y="476" width="533" height="24" usingCache="true">
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource((com.zetra.econsig.helper.parametro.ParamSist.paramEquals(com.zetra.econsig.values.CodedValues.TPC_CATEGORIA_RELATORIO_GERENCIAL_GERAL_CORRESPONDE_CARGO_RSE, com.zetra.econsig.values.CodedValues.TPC_NAO, $P{RESPONSAVEL})) ? $P{LISTA_QTDE_CONTRATOS_POR_CATEGORIA} : ((com.zetra.econsig.helper.parametro.ParamSist.paramEquals(com.zetra.econsig.values.CodedValues.TPC_CATEGORIA_RELATORIO_GERENCIAL_GERAL_CORRESPONDE_CARGO_RSE, com.zetra.econsig.values.CodedValues.TPC_SIM, $P{RESPONSAVEL})) ? $P{LISTA_QTDE_CONTRATOS_POR_CRS} : $P{LISTA_QTDE_CONTRATOS_POR_CATEGORIA}))]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + ((com.zetra.econsig.helper.parametro.ParamSist.paramEquals(com.zetra.econsig.values.CodedValues.TPC_CATEGORIA_RELATORIO_GERENCIAL_GERAL_CORRESPONDE_CARGO_RSE, com.zetra.econsig.values.CodedValues.TPC_NAO, $P{RESPONSAVEL})) ? "GerencialGeralContratosCategoria.jasper" : ((com.zetra.econsig.helper.parametro.ParamSist.paramEquals(com.zetra.econsig.values.CodedValues.TPC_CATEGORIA_RELATORIO_GERENCIAL_GERAL_CORRESPONDE_CARGO_RSE, com.zetra.econsig.values.CodedValues.TPC_SIM, $P{RESPONSAVEL})) ? "GerencialGeralContratosPorCargo.jasper" : "GerencialGeralContratosCategoria.jasper"))]]></expression>
+				<parameter name="SUBREPORT_DIR">
+					<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+				</parameter>
+				<parameter name="HeadingsCollection">
+					<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+				</parameter>
+				<parameter name="RESPONSAVEL">
+					<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+				</parameter>
+				<parameter name="QTDE_CONTRATOS_ATIVOS">
+					<expression><![CDATA[$P{QTDE_CONTRATOS_ATIVOS}]]></expression>
+				</parameter>
+				<parameter name="REPORT_SCRIPTLET">
+					<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+				</parameter>
+				<parameter name="PERIODO">
+					<expression><![CDATA[$P{PERIODO}]]></expression>
+				</parameter>
+				<parameter name="QTDE_CONTRATOS_POR_CRS">
+					<expression><![CDATA[$P{QTDE_CONTRATOS_POR_CRS}]]></expression>
+				</parameter>
+				<parameter name="QTDE_CONTRATOS_POR_CATEGORIA">
+					<expression><![CDATA[$P{QTDE_CONTRATOS_POR_CATEGORIA}]]></expression>
+				</parameter>
+			</element>
+			<element kind="break" uuid="ee056b49-6733-4694-b072-8932e6880ac7" key="element-23" x="0" y="500" width="535" height="1"/>
+			<element kind="subreport" uuid="4b66a232-58e7-478f-8078-b1c97a201b82" key="subreport-22" x="2" y="501" width="533" height="24" usingCache="true">
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{LISTA_QTDE_CONTRATOS_POR_SVC})]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralContratosServico.jasper"]]></expression>
+				<parameter name="SUBREPORT_DIR">
+					<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+				</parameter>
+				<parameter name="HeadingsCollection">
+					<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+				</parameter>
+				<parameter name="QTDE_SVC_INATIVOS_TOTAL">
+					<expression><![CDATA[$P{QTDE_SVC_INATIVOS_TOTAL}]]></expression>
+				</parameter>
+				<parameter name="RESPONSAVEL">
+					<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+				</parameter>
+				<parameter name="SALDO_DEVEDOR_EMPRESTIMO">
+					<expression><![CDATA[$P{SALDO_DEVEDOR_EMPRESTIMO}]]></expression>
+				</parameter>
+				<parameter name="REPORT_SCRIPTLET">
+					<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+				</parameter>
+				<parameter name="QTDE_SVC_TOTAL">
+					<expression><![CDATA[$P{QTDE_SVC_TOTAL}]]></expression>
+				</parameter>
+				<parameter name="TOTAL_PRESTACAO_EMPRESTIMO">
+					<expression><![CDATA[$P{TOTAL_PRESTACAO_EMPRESTIMO}]]></expression>
+				</parameter>
+				<parameter name="QTDE_SVC_ATIVOS_TOTAL">
+					<expression><![CDATA[$P{QTDE_SVC_ATIVOS_TOTAL}]]></expression>
+				</parameter>
+				<parameter name="QTDE_CONTRATOS_POR_SVC">
+					<expression><![CDATA[$P{QTDE_CONTRATOS_POR_SVC}]]></expression>
+				</parameter>
+			</element>
+			<element kind="break" uuid="c35c03cb-5f09-4844-8ab5-1084b0d6c078" key="element-24" positionType="Float" x="0" y="525" width="535" height="1"/>
+			<element kind="subreport" uuid="f6fc6fb7-accd-4b77-9b87-c78fc78d84b4" key="subreport-24" positionType="Float" x="2" y="526" width="533" height="24" usingCache="true">
+				<printWhenExpression><![CDATA[$P{EVOLUCAO}.size() > 0]]></printWhenExpression>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{CSA_INADIMPLENCIA})]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralInadimplencia.jasper"]]></expression>
+				<parameter name="SUBREPORT_DIR">
+					<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+				</parameter>
+				<parameter name="COUNT_TOTAL_CARTEIRA">
+					<expression><![CDATA[$P{COUNT_TOTAL_CARTEIRA}]]></expression>
+				</parameter>
+				<parameter name="EVOLUCAO">
+					<expression><![CDATA[$P{EVOLUCAO}]]></expression>
+				</parameter>
+				<parameter name="HeadingsCollection">
+					<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+				</parameter>
+				<parameter name="QUINZENAL">
+					<expression><![CDATA[$P{QUINZENAL}]]></expression>
+				</parameter>
+				<parameter name="PAGE">
+					<expression><![CDATA[$V{PAGE_COUNT}]]></expression>
+				</parameter>
+				<parameter name="RESPONSAVEL">
+					<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+				</parameter>
+				<parameter name="PORC_TOTAL_CONTRATOS_INADIMPLENCIA">
+					<expression><![CDATA[$P{PORC_TOTAL_CONTRATOS_INADIMPLENCIA}]]></expression>
+				</parameter>
+				<parameter name="REPORT_SCRIPTLET">
+					<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+				</parameter>
+				<parameter name="COUNT_TOTAL_CARTEIRA_EMPRESTIMO">
+					<expression><![CDATA[$P{COUNT_TOTAL_CARTEIRA_EMPRESTIMO}]]></expression>
+				</parameter>
+				<parameter name="PORC_EMPRESTIMO_CONTRATOS_INADIMPLENCIA">
+					<expression><![CDATA[$P{PORC_EMPRESTIMO_CONTRATOS_INADIMPLENCIA}]]></expression>
+				</parameter>
+				<parameter name="PERIODO_INADIMPLENCIA">
+					<expression><![CDATA[$P{PERIODO_INADIMPLENCIA}]]></expression>
+				</parameter>
+			</element>
+			<element kind="break" uuid="c35c03cb-5f09-4844-8ab5-1084b0d6c078" key="element-25" positionType="Float" x="0" y="550" width="535" height="1"/>
+			<element kind="subreport" uuid="f6fc6fb7-accd-4b77-9b87-c78fc78d84b4" key="subreport-25" positionType="Float" x="2" y="551" width="533" height="24" usingCache="true">
+				<printWhenExpression><![CDATA[$P{LISTA_RANKING_TAXAS} != null && !$P{LISTA_RANKING_TAXAS}.isEmpty()]]></printWhenExpression>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{LISTA_RANKING_TAXAS})]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralTaxas.jasper"]]></expression>
+				<parameter name="HeadingsCollection">
+					<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+				</parameter>
+				<parameter name="PAGE">
+					<expression><![CDATA[$V{PAGE_COUNT}]]></expression>
+				</parameter>
+				<parameter name="RESPONSAVEL">
+					<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+				</parameter>
+				<parameter name="SVC_RANKING_TAXAS">
+					<expression><![CDATA[$P{SVC_RANKING_TAXAS}]]></expression>
+				</parameter>
+				<parameter name="REPORT_SCRIPTLET">
+					<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+				</parameter>
+			</element>
+			<element kind="break" uuid="c35c03cb-5f09-4844-8ab5-1084b0d6c078" key="element-26" x="0" y="575" width="535" height="1"/>
+			<element kind="subreport" uuid="f6fc6fb7-accd-4b77-9b87-c78fc78d84b4" key="subreport-27" positionType="Float" x="2" y="576" width="533" height="24" usingCache="true">
+				<printWhenExpression><![CDATA[$P{LISTA_TAXAS_EFETIVAS} != null && !$P{LISTA_TAXAS_EFETIVAS}.isEmpty()]]></printWhenExpression>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{LISTA_TAXAS_EFETIVAS})]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralTaxasEfetivas.jasper"]]></expression>
+				<parameter name="HeadingsCollection">
+					<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+				</parameter>
+				<parameter name="PAGE">
+					<expression><![CDATA[$V{PAGE_COUNT}]]></expression>
+				</parameter>
+				<parameter name="RESPONSAVEL">
+					<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+				</parameter>
+				<parameter name="REPORT_SCRIPTLET">
+					<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+				</parameter>
+				<parameter name="SVC_TAXAS_EFETIVAS">
+					<expression><![CDATA[$P{SVC_TAXAS_EFETIVAS}]]></expression>
+				</parameter>
+			</element>
+			<element kind="break" uuid="c35c03cb-5f09-4844-8ab5-1084b0d6c078" key="element-27" x="0" y="600" width="535" height="1"/>
+			<element kind="subreport" uuid="e0d28669-92ac-4d44-927c-a8e88f915127" key="subreport-28" positionType="Float" x="2" y="602" width="533" height="24" usingCache="true">
+				<printWhenExpression><![CDATA[$P{SER_POR_ORG_ATIVO} != null && !$P{SER_POR_ORG_ATIVO}.isEmpty()]]></printWhenExpression>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{SER_POR_ORG_ATIVO})]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralOrgaoServidoresAtivos.jasper"]]></expression>
+				<parameter name="HeadingsCollection">
+					<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+				</parameter>
+				<parameter name="PAGE">
+					<expression><![CDATA[$V{PAGE_COUNT}]]></expression>
+				</parameter>
+				<parameter name="RESPONSAVEL">
+					<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+				</parameter>
+				<parameter name="QTDE_ORGAOS_ATIVOS">
+					<expression><![CDATA[$P{QTDE_ORGAOS_ATIVOS}]]></expression>
+				</parameter>
+				<parameter name="REPORT_SCRIPTLET">
+					<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+				</parameter>
+				<parameter name="QTDE_SER_ATIVOS">
+					<expression><![CDATA[$P{QTDE_SER_ATIVOS}]]></expression>
+				</parameter>
+			</element>
+			<element kind="break" uuid="6237df0d-945e-4460-9e62-5accbeedf0cb" key="element-28" x="0" y="626" width="535" height="1"/>
+			<element kind="subreport" uuid="9df31b6e-a333-4a27-91b8-72ad8cce3b8e" key="subreport-29" positionType="Float" x="2" y="629" width="533" height="24" usingCache="true">
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{LISTA_QTDE_CONTRATOS_POR_CSA_ATIVA})]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralCsaAtiva.jasper"]]></expression>
+				<parameter name="SUBREPORT_DIR">
+					<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+				</parameter>
+				<parameter name="HeadingsCollection">
+					<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+				</parameter>
+				<parameter name="RESPONSAVEL">
+					<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+				</parameter>
+				<parameter name="REPORT_SCRIPTLET">
+					<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+				</parameter>
+				<parameter name="QTDE_CSA_ATIVOS_TOTAL">
+					<expression><![CDATA[$P{QTDE_CSA_ATIVOS_TOTAL}]]></expression>
+				</parameter>
+				<parameter name="PERIODO">
+					<expression><![CDATA[$P{PERIODO}]]></expression>
+				</parameter>
+			</element>
+			<element kind="break" uuid="e8e6d963-32e8-425b-ad62-682efc562e02" key="element-29" x="0" y="655" width="535" height="1"/>
+			<element kind="subreport" uuid="f6fc6fb7-accd-4b77-9b87-c78fc78d84b4" key="subreport-26" positionType="Float" x="0" y="686" width="533" height="24" usingCache="true">
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{CONSIGNANTE})]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralConsideracoes.jasper"]]></expression>
+				<parameter name="SUBREPORT_DIR">
+					<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+				</parameter>
+				<parameter name="HeadingsCollection">
+					<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+				</parameter>
+				<parameter name="PAGE">
+					<expression><![CDATA[$V{PAGE_COUNT}]]></expression>
+				</parameter>
+				<parameter name="RESPONSAVEL">
+					<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+				</parameter>
+				<parameter name="REPORT_SCRIPTLET">
+					<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+				</parameter>
+			</element>
+			<element kind="break" uuid="4e924770-aab5-4610-afb6-35aef8a771b2" key="element-88" positionType="Float" x="0" y="685" width="535" height="1"/>
+			<element kind="subreport" uuid="a997ee79-ecbc-4d29-b578-89f141e7e34a" key="subreport-29" positionType="Float" x="2" y="658" width="533" height="24" usingCache="true">
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{LISTA_CONSIGNATARIA_SITUACAO})]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + "GerencialGeralCsaSituacao.jasper"]]></expression>
+				<parameter name="SUBREPORT_DIR">
+					<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+				</parameter>
+				<parameter name="HeadingsCollection">
+					<expression><![CDATA[$V{HeadingsCollection}]]></expression>
+				</parameter>
+				<parameter name="RESPONSAVEL">
+					<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+				</parameter>
+				<parameter name="REPORT_SCRIPTLET">
+					<expression><![CDATA[$P{REPORT_SCRIPTLET}]]></expression>
+				</parameter>
+				<parameter name="PERIODO">
+					<expression><![CDATA[$P{PERIODO}]]></expression>
+				</parameter>
+				<parameter name="QTDE_CSA_TOTAL">
+					<expression><![CDATA[$P{QTDE_CSA_TOTAL}]]></expression>
+				</parameter>
+			</element>
+		</band>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter height="27" splitType="Stretch">
+		<element kind="textField" uuid="90660d75-bf2c-48ad-8775-d4ecabee068c" key="textField" x="1" y="0" width="534" height="13" fontName="Times New Roman" fontSize="7.0" pattern="" blankWhenNull="true">
+			<expression><![CDATA[$P{TEXTO_RODAPE}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="9d5615d9-b003-4107-bc99-d5f6444b1396" key="textField-3" x="495" y="14" width="40" height="13" blankWhenNull="false" hTextAlign="Right">
+			<expression><![CDATA[$V{PAGE_NUMBER}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+	</pageFooter>
+	<summary splitType="Stretch"/>
+</jasperReport>

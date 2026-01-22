@@ -1,0 +1,11 @@
+-- DESENV-11182
+UPDATE tb_acesso_recurso SET ACR_RECURSO = '/v3/desfazerRetorno', ACR_PARAMETRO = 'acao', ACR_OPERACAO = 'iniciar' WHERE ACR_RECURSO = '/folha/desfazer_ult_retorno.jsp';
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP) 
+VALUES ('15635', '1', '151', '/v3/desfazerRetorno', 'acao', 'desfazer', 1, 'S', 'S', NULL, 'S', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP) 
+VALUES ('15636', '3', '151', '/v3/desfazerRetorno', 'acao', 'desfazer', 1, 'S', 'S', NULL, 'S', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP) 
+VALUES ('15637', '7', '151', '/v3/desfazerRetorno', 'acao', 'desfazer', 1, 'S', 'S', NULL, 'S', '2');

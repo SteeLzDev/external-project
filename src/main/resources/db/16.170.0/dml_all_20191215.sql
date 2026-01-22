@@ -1,0 +1,9 @@
+-- DESENV-12654
+INSERT INTO tb_tipo_param_svc (TPS_CODIGO, TPS_DESCRICAO, TPS_SUP_ALTERA, TPS_CSE_ALTERA, TPS_CSA_ALTERA) 
+VALUES ('282', 'Servidor pode alterar contrato deste serviço', 'N', 'N', 'N');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15356', '6', '88', '/v3/alterarConsignacao', 'acao', 'editar', 1, 'S', 'S', NULL, 'N', '2'); 
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15357', '6', '88', '/v3/alterarConsignacao', 'acao', 'salvar', 1, 'S', 'S', NULL, 'S', '2'); 

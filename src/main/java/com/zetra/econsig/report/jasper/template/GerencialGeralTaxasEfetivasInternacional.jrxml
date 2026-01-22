@@ -1,0 +1,126 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="GerencialGeralTaxasEfetivas" language="java" pageWidth="535" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="fde5f427-f3bb-4777-b92e-2bd2dde9e10d">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box padding="0" leftPadding="2" rightPadding="2"/>
+	</style>
+	<parameter name="CAMINHO_LOGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SUBTITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Subtitulo do relatório]]></description>
+	</parameter>
+	<parameter name="TEXTO_RODAPE" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Nome do Gestor(Consignante)]]></description>
+	</parameter>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="FORMATO_ARQUIVO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SVC_TAXAS_EFETIVAS" class="java.lang.String"/>
+	<parameter name="HeadingsCollection" forPrompting="false" class="java.util.Collection"/>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<query language="sql"><![CDATA[]]></query>
+	<field name="csaCodigo" class="java.lang.String"/>
+	<field name="csaNomeAbrev" class="java.lang.String"/>
+	<field name="csaNome" class="java.lang.String"/>
+	<field name="taxaMedia" class="java.math.BigDecimal"/>
+	<variable name="BACKGROUND" calculation="DistinctCount" class="java.lang.Integer">
+		<expression><![CDATA[$V{BACKGROUND}]]></expression>
+		<initialValueExpression><![CDATA[new java.lang.Integer(0)]]></initialValueExpression>
+	</variable>
+	<background splitType="Stretch"/>
+	<title height="52" splitType="Stretch">
+		<element kind="textField" uuid="19a5a667-5080-42df-aad9-c0f26313ce3e" key="textField-4" stretchType="ContainerHeight" x="1" y="1" width="522" height="23" fontName="Arial" fontSize="10.0" blankWhenNull="false" printWhenDetailOverflows="true" bold="true">
+			<expression><![CDATA["3.5. " + (com.zetra.econsig.helper.parametro.ParamSist.paramEquals(com.zetra.econsig.values.CodedValues.TPC_TEM_CET, com.zetra.econsig.values.CodedValues.TPC_SIM, com.zetra.econsig.helper.seguranca.AcessoSistema.getAcessoUsuarioSistema()) ? com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxasefetivas.cet.praticados", $P{RESPONSAVEL}) : com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxasefetivas.taxas.praticadas", $P{RESPONSAVEL}))]]></expression>
+		</element>
+		<element kind="textField" uuid="19a5a667-5080-42df-aad9-c0f26313ce3e" key="textField-4" stretchType="ContainerHeight" x="1" y="24" width="522" height="28" fontName="Arial" fontSize="10.0" blankWhenNull="true" printWhenDetailOverflows="true" bold="false">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.servico.singular", $P{RESPONSAVEL}) + ": " + $P{SVC_TAXAS_EFETIVAS} + "\n" +
+(com.zetra.econsig.helper.parametro.ParamSist.paramEquals(com.zetra.econsig.values.CodedValues.TPC_TEM_CET, com.zetra.econsig.values.CodedValues.TPC_SIM, com.zetra.econsig.helper.seguranca.AcessoSistema.getAcessoUsuarioSistema()) ? com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxasefetivas.subtitulo.cet", $P{RESPONSAVEL}, $P{SVC_TAXAS_EFETIVAS}.toString()) : com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxasefetivas.subtitulo.taxas", $P{RESPONSAVEL}, $P{SVC_TAXAS_EFETIVAS}.toString())) +
+":"]]></expression>
+		</element>
+	</title>
+	<columnHeader height="35" splitType="Stretch">
+		<element kind="textField" uuid="8908e637-6a83-4459-8127-c8e8809db9a9" key="staticText-10" mode="Opaque" x="139" y="1" width="259" height="34" backcolor="#CCCCCC" markup="none" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.consignataria.singular", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="02a52caf-8867-4164-8495-c4a8583e9948" key="staticText-9" mode="Opaque" x="29" y="1" width="110" height="34" backcolor="#CCCCCC" markup="none" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxasefetivas.csa.nome.abreviado", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="79f8ee1b-d798-4245-b56d-030a02d5d499" key="header-1" positionType="Float" mode="Opaque" x="398" y="1" width="108" height="17" backcolor="#CCCCCC" fontName="Arial" fontSize="9.0" blankWhenNull="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[(com.zetra.econsig.helper.parametro.ParamSist.paramEquals(com.zetra.econsig.values.CodedValues.TPC_TEM_CET, com.zetra.econsig.values.CodedValues.TPC_SIM, com.zetra.econsig.helper.seguranca.AcessoSistema.getAcessoUsuarioSistema()) ? com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxasefetivas.cet.praticados", $P{RESPONSAVEL}) : com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxasefetivas.taxas.praticadas", $P{RESPONSAVEL}))]]></expression>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="5a4cf308-7f2c-498d-9dd9-467ffa1f447d" key="header-3" positionType="Float" mode="Opaque" x="398" y="18" width="108" height="17" backcolor="#CCCCCC" fontName="Arial" fontSize="9.0" blankWhenNull="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxasefetivas.media", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<element kind="staticText" uuid="ee87851a-1cc0-41e5-bae3-a2bc5b00ef3a" key="fundoLinha" stretchType="ElementGroupHeight" mode="Opaque" x="29" y="0" width="477" height="17" backcolor="#DDDDDD">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0)]]></printWhenExpression>
+				<text><![CDATA[ ]]></text>
+				<box>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="346a5794-c58c-4836-9136-e9276b64b29e" key="textField-25" stretchType="ElementGroupHeight" x="398" y="0" width="108" height="17" fontSize="9.0" pattern="#,##0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+				<expression><![CDATA[$F{taxaMedia} != null ? $F{taxaMedia} : new java.math.BigDecimal(0.00)]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="961a13c4-cd66-4edc-a57e-6fdfde7c1321" key="textField" stretchType="ElementGroupHeight" x="139" y="0" width="259" height="17" fontSize="9.0" textAdjust="StretchHeight" blankWhenNull="true" vTextAlign="Middle" style="Celula">
+				<expression><![CDATA[$F{csaNome}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="3053e736-4a57-4d72-a7dc-b3117669ab88" key="textField" positionType="Float" stretchType="ElementGroupHeight" x="29" y="0" width="110" height="17" fontSize="9.0" textAdjust="StretchHeight" blankWhenNull="true" vTextAlign="Middle" style="Celula">
+				<expression><![CDATA[$F{csaNomeAbrev}]]></expression>
+				<box leftPadding="2" bottomPadding="0" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+		</band>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+</jasperReport>

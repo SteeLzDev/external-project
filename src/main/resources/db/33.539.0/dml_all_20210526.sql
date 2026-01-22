@@ -1,0 +1,10 @@
+-- DESENV-15711
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16325', '1', '485', '/v3/editarVerbaRescisoria', 'acao', 'visualizarComunicado', 1, 'S', 'S', null, 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16326', '3', '485', '/v3/editarVerbaRescisoria', 'acao', 'visualizarComunicado', 1, 'S', 'S', null, 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16327', '7', '485', '/v3/editarVerbaRescisoria', 'acao', 'visualizarComunicado', 1, 'S', 'S', null, 'N', '2');
+

@@ -1,0 +1,31 @@
+<Documento>
+  <Mapeamento Entrada="MATRICULA"               Saida="RSE_MATRICULA"            Tipo="Texto"     />
+  <Mapeamento Entrada="NOME"                    Saida="SER_NOME"                 Tipo="Texto"     />
+  <Mapeamento Entrada="ADE_IDENTIFICADOR"       Saida="ADE_IDENTIFICADOR"        Tipo="Texto"     />
+  <Mapeamento Entrada="CSA_IDENTIFICADOR"       Saida="CSA_IDENTIFICADOR"        Tipo="Texto"     />
+  <Mapeamento Entrada="CPF"                     Saida="SER_CPF"                  Tipo="Texto"     FormatoEntrada="###.###.###-##" FormatoSaida="###.###.###-##"  />
+  <Mapeamento Entrada="ORGAO"                   Saida="ORG_IDENTIFICADOR"        Tipo="Texto"     />
+  <Mapeamento Entrada="ESTABELECIMENTO"         Saida="EST_IDENTIFICADOR"        Tipo="Texto"     />
+  <Mapeamento Entrada="VALOR"                   Saida="ADE_VLR"                  Tipo="Numerico"  />
+  <Mapeamento Entrada="VLR_LIBERADO"            Saida="ADE_VLR_LIQUIDO"          Tipo="Numerico"  />
+  <Mapeamento Entrada="DATA_REF"                Saida="ADE_ANO_MES_INI"          Tipo="Data"      FormatoEntrada="yyyy-MM-dd" FormatoSaida="yyyy-MM-01"  />
+  <Mapeamento Entrada="DATA_REF_FIM"            Saida="ADE_ANO_MES_FIM"          Tipo="Data"      FormatoEntrada="yyyyMMdd" FormatoSaida="yyyy-MM-01"  />
+  <Mapeamento Entrada="VERBA"                   Saida="CNV_COD_VERBA"            Tipo="Texto"     />
+  <Mapeamento Entrada="ACAO"                    Saida="OPERACAO"                 Tipo="Texto"     Default="I" />
+  <Mapeamento Entrada="PRAZO"                   Saida="_PRAZO"                   Tipo="Mapa"      FormatoEntrada="   ;Default" FormatoSaida=";PRAZO"/>
+  <Mapeamento Entrada="_PRAZO"                  Saida="ADE_PRAZO"                Tipo="Numerico"  />
+  <Mapeamento Entrada="TMO_IDENTIFICADOR"       Saida="TMO_IDENTIFICADOR"        Tipo="Texto"     />
+  <Mapeamento Entrada="INDICE"                  Saida="ADE_INDICE"               Tipo="Texto"     />
+  <Mapeamento Entrada="CARENCIA"                Saida="ADE_CARENCIA"             Tipo="Numerico"  />
+  <Mapeamento Entrada="MODALIDADE_OPERACAO"     Saida="MODALIDADE_OPERACAO"      Tipo="Texto"     />
+  <Mapeamento Entrada="MATRICULA_SER_NA_CSA"    Saida="MATRICULA_SER_NA_CSA"     Tipo="Texto"     />
+  <Mapeamento Entrada="RENEGOCIACAO"            Saida="RENEGOCIACAO"             Tipo="Texto"     />
+  <Mapeamento Entrada="ADE_IDENTIFICADOR_RENEG" Saida="ADE_IDENTIFICADOR_RENEG"  Tipo="Texto"     />
+  <Mapeamento Entrada="RSE_BANCO_SAL"           Saida="RSE_BANCO_SAL"            Tipo="Texto"     />
+  <Mapeamento Entrada="RSE_AGENCIA_SAL"         Saida="RSE_AGENCIA_SAL"          Tipo="Texto"     />
+  <Mapeamento Entrada="RSE_CONTA_SAL"           Saida="RSE_CONTA_SAL"            Tipo="Texto"     />
+  <Mapeamento Entrada="ADE_ALT_ENT_BLOQUEADAS"  Saida="ADE_ALT_ENT_BLOQUEADAS"   Tipo="Texto"     />
+  <Mapeamento Entrada="VALOR_ANTIGO"            Saida="ADE_VLR_VERIFICAR"        Tipo="Numerico"  />
+  <Mapeamento Entrada="SERVICO"                 Saida="SVC_IDENTIFICADOR"        Tipo="Texto"     />
+
+</Documento>

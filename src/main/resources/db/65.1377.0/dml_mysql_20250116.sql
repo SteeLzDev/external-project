@@ -1,0 +1,8 @@
+-- DESENV-22608
+-- @@delimiter = !
+DELETE FROM tb_modelo_email WHERE MEM_CODIGO = 'enviarEmailSimulacaoConsignacao'
+!
+
+INSERT INTO tb_modelo_email (MEM_CODIGO, MEM_TITULO, MEM_TEXTO) VALUES ('enviarEmailSimulacaoConsignacao', '<@cse_nome>: Simulação de Consignação', CONCAT('Prezado(a) <@usu_nome>, <br>Segue em anexo o resultado da sua simulação de consignação realizado em <@data_hora_atual>. <br>Abaixo seguem os contatos das consignatárias participantes:<br><br><table style="border-collapse: collapse; width: 100%; border: 1px solid ', cast(0x23 as char), 'ddd;"><thead><tr style="background-color: ', cast(0x23 as char), 'f2f2f2;"><th style="border: 1px solid ', cast(0x23 as char), 'ddd; padding: 8px;">Ranking</th><th style="border: 1px solid ', cast(0x23 as char), 'ddd; padding: 8px;">Consignatária</th><th style="border: 1px solid ', cast(0x23 as char), 'ddd; padding: 8px;">Email</th><th style="border: 1px solid ', cast(0x23 as char), 'ddd; padding: 8px;">WhatsApp</th><th style="border: 1px solid ', cast(0x23 as char), 'ddd; padding: 8px;">Texto para Contato</th></tr></thead><tbody><@infor_csas><tr><td style="border: 1px solid ', cast(0x23 as char), 'ddd; padding: 8px;"><@ranking></td><td style="border: 1px solid ', cast(0x23 as char), 'ddd; padding: 8px;"><@nome></td><td style="border: 1px solid ', cast(0x23 as char), 'ddd; padding: 8px;"><@email></td><td style="border: 1px solid ', cast(0x23 as char), 'ddd; padding: 8px;"><@whatsapp></td><td style="border: 1px solid ', cast(0x23 as char), 'ddd; padding: 8px;"><@texto></td></tr><@/infor_csas></tbody></table><br> Atenciosamente, <@logoSistema>'))
+!
+

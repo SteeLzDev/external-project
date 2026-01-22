@@ -1,0 +1,3 @@
+-- DESENV-13872
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15785', '3', '/v3/autenticarEuConsigoMais', 'acao', 'gerarToken', 1, 'S', 'S', 'N', '2'); 

@@ -1,0 +1,3 @@
+-- DESENV-17203
+CREATE INDEX IDX_VLR_INI_FIM ON tb_dimensao_valor_contrato (DVC_VLR_INI, DVC_VLR_FIM);
+CREATE INDEX IDX_VLR_INI_FIM ON tb_dimensao_valor_parcela (DVP_VLR_INI, DVP_VLR_FIM);

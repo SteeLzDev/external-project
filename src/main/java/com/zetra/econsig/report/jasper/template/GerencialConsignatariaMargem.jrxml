@@ -1,0 +1,100 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="GerencialGeral" language="java" pageWidth="535" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" scriptletClass="com.zetra.econsig.report.reports.HeadingsScriptlet" uuid="a2b38f67-f39a-48e5-81dc-8b04c77eab02">
+	<property name="ireport.scriptlethandling" value="2"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box padding="0" leftPadding="2" rightPadding="2"/>
+	</style>
+	<parameter name="CAMINHO_LOGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SUBTITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Subtitulo do relatório]]></description>
+	</parameter>
+	<parameter name="TEXTO_RODAPE" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Nome do Gestor(Consignante)]]></description>
+	</parameter>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Titulo do relatorio]]></description>
+	</parameter>
+	<parameter name="HeadingsCollection" forPrompting="false" class="java.util.Collection"/>
+	<parameter name="MARGEM_1" forPrompting="false" class="java.lang.String"/>
+	<parameter name="MARGEM_2" forPrompting="false" class="java.lang.String"/>
+	<parameter name="MARGEM_3" forPrompting="false" class="java.lang.String"/>
+	<parameter name="MARGEM_1_CASADA_3" forPrompting="false" class="java.lang.Boolean"/>
+	<parameter name="MARGEM_123_CASADA" forPrompting="false" class="java.lang.Boolean"/>
+	<parameter name="INCIDE_MARGEM" forPrompting="false" class="java.lang.Boolean"/>
+	<parameter name="INCIDE_MARGEM_2" forPrompting="false" class="java.lang.Boolean"/>
+	<parameter name="INCIDE_MARGEM_3" forPrompting="false" class="java.lang.Boolean"/>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<query language="sql"><![CDATA[SELECT DISTINCT tb_usuario.usu_codigo,tb_usuario.usu_login,tb_usuario.usu_nome,tb_usuario.stu_codigo,tb_usuario.usu_tipo_bloq,tb_perfil.per_codigo,tb_perfil.per_descricao,tb_usuario.usu_data_cad,tb_usuario.usu_data_exp_senha,IF(tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo, 'CSE', (IF(tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo, 'CSA', (IF(tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo, 'COR', 'ORG'))))) AS TIPO,IF(tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo, tb_consignante.cse_nome, (IF(tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo, tb_consignataria.csa_nome, (IF(tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo, CONCAT(CONCAT(CSA_COR.csa_nome,  ' - '  ), tb_correspondente.cor_nome), tb_orgao.org_nome))))) AS ENTIDADE FROM tb_usuario LEFT OUTER JOIN tb_usuario_cse ON (tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo) LEFT OUTER JOIN tb_consignante ON (tb_usuario_cse.cse_codigo = tb_consignante.cse_codigo) LEFT OUTER JOIN tb_usuario_csa ON (tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo) LEFT OUTER JOIN tb_consignataria ON (tb_usuario_csa.csa_codigo = tb_consignataria.csa_codigo) LEFT OUTER JOIN tb_usuario_cor ON (tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo) LEFT OUTER JOIN tb_correspondente ON (tb_usuario_cor.cor_codigo = tb_correspondente.cor_codigo) LEFT OUTER JOIN tb_consignataria CSA_COR ON (tb_correspondente.csa_codigo = CSA_COR.csa_codigo) LEFT OUTER JOIN tb_usuario_org ON (tb_usuario.usu_codigo = tb_usuario_org.usu_codigo) LEFT OUTER JOIN tb_orgao ON (tb_usuario_org.org_codigo = tb_orgao.org_codigo) LEFT OUTER JOIN tb_perfil_usuario ON (tb_perfil_usuario.usu_codigo = tb_usuario.usu_codigo) LEFT OUTER JOIN tb_perfil ON (tb_perfil.per_codigo = tb_perfil_usuario.per_codigo) WHERE (tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_org.usu_codigo) AND ( tb_usuario_org.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_cse.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_csa.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_cor.usu_codigo = tb_usuario.usu_codigo )  AND tb_usuario.stu_codigo IN ( 1,2 ) ORDER BY  TIPO, tb_usuario.usu_nome]]></query>
+	<field name="margemTotal" class="java.math.BigDecimal"/>
+	<field name="margemRestTotal" class="java.math.BigDecimal"/>
+	<field name="margemUsadaTotal" class="java.math.BigDecimal"/>
+	<field name="margemRestMinimo" class="java.math.BigDecimal"/>
+	<field name="margemRestMaximo" class="java.math.BigDecimal"/>
+	<field name="margemRestMedia" class="java.lang.Double"/>
+	<field name="margemRestDesvio" class="java.math.BigDecimal"/>
+	<field name="qtdeSerMargemNegativa" class="java.lang.Long"/>
+	<field name="qtdeSerMargemZerada" class="java.lang.Long"/>
+	<field name="qtdeSerMargemPositiva" class="java.lang.Long"/>
+	<variable name="INCIDE_MARGEM_12" resetType="None" class="java.lang.Boolean">
+		<initialValueExpression><![CDATA[new java.lang.Boolean($P{INCIDE_MARGEM}.booleanValue() && $P{INCIDE_MARGEM_2}.booleanValue() && !$P{INCIDE_MARGEM_3}.booleanValue())]]></initialValueExpression>
+	</variable>
+	<variable name="INCIDE_MARGEM_13" resetType="None" class="java.lang.Boolean">
+		<initialValueExpression><![CDATA[new java.lang.Boolean($P{INCIDE_MARGEM}.booleanValue() && !$P{INCIDE_MARGEM_2}.booleanValue() && $P{INCIDE_MARGEM_3}.booleanValue())]]></initialValueExpression>
+	</variable>
+	<variable name="INCIDE_MARGEM_23" resetType="None" class="java.lang.Boolean">
+		<initialValueExpression><![CDATA[new java.lang.Boolean(!$P{INCIDE_MARGEM}.booleanValue() && $P{INCIDE_MARGEM_2}.booleanValue() && $P{INCIDE_MARGEM_3}.booleanValue())]]></initialValueExpression>
+	</variable>
+	<variable name="INCIDE_SOM_MARGEM_1" resetType="None" class="java.lang.Boolean">
+		<initialValueExpression><![CDATA[new java.lang.Boolean($P{INCIDE_MARGEM}.booleanValue() && !$P{INCIDE_MARGEM_2}.booleanValue() && !$P{INCIDE_MARGEM_3}.booleanValue())]]></initialValueExpression>
+	</variable>
+	<variable name="INCIDE_SOM_MARGEM_2" resetType="None" class="java.lang.Boolean">
+		<initialValueExpression><![CDATA[new java.lang.Boolean(!$P{INCIDE_MARGEM}.booleanValue() && $P{INCIDE_MARGEM_2}.booleanValue() && !$P{INCIDE_MARGEM_3}.booleanValue())]]></initialValueExpression>
+	</variable>
+	<variable name="INCIDE_SOM_MARGEM_3" resetType="None" class="java.lang.Boolean">
+		<initialValueExpression><![CDATA[new java.lang.Boolean(!$P{INCIDE_MARGEM}.booleanValue() && !$P{INCIDE_MARGEM_2}.booleanValue() && $P{INCIDE_MARGEM_3}.booleanValue())]]></initialValueExpression>
+	</variable>
+	<variable name="INCIDE_MARGEM_123" class="java.lang.Boolean">
+		<initialValueExpression><![CDATA[new java.lang.Boolean($P{INCIDE_MARGEM}.booleanValue() && $P{INCIDE_MARGEM_2}.booleanValue() && $P{INCIDE_MARGEM_3}.booleanValue())]]></initialValueExpression>
+	</variable>
+	<background splitType="Stretch"/>
+	<title height="196" splitType="Stretch">
+		<element kind="textField" uuid="e470b8ee-4010-4022-aae2-bdd557500094" key="textField-4" x="1" y="0" width="528" height="14" blankWhenNull="false">
+			<expression><![CDATA["3.2.3. " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialconsignataria.margem.margem", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="562371ef-abf1-4720-bfab-fed12b6ec6c6" key="textField-12" positionType="Float" x="1" y="22" width="528" height="27" blankWhenNull="false" removeLineWhenBlank="true" hTextAlign="Justified">
+			<printWhenExpression><![CDATA[$V{INCIDE_MARGEM_123}]]></printWhenExpression>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("mensagem.relatorio.gerencialconsignataria.margem.servidores.possuem.tres.margens", $P{RESPONSAVEL}, $P{MARGEM_1}, $P{MARGEM_2}, $P{MARGEM_3})]]></expression>
+		</element>
+		<element kind="textField" uuid="6f152477-7c04-4b2b-acde-4e2ec14e85d8" key="textField-13" positionType="Float" x="1" y="135" width="528" height="56" blankWhenNull="false" removeLineWhenBlank="true" hTextAlign="Justified">
+			<printWhenExpression><![CDATA[$P{MARGEM_123_CASADA}]]></printWhenExpression>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("mensagem.relatorio.gerencialconsignataria.margem.margem.casadas", $P{RESPONSAVEL}, $P{MARGEM_1}, $P{MARGEM_2}, $P{MARGEM_3})]]></expression>
+		</element>
+		<element kind="textField" uuid="acab7e70-a588-4694-bae0-74136d1c7790" key="textField-14" positionType="Float" x="1" y="50" width="528" height="27" blankWhenNull="false" removeLineWhenBlank="true" hTextAlign="Justified">
+			<printWhenExpression><![CDATA[$V{INCIDE_MARGEM_12}]]></printWhenExpression>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("mensagem.relatorio.gerencialconsignataria.margem.servidores.possuem.duas.margens", $P{RESPONSAVEL}, $P{MARGEM_1}, $P{MARGEM_2})]]></expression>
+		</element>
+		<element kind="textField" uuid="ce7253f2-d917-408d-a99a-027396ab62b3" key="textField-15" positionType="Float" x="1" y="78" width="528" height="27" blankWhenNull="false" removeLineWhenBlank="true" hTextAlign="Justified">
+			<printWhenExpression><![CDATA[$V{INCIDE_MARGEM_13}]]></printWhenExpression>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("mensagem.relatorio.gerencialconsignataria.margem.servidores.possuem.duas.margens", $P{RESPONSAVEL}, $P{MARGEM_1}, $P{MARGEM_3})]]></expression>
+		</element>
+		<element kind="textField" uuid="f718894c-9b20-4430-907e-803b63a95ae1" key="textField-16" positionType="Float" x="1" y="106" width="528" height="27" blankWhenNull="false" removeLineWhenBlank="true" hTextAlign="Justified">
+			<printWhenExpression><![CDATA[$V{INCIDE_MARGEM_23}]]></printWhenExpression>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("mensagem.relatorio.gerencialconsignataria.margem.servidores.possuem.duas.margens", $P{RESPONSAVEL}, $P{MARGEM_2}, $P{MARGEM_3})]]></expression>
+		</element>
+	</title>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader splitType="Stretch"/>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter splitType="Stretch"/>
+	<summary splitType="Stretch"/>
+</jasperReport>

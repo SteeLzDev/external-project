@@ -1,0 +1,2 @@
+-- DESENV-16385
+UPDATE tb_acesso_recurso SET PAP_CODIGO = '7' WHERE ACR_CODIGO = '15176';

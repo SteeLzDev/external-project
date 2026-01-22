@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="TaxaDeJuros">
+  <xsd:complexType name="TaxaDeJuros">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="1" name="prazo" nillable="false" type="xsd:long"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="taxa" nillable="false" type="xsd:double"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

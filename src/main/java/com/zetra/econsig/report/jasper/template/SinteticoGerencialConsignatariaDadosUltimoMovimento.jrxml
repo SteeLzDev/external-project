@@ -1,0 +1,58 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="SinteticoGerencialConsignatariaAverbacao" language="java" pageWidth="535" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" scriptletClass="com.zetra.econsig.report.reports.HeadingsScriptlet" uuid="8be84e21-4506-491d-a349-1d3d28ade638">
+	<property name="ireport.scriptlethandling" value="2"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box padding="0" leftPadding="2" rightPadding="2"/>
+	</style>
+	<dataset name="Empty Dataset1" uuid="c92fbf8d-43d4-4c24-8443-3b98068ac203"/>
+	<parameter name="CAMINHO_LOGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SUBTITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Subtitulo do relatório]]></description>
+	</parameter>
+	<parameter name="TEXTO_RODAPE" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Nome do Gestor(Consignante)]]></description>
+	</parameter>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Titulo do relatorio]]></description>
+	</parameter>
+	<parameter name="HeadingsCollection" forPrompting="false" class="java.util.Collection"/>
+	<parameter name="SUBREPORT_DIR" forPrompting="false" class="java.lang.String">
+		<defaultValueExpression><![CDATA[".\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<query language="sql"><![CDATA[SELECT DISTINCT tb_usuario.usu_codigo,tb_usuario.usu_login,tb_usuario.usu_nome,tb_usuario.stu_codigo,tb_usuario.usu_tipo_bloq,tb_perfil.per_codigo,tb_perfil.per_descricao,tb_usuario.usu_data_cad,tb_usuario.usu_data_exp_senha,IF(tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo, 'CSE', (IF(tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo, 'CSA', (IF(tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo, 'COR', 'ORG'))))) AS TIPO,IF(tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo, tb_consignante.cse_nome, (IF(tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo, tb_consignataria.csa_nome, (IF(tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo, CONCAT(CONCAT(CSA_COR.csa_nome,  ' - '  ), tb_correspondente.cor_nome), tb_orgao.org_nome))))) AS ENTIDADE FROM tb_usuario LEFT OUTER JOIN tb_usuario_cse ON (tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo) LEFT OUTER JOIN tb_consignante ON (tb_usuario_cse.cse_codigo = tb_consignante.cse_codigo) LEFT OUTER JOIN tb_usuario_csa ON (tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo) LEFT OUTER JOIN tb_consignataria ON (tb_usuario_csa.csa_codigo = tb_consignataria.csa_codigo) LEFT OUTER JOIN tb_usuario_cor ON (tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo) LEFT OUTER JOIN tb_correspondente ON (tb_usuario_cor.cor_codigo = tb_correspondente.cor_codigo) LEFT OUTER JOIN tb_consignataria CSA_COR ON (tb_correspondente.csa_codigo = CSA_COR.csa_codigo) LEFT OUTER JOIN tb_usuario_org ON (tb_usuario.usu_codigo = tb_usuario_org.usu_codigo) LEFT OUTER JOIN tb_orgao ON (tb_usuario_org.org_codigo = tb_orgao.org_codigo) LEFT OUTER JOIN tb_perfil_usuario ON (tb_perfil_usuario.usu_codigo = tb_usuario.usu_codigo) LEFT OUTER JOIN tb_perfil ON (tb_perfil.per_codigo = tb_perfil_usuario.per_codigo) WHERE (tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_org.usu_codigo) AND ( tb_usuario_org.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_cse.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_csa.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_cor.usu_codigo = tb_usuario.usu_codigo )  AND tb_usuario.stu_codigo IN ( 1,2 ) ORDER BY  TIPO, tb_usuario.usu_nome]]></query>
+	<field name="nome" class="java.lang.String"/>
+	<background splitType="Stretch"/>
+	<title height="23" splitType="Stretch">
+		<element kind="textField" uuid="36f94a24-29b6-4c67-8603-740ea7bfd02a" key="staticText-1" positionType="Float" x="1" y="2" width="334" height="21" markup="none" fontName="Arial" bold="true">
+			<expression><![CDATA["3.11 " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.sinteticogerencialconsignataria.ultimo.movimento.titulo", $P{RESPONSAVEL})]]></expression>
+		</element>
+	</title>
+	<pageHeader splitType="Stretch"/>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<element kind="textField" uuid="50fc30b0-d7c3-4080-b804-d2c245d4b725" positionType="Float" x="1" y="0" width="529" height="20" vTextAlign="Middle">
+				<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.sinteticogerencialconsignataria.ultimo.movimento.detalhe", $P{RESPONSAVEL}, $F{nome})]]></expression>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="e5c9873e-f403-4d71-b0e9-049d1fe6914e" positionType="Float" x="1" y="0" width="529" height="20">
+				<text><![CDATA[]]></text>
+			</element>
+		</band>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter splitType="Stretch"/>
+	<summary splitType="Stretch"/>
+</jasperReport>

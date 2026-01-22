@@ -1,0 +1,300 @@
+
+body{
+    background-color:#CCD7E6 !important;
+    font-family: 'Montserrat', sans-serif;
+}
+h1{
+    width: 28vh;
+}
+main{
+    display: flex !important;
+    flex-direction: row !important;
+    width: 99vw !important;
+}
+header{
+    display: flex !important;
+    align-items: center !important;
+}
+label{
+    margin-bottom: 20px !important;
+    font-weight: 700 !important;
+}
+section {
+    display: flex;
+    flex-direction: column;
+}
+.main-title{
+    font-size: 1rem;
+    font-weight: 700;
+}
+.hello-style{
+    font-size: 2rem;
+    font-weight: 700;
+    color:#D10065;
+}
+.page-image{
+    height: 100vh;
+    width: 100%;
+    overflow:hidden;
+}
+.page-image img{
+    height: 100vh;
+    width: 98vh;
+    overflow:hidden;
+    background-size: cover;
+}
+.page-content{
+    display: flex;
+    flex-direction: column;
+    padding: 2vh 5vh 0 2vh;
+}
+.page-presentation{
+    display: flex;
+    align-items: center;
+}
+
+.page-logo-econsig svg{
+    width: 16vh;
+    height: 8vh;
+}
+
+.page-logo-partner{
+    width: 18vh;
+    padding-left: 18vh;
+}
+.page-logo-partner img {
+    width: 12vh;
+}
+
+.btn-actions{
+    display: flex;
+}
+.card-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 298px;
+    height: 120px;
+    border: none;
+    border-radius: 20px;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: .5s;
+    text-decoration: none;
+}
+.btn-actions a:hover{
+    text-decoration: none !important;
+}
+.card-btn svg{
+    max-width: 100%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.grid-center{
+    height: 7vw;
+}
+.grid-top{
+    height: 3vw;
+}
+.btn-icon{
+    width: 40%;
+}
+.btn-icon svg{
+    margin-top: 40px;
+    margin-left: 20px;
+}
+.btn-text{
+    margin-top: 10px;
+    width: 60%;
+}
+.card-btn:not(:last-child){
+    margin-right: 50px;
+}
+.card-btn-wine{
+    background-color: #D10065;
+    color:#fff !important;
+}
+.card-btn-wine svg{
+    color: #D10065;
+}
+.card-btn-white{
+    background-color: #FFFFFF;
+    color:#D10065 !important;
+}
+.card-btn-wine:hover{
+    background-color: #E63888;
+    color:#fff !important;
+}
+.card-btn-white:hover{
+    background-color: #f0f0f0;
+}
+.division{
+    width: 100%;
+    border: 1px solid #1D4F91;
+}
+
+.text-button{
+    font-weight: 600 !important;
+}
+.text-button-ou{
+    font-weight: 500 !important;
+}
+#carouselIndicators{
+    width: 80vh;
+    height: 47vh;
+}
+
+.msg-title{
+    font-size: 1.125rem;
+    font-weight: 550 !important;
+    letter-spacing: -.025rem;
+    margin: 0 0 .25rem !important;
+}
+
+.carousel-item{
+    height: 450px;
+    text-align: center;
+}
+.carousel-item ul {
+    display: table;
+    margin: 0 auto;
+}
+
+.carousel-item ol {
+    display: table;
+    margin: 0 auto;
+}
+.carousel-item p{
+    text-align: center;
+}
+
+.carousel-item img{
+    align-items: center;
+    max-height: 350px;
+    max-width: 650px;
+    border: 0;
+    padding: 15px 15px 15px 15px;
+}
+
+/*subscrita das classes de caroussel do booststrap 4*/
+.carousel-indicators li {
+    width: 10px !important;
+    height: 10px !important;
+    border: 1px solid #E63888 !important;
+    border-radius: 100% !important;
+    background-color: #E63888 !important;
+}
+
+.carousel-indicators li.active {
+    background-color: #fff !important;
+}
+
+/*responsividade*/
+@media (max-width: 992px){
+    body{
+        display: flex !important;
+        justify-content: center !important;
+        overflow: unset;
+    }
+    main{
+        flex-direction: column !important;
+        justify-content: center !important;
+        position:absolute;
+        top:0;
+    }
+    section{
+        width: 100%;
+        display: flex !important;
+        align-items: center !important;
+    }
+    header{
+        flex-direction: column !important;
+        justify-content: center !important;
+    }
+    .grid-center{
+        height: 13vw;
+    }
+    .grid-top{
+        height: 6vw;
+    }
+    .page-content{
+        width: 100%;
+    }
+    .page-content{
+        width: 100%;
+    }
+    .page-image{
+        display: none;
+    }
+    .page-presentation{
+        justify-content: space-between;
+    }
+    .page-logo-econsig{
+        text-align: center;
+    }
+    .page-logo-partner{
+        text-align: center;
+        padding-left: 0;
+    }
+    .division, .page-slide{
+        width: 100% !important;
+    }
+    .page-slide{
+        margin-left: 0;
+    }
+    .carousel-item{
+        height: 320px;
+    }
+    .carousel-item img{
+        max-height: 280px;
+    }
+    #carouselIndicators{
+        width: 100%;
+    }
+}
+@media (max-width: 768px){
+    body{
+        overflow: unset;
+    }
+    .page-presentation{
+        margin-top: 1rem;
+    }
+    .grid-center{
+        height: 4vw;
+    }
+    .grid-top{
+        height: 2vw;
+    }
+    .carousel-item{
+        height: 300px;
+    }
+    .carousel-item img{
+        max-height: 250px;
+    }
+    .btn-actions{
+        text-align: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .card-btn{
+        margin: 21px 0;
+    }
+    .card-btn:not(:last-child){
+        margin-right: 0;
+    }
+    #carouselIndicators{
+        width: 100%;
+    }
+}
+@media (max-height: 650px) {
+    .carousel-item img{
+        max-height: 50vh;
+    }
+    #carouselIndicators{
+        width: 100%;
+        height: 75vh;
+    }
+}

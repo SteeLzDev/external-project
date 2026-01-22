@@ -1,0 +1,11 @@
+<Documento>
+        <Mapeamento Entrada="CSA_IDENTIFICADOR" Saida="CSA_IDENTIFICADOR" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="CSA_NOME" Saida="CSA_NOME" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="FAT_PERIODO" Saida="FAT_PERIODO" Tipo="Data" FormatoEntrada="yyyy-MM-dd HH:mm:ss" FormatoSaida="dd/MM/yyyy HH:mm:ss" Default="" />
+        <Mapeamento Entrada="RSE_MATRICULA" Saida="RSE_MATRICULA" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="CBE_NUMERO" Saida="CBE_NUMERO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="TLA_CODIGO" Saida="TLA_CODIGO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="VALOR_DEBITO" Saida="VALOR_DEBITO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="MOTIVO" Saida="MOTIVO" Tipo="Texto" Default="" />
+</Documento>
+

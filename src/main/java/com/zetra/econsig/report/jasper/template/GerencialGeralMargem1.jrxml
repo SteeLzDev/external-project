@@ -1,0 +1,120 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="GerencialGeral" language="java" pageWidth="535" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" scriptletClass="com.zetra.econsig.report.reports.HeadingsScriptlet" uuid="e2711001-7912-46be-9b50-6f3bd782aa6a">
+	<property name="net.sf.jasperreports.chart.pie.ignore.duplicated.key" value="true"/>
+	<property name="ireport.scriptlethandling" value="2"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="212"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box padding="0" leftPadding="2" rightPadding="2"/>
+	</style>
+	<parameter name="CAMINHO_LOGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SUBTITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Subtitulo do relatório]]></description>
+	</parameter>
+	<parameter name="TEXTO_RODAPE" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Nome do Gestor(Consignante)]]></description>
+	</parameter>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Titulo do relatorio]]></description>
+	</parameter>
+	<parameter name="HeadingsCollection" forPrompting="false" class="java.util.Collection"/>
+	<parameter name="QTDE_SER_POR_FAIXA_MARGEM_1" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MARGEM_1" forPrompting="false" class="java.lang.String"/>
+	<parameter name="MARGEM_2" forPrompting="false" class="java.lang.String"/>
+	<parameter name="MARGEM_3" forPrompting="false" class="java.lang.String"/>
+	<parameter name="MARGEM_1_CASADA_3" forPrompting="false" class="java.lang.Boolean"/>
+	<parameter name="MARGEM_123_CASADA" forPrompting="false" class="java.lang.Boolean"/>
+	<parameter name="INDICE_REPORT" class="java.lang.Integer"/>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<query language="sql"><![CDATA[SELECT DISTINCT tb_usuario.usu_codigo,tb_usuario.usu_login,tb_usuario.usu_nome,tb_usuario.stu_codigo,tb_usuario.usu_tipo_bloq,tb_perfil.per_codigo,tb_perfil.per_descricao,tb_usuario.usu_data_cad,tb_usuario.usu_data_exp_senha,IF(tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo, 'CSE', (IF(tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo, 'CSA', (IF(tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo, 'COR', 'ORG'))))) AS TIPO,IF(tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo, tb_consignante.cse_nome, (IF(tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo, tb_consignataria.csa_nome, (IF(tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo, CONCAT(CONCAT(CSA_COR.csa_nome,  ' - '  ), tb_correspondente.cor_nome), tb_orgao.org_nome))))) AS ENTIDADE FROM tb_usuario LEFT OUTER JOIN tb_usuario_cse ON (tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo) LEFT OUTER JOIN tb_consignante ON (tb_usuario_cse.cse_codigo = tb_consignante.cse_codigo) LEFT OUTER JOIN tb_usuario_csa ON (tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo) LEFT OUTER JOIN tb_consignataria ON (tb_usuario_csa.csa_codigo = tb_consignataria.csa_codigo) LEFT OUTER JOIN tb_usuario_cor ON (tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo) LEFT OUTER JOIN tb_correspondente ON (tb_usuario_cor.cor_codigo = tb_correspondente.cor_codigo) LEFT OUTER JOIN tb_consignataria CSA_COR ON (tb_correspondente.csa_codigo = CSA_COR.csa_codigo) LEFT OUTER JOIN tb_usuario_org ON (tb_usuario.usu_codigo = tb_usuario_org.usu_codigo) LEFT OUTER JOIN tb_orgao ON (tb_usuario_org.org_codigo = tb_orgao.org_codigo) LEFT OUTER JOIN tb_perfil_usuario ON (tb_perfil_usuario.usu_codigo = tb_usuario.usu_codigo) LEFT OUTER JOIN tb_perfil ON (tb_perfil.per_codigo = tb_perfil_usuario.per_codigo) WHERE (tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_org.usu_codigo) AND ( tb_usuario_org.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_cse.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_csa.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_cor.usu_codigo = tb_usuario.usu_codigo )  AND tb_usuario.stu_codigo IN ( 1,2 ) ORDER BY  TIPO, tb_usuario.usu_nome]]></query>
+	<field name="margemTotal" class="java.math.BigDecimal"/>
+	<field name="margemRestTotal" class="java.math.BigDecimal"/>
+	<field name="margemUsadaTotal" class="java.math.BigDecimal"/>
+	<field name="margemRestMinimo" class="java.math.BigDecimal"/>
+	<field name="margemRestMaximo" class="java.math.BigDecimal"/>
+	<field name="margemRestMedia" class="java.math.BigDecimal"/>
+	<field name="margemRestDesvio" class="java.math.BigDecimal"/>
+	<field name="qtdeSerMargemNegativa" class="java.lang.Long"/>
+	<field name="qtdeSerMargemZerada" class="java.lang.Long"/>
+	<field name="qtdeSerMargemPositiva" class="java.lang.Long"/>
+	<background splitType="Stretch"/>
+	<title height="198" splitType="Stretch">
+		<element kind="textField" uuid="bec3a1ef-5d1b-4eaa-8893-b8d113d54627" key="textField-2" x="293" y="108" width="122" height="13" fontSize="8.0" pattern="¤ #,##0.00" blankWhenNull="true" hTextAlign="Right">
+			<expression><![CDATA[$F{margemTotal}]]></expression>
+		</element>
+		<element kind="textField" uuid="32846a52-dbb3-48ce-add1-719add0fd280" key="textField-5" x="1" y="2" width="528" height="83" blankWhenNull="true">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("mensagem.relatorio.gerencialgeralmargem1.informacoes.servidores.margens.consignaveis", $P{RESPONSAVEL}, $P{INDICE_REPORT}.toString(), $P{MARGEM_1}, com.zetra.econsig.helper.texto.NumberHelper.formata(Double.parseDouble($F{qtdeSerMargemNegativa}.toString()), "#,###; -#,###"), com.zetra.econsig.helper.texto.NumberHelper.formata(Double.parseDouble($F{qtdeSerMargemZerada}.toString()), "#,###; -#,###"), com.zetra.econsig.helper.texto.NumberHelper.formata(Double.parseDouble($F{qtdeSerMargemPositiva}.toString()), "#,###; -#,###"))]]></expression>
+		</element>
+		<element kind="textField" uuid="92818c55-ac23-429d-aeee-572e0f4f88cd" key="staticText-3" x="101" y="108" width="192" height="13" markup="none" fontSize="9.0">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralmargem1.total.saldo.margem", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="9bed1724-b5a0-43be-837b-5697bc67e2cb" key="staticText-4" x="101" y="122" width="192" height="13" markup="none" fontSize="9.0">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralmargem1.margem.utilizada.mes", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="b82c1a0a-f363-4831-8329-1a3bcbf097a2" key="textField-6" x="293" y="122" width="122" height="13" fontSize="8.0" pattern="¤ #,##0.00" blankWhenNull="true" hTextAlign="Right">
+			<expression><![CDATA[$F{margemUsadaTotal}]]></expression>
+		</element>
+		<element kind="textField" uuid="d7aaa31f-e7cf-4bba-aa8d-c824af5b9c02" key="staticText-5" x="101" y="136" width="192" height="13" markup="none" fontSize="9.0">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralmargem1.total.saldo.margem.restante", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="8f5e90ba-9883-4316-b464-2822656c5c06" key="textField-7" x="293" y="136" width="122" height="13" fontSize="8.0" pattern="¤ #,##0.00" blankWhenNull="true" hTextAlign="Right">
+			<expression><![CDATA[$F{margemRestTotal}]]></expression>
+		</element>
+		<element kind="textField" uuid="79637133-f2c6-4e94-8231-e499da055468" key="textField-8" x="293" y="150" width="122" height="13" fontSize="8.0" pattern="¤ #,##0.00" blankWhenNull="true" hTextAlign="Right">
+			<expression><![CDATA[$F{margemRestMinimo}]]></expression>
+		</element>
+		<element kind="textField" uuid="5c870b09-9350-4612-a0a0-5b13fe070f0a" key="staticText-6" x="101" y="150" width="192" height="13" markup="none" fontSize="9.0">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralmargem1.menor.saldo.margem", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="1dde3f51-008c-44a1-99e1-9e5f09addaa1" key="staticText-7" x="101" y="164" width="192" height="13" markup="none" fontSize="9.0">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralmargem1.maior.saldo.margem", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="6cc421b9-c66c-490f-a14b-ad6f555c2fb9" key="textField-9" x="293" y="164" width="122" height="13" fontSize="8.0" pattern="¤ #,##0.00" blankWhenNull="true" hTextAlign="Right">
+			<expression><![CDATA[$F{margemRestMaximo}]]></expression>
+		</element>
+		<element kind="textField" uuid="82229896-3474-48bf-81b0-d31086fb67e3" key="staticText-8" x="101" y="178" width="192" height="13" markup="none" fontSize="9.0">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralmargem1.media", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="1285b25c-093b-4f54-9366-9bcfb0078612" key="textField-10" x="293" y="178" width="122" height="13" fontSize="8.0" pattern="¤ #,##0.00" blankWhenNull="true" hTextAlign="Right">
+			<expression><![CDATA[$F{margemRestMedia}]]></expression>
+		</element>
+		<element kind="textField" uuid="66a94ead-26db-4d5b-b9bf-f6773fe631c2" key="staticText-1" x="101" y="92" width="192" height="16" markup="none" fontName="Arial" fontSize="9.0" bold="true">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralmargem1.margens", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="50be9a0f-af1c-4851-b2ec-0896acefca9c" key="staticText-2" x="293" y="92" width="122" height="16" markup="none" fontName="Arial" fontSize="9.0" bold="true" hTextAlign="Right">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralmargem1.valores", $P{RESPONSAVEL})]]></expression>
+		</element>
+	</title>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader splitType="Stretch"/>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter splitType="Stretch"/>
+	<summary height="343" splitType="Stretch">
+		<element kind="chart" chartType="pie" uuid="3fafaf81-46bb-4010-8dd5-20e9f8018a81" x="68" y="1" width="384" height="338" showLegend="true" evaluationTime="Report" titlePosition="Top" printRepeatedValues="false">
+			<titleFont fontSize="12.0" bold="true"/>
+			<dataset kind="pie" maxCount="10">
+				<series>
+					<keyExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralmargem1.margem.usada.total", $P{RESPONSAVEL})]]></keyExpression>
+					<valueExpression><![CDATA[$F{margemUsadaTotal}]]></valueExpression>
+				</series>
+				<series>
+					<keyExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralmargem1.margem.restante.total", $P{RESPONSAVEL})]]></keyExpression>
+					<valueExpression><![CDATA[$F{margemRestTotal}]]></valueExpression>
+				</series>
+			</dataset>
+			<plot circular="true" labelFormat="{2}" legendLabelFormat="{0}" showLabels="false">
+				<itemLabel/>
+			</plot>
+		</element>
+	</summary>
+</jasperReport>

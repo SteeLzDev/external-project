@@ -1,0 +1,15 @@
+-- DESENV-10159
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15005', '1', '66', '/v3/downloadArquivo', 'tipo', 'cancelamentoporinadimplencia', 1, 'S', 'S', NULL, 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15006', '2', '66', '/v3/downloadArquivo', 'tipo', 'cancelamentoporinadimplencia', 1, 'S', 'S', NULL, 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15007', '3', '66', '/v3/downloadArquivo', 'tipo', 'cancelamentoporinadimplencia', 1, 'S', 'S', NULL, 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15008', '4', '66', '/v3/downloadArquivo', 'tipo', 'cancelamentoporinadimplencia', 1, 'S', 'S', NULL, 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15009', '7', '66', '/v3/downloadArquivo', 'tipo', 'cancelamentoporinadimplencia', 1, 'S', 'S', NULL, 'N', '2');

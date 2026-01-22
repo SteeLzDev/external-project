@@ -1,0 +1,134 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="AvaliacaoFaq" language="java" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="782" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="8b490339-0f6d-408e-a2cd-f35a4227ab99">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="1.363636363636371"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box padding="0" leftPadding="2" rightPadding="2"/>
+	</style>
+	<parameter name="DELIMITADOR" forPrompting="false" class="java.lang.String"/>
+	<parameter name="CAMINHO_LOGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SUBTITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Subtitulo do relatorio]]></description>
+	</parameter>
+	<parameter name="TEXTO_RODAPE" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Nome do Gestor(Consignante)]]></description>
+	</parameter>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="FORMATO_ARQUIVO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<parameter name="FAQS" forPrompting="false" class="java.util.List"/>
+	<parameter name="SUBREPORT_DIR" forPrompting="false" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FAQSinteticos" forPrompting="false" class="java.util.List"/>
+	<query language="sql"><![CDATA[SELECT tb_consignataria.*, tgc_identificador, tgc_descricao FROM tb_consignataria LEFT OUTER JOIN tb_tipo_grupo_consignataria USING (tgc_codigo) ORDER BY tgc_descricao, csa_identificador]]></query>
+	<field name="CSE_IDENTIFICADOR" class="java.lang.String"/>
+	<field name="CSE_NOME" class="java.lang.String"/>
+	<background splitType="Stretch"/>
+	<title splitType="Stretch"/>
+	<pageHeader height="38" splitType="Stretch">
+		<element kind="image" uuid="7edcdae8-79c1-42c8-a05b-f0d46280b368" key="image-1" x="2" y="1" width="63" height="20" onErrorType="Blank" usingCache="true" lazy="true">
+			<expression><![CDATA[$P{CAMINHO_LOGO}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="8fed5693-9d27-4e70-b0d9-6f230ebba1e5" key="textField-1" x="-1" y="16" width="780" height="22" fontName="Arial" textAdjust="StretchHeight" blankWhenNull="false" printWhenDetailOverflows="true" bold="false" hTextAlign="Left">
+			<expression><![CDATA[$P{SUBTITULO}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="d31787c1-4a77-4764-a8ec-9f10524603d3" key="textField-2" x="67" y="1" width="718" height="15" fontName="Arial" blankWhenNull="false" bold="true" italic="false" hTextAlign="Left">
+			<expression><![CDATA[$P{TITULO}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+	</pageHeader>
+	<columnHeader splitType="Stretch"/>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<element kind="subreport" uuid="6ce345aa-cbf7-4fb7-bd72-a7855e2159aa" positionType="Float" x="0" y="0" width="782" height="29" printWhenDetailOverflows="true">
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{FAQSinteticos})]]></dataSourceExpression>
+				<expression><![CDATA[$P{SUBREPORT_DIR} + "AvaliacaoFaqSintetico.jasper"]]></expression>
+				<parameter name="SUBREPORT_DIR">
+					<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+				</parameter>
+				<parameter name="DELIMITADOR">
+					<expression><![CDATA[$P{DELIMITADOR}]]></expression>
+				</parameter>
+				<parameter name="FORMATO_ARQUIVO">
+					<expression><![CDATA[$P{FORMATO_ARQUIVO}]]></expression>
+				</parameter>
+				<parameter name="RESPONSAVEL">
+					<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+				</parameter>
+			</element>
+		</band>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter height="18" splitType="Stretch">
+		<element kind="textField" uuid="68ba0f9a-4f81-46a1-8a0a-c4b78090a5ad" key="textField-3" x="0" y="4" width="675" height="13" fontName="Times New Roman" fontSize="7.0" blankWhenNull="true">
+			<expression><![CDATA[$P{TEXTO_RODAPE}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="61833028-6fdb-46f8-aa69-edf8372d2164" key="textField-4" x="676" y="4" width="60" height="13" blankWhenNull="false" hTextAlign="Right">
+			<expression><![CDATA[$V{PAGE_NUMBER} + ""]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="46e51d82-9373-4598-9aae-5d6a2e8adacc" key="textField-5" x="736" y="4" width="45" height="13" evaluationTime="Report" blankWhenNull="false" hTextAlign="Left">
+			<expression><![CDATA[" " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.de.pagina", $P{RESPONSAVEL}, $V{PAGE_NUMBER}.toString())]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+	</pageFooter>
+	<summary height="31">
+		<element kind="subreport" uuid="59b43c43-bdfa-4bc1-a01e-56417bceba08" positionType="Float" x="1" y="2" width="782" height="29" printWhenDetailOverflows="true">
+			<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{FAQS})]]></dataSourceExpression>
+			<expression><![CDATA[$P{SUBREPORT_DIR} + "AvaliacaoFaqAnalitico.jasper"]]></expression>
+			<parameter name="SUBREPORT_DIR">
+				<expression><![CDATA[$P{SUBREPORT_DIR}]]></expression>
+			</parameter>
+			<parameter name="DELIMITADOR">
+				<expression><![CDATA[$P{DELIMITADOR}]]></expression>
+			</parameter>
+			<parameter name="FORMATO_ARQUIVO">
+				<expression><![CDATA[$P{FORMATO_ARQUIVO}]]></expression>
+			</parameter>
+			<parameter name="RESPONSAVEL">
+				<expression><![CDATA[$P{RESPONSAVEL}]]></expression>
+			</parameter>
+		</element>
+		<element kind="break" uuid="4c45d440-fea1-4867-a035-f6277cb4341d" x="0" y="1" width="781" height="1"/>
+	</summary>
+</jasperReport>

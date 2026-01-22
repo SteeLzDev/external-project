@@ -1,0 +1,4 @@
+-- DESENV-9185
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP) 
+VALUES ('14901',  '7', '417', '/v3/alterarCalculoBeneficio', 'acao', 'excluirTabelaIniciada', 1, 'S', 'S', null, 'S', '2');

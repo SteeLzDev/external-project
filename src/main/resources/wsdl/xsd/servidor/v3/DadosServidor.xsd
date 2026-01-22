@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="DadosServidor">
+  <xsd:complexType name="DadosServidor">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="1" name="servidor" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="cpf" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="matricula" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="estabelecimentoCodigo" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="estabelecimento" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="orgaoCodigo" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="orgao" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="sexo" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="dataNascimento" nillable="true" type="xsd:date"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="estadoCivil" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="identidade" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="pai" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="mae" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="endereco" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="numero" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="complemento" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="bairro" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="cidade" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="uf" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="cep" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="telefone" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="celular" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="dataAdmissao" nillable="true" type="xsd:date"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="prazoServidor" nillable="true" type="xsd:int"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="nacionalidade" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="carteiraTrabalho" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="pis" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="categoria" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="email" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="tipoRegistroServidorCodigo" nillable="true" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,1650 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="Taxas" language="java" printOrder="Horizontal" pageWidth="595" pageHeight="897" whenNoDataType="AllSectionsNoDetail" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" scriptletClass="com.zetra.econsig.report.reports.HeadingsScriptlet" uuid="2c2acadd-78a2-4f6b-928e-8803d2b30ebe">
+	<property name="ireport.scriptlethandling" value="2"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="cm"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box padding="0" leftPadding="2" rightPadding="2"/>
+	</style>
+	<parameter name="CAMINHO_LOGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SUBTITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Subtitulo do relatório]]></description>
+	</parameter>
+	<parameter name="TEXTO_RODAPE" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Nome do Gestor(Consignante)]]></description>
+	</parameter>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="PAGINACAO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Indica se o número de página deve ser impresso.]]></description>
+	</parameter>
+	<parameter name="HeadingsCollection" forPrompting="false" class="java.util.Collection"/>
+	<parameter name="SVC_RANKING_TAXAS" class="java.lang.String"/>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<query language="sql"><![CDATA[select csa_nome, 0.00 as cft_vlr from tb_consignataria;]]></query>
+	<field name="consignataria" class="java.lang.String"/>
+	<field name="vlr12" class="java.math.BigDecimal"/>
+	<field name="vlr24" class="java.math.BigDecimal"/>
+	<field name="vlr36" class="java.math.BigDecimal"/>
+	<field name="vlr48" class="java.math.BigDecimal"/>
+	<field name="vlr60" class="java.math.BigDecimal"/>
+	<field name="vlr72" class="java.math.BigDecimal"/>
+	<field name="vlr84" class="java.math.BigDecimal"/>
+	<field name="vlr96" class="java.math.BigDecimal"/>
+	<field name="vlr108" class="java.math.BigDecimal"/>
+	<field name="vlr120" class="java.math.BigDecimal"/>
+	<field name="vlr132" class="java.math.BigDecimal"/>
+	<field name="vlr144" class="java.math.BigDecimal"/>
+	<field name="maxPrazo" class="java.lang.String"/>
+	<variable name="BACKGROUND" resetType="None" calculation="DistinctCount" class="java.lang.Integer">
+		<expression><![CDATA[$F{consignataria}]]></expression>
+		<initialValueExpression><![CDATA[new java.lang.Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="media12" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{media12}.add($F{vlr12})]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="media24" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{media24}.add($F{vlr24})]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="media36" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{media36}.add($F{vlr36})]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="media48" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{media48}.add($F{vlr48})]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="media60" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{media60}.add($F{vlr60})]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="media72" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{media72}.add($F{vlr72})]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="min12" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{min12}.compareTo($F{vlr12}) < 0 ? $V{min12} : $F{vlr12}]]></expression>
+		<initialValueExpression><![CDATA[$F{vlr12}]]></initialValueExpression>
+	</variable>
+	<variable name="min24" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{min24}.compareTo($F{vlr24}) < 0 ? $V{min24} : $F{vlr24}]]></expression>
+		<initialValueExpression><![CDATA[$F{vlr24}]]></initialValueExpression>
+	</variable>
+	<variable name="min36" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{min36}.compareTo($F{vlr36}) < 0 ? $V{min36} : $F{vlr36}]]></expression>
+		<initialValueExpression><![CDATA[$F{vlr36}]]></initialValueExpression>
+	</variable>
+	<variable name="min48" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{min48}.compareTo($F{vlr48}) < 0 ? $V{min48} : $F{vlr48}]]></expression>
+		<initialValueExpression><![CDATA[$F{vlr48}]]></initialValueExpression>
+	</variable>
+	<variable name="min60" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{min60}.compareTo($F{vlr60}) < 0 ? $V{min60} : $F{vlr60}]]></expression>
+		<initialValueExpression><![CDATA[$F{vlr60}]]></initialValueExpression>
+	</variable>
+	<variable name="min72" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{min72}.compareTo($F{vlr72}) < 0 ? $V{min72} : $F{vlr72}]]></expression>
+		<initialValueExpression><![CDATA[$F{vlr72}]]></initialValueExpression>
+	</variable>
+	<variable name="max12" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{max12}.compareTo($F{vlr12}) > 0 ? $V{max12} : $F{vlr12}]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="max24" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{max24}.compareTo($F{vlr24}) > 0 ? $V{max24} : $F{vlr24}]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="max36" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{max36}.compareTo($F{vlr36}) > 0 ? $V{max36} : $F{vlr36}]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="max48" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{max48}.compareTo($F{vlr48}) > 0 ? $V{max48} : $F{vlr48}]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="max60" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{max60}.compareTo($F{vlr60}) > 0 ? $V{max60} : $F{vlr60}]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="max72" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{max72}.compareTo($F{vlr72}) > 0 ? $V{max72} : $F{vlr72}]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="media84" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{media84}.add($F{vlr84})]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="media96" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{media96}.add($F{vlr96})]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="min84" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{min84}.compareTo($F{vlr84}) < 0 ? $V{min84} : $F{vlr84}]]></expression>
+		<initialValueExpression><![CDATA[$F{vlr72}]]></initialValueExpression>
+	</variable>
+	<variable name="min96" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{min96}.compareTo($F{vlr96}) < 0 ? $V{min96} : $F{vlr96}]]></expression>
+		<initialValueExpression><![CDATA[$F{vlr72}]]></initialValueExpression>
+	</variable>
+	<variable name="max84" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{max84}.compareTo($F{vlr84}) > 0 ? $V{max84} : $F{vlr84}]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="max96" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{max96}.compareTo($F{vlr96}) > 0 ? $V{max96} : $F{vlr96}]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="max108" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{max108}.compareTo($F{vlr108}) > 0 ? $V{max108} : $F{vlr108}]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="max120" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{max120}.compareTo($F{vlr120}) > 0 ? $V{max120} : $F{vlr120}]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="max132" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{max132}.compareTo($F{vlr132}) > 0 ? $V{max132} : $F{vlr132}]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="max144" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{max144}.compareTo($F{vlr144}) > 0 ? $V{max144} : $F{vlr144}]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="min108" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{min108}.compareTo($F{vlr108}) < 0 ? $V{min108} : $F{vlr108}]]></expression>
+		<initialValueExpression><![CDATA[$F{vlr72}]]></initialValueExpression>
+	</variable>
+	<variable name="min120" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{min120}.compareTo($F{vlr120}) < 0 ? $V{min120} : $F{vlr120}]]></expression>
+		<initialValueExpression><![CDATA[$F{vlr72}]]></initialValueExpression>
+	</variable>
+	<variable name="min132" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{min132}.compareTo($F{vlr132}) < 0 ? $V{min132} : $F{vlr132}]]></expression>
+		<initialValueExpression><![CDATA[$F{vlr72}]]></initialValueExpression>
+	</variable>
+	<variable name="min144" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{min144}.compareTo($F{vlr144}) < 0 ? $V{min144} : $F{vlr144}]]></expression>
+		<initialValueExpression><![CDATA[$F{vlr72}]]></initialValueExpression>
+	</variable>
+	<variable name="media108" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{media108}.add($F{vlr108})]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="media120" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{media120}.add($F{vlr120})]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="media132" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{media132}.add($F{vlr132})]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="media144" incrementType="Column" class="java.math.BigDecimal">
+		<expression><![CDATA[$V{media144}.add($F{vlr144})]]></expression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<background splitType="Stretch"/>
+	<title height="51" splitType="Stretch">
+		<element kind="textField" uuid="19a5a667-5080-42df-aad9-c0f26313ce3e" key="textField-4" stretchType="ContainerHeight" x="0" y="0" width="553" height="23" fontName="Arial" fontSize="10.0" blankWhenNull="false" printWhenDetailOverflows="true" bold="true">
+			<expression><![CDATA["3.4. " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxas.titulo", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="19a5a667-5080-42df-aad9-c0f26313ce3e" key="textField-4" stretchType="ContainerHeight" x="0" y="23" width="553" height="28" fontName="Arial" fontSize="10.0" blankWhenNull="true" printWhenDetailOverflows="true" bold="false">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.servico.singular", $P{RESPONSAVEL}) + ": " + ($P{SVC_RANKING_TAXAS} != null ? $P{SVC_RANKING_TAXAS} : com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.campo.nao.definido.abreviado", $P{RESPONSAVEL})) + "\n" +
+com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxas.subtitulo", $P{RESPONSAVEL}, ($P{SVC_RANKING_TAXAS} != null ? $P{SVC_RANKING_TAXAS} : com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.campo.nao.definido.abreviado", $P{RESPONSAVEL}))) + ":"]]></expression>
+		</element>
+	</title>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader height="32">
+		<element kind="staticText" uuid="50aaa69f-efa2-4e87-a38e-b8a2dea084cd" key="staticText-2" mode="Opaque" x="310" y="16" width="27" height="16" backcolor="#CCCCCC" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 36]]></printWhenExpression>
+			<text><![CDATA[48]]></text>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="6fc2a89a-be48-4c39-8553-c34f494ba46d" key="staticText-2" mode="Opaque" x="7" y="0" width="222" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.consignataria.singular", $P{RESPONSAVEL}).toUpperCase()]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="50aaa69f-efa2-4e87-a38e-b8a2dea084cd" key="staticText-2" mode="Opaque" x="229" y="16" width="27" height="16" backcolor="#CCCCCC" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[$F{vlr12} != null]]></printWhenExpression>
+			<text><![CDATA[12]]></text>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="50aaa69f-efa2-4e87-a38e-b8a2dea084cd" key="staticText-2" mode="Opaque" x="256" y="16" width="27" height="16" backcolor="#CCCCCC" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[$F{vlr24} != null]]></printWhenExpression>
+			<text><![CDATA[24]]></text>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="50aaa69f-efa2-4e87-a38e-b8a2dea084cd" key="staticText-2" mode="Opaque" x="283" y="16" width="27" height="16" backcolor="#CCCCCC" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[$F{vlr36} != null]]></printWhenExpression>
+			<text><![CDATA[36]]></text>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="50aaa69f-efa2-4e87-a38e-b8a2dea084cd" key="staticText-2" mode="Opaque" x="337" y="16" width="27" height="16" backcolor="#CCCCCC" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 48]]></printWhenExpression>
+			<text><![CDATA[60]]></text>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="50aaa69f-efa2-4e87-a38e-b8a2dea084cd" key="staticText-2" mode="Opaque" x="364" y="16" width="27" height="16" backcolor="#CCCCCC" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 60]]></printWhenExpression>
+			<text><![CDATA[72]]></text>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="2e9f6e66-3b5d-4506-90ef-b65fa3028368" key="staticText-2" mode="Opaque" x="229" y="0" width="324" height="16" backcolor="#CCCCCC" markup="none" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[$F{maxPrazo}.equals( "144" )]]></printWhenExpression>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxas.prazos", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="16e878ce-dded-4fc9-8609-df68de5f5eb6" key="staticText-2" mode="Opaque" x="391" y="16" width="27" height="16" backcolor="#CCCCCC" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 72]]></printWhenExpression>
+			<text><![CDATA[84]]></text>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="e98dd6d4-0fef-434c-a6d3-516a6b760a6b" key="staticText-2" mode="Opaque" x="418" y="16" width="27" height="16" backcolor="#CCCCCC" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 84]]></printWhenExpression>
+			<text><![CDATA[96]]></text>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="d9bc19cf-0c01-4b6f-80cb-1e3d03cc2ff3" key="staticText-2" mode="Opaque" x="445" y="16" width="27" height="16" backcolor="#CCCCCC" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 96]]></printWhenExpression>
+			<text><![CDATA[108]]></text>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="d9ac9cb1-9adf-4801-8c4c-43bc86c24016" key="staticText-2" mode="Opaque" x="472" y="16" width="27" height="16" backcolor="#CCCCCC" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 108]]></printWhenExpression>
+			<text><![CDATA[120]]></text>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="3eb7afe4-f717-4a91-9f8b-95f38b05c13e" key="staticText-2" mode="Opaque" x="499" y="16" width="27" height="16" backcolor="#CCCCCC" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 120]]></printWhenExpression>
+			<text><![CDATA[132]]></text>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="cae00975-1be3-4352-9e57-aefbdc18cc18" key="staticText-2" mode="Opaque" x="526" y="16" width="27" height="16" backcolor="#CCCCCC" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 132]]></printWhenExpression>
+			<text><![CDATA[144]]></text>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="b59a48cd-18a7-4752-b992-17e1e5ef05da" key="staticText-2" mode="Opaque" x="229" y="0" width="297" height="16" backcolor="#CCCCCC" markup="none" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[$F{maxPrazo}.equals( "132" )]]></printWhenExpression>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxas.prazos", $P{RESPONSAVEL})]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="93b0f1e8-a960-4d2a-a12a-bfb39ccfcda4" key="staticText-2" mode="Opaque" x="229" y="0" width="270" height="16" backcolor="#CCCCCC" markup="none" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[$F{maxPrazo}.equals( "120" )]]></printWhenExpression>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxas.prazos", $P{RESPONSAVEL})]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="930d25cc-5db6-47b9-856a-340b331258aa" key="staticText-2" mode="Opaque" x="229" y="0" width="243" height="16" backcolor="#CCCCCC" markup="none" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[$F{maxPrazo}.equals( "108" )]]></printWhenExpression>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxas.prazos", $P{RESPONSAVEL})]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="e0ffc8da-0e0c-4170-966b-0b5695e258f0" key="staticText-2" mode="Opaque" x="229" y="0" width="216" height="16" backcolor="#CCCCCC" markup="none" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[$F{maxPrazo}.equals( "96" )]]></printWhenExpression>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxas.prazos", $P{RESPONSAVEL})]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="3044a98b-f390-4144-bdce-be076eea7cbd" key="staticText-2" mode="Opaque" x="229" y="0" width="189" height="16" backcolor="#CCCCCC" markup="none" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[$F{maxPrazo}.equals( "84" )]]></printWhenExpression>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxas.prazos", $P{RESPONSAVEL})]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="1cb4415a-1dbe-4865-9b22-e3bd32ec3bc4" key="staticText-2" mode="Opaque" x="229" y="0" width="162" height="16" backcolor="#CCCCCC" markup="none" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[$F{maxPrazo}.equals( "72" )]]></printWhenExpression>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxas.prazos", $P{RESPONSAVEL})]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="ef2964ee-9cb1-4191-bc4f-c7d947f9cb0b" key="staticText-2" mode="Opaque" x="229" y="0" width="135" height="16" backcolor="#CCCCCC" markup="none" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[$F{maxPrazo}.equals( "60" )]]></printWhenExpression>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxas.prazos", $P{RESPONSAVEL})]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="0dcfe508-11ec-41d6-8c4d-79fa5ce8e090" key="staticText-2" mode="Opaque" x="229" y="0" width="108" height="16" backcolor="#CCCCCC" markup="none" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[$F{maxPrazo}.equals( "48" )]]></printWhenExpression>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxas.prazos", $P{RESPONSAVEL})]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="62914e2a-d294-432d-812d-b9bd942300ab" key="staticText-2" mode="Opaque" x="229" y="0" width="81" height="16" backcolor="#CCCCCC" markup="none" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[$F{maxPrazo}.equals( "36" )]]></printWhenExpression>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxas.prazos", $P{RESPONSAVEL})]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<property name="com.jaspersoft.studio.unit.height" value="px"/>
+	</columnHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<element kind="staticText" uuid="4745723b-a25b-4c23-b441-35e00272d68a" key="fundoLinha" mode="Opaque" x="7" y="0" width="492" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0 && $F{maxPrazo}.equals( "120" ))]]></printWhenExpression>
+				<text><![CDATA[ ]]></text>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<box>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="2d60cf41-d6a9-4b3c-9c72-21d9967fb824" key="fundoLinha" mode="Opaque" x="7" y="0" width="465" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0 && $F{maxPrazo}.equals( "108" ))]]></printWhenExpression>
+				<text><![CDATA[ ]]></text>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<box>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="4208909f-2edd-4b29-b0d7-e562d793d3f6" key="fundoLinha" mode="Opaque" x="7" y="0" width="411" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0 && $F{maxPrazo}.equals( "84" ))]]></printWhenExpression>
+				<text><![CDATA[ ]]></text>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<box>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="f2a3c3d4-add9-4afc-bfca-87ac590d5fd1" key="fundoLinha" mode="Opaque" x="7" y="0" width="384" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0 && $F{maxPrazo}.equals( "72" ))]]></printWhenExpression>
+				<text><![CDATA[ ]]></text>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<box>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="95da1441-7655-4c78-9493-a202dcdb005c" key="fundoLinha" mode="Opaque" x="7" y="0" width="330" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0 && $F{maxPrazo}.equals( "48" ))]]></printWhenExpression>
+				<text><![CDATA[ ]]></text>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<box>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="f9643e6c-02b8-45b2-a0d0-96917f17ba3b" key="fundoLinha" mode="Opaque" x="7" y="0" width="438" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0 && $F{maxPrazo}.equals( "96" ))]]></printWhenExpression>
+				<text><![CDATA[ ]]></text>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<box>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="0241ed3e-1538-4427-af39-2027aa7649e1" key="fundoLinha" mode="Opaque" x="7" y="0" width="519" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0 && $F{maxPrazo}.equals( "132" ))]]></printWhenExpression>
+				<text><![CDATA[ ]]></text>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<box>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="573a452b-c06e-4655-9196-56259f4d7d40" key="fundoLinha" mode="Opaque" x="7" y="0" width="357" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0 && $F{maxPrazo}.equals( "60" ))]]></printWhenExpression>
+				<text><![CDATA[ ]]></text>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<box>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="38082887-1404-454c-b6de-d3d1ab4f164f" key="fundoLinha" mode="Opaque" x="7" y="0" width="546" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0 && $F{maxPrazo}.equals( "144" ))]]></printWhenExpression>
+				<text><![CDATA[ ]]></text>
+				<box>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="7ab35122-651e-48a5-9c4d-3e28e1227182" key="fundoLinha" mode="Opaque" x="7" y="0" width="303" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0 && $F{maxPrazo}.equals( "36" ))]]></printWhenExpression>
+				<text><![CDATA[ ]]></text>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<box>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="7" y="0" width="222" height="17" fontSize="9.0" textAdjust="StretchHeight" pattern="" blankWhenNull="true" hTextAlign="Left" vTextAlign="Middle" style="Celula">
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[$F{consignataria}]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="310" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 36]]></printWhenExpression>
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[$F{vlr48}]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="d273e745-f2bf-4e1f-8b3f-73febb81bc64" key="textField" stretchType="ContainerHeight" x="445" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 96]]></printWhenExpression>
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[$F{vlr108}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="dba947ba-40ac-4a09-9e62-f814040e2b3e" key="textField" stretchType="ContainerHeight" x="472" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 108]]></printWhenExpression>
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[$F{vlr120}]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="283" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[$F{vlr36} != null]]></printWhenExpression>
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[$F{vlr36}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="d20d762c-329d-4b8a-8e31-33af8814da6a" key="textField" stretchType="ContainerHeight" x="526" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 132]]></printWhenExpression>
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[$F{vlr144}]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="337" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 48]]></printWhenExpression>
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[$F{vlr60}]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="eaf84dac-03b8-4ef5-8855-11101ec7189d" key="textField" stretchType="ContainerHeight" x="391" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 72]]></printWhenExpression>
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[$F{vlr84}]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="229" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[$F{vlr12} != null]]></printWhenExpression>
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[$F{vlr12}]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="76d9648c-7659-4a35-9623-fd2ce9638213" key="textField" stretchType="ContainerHeight" x="418" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 84]]></printWhenExpression>
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[$F{vlr96}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="f7cc2bf0-de04-49c6-82d6-e21425723297" key="textField" stretchType="ContainerHeight" x="499" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 120]]></printWhenExpression>
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[$F{vlr132}]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="364" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 60]]></printWhenExpression>
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[$F{vlr72}]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="256" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[$F{vlr24} != null]]></printWhenExpression>
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[$F{vlr24}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</detail>
+	<columnFooter height="123" splitType="Stretch">
+		<element kind="staticText" uuid="0c8816a7-9e91-46b3-8f54-57385edb383d" key="fundoLinha" mode="Opaque" x="7" y="0" width="303" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!(($V{BACKGROUND}.intValue() % 2)==0) &&  $F{maxPrazo}.equals( "36" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="a5e68146-504d-4a8b-8b3e-4256226da0b0" key="fundoLinha" mode="Opaque" x="7" y="0" width="330" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!(($V{BACKGROUND}.intValue() % 2)==0) &&  $F{maxPrazo}.equals( "48" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="d9145d9f-9d13-4cf3-af6a-7fc2cadb9e2d" key="fundoLinha" mode="Opaque" x="7" y="0" width="357" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!(($V{BACKGROUND}.intValue() % 2)==0) &&  $F{maxPrazo}.equals( "60" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="936feaf7-f489-42d2-b91c-261d785817fb" key="fundoLinha" mode="Opaque" x="7" y="0" width="384" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!(($V{BACKGROUND}.intValue() % 2)==0) &&  $F{maxPrazo}.equals( "72" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="955840f9-5aee-4f25-9240-6f8b436f6ec7" key="fundoLinha" mode="Opaque" x="7" y="0" width="411" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!(($V{BACKGROUND}.intValue() % 2)==0) &&  $F{maxPrazo}.equals( "84" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="a9d891f2-e443-446a-80e2-0071c393270b" key="fundoLinha" mode="Opaque" x="7" y="0" width="438" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!(($V{BACKGROUND}.intValue() % 2)==0) &&  $F{maxPrazo}.equals( "96" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="10f88c0a-1616-4dac-8bb5-ca0976a8745e" key="fundoLinha" mode="Opaque" x="7" y="0" width="465" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!(($V{BACKGROUND}.intValue() % 2)==0) &&  $F{maxPrazo}.equals( "108" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="e689b444-5fae-4345-8ea1-9ec961277af7" key="fundoLinha" mode="Opaque" x="7" y="0" width="492" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!(($V{BACKGROUND}.intValue() % 2)==0) &&  $F{maxPrazo}.equals( "120" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="d8e140c7-10a9-4efe-8e17-0f79d5bc1fe0" key="fundoLinha" mode="Opaque" x="7" y="0" width="518" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!(($V{BACKGROUND}.intValue() % 2)==0) &&  $F{maxPrazo}.equals( "132" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="d323b7f5-b85e-488f-898c-e0f614c68afb" key="fundoLinha" mode="Opaque" x="7" y="0" width="546" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!(($V{BACKGROUND}.intValue() % 2)==0) &&  $F{maxPrazo}.equals( "144" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="7" y="0" width="222" height="17" fontName="Arial" fontSize="10.0" textAdjust="StretchHeight" pattern="" blankWhenNull="true" bold="true" italic="false" hTextAlign="Left" vTextAlign="Middle" style="Celula">
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxas.minimo", $P{RESPONSAVEL})]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" x="229" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[$F{vlr12} != null]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{min12}]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="256" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[$F{vlr24} != null]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{min24}]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="283" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[$F{vlr36} != null]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{min36}]]></expression>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="310" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 36]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{min48}]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="337" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 48]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{min60}]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="364" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 60]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{min72}]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="7320cdd9-dc49-447c-97be-625abbe00c2b" key="textField" stretchType="ContainerHeight" x="391" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 72]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{min84}]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="64e6a706-0f4d-40f9-b581-5e0aec628f19" key="textField" stretchType="ContainerHeight" x="418" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 84]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{min96}]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="039c0269-8a76-4da4-9e2e-febc94f39205" key="textField" stretchType="ContainerHeight" x="445" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 96]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{min108}]]></expression>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="06889efa-41d7-400b-8119-f5cf66221dff" key="textField" stretchType="ContainerHeight" x="472" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 108]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{min120}]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="c70900d8-f2e3-45eb-9b58-6fe59d016014" key="textField" stretchType="ContainerHeight" x="499" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 120]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{min132}]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="b9d19e99-b715-4052-b8fc-8213263fdb22" key="textField" stretchType="ContainerHeight" x="526" y="0" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 132]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{min144}]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="dd30bb18-3947-4c23-904a-a9343155163f" key="fundoLinha" mode="Opaque" x="7" y="17" width="302" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0 &&  $F{maxPrazo}.equals( "36" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="44d2604a-3d1f-4b91-9be4-829994ad41ef" key="fundoLinha" mode="Opaque" x="7" y="17" width="330" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0 &&  $F{maxPrazo}.equals( "48" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="0919ea10-86e1-48d5-acd5-286d07fc44a6" key="fundoLinha" mode="Opaque" x="7" y="17" width="357" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0 &&  $F{maxPrazo}.equals( "60" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="6c9dc320-0b1e-492d-b0f9-c6753f307294" key="fundoLinha" mode="Opaque" x="7" y="17" width="384" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0 &&  $F{maxPrazo}.equals( "72" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="f9c5dad8-ab7c-451d-8d5a-80789cab25eb" key="fundoLinha" mode="Opaque" x="7" y="17" width="411" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0 &&  $F{maxPrazo}.equals( "84" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="3e91b9c5-709b-430c-9cc7-47f37f46a471" key="fundoLinha" mode="Opaque" x="7" y="17" width="438" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0 &&  $F{maxPrazo}.equals( "96" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="33b622de-7a5c-40b1-99b6-15b95ac0b94c" key="fundoLinha" mode="Opaque" x="7" y="17" width="465" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0 &&  $F{maxPrazo}.equals( "108" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="b77edd93-28bb-4fde-8b93-058306da5e9a" key="fundoLinha" mode="Opaque" x="7" y="17" width="492" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0 &&  $F{maxPrazo}.equals( "120" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="23297139-59e6-4cc9-8376-a3c677b576bf" key="fundoLinha" mode="Opaque" x="7" y="17" width="519" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0 &&  $F{maxPrazo}.equals( "132" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="9d36b95e-58ff-4a80-acdc-3d1044a14b6e" key="fundoLinha" mode="Opaque" x="7" y="17" width="546" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0 &&  $F{maxPrazo}.equals( "144" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="7" y="17" width="222" height="17" fontName="Arial" fontSize="10.0" textAdjust="StretchHeight" pattern="" blankWhenNull="true" bold="true" hTextAlign="Left" vTextAlign="Middle" style="Celula">
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxas.media", $P{RESPONSAVEL})]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" x="229" y="17" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[$F{vlr12} != null]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{media12}.divide(new BigDecimal($V{COLUMN_COUNT}), 2, RoundingMode.HALF_UP)]]></expression>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="256" y="17" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[$F{vlr24} != null]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{media24}.divide(new BigDecimal($V{COLUMN_COUNT}), 2, RoundingMode.HALF_UP)]]></expression>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="283" y="17" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[$F{vlr36} != null]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{media36}.divide(new BigDecimal($V{COLUMN_COUNT}), 2, RoundingMode.HALF_UP)]]></expression>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="310" y="17" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 36]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{media48}.divide(new BigDecimal($V{COLUMN_COUNT}), 2, RoundingMode.HALF_UP)]]></expression>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="337" y="17" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 48]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{media60}.divide(new BigDecimal($V{COLUMN_COUNT}), 2, RoundingMode.HALF_UP)]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="364" y="17" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 60]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{media72}.divide(new BigDecimal($V{COLUMN_COUNT}), 2, RoundingMode.HALF_UP)]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="ed154d6a-3e5a-48b3-8451-e37eaf34ba33" key="textField" stretchType="ContainerHeight" x="391" y="17" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 72]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{media84}.divide(new BigDecimal($V{COLUMN_COUNT}), 2, RoundingMode.HALF_UP)]]></expression>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="416d3a2f-091c-4974-ab68-49d64032ef2a" key="textField" stretchType="ContainerHeight" x="418" y="17" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 84]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{media96}.divide(new BigDecimal($V{COLUMN_COUNT}), 2, RoundingMode.HALF_UP)]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="75279dd8-2d4c-462d-b153-233ea4ce88bd" key="textField" stretchType="ContainerHeight" x="445" y="17" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 96]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{media108}.divide(new BigDecimal($V{COLUMN_COUNT}), 2, RoundingMode.HALF_UP)]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="85519cca-fc44-41ee-94d4-d1fef77ef92c" key="textField" stretchType="ContainerHeight" x="472" y="17" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 108]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{media120}.divide(new BigDecimal($V{COLUMN_COUNT}), 2, RoundingMode.HALF_UP)]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="4b4207b4-c24b-4d81-8f17-c63540f2ff76" key="textField" stretchType="ContainerHeight" x="499" y="17" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 120]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{media132}.divide(new BigDecimal($V{COLUMN_COUNT}), 2, RoundingMode.HALF_UP)]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="4572065e-6ed5-4f1c-8fd5-98e6a99ace2a" key="textField" stretchType="ContainerHeight" x="526" y="17" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 132]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{media144}.divide(new BigDecimal($V{COLUMN_COUNT}), 2, RoundingMode.HALF_UP)]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="ffcbc2cc-6e6b-4454-98be-10261e1939c5" key="fundoLinha" mode="Opaque" x="7" y="34" width="303" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!(($V{BACKGROUND}.intValue() % 2)==0) &&  $F{maxPrazo}.equals( "36" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="6035de1f-f707-4650-bcc3-4d748e03f483" key="fundoLinha" mode="Opaque" x="7" y="34" width="330" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!(($V{BACKGROUND}.intValue() % 2)==0) &&  $F{maxPrazo}.equals( "48" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="e603066f-f0c0-449f-b97a-603eb6b30e8c" key="fundoLinha" mode="Opaque" x="7" y="34" width="357" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!(($V{BACKGROUND}.intValue() % 2)==0) &&  $F{maxPrazo}.equals( "60" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="c40356f1-61a1-4025-85de-212238b15070" key="fundoLinha" mode="Opaque" x="7" y="34" width="384" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!(($V{BACKGROUND}.intValue() % 2)==0) &&  $F{maxPrazo}.equals( "72" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="da7d9cae-0ce0-4559-a31d-d53252b9fc7b" key="fundoLinha" mode="Opaque" x="7" y="34" width="411" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!(($V{BACKGROUND}.intValue() % 2)==0) &&  $F{maxPrazo}.equals( "84" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="1a7212d7-67b4-4d25-ae2a-6436436677ee" key="fundoLinha" mode="Opaque" x="7" y="34" width="438" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!(($V{BACKGROUND}.intValue() % 2)==0) &&  $F{maxPrazo}.equals( "96" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="fb82e967-61d2-4540-919d-5c812a866290" key="fundoLinha" mode="Opaque" x="7" y="34" width="465" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!(($V{BACKGROUND}.intValue() % 2)==0) &&  $F{maxPrazo}.equals( "108" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="c447758c-43e3-4029-ad27-5fc8dbc2e4b5" key="fundoLinha" mode="Opaque" x="7" y="34" width="492" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!(($V{BACKGROUND}.intValue() % 2)==0) &&  $F{maxPrazo}.equals( "120" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="9899453e-d0ab-42b7-a962-2c87cd50e719" key="fundoLinha" mode="Opaque" x="7" y="34" width="519" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!(($V{BACKGROUND}.intValue() % 2)==0) &&  $F{maxPrazo}.equals( "132" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="e30db7f8-27b8-4c92-807f-7fd6dec7e24f" key="fundoLinha" mode="Opaque" x="7" y="34" width="546" height="17" backcolor="#DDDDDD" printWhenDetailOverflows="true">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(!(($V{BACKGROUND}.intValue() % 2)==0) &&  $F{maxPrazo}.equals( "144" ))]]></printWhenExpression>
+			<text><![CDATA[ ]]></text>
+			<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+			<box>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="7" y="34" width="222" height="17" fontName="Arial" fontSize="10.0" textAdjust="StretchHeight" pattern="" blankWhenNull="true" bold="true" hTextAlign="Left" vTextAlign="Middle" style="Celula">
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeraltaxas.maximo", $P{RESPONSAVEL})]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" x="229" y="34" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[$F{vlr12} != null]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{max12}]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="256" y="34" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[$F{vlr24} != null]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{max24}]]></expression>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="283" y="34" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[$F{vlr36} != null]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{max36}]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="310" y="34" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 36]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{max48}]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="337" y="34" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 48]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{max60}]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="fd493a33-98d9-46b7-bc41-3bfa46ea6e59" key="textField" stretchType="ContainerHeight" x="364" y="34" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 60]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{max72}]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="42cee9b8-dea2-4908-bd6f-c5e5213b5970" key="textField" stretchType="ContainerHeight" x="391" y="34" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 72]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{max84}]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="baf250b0-b285-47b6-9d90-e6d24ba7a2b1" key="textField" stretchType="ContainerHeight" x="418" y="34" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 84]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{max96}]]></expression>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="62dfa33c-1e4b-4e6f-a6fc-b0f67837be2e" key="textField" stretchType="ContainerHeight" x="445" y="34" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 96]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{max108}]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="bb05ecdd-a97b-4ae2-ade6-c9e5b32ad683" key="textField" stretchType="ContainerHeight" x="472" y="34" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 108]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{max120}]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="cbf01fc8-9be1-41a9-bff3-85a61b16a437" key="textField" stretchType="ContainerHeight" x="499" y="34" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 120]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{max132}]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="d9e51ed2-1d8b-41ea-ba47-0aaf01a10ef9" key="textField" stretchType="ContainerHeight" x="526" y="34" width="27" height="17" fontSize="8.0" textAdjust="StretchHeight" pattern="###0.00;-###0.00" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+			<printWhenExpression><![CDATA[Integer.parseInt($F{maxPrazo}) > 132]]></printWhenExpression>
+			<paragraph lineSpacing="Single"/>
+			<expression><![CDATA[$V{max144}]]></expression>
+			<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+			<box leftPadding="2" rightPadding="2" style="Celula">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.25" lineColor="#000000"/>
+				<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<property name="com.jaspersoft.studio.layout"/>
+	</columnFooter>
+	<pageFooter splitType="Stretch"/>
+	<summary splitType="Stretch"/>
+</jasperReport>

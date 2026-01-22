@@ -1,0 +1,2216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="HostaHostService"      
+     xmlns:soapenc12="http://www.w3.org/2003/05/soap-encoding"
+     xmlns:tns="HostaHostService"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:soap11="http://schemas.xmlsoap.org/soap/envelope/"
+     xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" 
+     xmlns:soapenc11="http://schemas.xmlsoap.org/soap/encoding/"
+     xmlns:soap12="http://www.w3.org/2003/05/soap-envelope"
+     xmlns:ns1="Boleto"
+     xmlns:ns2="Servico"
+     xmlns:ns3="Servidor" 
+     xmlns:ns4="Historico"
+     xmlns:ns5="Resumo"
+     xmlns:ns6="Margem"
+     xmlns:ns7="Simulacao"
+     xmlns:ns8="Solicitacao"
+     xmlns:ns9="HostaHostService"
+     xmlns:ns10="ParametroSet"
+     xmlns:ns11="Anexo"
+     xmlns:ns12="SituacaoContrato"
+     xmlns:ns13="SituacaoServidor"
+     xmlns:ns14="DadoConsignacao"
+     xmlns:ns15="TaxaDeJuros"
+     xmlns:ns16="Parcela"
+     xmlns:ns17="DadoAdicional"
+     xmlns:ns18="SituacaoUsuario"
+     xmlns:ns19="AnexoConsignacao"
+     xmlns:ns20="PapelUsuario"
+     xmlns:ns21="Usuario">
+<wsdl:types>
+  <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="HostaHostService">
+    <xsd:element name="alongarConsignacao">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="novoAdeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="dataNascimento" nillable="true" type="xsd:date"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="valorParcela" nillable="false" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="valorLiberado" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codVerba" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="servicoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="prazo" nillable="false" type="xsd:int"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="carencia" nillable="true" type="xsd:int"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="senhaServidor" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="loginServidor" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="tokenAutServidor" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="correspondenteCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="valorTac" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="indice" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="valorIof" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="valorMensVin" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="matricula" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cpf" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="orgaoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="estabelecimentoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="banco" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="agencia" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="conta" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="naturezaServicoCodigo" nillable="true" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="alongarConsignacaoResponse">
+   <xsd:complexType>
+     <xsd:sequence>
+       <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="boleto" nillable="true" type="ns1:Boleto" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="historicos" nillable="true" type="ns4:Historico" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="resumos" nillable="true" type="ns5:Resumo" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="servicos" nillable="true" type="ns2:Servico" />
+     </xsd:sequence>
+   </xsd:complexType>
+   </xsd:element>
+    <xsd:element name="alterarConsignacao">
+      <xsd:complexType>
+        <xsd:sequence>
+          <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="novoAdeIdentificador" nillable="true" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="1" name="valorParcela" nillable="false" type="xsd:double"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="valorLiberado" nillable="true" type="xsd:double"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="valorTac" nillable="true" type="xsd:double"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="valorIof" nillable="true" type="xsd:double"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="valorMensVin" nillable="true" type="xsd:double"/>
+          <xsd:element maxOccurs="1" minOccurs="1" name="prazo" nillable="false" type="xsd:int"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="senhaServidor" nillable="true" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="loginServidor" nillable="false" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="tokenAutServidor" nillable="false" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="indice" nillable="true" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="carencia" nillable="true" type="xsd:int"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="taxaJuros" nillable="true" type="xsd:double"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="periodo" nillable="true" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="anexo" nillable="true" type="ns11:Anexo"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="codigoMotivoOperacao" nillable="true" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="obsMotivoOperacao" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="alterarConsignacaoResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="boleto" nillable="true" type="ns1:Boleto" />
+        <xsd:element maxOccurs="unbounded" minOccurs="0" name="historicos" nillable="true" type="ns4:Historico" />
+        <xsd:element maxOccurs="unbounded" minOccurs="0" name="resumos" nillable="true" type="ns5:Resumo" />
+      </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="autorizarReserva">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="senhaServidor" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="loginServidor" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="tokenAutServidor" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codigoMotivoOperacao" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="obsMotivoOperacao" nillable="true" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="autorizarReservaResponse">
+   <xsd:complexType>
+     <xsd:sequence>
+       <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="boleto" nillable="true" type="ns1:Boleto" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="historicos" nillable="true" type="ns4:Historico" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="resumos" nillable="true" type="ns5:Resumo" />
+     </xsd:sequence>
+   </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="cancelarConsignacao">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codigoMotivoOperacao" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="obsMotivoOperacao" nillable="true" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="cancelarConsignacaoResponse">
+   <xsd:complexType>
+     <xsd:sequence>
+       <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="boleto" nillable="true" type="ns1:Boleto" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="historicos" nillable="true" type="ns4:Historico" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="resumos" nillable="true" type="ns5:Resumo" />
+     </xsd:sequence>
+   </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="cancelarRenegociacao">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codigoMotivoOperacao" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="obsMotivoOperacao" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="loginExternoServidor" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="senhaServidor" nillable="true" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="cancelarRenegociacaoResponse">
+   <xsd:complexType>
+     <xsd:sequence>
+       <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="boleto" nillable="true" type="ns1:Boleto" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="historicos" nillable="true" type="ns4:Historico" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="resumos" nillable="true" type="ns5:Resumo" />
+     </xsd:sequence>
+   </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="cancelarReserva">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codigoMotivoOperacao" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="obsMotivoOperacao" nillable="true" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="cancelarReservaResponse">
+   <xsd:complexType>
+     <xsd:sequence>
+       <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="boleto" nillable="true" type="ns1:Boleto" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="historicos" nillable="true" type="ns4:Historico" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="resumos" nillable="true" type="ns5:Resumo" />
+     </xsd:sequence>
+   </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="confirmarReserva">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codigoMotivoOperacao" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="obsMotivoOperacao" nillable="true" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="confirmarReservaResponse">
+   <xsd:complexType>
+     <xsd:sequence>
+       <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="boleto" nillable="true" type="ns1:Boleto" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="historicos" nillable="true" type="ns4:Historico" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="resumos" nillable="true" type="ns5:Resumo" />
+     </xsd:sequence>
+   </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="confirmarSolicitacao">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="novoAdeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="senhaServidor" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="loginServidor" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="tokenAutServidor" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codigoAutorizacao" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="coeficiente" nillable="false" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="alteraValorLiberado" nillable="false" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="banco" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="agencia" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="conta" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codigoMotivoOperacao" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="obsMotivoOperacao" nillable="true" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="confirmarSolicitacaoResponse">
+   <xsd:complexType>
+     <xsd:sequence>
+       <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="boleto" nillable="true" type="ns1:Boleto" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="historicos" nillable="true" type="ns4:Historico" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="resumos" nillable="true" type="ns5:Resumo" />
+     </xsd:sequence>
+   </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="consultarConsignacao">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="matricula" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cpf" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="orgaoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="estabelecimentoCodigo" nillable="true" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="consultarConsignacaoResponse">
+   <xsd:complexType>
+     <xsd:sequence>
+       <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="boleto" nillable="true" type="ns1:Boleto" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="historicos" nillable="true" type="ns4:Historico" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="servidores" nillable="true" type="ns3:Servidor" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="resumos" nillable="true" type="ns5:Resumo" />
+     </xsd:sequence>
+   </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="consultarMargem">
+     <xsd:complexType>
+        <xsd:sequence>
+          <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="matricula" nillable="false" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="cpf" nillable="true" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="orgaoCodigo" nillable="true" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="estabelecimentoCodigo" nillable="true" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="1" name="valorParcela" nillable="false" type="xsd:double"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="senhaServidor" nillable="true" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="tokenAutServidor" nillable="false" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="loginServidor" nillable="false" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="codVerba" nillable="true" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="servicoCodigo" nillable="true" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="matriculaMultipla" nillable="true" type="xsd:boolean"/>
+        </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="consultarMargemResponse">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="unbounded" minOccurs="0" name="servidores" nillable="true" type="ns3:Servidor" />
+         <xsd:element maxOccurs="unbounded" minOccurs="0" name="servicos" nillable="true" type="ns2:Servico" />
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="detalharConsultaConsignacao">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="matricula" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cpf" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="orgaoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="estabelecimentoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="correspondenteCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="servicoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codigoVerba" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="sdvSolicitado" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="sdvSolicitadoNaoCadastrado" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="sdvSolicitadoCadastrado" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="sdvNaoSolicitado" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="periodo" nillable="true" type="xsd:date"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="dataInclusaoInicio" nillable="true" type="xsd:date"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="dataInclusaoFim" nillable="true" type="xsd:date"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="integraFolha" nillable="true" type="xsd:short"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codigoMargem" nillable="true" type="xsd:short"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="indice" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="situacaoContrato" nillable="true" type="ns12:SituacaoContrato" />
+         <xsd:element maxOccurs="1" minOccurs="0" name="situacaoServidor" nillable="true" type="ns13:SituacaoServidor" />
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="detalharConsultaConsignacaoResponse">
+   <xsd:complexType>
+     <xsd:sequence>
+       <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="boleto" nillable="true" type="ns1:Boleto" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="historicos" nillable="true" type="ns4:Historico" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="servidores" nillable="true" type="ns3:Servidor" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="resumos" nillable="true" type="ns5:Resumo" />
+     </xsd:sequence>
+   </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="incluirAnexoConsignacao">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="anexo" nillable="false" type="ns11:Anexo" />
+         <xsd:element maxOccurs="1" minOccurs="0" name="descricaoAnexo" nillable="true" type="xsd:string" />
+         <xsd:element maxOccurs="1" minOccurs="0" name="periodo" nillable="true" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="incluirAnexoConsignacaoResponse">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="incluirDadoConsignacao">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="dadoCodigo" nillable="false" type="xsd:string" />
+         <xsd:element maxOccurs="1" minOccurs="0" name="dadoValor" nillable="true" type="xsd:string" />
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="incluirDadoConsignacaoResponse">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="unbounded" minOccurs="0" name="dados" nillable="true" type="ns14:DadoConsignacao" />
+         <xsd:element maxOccurs="unbounded" minOccurs="0" name="resumos" nillable="true" type="ns5:Resumo" />
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="inserirSolicitacao">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="matricula" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cpf" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="orgaoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="estabelecimentoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="senhaServidor" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="loginServidor" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="tokenAutServidor" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="servicoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="dataNascimento" nillable="true" type="xsd:date"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="valorParcela" nillable="false" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="prazo" nillable="true" type="xsd:int"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="valorLiberado" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codVerba" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="endereco" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="bairro" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="cidade" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="uf" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="cep" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="telefone" nillable="false" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="inserirSolicitacaoResponse">
+   <xsd:complexType>
+     <xsd:sequence>
+       <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="boleto" nillable="true" type="ns1:Boleto" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="servicos" nillable="true" type="ns2:Servico" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="servidores" nillable="true" type="ns3:Servidor" />
+     </xsd:sequence>
+   </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="liquidarConsignacao">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codigoMotivoOperacao" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="obsMotivoOperacao" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="periodo" nillable="true" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="liquidarConsignacaoResponse">
+   <xsd:complexType>
+     <xsd:sequence>
+       <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="boleto" nillable="true" type="ns1:Boleto" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="historicos" nillable="true" type="ns4:Historico" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="resumos" nillable="true" type="ns5:Resumo" />
+     </xsd:sequence>
+   </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="listarDadoConsignacao">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="dadoCodigo" nillable="true" type="xsd:string" />
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="listarDadoConsignacaoResponse">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="unbounded" minOccurs="0" name="dados" nillable="true" type="ns14:DadoConsignacao" />
+         <xsd:element maxOccurs="unbounded" minOccurs="0" name="resumos" nillable="true" type="ns5:Resumo" />
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="listarSolicitacao">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="matricula" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cpf" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="orgaoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="estabelecimentoCodigo" nillable="true" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="listarSolicitacaoResponse">
+   <xsd:complexType>
+     <xsd:sequence>
+       <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="solicitacoes" nillable="true" type="ns8:Solicitacao" />
+     </xsd:sequence>
+   </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="pesquisarServidor">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="primeiroNome" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="ultimoNome" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cpf" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="dataNascimento" nillable="true" type="xsd:date"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="estIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="orgIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="matricula" nillable="true" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="pesquisarServidorResponse">
+   <xsd:complexType>
+     <xsd:sequence>
+       <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="servidores" nillable="true" type="ns3:Servidor" />
+     </xsd:sequence>
+   </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="reativarConsignacao">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codigoMotivoOperacao" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="obsMotivoOperacao" nillable="true" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="reativarConsignacaoResponse">
+   <xsd:complexType>
+     <xsd:sequence>
+       <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="boleto" nillable="true" type="ns1:Boleto" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="historicos" nillable="true" type="ns4:Historico" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="resumos" nillable="true" type="ns5:Resumo" />
+     </xsd:sequence>
+   </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="renegociarConsignacao">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="unbounded" minOccurs="0" name="adeNumeros" nillable="true" type="xsd:long"/>
+         <xsd:element maxOccurs="unbounded" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="novoAdeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="dataNascimento" nillable="true" type="xsd:date"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="valorParcela" nillable="false" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="valorLiberado" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codVerba" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="servicoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="prazo" nillable="false" type="xsd:int"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="carencia" nillable="true" type="xsd:int"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="senhaServidor" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="loginServidor" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="tokenAutServidor" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="correspondenteCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="valorTac" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="indice" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="valorIof" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="valorMensVin" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="matricula" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cpf" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="orgaoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="estabelecimentoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="banco" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="agencia" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="conta" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="taxaJuros" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="naturezaServicoCodigo" nillable="true" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="renegociarConsignacaoResponse">
+   <xsd:complexType>
+     <xsd:sequence>
+       <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="boleto" nillable="true" type="ns1:Boleto" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="historicos" nillable="true" type="ns4:Historico" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="resumos" nillable="true" type="ns5:Resumo" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="servicos" nillable="true" type="ns2:Servico" />
+     </xsd:sequence>
+   </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="reservarMargem">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="matricula" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cpf" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="orgaoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="estabelecimentoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="senhaServidor" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="loginServidor" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="tokenAutServidor" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="servicoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="dataNascimento" nillable="true" type="xsd:date"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="valorParcela" nillable="false" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="prazo" nillable="true" type="xsd:int"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="valorLiberado" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codVerba" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="correspondenteCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="carencia" nillable="true" type="xsd:int"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="valorTac" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="indice" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="valorIof" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="valorMensVin" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="banco" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="agencia" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="conta" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="taxaJuros" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="naturezaServicoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="periodo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="anexo" nillable="true" type="ns11:Anexo"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="reservarMargemResponse">
+   <xsd:complexType>
+     <xsd:sequence>
+       <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="boleto" nillable="true" type="ns1:Boleto" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="servicos" nillable="true" type="ns2:Servico" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="servidores" nillable="true" type="ns3:Servidor" />
+     </xsd:sequence>
+   </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="simularConsignacao">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="matricula" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cpf" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="orgaoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="estabelecimentoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="servicoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="valorParcela" nillable="false" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="prazo" nillable="true" type="xsd:int"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="valorLiberado" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codVerba" nillable="true" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="simularConsignacaoResponse">
+   <xsd:complexType>
+     <xsd:sequence>
+       <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="simulacoes" nillable="true" type="ns7:Simulacao" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="servicos" nillable="true" type="ns2:Servico" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="servidores" nillable="true" type="ns3:Servidor" />
+     </xsd:sequence>
+   </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="suspenderConsignacao">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codigoMotivoOperacao" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="obsMotivoOperacao" nillable="true" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="suspenderConsignacaoResponse">
+   <xsd:complexType>
+     <xsd:sequence>
+       <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+       <xsd:element maxOccurs="1" minOccurs="0" name="boleto" nillable="true" type="ns1:Boleto" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="historicos" nillable="true" type="ns4:Historico" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="servidores" nillable="true" type="ns3:Servidor" />
+       <xsd:element maxOccurs="unbounded" minOccurs="0" name="resumos" nillable="true" type="ns5:Resumo" />
+     </xsd:sequence>
+   </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="validarAcesso">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="matricula" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cpf" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="orgaoCodigo" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="estabelecimentoCodigo" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="senhaServidor" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="loginServidor" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="tokenAutServidor" nillable="false" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="validarAcessoResponse">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="consultarParametros">
+       <xsd:complexType>
+         <xsd:sequence>
+           <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="codVerba" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="servicoCodigo" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="orgaoCodigo" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="estabelecimentoCodigo" nillable="false" type="xsd:string"/>
+         </xsd:sequence>
+       </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="consultarParametrosResponse">
+       <xsd:complexType>
+         <xsd:sequence>
+           <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="unbounded" minOccurs="0" name="servicos" nillable="true" type="ns2:Servico" />
+           <xsd:element maxOccurs="1" minOccurs="0" name="parametroSet" nillable="true" type="ns10:ParametroSet" />
+         </xsd:sequence>
+       </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="cadastrarTaxaDeJuros">
+       <xsd:complexType>
+         <xsd:sequence>
+           <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="codVerba" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="servicoCodigo" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="orgaoCodigo" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="estabelecimentoCodigo" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="unbounded" minOccurs="1" name="taxaDeJuros" nillable="false" type="ns15:TaxaDeJuros" />
+         </xsd:sequence>
+       </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="cadastrarTaxaDeJurosResponse">
+       <xsd:complexType>
+         <xsd:sequence>
+           <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="unbounded" minOccurs="0" name="servicos" nillable="true" type="ns2:Servico" />
+         </xsd:sequence>
+       </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="consultarParcela">
+       <xsd:complexType>
+         <xsd:sequence>
+           <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="prdNumero" nillable="true" type="xsd:short"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="dataDesconto" nillable="true" type="xsd:string"/>
+         </xsd:sequence>
+       </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="consultarParcelaResponse">
+       <xsd:complexType>
+         <xsd:sequence>
+           <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="unbounded" minOccurs="0" name="parcelas" nillable="true" type="ns16:Parcela" />
+           <xsd:element maxOccurs="unbounded" minOccurs="0" name="resumos" nillable="true" type="ns5:Resumo" />
+         </xsd:sequence>
+       </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="liquidarParcela">
+       <xsd:complexType>
+         <xsd:sequence>
+           <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="prdNumero" nillable="true" type="xsd:short"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="dataDesconto" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="valorRealizado" nillable="false" type="xsd:double"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="observacao" nillable="false" type="xsd:string"/>
+         </xsd:sequence>
+       </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="liquidarParcelaResponse">
+       <xsd:complexType>
+         <xsd:sequence>
+           <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="unbounded" minOccurs="0" name="parcelas" nillable="true" type="ns16:Parcela" />
+           <xsd:element maxOccurs="unbounded" minOccurs="0" name="resumos" nillable="true" type="ns5:Resumo" />
+         </xsd:sequence>
+       </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="cadastrarServidor">
+       <xsd:complexType>
+         <xsd:sequence>
+           <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="nome" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="titulacao" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="primeiroNome" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="nomeMeio" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="ultimoNome" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="cpf" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="nomePai" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="nomeMae" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="nomeConjuge" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="dataNascimento" nillable="true" type="xsd:date"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="cidadeNascimento" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="ufNascimento" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="sexo" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="estadoCivil" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="nacionalidade" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="identidade" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="dataIdentidade" nillable="true" type="xsd:date"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="ufIdentidade" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="emissorIdentidade" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="numCarteiraTrabalho" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="numPis" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="logradouro" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="nro" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="complemento" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="bairro" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="cidade" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="uf" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="cep" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="dddTelefone" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="telefone" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="dddCelular" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="celular" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="email" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="matricula" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="estabelecimentoCodigo" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="orgaoCodigo" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="subOrgaoCodigo" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="situacao" nillable="true" type="ns13:SituacaoServidor"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="categoria" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="cargoCodigo" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="municipioLotacao" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="estabilizado" nillable="true" type="xsd:boolean"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="dataFimEngajamento" nillable="true" type="xsd:date"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="dataLimitePermanencia" nillable="true" type="xsd:date"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="vinculoCodigo" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="clt" nillable="true" type="xsd:boolean"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="dataAdmissao" nillable="true" type="xsd:date"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="dataContracheque" nillable="true" type="xsd:date"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="prazoServidor" nillable="true" type="xsd:int"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="bancoCodigo" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="banco" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="agencia" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="conta" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="bancoAlternativo" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="agenciaAlternativa" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="contaAlternativa" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="observacao" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="praca" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="salario" nillable="true" type="xsd:double"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="proventos" nillable="true" type="xsd:double"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="descontosCompulsorios" nillable="true" type="xsd:double"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="descontosFacultativos" nillable="true" type="xsd:double"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="baseCalculo" nillable="true" type="xsd:double"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="associado" nillable="true" type="xsd:boolean"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="outrosDescontos" nillable="true" type="xsd:double"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="matriculaInstitucional" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="padraoCodigo" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="unidadeCodigo" nillable="true" type="xsd:string"/>
+         </xsd:sequence>
+       </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="cadastrarServidorResponse">
+       <xsd:complexType>
+         <xsd:sequence>
+           <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="servidor" nillable="true" type="ns3:Servidor" />
+         </xsd:sequence>
+       </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="editarStatusServidor">
+       <xsd:complexType>
+         <xsd:sequence>
+           <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="primeiroNome" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="ultimoNome" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="cpf" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="dataNascimento" nillable="true" type="xsd:date"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="matricula" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="estabelecimentoCodigo" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="orgaoCodigo" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="situacao" nillable="true" type="ns13:SituacaoServidor"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="dataSaida" nillable="true" type="xsd:date"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="dataUltimoSalario" nillable="true" type="xsd:date"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="dataRetorno" nillable="true" type="xsd:date"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="pedidoDemissao" nillable="true" type="xsd:boolean"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="salario" nillable="true" type="xsd:double"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="proventos" nillable="true" type="xsd:double"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="codigoMotivoOperacao" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="obsMotivoOperacao" nillable="true" type="xsd:string"/>
+         </xsd:sequence>
+       </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="editarStatusServidorResponse">
+       <xsd:complexType>
+         <xsd:sequence>
+           <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="unbounded" minOccurs="0" name="servidores" nillable="true" type="ns3:Servidor" />
+         </xsd:sequence>
+       </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="validarDadosBancariosServidor">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="estabelecimentoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="orgaoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="matricula" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cpf" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="banco" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="agencia" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="conta" nillable="false" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="validarDadosBancariosServidorResponse">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="unbounded" minOccurs="0" name="servidores" nillable="true" type="ns3:Servidor" />
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="desliquidarConsignacao">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="codigoMotivoOperacao" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="obsMotivoOperacao" nillable="true" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="desliquidarConsignacaoResponse">
+       <xsd:complexType>
+         <xsd:sequence>
+           <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="boleto" nillable="true" type="ns1:Boleto" />
+           <xsd:element maxOccurs="unbounded" minOccurs="0" name="historicos" nillable="true" type="ns4:Historico" />
+           <xsd:element maxOccurs="unbounded" minOccurs="0" name="resumos" nillable="true" type="ns5:Resumo" />
+           <xsd:element maxOccurs="unbounded" minOccurs="0" name="servicos" nillable="true" type="ns2:Servico" />
+         </xsd:sequence>
+       </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="cadastrarUsuario">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuarioAfetado" nillable="true" type="ns21:Usuario"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="cadastrarUsuarioResponse">
+       <xsd:complexType>
+         <xsd:sequence>
+           <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="entidadeCodigo" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="entidadeNome" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="nomeUsuario" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="loginUsuario" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="senhaUsuario" nillable="true" type="xsd:string"/>
+         </xsd:sequence>
+       </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="editarStatusUsuario">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuarioAfetado" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="situacaoUsuario" nillable="true" type="ns18:SituacaoUsuario" />
+         <xsd:element maxOccurs="1" minOccurs="0" name="codigoMotivoOperacao" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="obsMotivoOperacao" nillable="true" type="xsd:string"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="editarStatusUsuarioResponse">
+       <xsd:complexType>
+         <xsd:sequence>
+           <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+         </xsd:sequence>
+       </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="downloadAnexosConsignacao">
+     <xsd:complexType>
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cliente" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="convenio" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="nomeArquivo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="compras" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="todos" nillable="true" type="xsd:boolean"/>
+       </xsd:sequence>
+     </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="downloadAnexosConsignacaoResponse">
+       <xsd:complexType>
+         <xsd:sequence>
+           <xsd:element maxOccurs="1" minOccurs="1" name="sucesso" nillable="false" type="xsd:boolean"/>
+           <xsd:element maxOccurs="1" minOccurs="0" name="codRetorno" nillable="true" type="xsd:string"/>
+           <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+           <xsd:element maxOccurs="unbounded" minOccurs="0" name="anexos" nillable="true" type="ns19:AnexoConsignacao" />
+         </xsd:sequence>
+       </xsd:complexType>
+   </xsd:element>
+  </xsd:schema>
+  <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="Boleto">
+    <xsd:complexType name="Boleto">
+      <xsd:sequence>
+        <xsd:element maxOccurs="1" minOccurs="1" name="servidor" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="cpf" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="sexo" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="dataNascimento" nillable="true" type="xsd:date"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="estadoCivil" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="identidade" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="pai" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="mae" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="endereco" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="numero" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="complemento" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="bairro" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="cidade" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="uf" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="cep" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="telefone" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="matricula" nillable="false" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="dataAdmissao" nillable="true" type="xsd:date"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="prazoServidor" nillable="true" type="xsd:int"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="categoria" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="estabelecimento" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="orgao" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="estabelecimentoCodigo" nillable="false" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="orgaoCodigo" nillable="false" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="orgaoEndereco" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="orgaoNumero" nillable="true" type="xsd:int"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="orgaoComplemento" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="orgaoBairro" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="orgaoCidade" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="orgaoUf" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="orgaoCep" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="orgaoTelefone" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="consignataria" nillable="false" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="codVerba" nillable="false" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="ranking" nillable="true" type="xsd:short"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="servico" nillable="false" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="valorLiberado" nillable="true" type="xsd:double"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="dataReserva" nillable="true" type="xsd:dateTime"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="dataInicial" nillable="true" type="xsd:date"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="dataFinal" nillable="true" type="xsd:date"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="valorParcela" nillable="false" type="xsd:double"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="adeNumero" nillable="false" type="xsd:long"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="adeIdentificador" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="indice" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="prazo" nillable="false" type="xsd:int"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="pagas" nillable="false" type="xsd:int"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="taxaJuros" nillable="true" type="xsd:double"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="situacao" nillable="false" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="servicoCodigo" nillable="false" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="statusCodigo" nillable="false" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="consignatariaCodigo" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="1" name="responsavel" nillable="false" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="dataIdentidade" nillable="true" type="xsd:date"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="ufIdentidade" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="emissorIdentidade" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="cidadeNascimento" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="nacionalidade" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="celular" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="salario" nillable="true" type="xsd:double"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="dataSaida" nillable="true" type="xsd:date"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="banco" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="agencia" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="conta" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="cargoCodigo" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="cargoDescricao" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="habitacaoCodigo" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="habitacaoDescricao" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="escolaridadeCodigo" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="escolaridadeDescricao" nillable="true" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="qtdFilhos" nillable="true" type="xsd:int"/>
+      </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="Historico">
+   <xsd:complexType name="Historico">
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="data" nillable="false" type="xsd:dateTime"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="responsavel" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="tipo" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="descricao" nillable="false" type="xsd:string"/>
+       </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="Resumo">
+   <xsd:complexType name="Resumo">
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="adeNumero" nillable="false" type="xsd:long"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="adeIdentificador" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="indice" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="responsavel" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="servico" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="codVerba" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="dataReserva" nillable="true" type="xsd:dateTime"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="valorParcela" nillable="false" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="prazo" nillable="false" type="xsd:int"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="pagas" nillable="true" type="xsd:int"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="situacao" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="servicoCodigo" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="statusCodigo" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="consignataria" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="consignatariaCodigo" nillable="true" type="xsd:string"/>
+       </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="Servidor">
+   <xsd:complexType name="Servidor">
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="estabelecimentoCodigo" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="estabelecimento" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="orgaoCodigo" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="orgao" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="categoria" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="servidor" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cpf" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="matricula" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="dataNascimento" nillable="true" type="xsd:date"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="dataAdmissao" nillable="true" type="xsd:date"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="prazoServidor" nillable="true" type="xsd:int"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="situacaoServidor" nillable="true" type="ns13:SituacaoServidor" />
+         <xsd:element maxOccurs="unbounded" minOccurs="0" name="margens" nillable="true" type="ns6:Margem" />
+         <xsd:element maxOccurs="1" minOccurs="0" name="salarioLiquido" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="salarioBruto" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="identidade" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="dataIdentidade" nillable="true" type="xsd:date"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="ufIdentidade" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="emissorIdentidade" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cidadeNascimento" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="nacionalidade" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="sexo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="estadoCivil" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="endereco" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="numero" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="complemento" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="bairro" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cidade" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="uf" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cep" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="telefone" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="celular" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="salario" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="dataSaida" nillable="true" type="xsd:date"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="banco" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="agencia" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="conta" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cargoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cargoDescricao" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="habitacaoCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="habitacaoDescricao" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="escolaridadeCodigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="escolaridadeDescricao" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="qtdFilhos" nillable="true" type="xsd:int"/>
+         <xsd:element maxOccurs="unbounded" minOccurs="0" name="dados" nillable="true" type="ns17:DadoAdicional" />
+       </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="Servico">
+   <xsd:complexType name="Servico">
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="servico" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="servicoCodigo" nillable="false" type="xsd:string"/>
+       </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="Margem">
+   <xsd:complexType name="Margem">
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="codigo" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="descricao" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="valorFolha" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="valorUsado" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="valorDisponivel" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="valorLimite" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="mensagem" nillable="true" type="xsd:string"/>
+       </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="Simulacao">
+  <xsd:complexType name="Simulacao">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="1" name="consignatariaCodigo" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="consignataria" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="valorLiberado" nillable="false" type="xsd:double"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="valorParcela" nillable="false" type="xsd:double"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="ranking" nillable="false" type="xsd:short"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="taxaJuros" nillable="false" type="xsd:double"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="servico" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="servicoCodigo" nillable="true" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="Solicitacao">
+   <xsd:complexType name="Solicitacao">
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="dataReserva" nillable="true" type="xsd:dateTime"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="adeNumero" nillable="true" type="xsd:long"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="servidor" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="telefone" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="cpf" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="matricula" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="valorParcela" nillable="false" type="xsd:double"/>	 
+         <xsd:element maxOccurs="1" minOccurs="1" name="prazo" nillable="false" type="xsd:int"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="servico" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="codVerba" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="valorLiberado" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="taxaJuros" nillable="true" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="estabelecimento" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="orgao" nillable="true" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="estabelecimentoCodigo" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="orgaoCodigo" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="servicoCodigo" nillable="false" type="xsd:string"/>
+       </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="ParametroSet">
+   <xsd:complexType name="ParametroSet">
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="svcDescricao" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="tamMinMatriculaServidor" nillable="true" type="xsd:int"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="tamMaxMatriculaServidor" nillable="true" type="xsd:int"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="qtdMaxParcelas" nillable="true" type="xsd:int"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="exigeCpfMatriculaPesquisa" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="validaCpfPesquisa" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="exigeTac" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="exigeCadMensVinc" nillable="false" type="xsd:boolean"/>	 
+         <xsd:element maxOccurs="1" minOccurs="1" name="exigeCadVlrLiberado" nillable="false" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="exigeIof" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="validaDataNascReserva" nillable="false" type="xsd:boolean"/>	 
+         <xsd:element maxOccurs="1" minOccurs="1" name="exigeInfoBancaria" nillable="false" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="validaInfoBancaria" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="alteraAutMargemNegativa" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="exigeSenhaServReservarRenegociar" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="exigeSenhaServConsMargem" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="exigeSenhaServAltContrato" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="permiteAltContrato" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="permiteRenegociarContrato" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="qtdMinPrdPgsParaRenegociarAut" nillable="true" type="xsd:int"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="visualizaMargem" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="visualizaMargemNegativa" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="diaCorte" nillable="true" type="xsd:short"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="periodoAtual" nillable="true" type="xsd:date"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="permiteCompraContrato" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="diasInfoSaldoDevedor" nillable="true" type="xsd:short"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="diasAprovSaldoDevedor" nillable="true" type="xsd:short"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="diasInfoPgSaldoDevedor" nillable="true" type="xsd:short"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="diasLiquidacaoAdeCompra" nillable="true" type="xsd:short"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="usaCet" nillable="true" type="xsd:boolean"/>
+       </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="Anexo"
+     xmlns:soapenc11="http://schemas.xmlsoap.org/soap/encoding/">
+   <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" schemaLocation="xsd/schemas.xmlsoap.org_soap_encoding.xsd"/>
+   <xsd:complexType name="Anexo">
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="nomeArquivo" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="arquivo" type="soapenc11:base64"/>
+       </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="AnexoConsignacao"
+     xmlns:soapenc11="http://schemas.xmlsoap.org/soap/encoding/">
+   <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" schemaLocation="xsd/schemas.xmlsoap.org_soap_encoding.xsd"/>
+   <xsd:complexType name="AnexoConsignacao">
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="nomeArquivo" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="tipoArquivo" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="descricaoTipoArquivo" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="arquivo" nillable="true" type="soapenc11:base64"/>
+       </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="SituacaoContrato">
+   <xsd:complexType name="SituacaoContrato">
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="solicitado" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="aguardandoConfirmacao" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="aguardandoDeferimento" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="indeferida" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="deferida" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="emAndamento" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="suspensa" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="cancelada" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="liquidada" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="concluido" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="suspensaPeloConsignante" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="aguardandoLiquidacao" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="estoque" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="estoqueNaoLiberado" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="emCarencia" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="aguardandoLiquidacaoCompra" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="estoqueMensal" nillable="true" type="xsd:boolean"/>
+       </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="SituacaoServidor">
+   <xsd:complexType name="SituacaoServidor">
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="ativo" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="bloqueado" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="excluido" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="falecido" nillable="true" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="pendente" nillable="true" type="xsd:boolean"/>
+       </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="SituacaoUsuario">
+  <xsd:complexType name="SituacaoUsuario">
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="ativo" nillable="false" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="bloqueado" nillable="false" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="excluido" nillable="false" type="xsd:boolean"/>
+       </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="DadoConsignacao">
+   <xsd:complexType name="DadoConsignacao">
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="codigo" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="descricao" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="valor" nillable="false" type="xsd:string"/>
+       </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="DadoAdicional">
+   <xsd:complexType name="DadoAdicional">
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="codigo" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="descricao" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="valor" nillable="false" type="xsd:string"/>
+       </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="TaxaDeJuros">
+   <xsd:complexType name="TaxaDeJuros">
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="prazo" nillable="false" type="xsd:long"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="taxa" nillable="false" type="xsd:double"/>
+       </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="Parcela">
+   <xsd:complexType name="Parcela">
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="1" name="numero" nillable="false" type="xsd:int"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="dataDesconto" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="dataRealizado" nillable="false" type="xsd:date"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="valorPrevisto" nillable="false" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="valorRealizado" nillable="false" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="status" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="observacao" nillable="false" type="xsd:string"/>
+       </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="Usuario">
+  <xsd:complexType name="Usuario">
+   <xsd:sequence>
+     <xsd:element maxOccurs="1" minOccurs="1" name="login" nillable="false" type="xsd:string"/>
+     <xsd:element maxOccurs="1" minOccurs="1" name="nome" nillable="false" type="xsd:string"/>
+     <xsd:element maxOccurs="1" minOccurs="0" name="email" nillable="true" type="xsd:string"/>
+     <xsd:element maxOccurs="1" minOccurs="0" name="cpf" nillable="true" type="xsd:string"/>
+     <xsd:element maxOccurs="1" minOccurs="0" name="telefone" nillable="true" type="xsd:string"/>
+     <xsd:element maxOccurs="1" minOccurs="0" name="ipAcesso" nillable="true" type="xsd:string"/>
+     <xsd:element maxOccurs="1" minOccurs="0" name="dnsAcesso" nillable="true" type="xsd:string"/>
+     <xsd:element maxOccurs="1" minOccurs="0" name="dataFimVigencia" nillable="true" type="xsd:date"/>
+     <xsd:element maxOccurs="1" minOccurs="1" name="perfil" nillable="false" type="xsd:string"/>
+     <xsd:element maxOccurs="1" minOccurs="0" name="tipoEntidade" nillable="true" type="ns20:PapelUsuario"/>
+     <xsd:element maxOccurs="1" minOccurs="0" name="entidadeCodigo" nillable="true" type="xsd:string"/>
+   </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="PapelUsuario">
+   <xsd:complexType name="PapelUsuario">
+       <xsd:sequence>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cse" nillable="false" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="org" nillable="false" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="csa" nillable="false" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="cor" nillable="false" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="ser" nillable="false" type="xsd:boolean"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="sup" nillable="false" type="xsd:boolean"/>
+       </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+</wsdl:types>
+<wsdl:message name="alongarConsignacaoResponse">
+  <wsdl:part name="parameters" element="tns:alongarConsignacaoResponse"/>
+</wsdl:message>
+<wsdl:message name="alongarConsignacaoRequest">
+  <wsdl:part name="parameters" element="tns:alongarConsignacao"/>
+</wsdl:message>
+<wsdl:message name="alterarConsignacaoResponse">
+  <wsdl:part name="parameters" element="tns:alterarConsignacaoResponse"/>
+</wsdl:message>
+<wsdl:message name="alterarConsignacaoRequest">
+  <wsdl:part name="parameters" element="tns:alterarConsignacao"/>
+</wsdl:message>
+<wsdl:message name="autorizarReservaResponse">
+  <wsdl:part name="parameters" element="tns:autorizarReservaResponse"/>
+</wsdl:message>
+<wsdl:message name="autorizarReservaRequest">
+  <wsdl:part name="parameters" element="tns:autorizarReserva"/>
+</wsdl:message>
+<wsdl:message name="cancelarConsignacaoResponse">
+  <wsdl:part name="parameters" element="tns:cancelarConsignacaoResponse"/>
+</wsdl:message>
+<wsdl:message name="cancelarConsignacaoRequest">
+  <wsdl:part name="parameters" element="tns:cancelarConsignacao"/>
+</wsdl:message>
+<wsdl:message name="cancelarReservaResponse">
+  <wsdl:part name="parameters" element="tns:cancelarReservaResponse"/>
+</wsdl:message>
+<wsdl:message name="cancelarReservaRequest">
+  <wsdl:part name="parameters" element="tns:cancelarReserva"/>
+</wsdl:message>
+<wsdl:message name="cancelarRenegociacaoResponse">
+  <wsdl:part name="parameters" element="tns:cancelarRenegociacaoResponse"/>
+</wsdl:message>
+<wsdl:message name="cancelarRenegociacaoRequest">
+  <wsdl:part name="parameters" element="tns:cancelarRenegociacao"/>
+</wsdl:message>
+<wsdl:message name="confirmarReservaResponse">
+  <wsdl:part name="parameters" element="tns:confirmarReservaResponse"/>
+</wsdl:message>
+<wsdl:message name="confirmarReservaRequest">
+  <wsdl:part name="parameters" element="tns:confirmarReserva"/>
+</wsdl:message>
+<wsdl:message name="confirmarSolicitacaoResponse">
+  <wsdl:part name="parameters" element="tns:confirmarSolicitacaoResponse"/>
+</wsdl:message>
+<wsdl:message name="confirmarSolicitacaoRequest">
+  <wsdl:part name="parameters" element="tns:confirmarSolicitacao"/>
+</wsdl:message>
+<wsdl:message name="consultarConsignacaoResponse">
+  <wsdl:part name="parameters" element="tns:consultarConsignacaoResponse"/>
+</wsdl:message>
+<wsdl:message name="consultarConsignacaoRequest">
+  <wsdl:part name="parameters" element="tns:consultarConsignacao"/>
+</wsdl:message>
+<wsdl:message name="consultarMargemResponse">
+  <wsdl:part name="parameters" element="tns:consultarMargemResponse"/>
+</wsdl:message>
+<wsdl:message name="consultarParcelaRequest">
+  <wsdl:part name="parameters" element="tns:consultarParcela"/>
+</wsdl:message>
+<wsdl:message name="consultarParcelaResponse">
+  <wsdl:part name="parameters" element="tns:consultarParcelaResponse"/>
+</wsdl:message>
+<wsdl:message name="consultarMargemRequest">
+  <wsdl:part name="parameters" element="tns:consultarMargem"/>
+</wsdl:message>
+<wsdl:message name="detalharConsultaConsignacaoResponse">
+  <wsdl:part name="parameters" element="tns:detalharConsultaConsignacaoResponse"/>
+</wsdl:message>
+<wsdl:message name="detalharConsultaConsignacaoRequest">
+  <wsdl:part name="parameters" element="tns:detalharConsultaConsignacao"/>
+</wsdl:message>
+<wsdl:message name="incluirAnexoConsignacaoResponse">
+  <wsdl:part name="parameters" element="tns:incluirAnexoConsignacaoResponse"/>
+</wsdl:message>
+<wsdl:message name="incluirAnexoConsignacaoRequest">
+  <wsdl:part name="parameters" element="tns:incluirAnexoConsignacao"/>
+</wsdl:message>
+<wsdl:message name="incluirDadoConsignacaoResponse">
+  <wsdl:part name="parameters" element="tns:incluirDadoConsignacaoResponse"/>
+</wsdl:message>
+<wsdl:message name="incluirDadoConsignacaoRequest">
+  <wsdl:part name="parameters" element="tns:incluirDadoConsignacao"/>
+</wsdl:message>
+<wsdl:message name="inserirSolicitacaoResponse">
+  <wsdl:part name="parameters" element="tns:inserirSolicitacaoResponse"/>
+</wsdl:message>
+<wsdl:message name="inserirSolicitacaoRequest">
+  <wsdl:part name="parameters" element="tns:inserirSolicitacao"/>
+</wsdl:message>
+<wsdl:message name="liquidarConsignacaoResponse">
+  <wsdl:part name="parameters" element="tns:liquidarConsignacaoResponse"/>
+</wsdl:message>
+<wsdl:message name="liquidarConsignacaoRequest">
+  <wsdl:part name="parameters" element="tns:liquidarConsignacao"/>
+</wsdl:message>
+<wsdl:message name="listarDadoConsignacaoResponse">
+  <wsdl:part name="parameters" element="tns:listarDadoConsignacaoResponse"/>
+</wsdl:message>
+<wsdl:message name="listarDadoConsignacaoRequest">
+  <wsdl:part name="parameters" element="tns:listarDadoConsignacao"/>
+</wsdl:message>
+<wsdl:message name="listarSolicitacaoResponse">
+  <wsdl:part name="parameters" element="tns:listarSolicitacaoResponse"/>
+</wsdl:message>
+<wsdl:message name="listarSolicitacaoRequest">
+  <wsdl:part name="parameters" element="tns:listarSolicitacao"/>
+</wsdl:message>
+<wsdl:message name="pesquisarServidorResponse">
+  <wsdl:part name="parameters" element="tns:pesquisarServidorResponse"/>
+</wsdl:message>
+<wsdl:message name="pesquisarServidorRequest">
+  <wsdl:part name="parameters" element="tns:pesquisarServidor"/>
+</wsdl:message>
+<wsdl:message name="reativarConsignacaoResponse">
+  <wsdl:part name="parameters" element="tns:reativarConsignacaoResponse"/>
+</wsdl:message>
+<wsdl:message name="reativarConsignacaoRequest">
+  <wsdl:part name="parameters" element="tns:reativarConsignacao"/>
+</wsdl:message>
+<wsdl:message name="renegociarConsignacaoResponse">
+  <wsdl:part name="parameters" element="tns:renegociarConsignacaoResponse"/>
+</wsdl:message>
+<wsdl:message name="renegociarConsignacaoRequest">
+  <wsdl:part name="parameters" element="tns:renegociarConsignacao"/>
+</wsdl:message>
+<wsdl:message name="reservarMargemResponse">
+  <wsdl:part name="parameters" element="tns:reservarMargemResponse"/>
+</wsdl:message>
+<wsdl:message name="reservarMargemRequest">
+  <wsdl:part name="parameters" element="tns:reservarMargem"/>
+</wsdl:message>
+<wsdl:message name="simularConsignacaoResponse">
+  <wsdl:part name="parameters" element="tns:simularConsignacaoResponse"/>
+</wsdl:message>
+<wsdl:message name="simularConsignacaoRequest">
+  <wsdl:part name="parameters" element="tns:simularConsignacao"/>
+</wsdl:message>
+<wsdl:message name="suspenderConsignacaoResponse">
+  <wsdl:part name="parameters" element="tns:suspenderConsignacaoResponse"/>
+</wsdl:message>
+<wsdl:message name="suspenderConsignacaoRequest">
+  <wsdl:part name="parameters" element="tns:suspenderConsignacao"/>
+</wsdl:message>
+<wsdl:message name="validarAcessoResponse">
+  <wsdl:part name="parameters" element="tns:validarAcessoResponse"/>
+</wsdl:message>
+<wsdl:message name="validarAcessoRequest">
+  <wsdl:part name="parameters" element="tns:validarAcesso"/>
+</wsdl:message>
+<wsdl:message name="consultarParametrosResponse">
+  <wsdl:part name="parameters" element="tns:consultarParametrosResponse"/>
+</wsdl:message>
+<wsdl:message name="consultarParametrosRequest">
+  <wsdl:part name="parameters" element="tns:consultarParametros"/>
+</wsdl:message>
+<wsdl:message name="liquidarParcelaResponse">
+  <wsdl:part name="parameters" element="tns:liquidarParcelaResponse"/>
+</wsdl:message>
+<wsdl:message name="liquidarParcelaRequest">
+  <wsdl:part name="parameters" element="tns:liquidarParcela"/>
+</wsdl:message>
+<wsdl:message name="cadastrarTaxaDeJurosResponse">
+  <wsdl:part name="parameters" element="tns:cadastrarTaxaDeJurosResponse"/>
+</wsdl:message>
+<wsdl:message name="cadastrarTaxaDeJurosRequest">
+  <wsdl:part name="parameters" element="tns:cadastrarTaxaDeJuros"/>
+</wsdl:message>
+<wsdl:message name="cadastrarServidorResponse">
+  <wsdl:part name="parameters" element="tns:cadastrarServidorResponse"/>
+</wsdl:message>
+<wsdl:message name="cadastrarServidorRequest">
+  <wsdl:part name="parameters" element="tns:cadastrarServidor"/>
+</wsdl:message>
+<wsdl:message name="editarStatusServidorResponse">
+  <wsdl:part name="parameters" element="tns:editarStatusServidorResponse"/>
+</wsdl:message>
+<wsdl:message name="editarStatusServidorRequest">
+  <wsdl:part name="parameters" element="tns:editarStatusServidor"/>
+</wsdl:message>
+<wsdl:message name="validarDadosBancariosServidorResponse">
+  <wsdl:part name="parameters" element="tns:validarDadosBancariosServidorResponse"/>
+</wsdl:message>
+<wsdl:message name="validarDadosBancariosServidorRequest">
+  <wsdl:part name="parameters" element="tns:validarDadosBancariosServidor"/>
+</wsdl:message>
+<wsdl:message name="desliquidarConsignacaoResponse">
+  <wsdl:part name="parameters" element="tns:desliquidarConsignacaoResponse"/>
+</wsdl:message>
+<wsdl:message name="desliquidarConsignacaoRequest">
+  <wsdl:part name="parameters" element="tns:desliquidarConsignacao"/>
+</wsdl:message>
+<wsdl:message name="cadastrarUsuarioResponse">
+  <wsdl:part name="parameters" element="tns:cadastrarUsuarioResponse"/>
+</wsdl:message>
+<wsdl:message name="cadastrarUsuarioRequest">
+  <wsdl:part name="parameters" element="tns:cadastrarUsuario"/>
+</wsdl:message>
+<wsdl:message name="editarStatusUsuarioResponse">
+  <wsdl:part name="parameters" element="tns:editarStatusUsuarioResponse"/>
+</wsdl:message>
+<wsdl:message name="editarStatusUsuarioRequest">
+  <wsdl:part name="parameters" element="tns:editarStatusUsuario"/>
+</wsdl:message>
+<wsdl:message name="downloadAnexosConsignacaoResponse">
+  <wsdl:part name="parameters" element="tns:downloadAnexosConsignacaoResponse"/>
+</wsdl:message>
+<wsdl:message name="downloadAnexosConsignacaoRequest">
+  <wsdl:part name="parameters" element="tns:downloadAnexosConsignacao"/>
+</wsdl:message>
+<wsdl:portType name="HostaHostPortType">
+  <wsdl:operation name="alongarConsignacao">
+    <wsdl:input name="alongarConsignacaoRequest" message="tns:alongarConsignacaoRequest"/>
+    <wsdl:output name="alongarConsignacaoResponse" message="tns:alongarConsignacaoResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="alterarConsignacao">
+    <wsdl:input name="alterarConsignacaoRequest" message="tns:alterarConsignacaoRequest"/>
+    <wsdl:output name="alterarConsignacaoResponse" message="tns:alterarConsignacaoResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="autorizarReserva">
+    <wsdl:input name="autorizarReservaRequest" message="tns:autorizarReservaRequest"/>
+    <wsdl:output name="autorizarReservaResponse" message="tns:autorizarReservaResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="cancelarConsignacao">
+    <wsdl:input name="cancelarConsignacaoRequest" message="tns:cancelarConsignacaoRequest"/>
+    <wsdl:output name="cancelarConsignacaoResponse" message="tns:cancelarConsignacaoResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="cancelarRenegociacao">
+    <wsdl:input name="cancelarRenegociacaoRequest" message="tns:cancelarRenegociacaoRequest"/>
+    <wsdl:output name="cancelarRenegociacaoResponse" message="tns:cancelarRenegociacaoResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="cancelarReserva">
+    <wsdl:input name="cancelarReservaRequest" message="tns:cancelarReservaRequest"/>
+    <wsdl:output name="cancelarReservaResponse" message="tns:cancelarReservaResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="confirmarReserva">
+    <wsdl:input name="confirmarReservaRequest" message="tns:confirmarReservaRequest"/>
+    <wsdl:output name="confirmarReservaResponse" message="tns:confirmarReservaResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="confirmarSolicitacao">
+    <wsdl:input name="confirmarSolicitacaoRequest" message="tns:confirmarSolicitacaoRequest"/>
+    <wsdl:output name="confirmarSolicitacaoResponse" message="tns:confirmarSolicitacaoResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="consultarConsignacao">
+    <wsdl:input name="consultarConsignacaoRequest" message="tns:consultarConsignacaoRequest"/>
+    <wsdl:output name="consultarConsignacaoResponse" message="tns:consultarConsignacaoResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="consultarMargem">
+    <wsdl:input name="consultarMargemRequest" message="tns:consultarMargemRequest"/>
+    <wsdl:output name="consultarMargemResponse" message="tns:consultarMargemResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="consultarParcela">
+    <wsdl:input name="consultarParcelaRequest" message="tns:consultarParcelaRequest"/>
+    <wsdl:output name="consultarParcelaResponse" message="tns:consultarParcelaResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="detalharConsultaConsignacao">
+    <wsdl:input name="detalharConsultaConsignacaoRequest" message="tns:detalharConsultaConsignacaoRequest"/>
+    <wsdl:output name="detalharConsultaConsignacaoResponse" message="tns:detalharConsultaConsignacaoResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="incluirAnexoConsignacao">
+    <wsdl:input name="incluirAnexoConsignacaoRequest" message="tns:incluirAnexoConsignacaoRequest"/>
+    <wsdl:output name="incluirAnexoConsignacaoResponse" message="tns:incluirAnexoConsignacaoResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="incluirDadoConsignacao">
+    <wsdl:input name="incluirDadoConsignacaoRequest" message="tns:incluirDadoConsignacaoRequest"/>
+    <wsdl:output name="incluirDadoConsignacaoResponse" message="tns:incluirDadoConsignacaoResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="inserirSolicitacao">
+    <wsdl:input name="inserirSolicitacaoRequest" message="tns:inserirSolicitacaoRequest"/>
+    <wsdl:output name="inserirSolicitacaoResponse" message="tns:inserirSolicitacaoResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="liquidarConsignacao">
+    <wsdl:input name="liquidarConsignacaoRequest" message="tns:liquidarConsignacaoRequest"/>
+    <wsdl:output name="liquidarConsignacaoResponse" message="tns:liquidarConsignacaoResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="listarDadoConsignacao">
+    <wsdl:input name="listarDadoConsignacaoRequest" message="tns:listarDadoConsignacaoRequest"/>
+    <wsdl:output name="listarDadoConsignacaoResponse" message="tns:listarDadoConsignacaoResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="listarSolicitacao">
+    <wsdl:input name="listarSolicitacaoRequest" message="tns:listarSolicitacaoRequest"/>
+    <wsdl:output name="listarSolicitacaoResponse" message="tns:listarSolicitacaoResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="pesquisarServidor">
+    <wsdl:input name="pesquisarServidorRequest" message="tns:pesquisarServidorRequest"/>
+    <wsdl:output name="pesquisarServidorResponse" message="tns:pesquisarServidorResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="reativarConsignacao">
+    <wsdl:input name="reativarConsignacaoRequest" message="tns:reativarConsignacaoRequest"/>
+    <wsdl:output name="reativarConsignacaoResponse" message="tns:reativarConsignacaoResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="renegociarConsignacao">
+    <wsdl:input name="renegociarConsignacaoRequest" message="tns:renegociarConsignacaoRequest"/>
+    <wsdl:output name="renegociarConsignacaoResponse" message="tns:renegociarConsignacaoResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="reservarMargem">
+    <wsdl:input name="reservarMargemRequest" message="tns:reservarMargemRequest"/>
+    <wsdl:output name="reservarMargemResponse" message="tns:reservarMargemResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="simularConsignacao">
+    <wsdl:input name="simularConsignacaoRequest" message="tns:simularConsignacaoRequest"/>
+    <wsdl:output name="simularConsignacaoResponse" message="tns:simularConsignacaoResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="suspenderConsignacao">
+    <wsdl:input name="suspenderConsignacaoRequest" message="tns:suspenderConsignacaoRequest"/>
+    <wsdl:output name="suspenderConsignacaoResponse" message="tns:suspenderConsignacaoResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="validarAcesso">
+    <wsdl:input name="validarAcessoRequest" message="tns:validarAcessoRequest"/>
+    <wsdl:output name="validarAcessoResponse" message="tns:validarAcessoResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="consultarParametros">
+    <wsdl:input name="consultarParametrosRequest" message="tns:consultarParametrosRequest"/>
+    <wsdl:output name="consultarParametrosResponse" message="tns:consultarParametrosResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="liquidarParcela">
+    <wsdl:input name="liquidarParcelaRequest" message="tns:liquidarParcelaRequest"/>
+    <wsdl:output name="liquidarParcelaResponse" message="tns:liquidarParcelaResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="cadastrarTaxaDeJuros">
+    <wsdl:input name="cadastrarTaxaDeJurosRequest" message="tns:cadastrarTaxaDeJurosRequest"/>
+    <wsdl:output name="cadastrarTaxaDeJurosResponse" message="tns:cadastrarTaxaDeJurosResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="cadastrarServidor">
+    <wsdl:input name="cadastrarServidorRequest" message="tns:cadastrarServidorRequest"/>
+    <wsdl:output name="cadastrarServidorResponse" message="tns:cadastrarServidorResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="editarStatusServidor">
+    <wsdl:input name="editarStatusServidorRequest" message="tns:editarStatusServidorRequest"/>
+    <wsdl:output name="editarStatusServidorResponse" message="tns:editarStatusServidorResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="validarDadosBancariosServidor">
+    <wsdl:input name="validarDadosBancariosServidorRequest" message="tns:validarDadosBancariosServidorRequest"/>
+    <wsdl:output name="validarDadosBancariosServidorResponse" message="tns:validarDadosBancariosServidorResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="desliquidarConsignacao">
+    <wsdl:input name="desliquidarConsignacaoRequest" message="tns:desliquidarConsignacaoRequest"/>
+    <wsdl:output name="desliquidarConsignacaoResponse" message="tns:desliquidarConsignacaoResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="cadastrarUsuario">
+    <wsdl:input name="cadastrarUsuarioRequest" message="tns:cadastrarUsuarioRequest"/>
+    <wsdl:output name="cadastrarUsuarioResponse" message="tns:cadastrarUsuarioResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="editarStatusUsuario">
+    <wsdl:input name="editarStatusUsuarioRequest" message="tns:editarStatusUsuarioRequest"/>
+    <wsdl:output name="editarStatusUsuarioResponse" message="tns:editarStatusUsuarioResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="downloadAnexosConsignacao">
+    <wsdl:input name="downloadAnexosConsignacaoRequest" message="tns:downloadAnexosConsignacaoRequest"/>
+    <wsdl:output name="downloadAnexosConsignacaoResponse" message="tns:downloadAnexosConsignacaoResponse"/>
+  </wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="HostaHostHttpBinding" type="tns:HostaHostPortType">
+  <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="alongarConsignacao">
+      <wsdlsoap:operation soapAction="urn:alongarConsignacao"/>
+      <wsdl:input name="alongarConsignacaoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="alongarConsignacaoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alterarConsignacao">
+      <wsdlsoap:operation soapAction="urn:alterarConsignacao"/>
+      <wsdl:input name="alterarConsignacaoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="alterarConsignacaoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="autorizarReserva">
+      <wsdlsoap:operation soapAction="urn:autorizarReserva"/>
+        <wsdl:input name="autorizarReservaRequest">
+          <wsdlsoap:body use="literal"/>
+        </wsdl:input>
+        <wsdl:output name="autorizarReservaResponse">
+          <wsdlsoap:body use="literal"/>
+        </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cancelarConsignacao">
+    <wsdlsoap:operation soapAction="urn:cancelarConsignacao"/>
+      <wsdl:input name="cancelarConsignacaoRequest">
+         <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cancelarConsignacaoResponse">
+         <wsdlsoap:body use="literal"/>
+       </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cancelarRenegociacao">
+    <wsdlsoap:operation soapAction="urn:cancelarRenegociacao"/>
+      <wsdl:input name="cancelarRenegociacaoRequest">
+         <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cancelarRenegociacaoResponse">
+         <wsdlsoap:body use="literal"/>
+       </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cancelarReserva">
+      <wsdlsoap:operation soapAction="urn:cancelarReserva"/>
+        <wsdl:input name="cancelarReservaRequest">
+          <wsdlsoap:body use="literal"/>
+        </wsdl:input>
+        <wsdl:output name="cancelarReservaResponse">
+          <wsdlsoap:body use="literal"/>
+        </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmarReserva">
+    <wsdlsoap:operation soapAction="urn:confirmarReserva"/>
+        <wsdl:input name="confirmarReservaRequest">
+          <wsdlsoap:body use="literal"/>
+        </wsdl:input>
+        <wsdl:output name="confirmarReservaResponse">
+          <wsdlsoap:body use="literal"/>
+        </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmarSolicitacao">
+    <wsdlsoap:operation soapAction="urn:confirmarSolicitacao"/>
+        <wsdl:input name="confirmarSolicitacaoRequest">
+          <wsdlsoap:body use="literal"/>
+        </wsdl:input>
+        <wsdl:output name="confirmarSolicitacaoResponse">
+          <wsdlsoap:body use="literal"/>
+        </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarConsignacao">
+      <wsdlsoap:operation soapAction="urn:consultarConsignacao"/>
+      <wsdl:input name="consultarConsignacaoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="consultarConsignacaoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarMargem">
+      <wsdlsoap:operation soapAction="urn:consultarMargem"/>
+        <wsdl:input name="consultarMargemRequest">
+      <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="consultarMargemResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarParcela">
+      <wsdlsoap:operation soapAction="urn:consultarParcela"/>
+        <wsdl:input name="consultarParcelaRequest">
+      <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="consultarParcelaResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="detalharConsultaConsignacao">
+      <wsdlsoap:operation soapAction="urn:detalharConsultaConsignacao"/>
+        <wsdl:input name="detalharConsultaConsignacaoRequest">
+      <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="detalharConsultaConsignacaoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="incluirAnexoConsignacao">
+      <wsdlsoap:operation soapAction="urn:incluirAnexoConsignacao"/>
+      <wsdl:input name="incluirAnexoConsignacaoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="incluirAnexoConsignacaoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="incluirDadoConsignacao">
+      <wsdlsoap:operation soapAction="urn:incluirDadoConsignacao"/>
+      <wsdl:input name="incluirDadoConsignacaoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="incluirDadoConsignacaoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="inserirSolicitacao">
+      <wsdlsoap:operation soapAction="urn:inserirSolicitacao"/>
+      <wsdl:input name="inserirSolicitacaoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="inserirSolicitacaoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="liquidarConsignacao">
+      <wsdlsoap:operation soapAction="urn:liquidarConsignacao"/>
+      <wsdl:input name="liquidarConsignacaoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="liquidarConsignacaoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listarDadoConsignacao">
+      <wsdlsoap:operation soapAction="urn:listarDadoConsignacao"/>
+      <wsdl:input name="listarDadoConsignacaoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listarDadoConsignacaoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listarSolicitacao">
+      <wsdlsoap:operation soapAction="urn:listarSolicitacao"/>
+      <wsdl:input name="listarSolicitacaoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listarSolicitacaoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pesquisarServidor">
+      <wsdlsoap:operation soapAction="urn:pesquisarServidor"/>
+      <wsdl:input name="pesquisarServidorRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="pesquisarServidorResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="reativarConsignacao">
+      <wsdlsoap:operation soapAction="urn:reativarConsignacao"/>
+      <wsdl:input name="reativarConsignacaoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="reativarConsignacaoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="renegociarConsignacao">
+    <wsdlsoap:operation soapAction="urn:renegociarConsignacao"/>
+      <wsdl:input name="renegociarConsignacaoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+    <wsdl:output name="renegociarConsignacaoResponse">
+      <wsdlsoap:body use="literal"/>
+       </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="reservarMargem">
+      <wsdlsoap:operation soapAction="urn:reservarMargem"/>
+      <wsdl:input name="reservarMargemRequest">
+        <wsdlsoap:body use="literal"/>
+       </wsdl:input>
+       <wsdl:output name="reservarMargemResponse">
+         <wsdlsoap:body use="literal"/>
+       </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="simularConsignacao">
+      <wsdlsoap:operation soapAction="urn:simularConsignacao"/>
+      <wsdl:input name="simularConsignacaoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="simularConsignacaoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="suspenderConsignacao">
+      <wsdlsoap:operation soapAction="urn:suspenderConsignacao"/>
+      <wsdl:input name="suspenderConsignacaoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="suspenderConsignacaoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="validarAcesso">
+      <wsdlsoap:operation soapAction="urn:validarAcesso"/>
+      <wsdl:input name="validarAcessoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="validarAcessoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarParametros">
+      <wsdlsoap:operation soapAction="urn:consultarParametros"/>
+      <wsdl:input name="consultarParametrosRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="consultarParametrosResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="liquidarParcela">
+      <wsdlsoap:operation soapAction="urn:liquidarParcela"/>
+      <wsdl:input name="liquidarParcelaRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="liquidarParcelaResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cadastrarTaxaDeJuros">
+      <wsdlsoap:operation soapAction="urn:cadastrarTaxaDeJuros"/>
+      <wsdl:input name="cadastrarTaxaDeJurosRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cadastrarTaxaDeJurosResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cadastrarServidor">
+      <wsdlsoap:operation soapAction="urn:cadastrarServidor"/>
+      <wsdl:input name="cadastrarServidorRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cadastrarServidorResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="editarStatusServidor">
+      <wsdlsoap:operation soapAction="urn:editarStatusServidor"/>
+      <wsdl:input name="editarStatusServidorRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="editarStatusServidorResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="validarDadosBancariosServidor">
+      <wsdlsoap:operation soapAction="urn:validarDadosBancariosServidor"/>
+      <wsdl:input name="validarDadosBancariosServidorRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="validarDadosBancariosServidorResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="desliquidarConsignacao">
+      <wsdlsoap:operation soapAction="urn:desliquidarConsignacao"/>
+      <wsdl:input name="desliquidarConsignacaoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="desliquidarConsignacaoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cadastrarUsuario">
+      <wsdlsoap:operation soapAction="urn:cadastrarUsuario"/>
+      <wsdl:input name="cadastrarUsuarioRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cadastrarUsuarioResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="editarStatusUsuario">
+      <wsdlsoap:operation soapAction="urn:editarStatusUsuario"/>
+      <wsdl:input name="editarStatusUsuarioRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="editarStatusUsuarioResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="downloadAnexosConsignacao">
+      <wsdlsoap:operation soapAction="urn:downloadAnexosConsignacao"/>
+      <wsdl:input name="downloadAnexosConsignacaoRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="downloadAnexosConsignacaoResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="HostaHostService-v7_0">
+    <wsdl:port name="HostaHostHttpPort" binding="tns:HostaHostHttpBinding">
+      <wsdlsoap:address location="http://localhost:8080/services/HostaHostService-v7_0"/>
+    </wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

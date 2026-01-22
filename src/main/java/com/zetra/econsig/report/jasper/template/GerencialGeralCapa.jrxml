@@ -1,0 +1,78 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="GerencialGeral" language="java" pageWidth="535" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="04c4ec02-00f9-4703-9daf-908fb94fdc54">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="192"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box padding="0" leftPadding="2" rightPadding="2"/>
+	</style>
+	<parameter name="CAMINHO_LOGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SUBTITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Subtitulo do relatório]]></description>
+	</parameter>
+	<parameter name="TEXTO_RODAPE" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Nome do Gestor(Consignante)]]></description>
+	</parameter>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Titulo do relatorio]]></description>
+	</parameter>
+	<parameter name="CSE_NOME" forPrompting="false" class="java.lang.String"/>
+	<parameter name="MES_ANO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="CAMINHO_LOGO_ENTIDADE" forPrompting="false" class="java.lang.String"/>
+	<parameter name="CAMINHO_LOGO_ECONSIG" forPrompting="false" class="java.lang.String"/>
+	<parameter name="ANO_ATUAL" forPrompting="false" class="java.lang.String"/>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<query language="sql"><![CDATA[SELECT DISTINCT tb_usuario.usu_codigo,tb_usuario.usu_login,tb_usuario.usu_nome,tb_usuario.stu_codigo,tb_usuario.usu_tipo_bloq,tb_perfil.per_codigo,tb_perfil.per_descricao,tb_usuario.usu_data_cad,tb_usuario.usu_data_exp_senha,IF(tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo, 'CSE', (IF(tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo, 'CSA', (IF(tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo, 'COR', 'ORG'))))) AS TIPO,IF(tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo, tb_consignante.cse_nome, (IF(tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo, tb_consignataria.csa_nome, (IF(tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo, CONCAT(CONCAT(CSA_COR.csa_nome,  ' - '  ), tb_correspondente.cor_nome), tb_orgao.org_nome))))) AS ENTIDADE FROM tb_usuario LEFT OUTER JOIN tb_usuario_cse ON (tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo) LEFT OUTER JOIN tb_consignante ON (tb_usuario_cse.cse_codigo = tb_consignante.cse_codigo) LEFT OUTER JOIN tb_usuario_csa ON (tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo) LEFT OUTER JOIN tb_consignataria ON (tb_usuario_csa.csa_codigo = tb_consignataria.csa_codigo) LEFT OUTER JOIN tb_usuario_cor ON (tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo) LEFT OUTER JOIN tb_correspondente ON (tb_usuario_cor.cor_codigo = tb_correspondente.cor_codigo) LEFT OUTER JOIN tb_consignataria CSA_COR ON (tb_correspondente.csa_codigo = CSA_COR.csa_codigo) LEFT OUTER JOIN tb_usuario_org ON (tb_usuario.usu_codigo = tb_usuario_org.usu_codigo) LEFT OUTER JOIN tb_orgao ON (tb_usuario_org.org_codigo = tb_orgao.org_codigo) LEFT OUTER JOIN tb_perfil_usuario ON (tb_perfil_usuario.usu_codigo = tb_usuario.usu_codigo) LEFT OUTER JOIN tb_perfil ON (tb_perfil.per_codigo = tb_perfil_usuario.per_codigo) WHERE (tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_org.usu_codigo) AND ( tb_usuario_org.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_cse.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_csa.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_cor.usu_codigo = tb_usuario.usu_codigo )  AND tb_usuario.stu_codigo IN ( 1,2 ) ORDER BY  TIPO, tb_usuario.usu_nome]]></query>
+	<variable name="HeadingsCollection" calculation="System" class="java.util.Collection">
+		<initialValueExpression><![CDATA[new java.util.ArrayList()]]></initialValueExpression>
+	</variable>
+	<background splitType="Stretch"/>
+	<title splitType="Stretch"/>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader splitType="Stretch"/>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter splitType="Stretch"/>
+	<summary height="634" splitType="Stretch">
+		<element kind="image" uuid="f3efa968-d46e-47ba-a8f4-27c7b2e59d01" key="image-1" x="48" y="5" width="438" height="133" hImageAlign="Center" vImageAlign="Middle">
+			<expression><![CDATA[$P{CAMINHO_LOGO_ECONSIG}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="02fd4dbd-06ff-40d8-858a-e5b0841865dc" key="staticText-4" x="48" y="147" width="438" height="20" markup="none" fontName="Arial" fontSize="14.0" textAdjust="StretchHeight" bold="false" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.titulo.sistema", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="ebb3d6c4-d4cf-45ff-8b0f-8625d9621aff" key="textField-7" x="195" y="204" width="144" height="77" fontName="Arial" fontSize="12.0" blankWhenNull="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[$P{CSE_NOME}]]></expression>
+		</element>
+		<element kind="textField" uuid="316d5eaa-fbe1-41e9-978a-76a434dd8c52" key="textField-8" x="230" y="319" width="74" height="16" fontName="Arial" blankWhenNull="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[$P{MES_ANO}]]></expression>
+		</element>
+		<element kind="textField" uuid="2db5c60a-c6c4-4bad-b08d-40ae66ea0c90" key="staticText-5" x="59" y="565" width="410" height="59" markup="none" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("mensagem.relatorio.gerencialgeralcapa.todos.direitos", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="f9205c09-806e-464e-be8d-199d0ff28a5f" key="staticText-6" x="142" y="475" width="248" height="65" markup="none" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("mensagem.relatorio.gerencialgeralcapa.informacoes.zetrasoft", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="46477a06-bbb1-4f4e-99ed-c960c8ab926c" key="staticText-7" x="183" y="288" width="167" height="17" markup="none" fontName="Arial" fontSize="12.0" bold="true" hTextAlign="Center">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralcapa.relatorio.gerencial", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="image" uuid="ddadf6b6-ac5f-4b21-9030-48aba24a67a0" key="image-2" x="48" y="352" width="438" height="110" hImageAlign="Center" vImageAlign="Middle">
+			<expression><![CDATA[$P{CAMINHO_LOGO_ENTIDADE}]]></expression>
+		</element>
+		<element kind="textField" uuid="85432220-bea1-4b81-b6ed-793f64f83f1b" key="textField-9" x="142" y="547" width="248" height="14" fontSize="8.0" blankWhenNull="false" hTextAlign="Center">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralcapa.zetrasoft.ano", $P{RESPONSAVEL}, $P{ANO_ATUAL})]]></expression>
+		</element>
+	</summary>
+</jasperReport>

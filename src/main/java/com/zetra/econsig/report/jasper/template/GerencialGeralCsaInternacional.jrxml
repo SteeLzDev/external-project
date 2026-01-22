@@ -1,0 +1,96 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="GerencialGeral" language="java" pageWidth="535" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" scriptletClass="com.zetra.econsig.report.reports.HeadingsScriptlet" uuid="fafc6ca9-d65b-4dbc-8907-416e7ee1a774">
+	<property name="ireport.scriptlethandling" value="2"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="1.650000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box padding="0" leftPadding="2" rightPadding="2"/>
+	</style>
+	<parameter name="CAMINHO_LOGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SUBTITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Subtitulo do relatório]]></description>
+	</parameter>
+	<parameter name="TEXTO_RODAPE" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Nome do Gestor(Consignante)]]></description>
+	</parameter>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Titulo do relatorio]]></description>
+	</parameter>
+	<parameter name="HeadingsCollection" forPrompting="false" class="java.util.Collection"/>
+	<parameter name="QTDE_CSA_TOTAL" forPrompting="false" class="java.lang.Integer"/>
+	<parameter name="QTDE_CSA_ATIVOS_TOTAL" forPrompting="false" class="java.lang.Integer"/>
+	<parameter name="QTDE_CSA_INATIVOS_TOTAL" forPrompting="false" class="java.lang.Integer"/>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<parameter name="PERIODO" class="java.lang.String">
+		<description><![CDATA[PERÍODO DO FILTRO DE PERÍODO]]></description>
+	</parameter>
+	<parameter name="LISTA_QTDE_CONTRATOS_POR_CSA" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<query language="sql"><![CDATA[SELECT DISTINCT tb_usuario.usu_codigo,tb_usuario.usu_login,tb_usuario.usu_nome,tb_usuario.stu_codigo,tb_usuario.usu_tipo_bloq,tb_perfil.per_codigo,tb_perfil.per_descricao,tb_usuario.usu_data_cad,tb_usuario.usu_data_exp_senha,IF(tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo, 'CSE', (IF(tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo, 'CSA', (IF(tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo, 'COR', 'ORG'))))) AS TIPO,IF(tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo, tb_consignante.cse_nome, (IF(tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo, tb_consignataria.csa_nome, (IF(tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo, CONCAT(CONCAT(CSA_COR.csa_nome,  ' - '  ), tb_correspondente.cor_nome), tb_orgao.org_nome))))) AS ENTIDADE FROM tb_usuario LEFT OUTER JOIN tb_usuario_cse ON (tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo) LEFT OUTER JOIN tb_consignante ON (tb_usuario_cse.cse_codigo = tb_consignante.cse_codigo) LEFT OUTER JOIN tb_usuario_csa ON (tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo) LEFT OUTER JOIN tb_consignataria ON (tb_usuario_csa.csa_codigo = tb_consignataria.csa_codigo) LEFT OUTER JOIN tb_usuario_cor ON (tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo) LEFT OUTER JOIN tb_correspondente ON (tb_usuario_cor.cor_codigo = tb_correspondente.cor_codigo) LEFT OUTER JOIN tb_consignataria CSA_COR ON (tb_correspondente.csa_codigo = CSA_COR.csa_codigo) LEFT OUTER JOIN tb_usuario_org ON (tb_usuario.usu_codigo = tb_usuario_org.usu_codigo) LEFT OUTER JOIN tb_orgao ON (tb_usuario_org.org_codigo = tb_orgao.org_codigo) LEFT OUTER JOIN tb_perfil_usuario ON (tb_perfil_usuario.usu_codigo = tb_usuario.usu_codigo) LEFT OUTER JOIN tb_perfil ON (tb_perfil.per_codigo = tb_perfil_usuario.per_codigo) WHERE (tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_org.usu_codigo) AND ( tb_usuario_org.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_cse.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_csa.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_cor.usu_codigo = tb_usuario.usu_codigo )  AND tb_usuario.stu_codigo IN ( 1,2 ) ORDER BY  TIPO, tb_usuario.usu_nome]]></query>
+	<field name="consignataria" class="java.lang.String"/>
+	<field name="quantidade" class="java.lang.Long"/>
+	<field name="vlrMensal" class="java.math.BigDecimal"/>
+	<field name="vlrTotal" class="java.math.BigDecimal"/>
+	<field name="status" class="java.lang.String"/>
+	<variable name="IMPRIMIR_SOMENTE_10_CSA" class="java.lang.Boolean">
+		<initialValueExpression><![CDATA[new java.lang.Boolean($P{QTDE_CSA_TOTAL}.intValue() >= 10)]]></initialValueExpression>
+	</variable>
+	<background splitType="Stretch"/>
+	<title height="76" splitType="Stretch">
+		<element kind="textField" uuid="980561d7-398b-447c-8cab-dd4f16669edf" key="staticText-1" x="1" y="62" width="162" height="14" markup="none" fontName="Arial" fontSize="9.0" bold="true">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.consignataria.plural", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="1866b565-5590-4649-bfe1-8e9ac0394d87" key="staticText-2" x="253" y="62" width="88" height="14" markup="none" fontName="Arial" fontSize="9.0" bold="true" hTextAlign="Right">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralcsa.quantidade.contratos", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="b398c440-88d5-4423-8cb6-53296d6d6d4f" key="textField-3" x="1" y="26" width="522" height="17" blankWhenNull="false">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("mensagem.relatorio.gerencialgeralcsa.existem.consignatarias.cadastradas.ativas.bloqueadas", $P{RESPONSAVEL}, com.zetra.econsig.helper.texto.NumberHelper.formata(Double.parseDouble($P{QTDE_CSA_TOTAL}.toString()), "#,###; -#,###"), com.zetra.econsig.helper.texto.NumberHelper.formata(Double.parseDouble($P{QTDE_CSA_ATIVOS_TOTAL}.toString()), "#,###; -#,###"), com.zetra.econsig.helper.texto.NumberHelper.formata(Double.parseDouble($P{QTDE_CSA_INATIVOS_TOTAL}.toString()), "#,###; -#,###"))]]></expression>
+		</element>
+		<element kind="textField" uuid="14b6b2a2-42d9-42f7-80d8-1b911f03c375" key="staticText-3" x="1" y="44" width="522" height="17" markup="none" fontName="Arial" fontSize="10.0" bold="false">
+			<printWhenExpression><![CDATA[$V{IMPRIMIR_SOMENTE_10_CSA}]]></printWhenExpression>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("mensagem.relatorio.gerencialgeralcsa.consignatarias.maior.numero.contratos.internacional", $P{RESPONSAVEL},!$P{LISTA_QTDE_CONTRATOS_POR_CSA}.isEmpty() ? String.valueOf($P{LISTA_QTDE_CONTRATOS_POR_CSA}.size()) : "0") + ":"]]></expression>
+		</element>
+		<element kind="textField" uuid="e823d1bb-d98d-40c6-81af-3ea732a3f0cc" key="textField-4" x="1" y="2" width="522" height="23" fontName="Arial" fontSize="10.0" blankWhenNull="false" bold="false">
+			<expression><![CDATA["3.2.4. " + (com.zetra.econsig.helper.parametro.ParamSist.paramEquals(com.zetra.econsig.values.CodedValues.TPC_OCULTAR_INFO_COR_RELATORIO_GERENCIAL_GERAL, com.zetra.econsig.values.CodedValues.TPC_NAO, $P{RESPONSAVEL}) ?  com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralcsa.consignatarias.correspondentes", $P{RESPONSAVEL}) : com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.consignataria.plural", $P{RESPONSAVEL}))  +(($P{PERIODO} != "" && $P{PERIODO} != null ) ? " (Ref.: "+com.zetra.econsig.helper.texto.DateHelper.toPeriodString(com.zetra.econsig.helper.texto.DateHelper.parse($P{PERIODO}, "yyyy-MM-dd"))+")" : "")]]></expression>
+		</element>
+		<element kind="textField" uuid="3ebb5d90-9ef7-47ff-9e36-1eca865a25a9" key="staticText-4" x="341" y="62" width="75" height="14" markup="none" fontName="Arial" fontSize="9.0" bold="true" hTextAlign="Right">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralcsa.valor.mensal", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="88806de4-7131-42db-af2a-5f4afdd2b1ab" key="staticText-5" x="416" y="62" width="107" height="14" markup="none" fontName="Arial" fontSize="9.0" bold="true" hTextAlign="Right">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralcsa.valor.total", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="e6aacc7d-cad1-46bb-942e-66dda48cc9f6" key="staticText-2" x="163" y="62" width="90" height="14" markup="none" fontName="Arial" fontSize="9.0" bold="true" hTextAlign="Right">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralcsa.status", $P{RESPONSAVEL})]]></expression>
+		</element>
+	</title>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader splitType="Stretch"/>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<element kind="textField" uuid="26796121-a253-4415-93cc-2cf5d492020e" key="textField-1" x="1" y="0" width="162" height="14" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true">
+				<expression><![CDATA[$F{consignataria}]]></expression>
+			</element>
+			<element kind="textField" uuid="358ddd06-47e8-4ca9-a320-c044f8aff732" key="textField-2" x="253" y="0" width="88" height="14" fontSize="8.0" pattern="#,##0" blankWhenNull="true" hTextAlign="Right">
+				<expression><![CDATA[$F{quantidade}]]></expression>
+			</element>
+			<element kind="textField" uuid="bda9eb2b-e5f2-41c6-a7ae-af2906fd47aa" key="textField-5" x="341" y="0" width="75" height="14" fontSize="8.0" pattern="¤ #,##0.00" blankWhenNull="true" hTextAlign="Right">
+				<expression><![CDATA[$F{vlrMensal}]]></expression>
+			</element>
+			<element kind="textField" uuid="e09dddf4-c4ae-4429-bab7-45ec658e76be" key="textField-6" x="416" y="0" width="107" height="14" fontSize="8.0" pattern="¤ #,##0.00" blankWhenNull="true" hTextAlign="Right">
+				<expression><![CDATA[$F{vlrTotal}]]></expression>
+			</element>
+			<element kind="textField" uuid="d110df9a-598f-4ee7-9226-774c561be702" key="textField-1" x="163" y="0" width="90" height="14" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" hTextAlign="Right">
+				<expression><![CDATA[$F{status}]]></expression>
+			</element>
+		</band>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter splitType="Stretch"/>
+	<summary height="4" splitType="Stretch"/>
+</jasperReport>

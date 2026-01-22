@@ -1,0 +1,1 @@
+<%@ taglib uri="/html-lib" prefix="hl"%><hl:message key="release.tag"/>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="ParametroSet">
+  <xsd:complexType name="ParametroSet">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="1" name="svcDescricao" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="tamMinMatriculaServidor" nillable="true" type="xsd:int"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="tamMaxMatriculaServidor" nillable="true" type="xsd:int"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="qtdMaxParcelas" nillable="true" type="xsd:int"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="exigeCpfMatriculaPesquisa" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="validaCpfPesquisa" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="exigeTac" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="exigeCadMensVinc" nillable="false" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="exigeCadVlrLiberado" nillable="false" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="exigeIof" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="validaDataNascReserva" nillable="false" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="exigeInfoBancaria" nillable="false" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="validaInfoBancaria" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="alteraAutMargemNegativa" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="exigeSenhaServReservarRenegociar" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="exigeSenhaServConsMargem" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="exigeSenhaServAltContrato" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="permiteAltContrato" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="permiteRenegociarContrato" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="qtdMinPrdPgsParaRenegociarAut" nillable="true" type="xsd:int"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="visualizaMargem" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="visualizaMargemNegativa" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="diaCorte" nillable="true" type="xsd:short"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="periodoAtual" nillable="true" type="xsd:date"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="permiteCompraContrato" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="diasInfoSaldoDevedor" nillable="true" type="xsd:short"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="diasAprovSaldoDevedor" nillable="true" type="xsd:short"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="diasInfoPgSaldoDevedor" nillable="true" type="xsd:short"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="diasLiquidacaoAdeCompra" nillable="true" type="xsd:short"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="usaCet" nillable="true" type="xsd:boolean"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

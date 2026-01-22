@@ -1,0 +1,84 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="SinteticoGerencialConsignatariaParcelasDesconto" language="java" pageWidth="535" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" scriptletClass="com.zetra.econsig.report.reports.HeadingsScriptlet" uuid="8be84e21-4506-491d-a349-1d3d28ade638">
+	<property name="ireport.scriptlethandling" value="2"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box padding="0" leftPadding="2" rightPadding="2"/>
+	</style>
+	<dataset name="Empty Dataset1" uuid="c92fbf8d-43d4-4c24-8443-3b98068ac203"/>
+	<parameter name="CAMINHO_LOGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SUBTITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Subtitulo do relatório]]></description>
+	</parameter>
+	<parameter name="TEXTO_RODAPE" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Nome do Gestor(Consignante)]]></description>
+	</parameter>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Titulo do relatorio]]></description>
+	</parameter>
+	<parameter name="HeadingsCollection" forPrompting="false" class="java.util.Collection"/>
+	<parameter name="SUBREPORT_DIR" forPrompting="false" class="java.lang.String">
+		<defaultValueExpression><![CDATA[".\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<query language="sql"><![CDATA[SELECT prd.prd_data_desconto as nome, 
+count(*) as quantidade, 
+CASE WHEN prd.prd_vlr_previsto <> prd_vlr_realizado AND prd.prd_vlr_realizado > 0 THEN 'Desconto Parcial' ELSE spd.spd_descricao END as status 
+FROM tb_parcela_desconto prd
+INNER JOIN tb_status_parcela_desconto spd ON (prd.spd_codigo = prd.spd_codigo) 
+INNER JOIN tb_aut_desconto ade ON (ade.ade_codigo = prd.ade_codigo) 
+INNER JOIN tb_verba_convenio vco ON (vco.vco_codigo = ade.vco_codigo) 
+INNER JOIN tb_convenio cnv ON (cnv.cnv_codigo = vco.cnv_codigo) 
+INNER JOIN tb_consignataria csa ON (csa.csa_codigo = cnv.csa_codigo) 
+WHERE prd.prd_data_desconto BETWEEN date_add(current_date(), interval  -36 month) AND current_date() 
+GROUP BY prd_data_desconto, spd.spd_codigo]]></query>
+	<field name="quantidade" class="java.lang.Long"/>
+	<field name="status" class="java.lang.String"/>
+	<field name="nome" class="java.lang.String"/>
+	<background splitType="Stretch">
+		<property name="com.jaspersoft.studio.unit.height" value="px"/>
+	</background>
+	<pageHeader height="22" splitType="Stretch">
+		<element kind="textField" uuid="7b144895-f1f1-48a0-ae7a-8562d0ba5e5c" key="staticText-1" positionType="Float" x="0" y="0" width="524" height="21" markup="none" fontName="Arial" bold="true">
+			<expression><![CDATA["3.12 " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.sinteticogerencialconsignataria.parcelas.desconto.titulo", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<property name="com.jaspersoft.studio.unit.height" value="px"/>
+	</pageHeader>
+	<columnHeader>
+		<property name="com.jaspersoft.studio.unit.height" value="px"/>
+	</columnHeader>
+	<detail>
+		<band>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter splitType="Stretch"/>
+	<summary height="276">
+		<element kind="chart" chartType="bar" uuid="d38cf631-7c06-4aa2-bab2-f1ef4c6d97c9" stretchType="ElementGroupHeight" x="7" y="24" width="520" height="252" evaluationTime="Report">
+			<dataset kind="category">
+				<series>
+					<seriesExpression><![CDATA[$F{status}]]></seriesExpression>
+					<categoryExpression><![CDATA[$F{nome}]]></categoryExpression>
+					<valueExpression><![CDATA[$F{quantidade}]]></valueExpression>
+					<labelExpression><![CDATA[$F{quantidade}.toString()]]></labelExpression>
+				</series>
+			</dataset>
+			<plot labelRotation="50.0" categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000" categoryAxisTickLabelRotation="50.0">
+				<itemLabel/>
+			</plot>
+		</element>
+		<element kind="textField" uuid="60c6cb11-ce8b-40f2-ba2a-00fc79a98d5e" key="textField-2" positionType="Float" stretchType="ElementGroupHeight" x="7" y="2" width="520" height="21" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Center">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.sinteticogerencialconsignataria.parcelas.desconto.qtde.parcelas", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<property name="com.jaspersoft.studio.unit.height" value="px"/>
+	</summary>
+</jasperReport>

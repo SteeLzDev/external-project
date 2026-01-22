@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TermoUsoPrivacidadeAdesaoAutorizado" pageWidth="785" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="785" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2a48d231-77a7-47a0-8464-ec5a3098c741">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="1.8150000000000108"/>
+	<property name="ireport.x" value="810"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<style name="Celula" isDefault="true">
+		<box padding="0" leftPadding="2" rightPadding="2">
+			<topPen lineWidth="0.25" lineColor="#000000"/>
+			<leftPen lineWidth="0.25" lineColor="#000000"/>
+			<bottomPen lineWidth="0.25" lineColor="#000000"/>
+			<rightPen lineWidth="0.25" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="DELIMITADOR" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="CAMINHO_LOGO" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="SUBTITULO" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Subtitulo do relatório]]></parameterDescription>
+	</parameter>
+	<parameter name="TEXTO_RODAPE" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Nome do Gestor(Consignante)]]></parameterDescription>
+	</parameter>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<parameter name="TITULO" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="FORMATO_ARQUIVO" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="EXIBE_TERMO_ADESAO_NAO_AUTORIZADO" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[false]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select usu_nome,
+usu_login, usu_email,
+usu_tel,
+usu_cpf,
+stu_descricao,
+case
+when cse.cse_codigo is not null then cse.cse_nome
+when org.org_codigo is not null then org.org_nome
+when csa.csa_codigo is not null then csa.csa_nome
+when cor.cor_codigo is not null then cor.cor_nome
+when ser.ser_codigo is not null then 'Servidor'
+when supcse.cse_codigo is not null then 'Suporte'
+end AS ENTIDADE,
+ous.ous_data,
+ous.ous_ip_acesso,
+case
+when ous.toc_codigo in (111,163) then 'WEB'
+end AS ACEITACAO_VIA
+from tb_ocorrencia_usuario ous
+inner join tb_usuario usu on (ous.usu_codigo = usu.usu_codigo)
+inner join tb_status_login stu on (usu.stu_codigo = stu.stu_codigo)
+left join tb_usuario_cor ucor on (ucor.usu_codigo = usu.usu_codigo)
+left join tb_correspondente cor on (cor.cor_codigo = ucor.cor_codigo)
+left join tb_usuario_csa ucsa on (ucsa.usu_codigo = usu.usu_codigo)
+left join tb_consignataria csa on (csa.csa_codigo = ucsa.csa_codigo)
+left join tb_usuario_cse ucse on (ucse.usu_codigo = usu.usu_codigo)
+left join tb_consignante cse on (cse.cse_codigo = ucse.cse_codigo)
+left join tb_usuario_org uorg on (uorg.usu_codigo = usu.usu_codigo)
+left join tb_orgao org on (org.org_codigo = uorg.org_codigo)
+left join tb_usuario_ser user on (user.usu_codigo = usu.usu_codigo)
+left join tb_servidor ser on (ser.ser_codigo = user.ser_codigo)
+left join tb_usuario_sup usup on (usup.usu_codigo = usu.usu_codigo)
+left join tb_consignante supcse on (supcse.cse_codigo = usup.cse_codigo)
+where 1=1
+and ous.toc_codigo in (111,163);]]>
+	</queryString>
+	<field name="usuNome" class="java.lang.String"/>
+	<field name="usuLogin" class="java.lang.String"/>
+	<field name="usuEmail" class="java.lang.String"/>
+	<field name="usuTel" class="java.lang.String"/>
+	<field name="usuCPF" class="java.lang.String"/>
+	<field name="stuDescricao" class="java.lang.String"/>
+	<field name="entidade" class="java.lang.String"/>
+	<field name="data" class="java.lang.String"/>
+	<field name="ipAcesso" class="java.lang.String"/>
+	<field name="aceitacaoVia" class="java.lang.String"/>
+	<field name="documentoAceito" class="java.lang.String"/>
+	<variable name="BACKGROUND" class="java.lang.String" resetType="None" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{usuLogin}]]></variableExpression>
+	</variable>
+	<group name="GPR_TIPO_ENTIDADE" isReprintHeaderOnEachPage="true">
+		<groupHeader>
+			<band height="45" splitType="Stretch">
+				<textField>
+					<reportElement key="staticText-14" mode="Opaque" x="0" y="25" width="142" height="20" backcolor="#CCCCCC" uuid="3cf95cde-c509-411f-84d1-bb24e030ee5c">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.usuarios.nome", $P{RESPONSAVEL})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement key="staticText-15" mode="Opaque" x="142" y="25" width="58" height="20" backcolor="#CCCCCC" uuid="7ac5609b-7205-4175-972d-d15a86332fe3">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.usuarios.login", $P{RESPONSAVEL})]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement key="staticText-18" stretchType="RelativeToTallestObject" mode="Opaque" x="326" y="25" width="97" height="20" backcolor="#CCCCCC" uuid="a1b7dbfb-a2b3-462f-97d6-6ab11e87ea55">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) ?
+com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.usuarios.telefone", $P{RESPONSAVEL}) + $P{DELIMITADOR} +
+com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.usuarios.cpf", $P{RESPONSAVEL})
+: com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.usuarios.cpf", $P{RESPONSAVEL})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement key="staticText-21" mode="Opaque" x="546" y="25" width="68" height="20" backcolor="#CCCCCC" uuid="134f7bc9-c960-4689-99b5-1ae2792f9ee2">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.termoprivacidade.data.leitura", $P{RESPONSAVEL})]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement key="staticText-22" stretchType="RelativeToTallestObject" mode="Opaque" x="682" y="25" width="55" height="20" backcolor="#CCCCCC" uuid="d486cf11-5dca-40e4-b34f-8b27a3cddbd3">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.termoprivacidade.aceitacao.via", $P{RESPONSAVEL})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement key="staticText-19" mode="Opaque" x="423" y="25" width="38" height="20" backcolor="#CCCCCC" uuid="bd93c8da-a116-48e0-8b93-0c8d1c6a415d">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.usuarios.status", $P{RESPONSAVEL})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement key="staticText-20" mode="Opaque" x="461" y="25" width="85" height="20" backcolor="#CCCCCC" uuid="d40445e4-2ffa-42c5-b80e-cc47adfa8bc3">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.usuarios.entidade", $P{RESPONSAVEL})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement key="staticText-16" mode="Opaque" x="200" y="25" width="126" height="20" backcolor="#CCCCCC" uuid="7ac5609b-7205-4175-972d-d15a86332fe3">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.usuarios.email", $P{RESPONSAVEL})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement key="staticText-17" mode="Opaque" x="614" y="25" width="68" height="20" backcolor="#CCCCCC" uuid="3589765c-53ea-4f68-95ba-ccc5a906befe">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.termoprivacidade.documento.aceito", $P{RESPONSAVEL})]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement key="staticText-23" stretchType="RelativeToTallestObject" mode="Opaque" x="737" y="25" width="45" height="20" backcolor="#CCCCCC" uuid="4d3df96b-57aa-49b0-b1c3-075b8a4a9004">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.usuario.ip.acesso", $P{RESPONSAVEL})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement key="Text-45" isPrintRepeatedValues="false" x="1" y="4" width="502" height="17" uuid="d119e67f-b62a-4f68-9d74-1ca43555a7fb">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.termoprivacidade.autorizacoes", $P{RESPONSAVEL}) + ":"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band splitType="Stretch"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="19" splitType="Prevent">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement key="fundoLinha" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="781" height="19" isPrintWhenDetailOverflows="true" backcolor="#DDDDDD" uuid="37b78ca4-7ca5-4523-a3a3-b81a4ebcdd75">
+					<printWhenExpression><![CDATA[new java.lang.Boolean(($V{REPORT_COUNT}.intValue() % 2)==0)]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[ ]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="142" height="19" uuid="dd06bad5-4940-4c32-8421-7359b9d24c1c"/>
+				<textFieldExpression><![CDATA[$F{usuNome}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="142" y="0" width="58" height="19" uuid="8139b9af-0577-4039-b93d-7f2d4ca433a6"/>
+				<textFieldExpression><![CDATA[$F{usuLogin}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="200" y="0" width="126" height="19" uuid="a8999e01-ff3a-45cc-8f8a-46422bae0976"/>
+				<textFieldExpression><![CDATA[$F{usuEmail}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="326" y="0" width="97" height="19" uuid="d9755ef1-d175-4607-bb3e-e0d04c299f66"/>
+				<textFieldExpression><![CDATA[($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) ?
+				    (!com.zetra.econsig.helper.texto.TextHelper.isNull($F{usuTel}) ? $F{usuTel}: "") + $P{DELIMITADOR} +
+				    (!com.zetra.econsig.helper.texto.TextHelper.isNull($F{usuCPF}) ?$F{usuCPF} : "")
+				  : $F{usuCPF}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="423" y="0" width="38" height="19" uuid="49eaf772-0d9c-4e4d-a8d6-61f7f68e2f6a"/>
+				<textFieldExpression><![CDATA[$F{stuDescricao}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="461" y="0" width="85" height="19" uuid="774ccbe6-d01a-4516-97eb-4735ea875724"/>
+				<textFieldExpression><![CDATA[$F{entidade}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="546" y="0" width="68" height="19" uuid="2fc0ea67-77d1-4e00-87ee-9ae8d53f31d2"/>
+				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="614" y="0" width="68" height="19" uuid="b54f85e6-ed7c-4168-bad9-d357a9b2c3b4"/>
+				<textFieldExpression><![CDATA[$F{documentoAceito}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="682" y="0" width="55" height="19" uuid="bff13fc2-5e81-4f27-90d6-221bc601d646"/>
+				<textFieldExpression><![CDATA[$F{aceitacaoVia}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="737" y="0" width="45" height="19" uuid="f1b37e44-8d76-4574-8a4b-25f11036845f"/>
+				<textFieldExpression><![CDATA[$F{ipAcesso}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement key="staticText-10" x="0" y="2" width="142" height="17" uuid="c4764d04-7cc8-4358-9c34-24c87e77f89b"/>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.total.registros", $P{RESPONSAVEL}) + ":"]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement key="textField-3" x="142" y="2" width="48" height="17" uuid="18ef8c1a-13cb-40be-8238-a71b5eb03534"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

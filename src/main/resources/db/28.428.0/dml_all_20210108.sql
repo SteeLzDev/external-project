@@ -1,0 +1,6 @@
+-- DESENV-15044
+DELETE FROM tb_ajuda WHERE ACR_CODIGO = '14307';
+DELETE FROM tb_acesso_usuario WHERE ACR_CODIGO = '14307';
+DELETE FROM tb_acesso_recurso WHERE ACR_CODIGO = '14307';
+
+UPDATE tb_acesso_recurso SET ACR_RECURSO = '/v3/favoritarMenu' WHERE ACR_CODIGO = '14716';

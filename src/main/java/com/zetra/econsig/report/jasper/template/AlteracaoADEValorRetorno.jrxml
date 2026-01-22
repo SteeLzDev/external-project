@@ -1,0 +1,320 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="AlteracaoValorRetorno" language="java" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="782" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" formatFactoryClass="com.zetra.econsig.report.format.DefaultFormatFactory" uuid="84bfa54c-b540-43eb-aad3-f600054381ad">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="887"/>
+	<property name="ireport.y" value="0"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box padding="0" leftPadding="2" rightPadding="2"/>
+	</style>
+	<parameter name="CAMINHO_LOGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="PERIODO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SUBTITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Subtitulo do relatório]]></description>
+	</parameter>
+	<parameter name="TEXTO_RODAPE" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Nome do Gestor(Consignante)]]></description>
+	</parameter>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<field name="ade_codigo" class="java.lang.String"/>
+	<field name="ade_numero" class="java.lang.String"/>
+	<field name="VLR_ANTIGO" class="java.math.BigDecimal"/>
+	<field name="VLR_NOVO" class="java.math.BigDecimal"/>
+	<field name="sad_descricao" class="java.lang.String"/>
+	<field name="ade_data" class="java.sql.Timestamp"/>
+	<field name="ade_prazo" class="java.lang.String"/>
+	<field name="ade_prd_pagas" class="java.lang.String"/>
+	<field name="servidor" class="java.lang.String"/>
+	<field name="ser_cpf" class="java.lang.String"/>
+	<field name="cnv_cod_verba" class="java.lang.String"/>
+	<field name="srs_descricao" class="java.lang.String">
+		<description><![CDATA[Situação do servidor]]></description>
+	</field>
+	<variable name="BACKGROUND" resetType="None" calculation="DistinctCount" class="java.lang.Integer">
+		<expression><![CDATA[$F{ade_codigo}]]></expression>
+		<initialValueExpression><![CDATA[new java.lang.Integer(0)]]></initialValueExpression>
+	</variable>
+	<group name="VERBA" startNewPage="true" reprintHeaderOnEachPage="true">
+		<expression><![CDATA[$F{cnv_cod_verba}]]></expression>
+		<groupHeader>
+			<band height="33" splitType="Stretch">
+				<element kind="textField" uuid="2c6e875d-6de1-453b-851d-f3754413d42f" key="textField-verba" x="2" y="0" width="554" height="13" printWhenGroupChanges="VERBA" fontName="Verdana" fontSize="9.0" blankWhenNull="true" bold="false" hTextAlign="Left" vTextAlign="Middle" style="Celula">
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.alteracaoadevalorretorno.verba", $P{RESPONSAVEL}) + ": " + (com.zetra.econsig.helper.texto.TextHelper.isNull($F{cnv_cod_verba}) ? "" : $F{cnv_cod_verba})]]></expression>
+					<box style="Celula">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="bdd7e40e-2e4c-4800-ac00-cf19c78c41ad" key="staticText-15" mode="Opaque" x="702" y="16" width="77" height="17" backcolor="#CCCCCC" markup="none" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.alteracaoadevalorretorno.vlr.novo", $P{RESPONSAVEL})]]></expression>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="7dd5788b-c78d-44c1-8769-6c0cec8c1a2c" key="staticText-14" mode="Opaque" x="625" y="16" width="77" height="17" backcolor="#CCCCCC" markup="none" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.alteracaoadevalorretorno.vlr.ant", $P{RESPONSAVEL})]]></expression>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="e77cc8ba-2950-49ca-a451-bac27503bc0f" key="staticText-13" mode="Opaque" x="534" y="16" width="91" height="17" backcolor="#CCCCCC" markup="none" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.alteracaoadevalorretorno.data.inc", $P{RESPONSAVEL})]]></expression>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="7c946f8a-b230-4aaa-a8e6-2753d54baad4" key="staticText-12" mode="Opaque" x="472" y="16" width="62" height="17" backcolor="#CCCCCC" markup="none" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.alteracaoadevalorretorno.nro.ade", $P{RESPONSAVEL})]]></expression>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="27701b14-9d3e-4194-8415-dd2d8baa1f29" key="staticText-17" mode="Opaque" x="420" y="16" width="52" height="17" backcolor="#CCCCCC" markup="none" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.alteracaoadevalorretorno.pagas", $P{RESPONSAVEL})]]></expression>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="e9ec3733-70b4-4c2c-8168-984a71aee438" key="staticText-11" mode="Opaque" x="368" y="16" width="52" height="17" backcolor="#CCCCCC" markup="none" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.alteracaoadevalorretorno.prazo", $P{RESPONSAVEL})]]></expression>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="634dd483-4ac7-4068-939a-83e0ce3eb906" key="staticText-10" mode="Opaque" x="295" y="16" width="73" height="17" backcolor="#CCCCCC" markup="none" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.cpf", $P{RESPONSAVEL})]]></expression>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="33a069fe-da04-4437-9682-7e932f71674d" key="headerServidor" mode="Opaque" x="0" y="16" width="234" height="17" backcolor="#CCCCCC" fontName="Arial" fontSize="10.0" blankWhenNull="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.servidor.singular", $P{RESPONSAVEL}).toUpperCase()]]></expression>
+					<box>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="5c962939-3925-4ae1-8d21-d0b844081849" key="staticText-20" mode="Opaque" x="234" y="16" width="61" height="17" backcolor="#CCCCCC" markup="none" fontName="Arial" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.alteracaoadevalorretorno.situacao", $P{RESPONSAVEL})]]></expression>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+				</element>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="18" splitType="Stretch">
+				<element kind="textField" uuid="8b3f5b92-f79a-43dc-9b85-58502c1cfda2" key="staticText-18" x="0" y="2" width="142" height="13" markup="none" fontName="Arial" bold="true" hTextAlign="Left">
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.subtotal.registros", $P{RESPONSAVEL}) + ":"]]></expression>
+				</element>
+				<element kind="textField" uuid="be025025-0164-419b-8a1e-2817dd4a2824" key="textField" x="142" y="2" width="100" height="13" blankWhenNull="false">
+					<expression><![CDATA[$V{VERBA_COUNT}]]></expression>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+			</band>
+		</groupFooter>
+	</group>
+	<background splitType="Stretch"/>
+	<title splitType="Stretch"/>
+	<pageHeader height="31" splitType="Stretch">
+		<element kind="textField" uuid="d7840a5c-aa75-46b7-9cd0-3ff05f8108ac" key="textField-20" x="64" y="0" width="715" height="13" fontName="Arial" blankWhenNull="false" bold="true" hTextAlign="Left">
+			<expression><![CDATA[$P{TITULO}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="image" uuid="e88555e6-2610-43cc-826c-7e8d3c0fbb23" key="image-1" x="0" y="-1" width="63" height="29" scaleImage="RetainShape" hImageAlign="Left" vImageAlign="Middle">
+			<expression><![CDATA[$P{CAMINHO_LOGO}]]></expression>
+			<pen lineWidth="0.0" lineStyle="Solid"/>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="39592cae-0137-41a0-ae41-5bb53eea9c64" key="textField-12" x="64" y="13" width="715" height="13" evaluationTime="Report" pattern="" blankWhenNull="false" hTextAlign="Left">
+			<expression><![CDATA[$P{SUBTITULO}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+	</pageHeader>
+	<columnHeader splitType="Stretch"/>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<element kind="staticText" uuid="f2035e4b-1279-4ed7-9bb2-4e52ed27320f" key="fundoLinha" stretchType="ElementGroupHeight" mode="Opaque" x="0" y="0" width="779" height="15" backcolor="#DDDDDD">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0)]]></printWhenExpression>
+				<text><![CDATA[ ]]></text>
+				<box>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="e34bd4c3-e371-4381-b0fa-b2f50461aeea" key="textField-1" stretchType="ElementGroupHeight" x="368" y="0" width="52" height="15" fontSize="9.0" textAdjust="StretchHeight" blankWhenNull="false" hTextAlign="Left" vTextAlign="Top" style="Celula">
+				<expression><![CDATA[$F{ade_prazo}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="c13e320c-48d0-433f-a2bd-ed23587643d4" key="textField-2" stretchType="ElementGroupHeight" x="534" y="0" width="91" height="15" fontSize="9.0" textAdjust="StretchHeight" blankWhenNull="true" hTextAlign="Left" vTextAlign="Top" style="Celula">
+				<expression><![CDATA[$F{ade_data}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="87683e26-ca91-49f7-acdf-be89279c99f8" key="textField-4" stretchType="ElementGroupHeight" x="472" y="0" width="62" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="###0" blankWhenNull="false" pdfEmbedded="true" hTextAlign="Left" vTextAlign="Top" style="Celula">
+				<expression><![CDATA[$F{ade_numero}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="ac541460-9ac4-4a1e-a729-322000438a32" key="textField-6" stretchType="ElementGroupHeight" x="295" y="0" width="73" height="15" fontSize="9.0" textAdjust="StretchHeight" blankWhenNull="false" hTextAlign="Left" vTextAlign="Top" style="Celula">
+				<expression><![CDATA[$F{ser_cpf}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="14531637-f866-439c-af50-82ea2ac4f460" key="textField-7" stretchType="ElementGroupHeight" x="0" y="0" width="234" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="" blankWhenNull="false" hTextAlign="Left" vTextAlign="Top" style="Celula">
+				<expression><![CDATA[$F{servidor}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="97a9af95-db01-4c73-90b2-c38b75b24014" key="textField-14" stretchType="ElementGroupHeight" x="625" y="0" width="77" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" hTextAlign="Right" vTextAlign="Top" style="Celula">
+				<expression><![CDATA[$F{VLR_ANTIGO}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="227ad88b-19ca-49c5-9ba6-0a38c8bf6b83" key="textField-15" stretchType="ElementGroupHeight" x="702" y="0" width="77" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" hTextAlign="Right" vTextAlign="Top" style="Celula">
+				<expression><![CDATA[$F{VLR_NOVO}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="286d7880-f035-4c28-8d21-7a1ba7a80559" key="textField-17" stretchType="ElementGroupHeight" x="420" y="0" width="52" height="15" fontSize="9.0" textAdjust="StretchHeight" blankWhenNull="false" hTextAlign="Left" vTextAlign="Top" style="Celula">
+				<expression><![CDATA[$F{ade_prd_pagas}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="59a6b175-4883-4b95-ae77-e56ecaa70c05" key="textField-21" stretchType="ElementGroupHeight" x="234" y="0" width="61" height="15" fontSize="9.0" textAdjust="StretchHeight" blankWhenNull="false" hTextAlign="Left" vTextAlign="Top" style="Celula">
+				<expression><![CDATA[$F{srs_descricao}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+		</band>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter height="18" splitType="Stretch">
+		<element kind="textField" uuid="7dea263a-657c-4972-b056-2efe246d5c91" key="textField-10" x="674" y="3" width="60" height="13" blankWhenNull="false" hTextAlign="Right">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.pagina.de", $P{RESPONSAVEL}, $V{PAGE_NUMBER}.toString())]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="8e42e10a-f0e1-4e5c-91da-dcb0262dc6f6" key="textField-11" x="737" y="3" width="45" height="13" evaluationTime="Report" blankWhenNull="false" hTextAlign="Left">
+			<expression><![CDATA[$V{PAGE_NUMBER}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="4176ae48-3a48-40ff-b307-191e02903dbc" key="textField" x="0" y="3" width="674" height="13" fontName="Times New Roman" fontSize="7.0" blankWhenNull="false">
+			<expression><![CDATA[$P{TEXTO_RODAPE}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+	</pageFooter>
+	<summary height="21" splitType="Stretch">
+		<element kind="textField" uuid="30b9d00c-4117-42b0-aa2b-dbe5d3864ff9" key="staticText-19" x="0" y="0" width="121" height="13" markup="none" fontName="Arial" bold="true" hTextAlign="Left">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.total.registros", $P{RESPONSAVEL}) + ":"]]></expression>
+		</element>
+		<element kind="textField" uuid="7ddcfe5b-5b19-4a81-85ad-fcccca34401e" key="textField-18" x="121" y="0" width="112" height="13" blankWhenNull="false">
+			<expression><![CDATA[$V{REPORT_COUNT}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+	</summary>
+</jasperReport>

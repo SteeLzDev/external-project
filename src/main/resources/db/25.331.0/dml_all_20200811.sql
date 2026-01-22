@@ -1,0 +1,79 @@
+-- DESENV-13928
+INSERT INTO tb_tipo_param_sist_consignante (TPC_CODIGO, TPC_DESCRICAO, TPC_DOMINIO, TPC_VLR_DEFAULT, TPC_CSE_ALTERA, TPC_CSE_CONSULTA, TPC_SUP_ALTERA, TPC_SUP_CONSULTA, GPS_CODIGO) 
+VALUES ('764', 'Quantidade de dias para expiração de informação de saldo devedor do módulo de rescisão', 'INT', '1', 'N', 'N', 'N', 'N', '3');
+
+INSERT INTO tb_param_sist_consignante (TPC_CODIGO, CSE_CODIGO, PSI_VLR)
+VALUES ('764', '1', '1');
+
+INSERT INTO tb_status_verba_rescisoria (SVR_CODIGO, SVR_DESCRICAO) VALUES ('1','Candidato à inclusão de verba rescisória');
+INSERT INTO tb_status_verba_rescisoria (SVR_CODIGO, SVR_DESCRICAO) VALUES ('2','Aguardando informação de verba rescisória');
+INSERT INTO tb_status_verba_rescisoria (SVR_CODIGO, SVR_DESCRICAO) VALUES ('3','Concluído');
+
+UPDATE tb_menu SET MNU_SEQUENCIA = MNU_SEQUENCIA + 1 WHERE MNU_SEQUENCIA >= 5; 
+
+INSERT INTO tb_menu (MNU_CODIGO, MNU_DESCRICAO, MNU_ATIVO, MNU_SEQUENCIA, MNU_IMAGEM) 
+VALUES ('7', 'Rescisão', 1, 5, 'i-operacional');
+
+INSERT INTO tb_item_menu (ITM_CODIGO, MNU_CODIGO, TEX_CHAVE, ITM_CODIGO_PAI, ITM_DESCRICAO, ITM_ATIVO, ITM_SEQUENCIA, ITM_SEPARADOR, ITM_CENTRALIZADOR, ITM_IMAGEM) 
+VALUES ('237', '7', NULL, NULL, 'Informar rescisão', 1, 1, 'N', 'S', NULL);
+
+INSERT INTO tb_funcao (FUN_CODIGO, GRF_CODIGO, FUN_DESCRICAO, FUN_PERMITE_BLOQUEIO, FUN_EXIGE_TMO, FUN_AUDITAVEL, FUN_RESTRITA_NCA, FUN_EXIGE_SEGUNDA_SENHA_CSE, FUN_EXIGE_SEGUNDA_SENHA_SUP, FUN_EXIGE_SEGUNDA_SENHA_ORG, FUN_EXIGE_SEGUNDA_SENHA_CSA, FUN_EXIGE_SEGUNDA_SENHA_COR) 
+VALUES ('485', '8', 'Efetuar Rescisão', 'N', 'N', 'S', 'N', 'N', 'N', 'N', 'N', 'N');
+
+-- INSERT INTO tb_papel_funcao (PAP_CODIGO, FUN_CODIGO) VALUES ('1','485');
+-- INSERT INTO tb_papel_funcao (PAP_CODIGO, FUN_CODIGO) VALUES ('3','485');
+-- INSERT INTO tb_papel_funcao (PAP_CODIGO, FUN_CODIGO) VALUES ('7','485');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15912', '1', '485', '/v3/listarColaboradoresRescisao', 'acao', 'iniciar', 1, 'S', 'S', '237', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15913', '3', '485', '/v3/listarColaboradoresRescisao', 'acao', 'iniciar', 1, 'S', 'S', '237', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15914', '7', '485', '/v3/listarColaboradoresRescisao', 'acao', 'iniciar', 1, 'S', 'S', '237', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15915', '1', '485', '/v3/listarColaboradoresRescisao', 'acao', 'excluir', 1, 'S', 'S', null, 'S', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15916', '3', '485', '/v3/listarColaboradoresRescisao', 'acao', 'excluir', 1, 'S', 'S', null, 'S', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15917', '7', '485', '/v3/listarColaboradoresRescisao', 'acao', 'excluir', 1, 'S', 'S', null, 'S', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15918', '1', '485', '/v3/incluirColaboradorRescisao', 'acao', 'iniciar', 1, 'S', 'S', null, 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15919', '3', '485', '/v3/incluirColaboradorRescisao', 'acao', 'iniciar', 1, 'S', 'S', null, 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15920', '7', '485', '/v3/incluirColaboradorRescisao', 'acao', 'iniciar', 1, 'S', 'S', null, 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15921', '1', '485', '/v3/incluirColaboradorRescisao', 'acao', 'pesquisarServidor', 1, 'S', 'S', null, 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15922', '3', '485', '/v3/incluirColaboradorRescisao', 'acao', 'pesquisarServidor', 1, 'S', 'S', null, 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15923', '7', '485', '/v3/incluirColaboradorRescisao', 'acao', 'pesquisarServidor', 1, 'S', 'S', null, 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15924', '1', '485', '/v3/incluirColaboradorRescisao', 'acao', 'incluir', 1, 'S', 'S', null, 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15925', '3', '485', '/v3/incluirColaboradorRescisao', 'acao', 'incluir', 1, 'S', 'S', null, 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15926', '7', '485', '/v3/incluirColaboradorRescisao', 'acao', 'incluir', 1, 'S', 'S', null, 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15927', '1', '485', '/v3/listarColaboradoresRescisao', 'acao', 'confirmar', 1, 'S', 'S', null, 'S', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15928', '3', '485', '/v3/listarColaboradoresRescisao', 'acao', 'confirmar', 1, 'S', 'S', null, 'S', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15929', '7', '485', '/v3/listarColaboradoresRescisao', 'acao', 'confirmar', 1, 'S', 'S', null, 'S', '2');

@@ -1,0 +1,111 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="Auditoria" language="java" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" formatFactoryClass="com.zetra.econsig.report.format.DefaultFormatFactory" uuid="5488a894-adcc-4d06-b9c1-2aabbbf523af">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="239"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.background.image.properties" value="true,true,0.25,183,503,0,0,223,260"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box padding="0" leftPadding="2" rightPadding="2">
+			<topPen lineWidth="0.25"/>
+			<leftPen lineWidth="0.25"/>
+			<bottomPen lineWidth="0.25"/>
+			<rightPen lineWidth="0.25"/>
+		</box>
+	</style>
+	<parameter name="CAMINHO_LOGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="MATRICULA" forPrompting="false" class="java.lang.String"/>
+	<parameter name="NOME" forPrompting="false" class="java.lang.String"/>
+	<parameter name="TEXTO_RODAPE" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Nome do Gestor(Consignante)]]></description>
+	</parameter>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<parameter name="CAMINHO_BACKGROUND" class="java.lang.String"/>
+	<query language="sql"><![CDATA[select CCQ_TEXTO as contracheque from tb_contracheque_registro_ser where RSE_CODIGO=111111 order by CCQ_PERIODO DESC limit 1]]></query>
+	<field name="contracheque" class="java.lang.String"/>
+	<background height="802" splitType="Stretch">
+		<printWhenExpression><![CDATA[$P{CAMINHO_BACKGROUND} != null && !$P{CAMINHO_BACKGROUND}.equals("")]]></printWhenExpression>
+		<element kind="image" uuid="6f7bbbd2-9fe9-48c8-875e-97c5bb2f48df" key="image-1" mode="Transparent" x="23" y="93" width="493" height="300" forecolor="#8A8A8A" scaleImage="RetainShape" hImageAlign="Center" vImageAlign="Middle">
+			<printWhenExpression><![CDATA[$P{CAMINHO_BACKGROUND} != null && !$P{CAMINHO_BACKGROUND}.equals("")]]></printWhenExpression>
+			<expression><![CDATA[$P{CAMINHO_BACKGROUND}]]></expression>
+			<pen lineWidth="0.0" lineStyle="Solid"/>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+	</background>
+	<title splitType="Stretch"/>
+	<pageHeader height="60" splitType="Stretch">
+		<element kind="image" uuid="6f7bbbd2-9fe9-48c8-875e-97c5bb2f48df" key="image-1" x="0" y="0" width="66" height="42" scaleImage="RetainShape" hImageAlign="Left" vImageAlign="Middle">
+			<expression><![CDATA[$P{CAMINHO_LOGO}]]></expression>
+			<pen lineWidth="0.0" lineStyle="Solid"/>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="bc6600e1-4acd-4f9a-adb3-9806c7eed10e" key="staticText-8" x="76" y="3" width="65" height="13" markup="none" bold="true" hTextAlign="Left">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.matricula.singular", $P{RESPONSAVEL}) + ":"]]></expression>
+		</element>
+		<element kind="textField" uuid="c9510270-fb62-45df-a1d1-e5f73fe57801" key="textField-12" x="141" y="3" width="112" height="13" evaluationTime="Report" pattern="" blankWhenNull="false" hTextAlign="Left">
+			<expression><![CDATA[$P{MATRICULA}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="bc6600e1-4acd-4f9a-adb3-9806c7eed10e" key="staticText-8" x="76" y="16" width="65" height="13" markup="none" bold="true" hTextAlign="Left">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.usuarios.nome", $P{RESPONSAVEL}) + ":"]]></expression>
+		</element>
+		<element kind="textField" uuid="c9510270-fb62-45df-a1d1-e5f73fe57801" key="textField-12" x="141" y="16" width="112" height="13" evaluationTime="Report" pattern="" blankWhenNull="false" hTextAlign="Left">
+			<expression><![CDATA[$P{NOME}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+	</pageHeader>
+	<columnHeader splitType="Stretch"/>
+	<detail>
+		<band height="81" splitType="Stretch">
+			<element kind="textField" uuid="a8686145-307b-430a-b19a-aa7455af46ba" key="textField-16" x="0" y="0" width="535" height="30" fontName="Arial" fontSize="14.0" textAdjust="StretchHeight" blankWhenNull="false" bold="true" italic="false" hTextAlign="Center">
+				<expression><![CDATA[$P{TITULO}]]></expression>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="4b894c9c-6762-432b-8d2a-9af86e9df764" x="0" y="33" width="535" height="36" fontName="Monospaced" textAdjust="StretchHeight" printWhenDetailOverflows="true" hTextAlign="Left">
+				<expression><![CDATA[$F{contracheque}]]></expression>
+			</element>
+		</band>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter height="30" splitType="Stretch">
+		<element kind="textField" uuid="ec0c3474-bf45-4ed5-ba6c-a26ae486017a" key="textField" x="0" y="14" width="535" height="13" fontName="Times New Roman" fontSize="7.0" blankWhenNull="true">
+			<expression><![CDATA[$P{TEXTO_RODAPE}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+	</pageFooter>
+</jasperReport>

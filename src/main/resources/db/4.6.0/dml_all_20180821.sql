@@ -1,0 +1,7 @@
+-- DESENV-9390
+
+INSERT INTO tb_tipo_dados_autorizacao (TDA_CODIGO, TDA_DESCRICAO, TDA_EXPORTA, TDA_SUP_CONSULTA, TDA_CSE_CONSULTA, TDA_CSA_CONSULTA, TDA_SER_CONSULTA, TDA_SUP_ALTERA, TDA_CSE_ALTERA, TDA_CSA_ALTERA, TDA_SER_ALTERA, TDA_DOMINIO)
+VALUES ('34', 'Benefício - Adesão ao plano de ex-funcionários', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', '');
+
+INSERT INTO tb_tipo_dados_autorizacao (TDA_CODIGO, TDA_DESCRICAO, TDA_EXPORTA, TDA_SUP_CONSULTA, TDA_CSE_CONSULTA, TDA_CSA_CONSULTA, TDA_SER_CONSULTA, TDA_SUP_ALTERA, TDA_CSE_ALTERA, TDA_CSA_ALTERA, TDA_SER_ALTERA, TDA_DOMINIO)
+VALUES ('35', 'Benefício - Período de contribuição para o plano (meses)', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', '');

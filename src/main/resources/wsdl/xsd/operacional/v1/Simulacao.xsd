@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="Simulacao">
+  <xsd:complexType name="Simulacao">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="1" name="consignatariaCodigo" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="consignataria" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="valorLiberado" nillable="false" type="xsd:double"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="valorParcela" nillable="false" type="xsd:double"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="ranking" nillable="false" type="xsd:short"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="taxaJuros" nillable="false" type="xsd:double"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="servico" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="servicoCodigo" nillable="true" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,10 @@
+-- DESENV-8255
+
+INSERT INTO tb_tipo_param_sist_consignante (TPC_CODIGO, GPS_CODIGO, TPC_DESCRICAO, TPC_DOMINIO, TPC_VLR_DEFAULT, TPC_CSE_ALTERA, TPC_CSE_CONSULTA, TPC_SUP_ALTERA, TPC_SUP_CONSULTA)
+VALUES ('611', NULL, 'Exige cadastro de telefone pelo servidor no primeiro acesso ao sistema', 'SN', 'N', 'N', 'N', 'N', 'N');
+
+INSERT INTO tb_param_sist_consignante (TPC_CODIGO, CSE_CODIGO, PSI_VLR)
+VALUES ('611', '1', 'N');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('14925', '6', NULL, '/v3/atualizarEmailTelefone', NULL, NULL, 1, 'S', 'S', NULL, 'N', '0');

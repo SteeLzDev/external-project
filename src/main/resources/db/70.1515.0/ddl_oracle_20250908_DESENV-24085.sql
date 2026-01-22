@@ -1,0 +1,1 @@
+ALTER TABLE ht_servidor DROP CONSTRAINT tb_servidor_validacao_ak;

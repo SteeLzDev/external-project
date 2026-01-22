@@ -1,0 +1,4 @@
+-- DESENV-20954
+INSERT INTO tb_tipo_entidade (TEN_CODIGO, TEN_DESCRICAO, TEN_AUDITORIA, TEN_CAMPO_ENT_00, TEN_CAMPO_ENT_01, TEN_CAMPO_ENT_02)
+VALUES ('130', 'Configuração de envio de e-mail para consignante', 1, 'FUN_CODIGO', 'PAP_CODIGO', 'CSE_CODIGO');
+

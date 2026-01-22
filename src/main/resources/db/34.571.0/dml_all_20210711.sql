@@ -1,0 +1,6 @@
+-- DESENV-16180
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16386', '1', '391', '/v3/excluirArquivo', 'tipo', 'conciliacao_multipla', 1, 'S', 'S', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16387', '7', '391', '/v3/excluirArquivo', 'tipo', 'conciliacao_multipla', 1, 'S', 'S', 'N', '2');

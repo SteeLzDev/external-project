@@ -1,0 +1,54 @@
+-- DESENV-9224
+
+INSERT INTO tb_funcao (FUN_CODIGO, GRF_CODIGO, FUN_DESCRICAO, FUN_PERMITE_BLOQUEIO, FUN_EXIGE_TMO, FUN_AUDITAVEL, FUN_RESTRITA_NCA, FUN_EXIGE_SEGUNDA_SENHA_CSE, FUN_EXIGE_SEGUNDA_SENHA_SUP, FUN_EXIGE_SEGUNDA_SENHA_ORG, FUN_EXIGE_SEGUNDA_SENHA_CSA, FUN_EXIGE_SEGUNDA_SENHA_COR) 
+VALUES ('428', '20', 'Upload e Processamento de Arquivos de Integração', 'N', 'N', 'S', 'N', 'N', 'N', 'N', 'N', 'N');
+
+-- INSERT INTO tb_papel_funcao (PAP_CODIGO, FUN_CODIGO) VALUES ('1', '428'); 
+
+INSERT INTO tb_tipo_param_sist_consignante (TPC_CODIGO, GPS_CODIGO, TPC_DESCRICAO, TPC_DOMINIO, TPC_VLR_DEFAULT, TPC_SUP_CONSULTA, TPC_SUP_ALTERA, TPC_CSE_CONSULTA, TPC_CSE_ALTERA)
+VALUES ('599', NULL, 'Habilita funcionalidades para testes de integração orientada', 'SN', 'N', 'N', 'N', 'N', 'N');
+
+INSERT INTO tb_param_sist_consignante (TPC_CODIGO, CSE_CODIGO, PSI_VLR)
+VALUES ('599', '1', 'N');
+
+INSERT INTO tb_tipo_param_sist_consignante (TPC_CODIGO, GPS_CODIGO, TPC_DESCRICAO, TPC_DOMINIO, TPC_VLR_DEFAULT, TPC_SUP_CONSULTA, TPC_SUP_ALTERA, TPC_CSE_CONSULTA, TPC_CSE_ALTERA)
+VALUES ('600', NULL, 'Nome do arquivo de configuração do arquivo de margens', 'ALFA', NULL, 'N', 'N', 'N', 'N');
+
+-- INSERT INTO tb_param_sist_consignante (TPC_CODIGO, CSE_CODIGO, PSI_VLR)
+-- VALUES ('600', '1', 'integrar_folha_margem.xml');
+
+INSERT INTO tb_tipo_param_sist_consignante (TPC_CODIGO, GPS_CODIGO, TPC_DESCRICAO, TPC_DOMINIO, TPC_VLR_DEFAULT, TPC_SUP_CONSULTA, TPC_SUP_ALTERA, TPC_CSE_CONSULTA, TPC_CSE_ALTERA)
+VALUES ('601', NULL, 'Nome do arquivo de configuração do arquivo de retorno', 'ALFA', NULL, 'N', 'N', 'N', 'N');
+
+-- INSERT INTO tb_param_sist_consignante (TPC_CODIGO, CSE_CODIGO, PSI_VLR)
+-- VALUES ('601', '1', 'integrar_folha_retorno.xml');
+
+INSERT INTO tb_tipo_param_sist_consignante (TPC_CODIGO, GPS_CODIGO, TPC_DESCRICAO, TPC_DOMINIO, TPC_VLR_DEFAULT, TPC_SUP_CONSULTA, TPC_SUP_ALTERA, TPC_CSE_CONSULTA, TPC_CSE_ALTERA)
+VALUES ('602', NULL, 'Nome do arquivo de manual da Integração Orientada', 'ALFA', NULL, 'N', 'N', 'N', 'N');
+
+-- INSERT INTO tb_param_sist_consignante (TPC_CODIGO, CSE_CODIGO, PSI_VLR)
+-- VALUES ('602', '1', 'manual_integracao_orientada.docx');
+
+INSERT INTO tb_item_menu (ITM_CODIGO, MNU_CODIGO, ITM_DESCRICAO, ITM_ATIVO, ITM_SEQUENCIA)
+VALUES ('206', '1', 'Integrar Folha', 1, 77);
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP) 
+VALUES ('14902', '1', '428', '/v3/integrarFolha', 'acao', 'iniciar', 1, 'S', 'S', 206, 'N', '2'); 
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP) 
+VALUES ('14903', '1', '428', '/v3/integrarFolha', 'acao', 'upload', 1, 'S', 'S', NULL, 'N', '2'); 
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP) 
+VALUES ('14904', '1', '428', '/v3/integrarFolha', 'acao', 'downloadCritica', 1, 'S', 'S', NULL, 'N', '2'); 
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP) 
+VALUES ('14905', '1', '428', '/v3/integrarFolha', 'acao', 'processar', 1, 'S', 'S', NULL, 'S', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP) 
+VALUES ('14906', '1', '428', '/v3/integrarFolha', 'acao', 'selecionarArquivo', 1, 'S', 'S', NULL, 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP) 
+VALUES ('14907', '1', '428', '/v3/integrarFolha', 'acao', 'excluirArquivo', 1, 'S', 'S', NULL, 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP) 
+VALUES ('14908', '1', '428', '/v3/integrarFolha', 'acao', 'downloadManual', 1, 'S', 'S', NULL, 'N', '2');

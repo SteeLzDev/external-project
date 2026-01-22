@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+    <taglib xmlns="http://java.sun.com/xml/ns/j2ee" 
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+      xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd" 
+      version="2.1"> 
+
+      <tlib-version>1.0</tlib-version>
+      <uri>/function-lib</uri>
+
+      <function>
+          <name>forJavaScriptBlock</name>
+          <function-class>com.zetra.econsig.helper.texto.TextHelper</function-class>
+          <function-signature>java.lang.String forJavaScriptBlock(java.lang.Object)</function-signature>
+      </function>
+      <function>
+          <name>forUriComponent</name>
+          <function-class>com.zetra.econsig.helper.texto.TextHelper</function-class>
+          <function-signature>java.lang.String forUriComponent(java.lang.Object)</function-signature>
+      </function>
+      <function>
+          <name>forHtmlContent</name>
+          <function-class>com.zetra.econsig.helper.texto.TextHelper</function-class>
+          <function-signature>java.lang.String forHtmlContent(java.lang.Object)</function-signature>
+      </function>
+      <function>
+          <name>forJavaScript</name>
+          <function-class>com.zetra.econsig.helper.texto.TextHelper</function-class>
+          <function-signature>java.lang.String forJavaScript(java.lang.Object)</function-signature>
+      </function>
+      <function>
+          <name>forHtmlAttribute</name>
+          <function-class>com.zetra.econsig.helper.texto.TextHelper</function-class>
+          <function-signature>java.lang.String forHtmlAttribute(java.lang.Object)</function-signature>
+      </function>
+      <function>
+          <name>forJavaScriptAttribute</name>
+          <function-class>com.zetra.econsig.helper.texto.TextHelper</function-class>
+          <function-signature>java.lang.String forJavaScriptAttribute(java.lang.Object)</function-signature>
+      </function>
+    <function>
+        <name>forValidationArquivo</name>
+        <function-class>com.zetra.econsig.helper.texto.TextHelper</function-class>
+        <function-signature>java.lang.Boolean forValidationArquivo(java.lang.String)</function-signature>
+    </function>
+      <function>
+          <name>replaceString</name>
+          <function-class>com.zetra.econsig.helper.texto.TextHelper</function-class>
+          <function-signature>java.lang.String replaceString(java.lang.String, java.lang.String, java.lang.String)</function-signature>
+      </function>           
+      <function>
+          <name>retornaIniciaisNome</name>
+          <function-class>com.zetra.econsig.helper.texto.TextHelper</function-class>
+          <function-signature>java.lang.String retornaIniciaisNome(java.lang.String, java.lang.Integer)</function-signature>
+      </function>
+      <function>
+          <name>qtdeMsgSemLeitura</name>
+          <function-class>com.zetra.econsig.helper.web.JspHelper</function-class>
+          <function-signature>java.lang.Integer qtdeMsgSemLeitura(java.util.Date, com.zetra.econsig.helper.seguranca.AcessoSistema)</function-signature>
+      </function>
+      <function>
+          <name>temPermissao</name>
+          <function-class>com.zetra.econsig.helper.web.JspHelper</function-class>
+          <function-signature>java.lang.Boolean temPermissao(com.zetra.econsig.helper.seguranca.AcessoSistema, java.lang.String, java.lang.Boolean)</function-signature>
+      </function>
+</taglib>

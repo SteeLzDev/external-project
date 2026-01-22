@@ -1,0 +1,48 @@
+<Documento>
+        <Mapeamento Entrada="TIPO_REGISTRO" Saida="TIPO_REGISTRO" Tipo="Texto" Default="I" />
+        <Mapeamento Entrada="COMPETENCIA_FATURAMENTO" Saida="COMPETENCIA_FATURAMENTO" Tipo="Data" FormatoEntrada="yyyy-MM-dd" FormatoSaida="dd/MM/yyyy" Default="" />
+        <Mapeamento Entrada="CBE_DATA_INCLUSAO" Saida="CBE_DATA_INCLUSAO" Tipo="Data" FormatoEntrada="yyyy-MM-dd HH:mm:ss" FormatoSaida="dd/MM/yyyy HH:mm:ss" Default="" />
+        <Mapeamento Entrada="CBE_DATA_CANCELAMENTO" Saida="CBE_DATA_CANCELAMENTO" Tipo="Data" FormatoEntrada="yyyy-MM-dd HH:mm:ss" FormatoSaida="dd/MM/yyyy HH:mm:ss" Default="" />
+        <Mapeamento Entrada="CBE_NUMERO" Saida="CBE_NUMERO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="BEN_CODIGO_REGISTRO" Saida="BEN_CODIGO_REGISTRO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="RSE_MATRICULA" Saida="RSE_MATRICULA" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="BEN_CODIGO_CONTRATO" Saida="BEN_CODIGO_CONTRATO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="ADE_NUMERO" Saida="ADE_NUMERO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="CODIGO_PROCEDIMENTO" Saida="CODIGO_PROCEDIMENTO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="DESCRICAO_PROCEDIMENTO" Saida="DESCRICAO_PROCEDIMENTO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="VALOR_DEBITO" Saida="VALOR_DEBITO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="QUANTIDADE" Saida="QUANTIDADE" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="DATA_PROCEDIMENTO" Saida="DATA_PROCEDIMENTO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="TIPO_PRESTADOR" Saida="TIPO_PRESTADOR" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="CNPJ_PRESTADOR" Saida="CNPJ_PRESTADOR" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="NOME_PRESTADOR" Saida="NOME_PRESTADOR" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="TLA_CODIGO" Saida="TLA_CODIGO" Tipo="Texto"/>
+        <Mapeamento Entrada="COMPETENCIA_PRORATA" Saida="COMPETENCIA_PRORATA" Tipo="Data" FormatoEntrada="yyyy-MM-dd" FormatoSaida="dd/MM/yyyy" Default="" />
+        <Mapeamento Entrada="REAJUSTE_FAIXA_ETARIA" Saida="REAJUSTE_FAIXA_ETARIA" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="REAJUSTE_ANUAL" Saida="REAJUSTE_ANUAL" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="MENSAGEM_REAJUSTE_FAIXA_ETARIA" Saida="MENSAGEM_REAJUSTE_FAIXA_ETARIA" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="MENSAGEM_REAJUSTE_ANUAL" Saida="MENSAGEM_REAJUSTE_ANUAL" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="SEQUENCIAL" Saida="SEQUENCIAL" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="AFB_NUMERO_LOTE" Saida="AFB_NUMERO_LOTE" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="AFB_ITEM_LOTE" Saida="AFB_ITEM_LOTE" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="AFB_VALOR_SUBSIDIO" Saida="AFB_VALOR_SUBSIDIO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="AFB_VALOR_REALIZADO" Saida="AFB_VALOR_REALIZADO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="AFB_VALOR_NAO_REALIZADO" Saida="AFB_VALOR_NAO_REALIZADO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="AFB_VALOR_TOTAL" Saida="AFB_VALOR_TOTAL" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="ENS_CEP" Saida="ENS_CEP" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="ENS_LOGRADOURO" Saida="ENS_LOGRADOURO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="ENS_NUMERO" Saida="ENS_NUMERO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="ENS_COMPLEMENTO" Saida="ENS_COMPLEMENTO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="ENS_BAIRRO" Saida="ENS_BAIRRO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="ENS_MUNICIPIO" Saida="ENS_MUNICIPIO" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="ENS_UF" Saida="ENS_UF" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="BFC_CELULAR" Saida="BFC_CELULAR" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="SER_EMAIL" Saida="SER_EMAIL" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="COMPETENCIA_COBRANCA" Saida="COMPETENCIA_COBRANCA" Tipo="Data" FormatoEntrada="yyyy-MM-dd" FormatoSaida="dd/MM/yyyy" Default="" />
+        <Mapeamento Entrada="ORG_IDENTIFICADOR" Saida="ORG_IDENTIFICADOR" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="CNV_COD_VERBA" Saida="CNV_COD_VERBA" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="BFC_CPF" Saida="BFC_CPF" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="MARGEM_NAO_CONSIGNAVEL" Saida="MARGEM_NAO_CONSIGNAVEL" Tipo="Texto" Default="" />
+        <Mapeamento Entrada="BFC_NOME" Saida="BFC_NOME" Tipo="Texto" Default="" />
+</Documento>
+

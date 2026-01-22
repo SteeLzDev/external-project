@@ -1,0 +1,2 @@
+-- DESENV-16861
+INSERT INTO tb_tipo_param_sist_consignante (TPC_CODIGO, TPC_DESCRICAO, TPC_DOMINIO, TPC_VLR_DEFAULT, TPC_CSE_ALTERA, TPC_CSE_CONSULTA, TPC_SUP_ALTERA, TPC_SUP_CONSULTA, GPS_CODIGO) VALUES ('889', 'Quantidade de dias para confirmar leitura mensagem', 'INT', '0', 'N', 'N', 'N', 'N', NULL);

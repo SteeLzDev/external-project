@@ -1,0 +1,6 @@
+-- DESENV-14804
+INSERT INTO tb_tipo_param_sist_consignante (TPC_CODIGO, TPC_DESCRICAO, TPC_DOMINIO, TPC_VLR_DEFAULT, TPC_CSE_ALTERA, TPC_CSE_CONSULTA, TPC_SUP_ALTERA, TPC_SUP_CONSULTA, GPS_CODIGO)
+VALUES ('794', 'Quantidade de horas que o usuário possui para logar no sistema após o desbloqueio', 'INT', '48', 'N', 'N', 'N', 'N', '3');
+
+INSERT INTO tb_param_sist_consignante (TPC_CODIGO, CSE_CODIGO, PSI_VLR) 
+VALUES ('794', '1', '48');

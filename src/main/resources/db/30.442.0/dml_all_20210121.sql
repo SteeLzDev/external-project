@@ -1,0 +1,9 @@
+-- DESENV-9283
+UPDATE tb_acesso_recurso SET ACR_RECURSO = '/v3/reservarMargemGap', ACR_PARAMETRO = 'acao', ACR_OPERACAO = 'confirmarReserva' WHERE ACR_CODIGO IN ('10257', '10258', '10259', '10260', '10261', '12046');
+UPDATE tb_acesso_recurso SET ACR_RECURSO = '/v3/reservarMargemGap', ACR_PARAMETRO = 'acao', ACR_OPERACAO = 'incluirReserva' WHERE ACR_CODIGO IN ('10262', '10263', '10264', '10265', '10266', '12047');
+
+DELETE FROM tb_ajuda_recurso WHERE ACR_CODIGO IN ('10267', '10268', '10269', '10270', '10271', '12048');
+DELETE FROM tb_ajuda WHERE ACR_CODIGO IN ('10267', '10268', '10269', '10270', '10271', '12048');
+DELETE FROM tb_operacao_nao_confirmada WHERE ACR_CODIGO IN ('10267', '10268', '10269', '10270', '10271', '12048');
+DELETE FROM tb_acesso_usuario WHERE ACR_CODIGO IN ('10267', '10268', '10269', '10270', '10271', '12048');
+DELETE FROM tb_acesso_recurso WHERE ACR_CODIGO IN ('10267', '10268', '10269', '10270', '10271', '12048');

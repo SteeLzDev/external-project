@@ -1,0 +1,3 @@
+-- DESENV-9855
+INSERT INTO tb_tipo_dado_adicional (TDA_CODIGO, TEN_CODIGO, TDA_DESCRICAO, TDA_EXPORTA, TDA_SUP_CONSULTA, TDA_CSE_CONSULTA, TDA_CSA_CONSULTA, TDA_SER_CONSULTA, TDA_SUP_ALTERA, TDA_CSE_ALTERA, TDA_CSA_ALTERA, TDA_SER_ALTERA, TDA_DOMINIO)
+VALUES ('39', '19', 'Valor monetário dos juros de uma consignação de natureza empréstimo', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'MONETARIO');

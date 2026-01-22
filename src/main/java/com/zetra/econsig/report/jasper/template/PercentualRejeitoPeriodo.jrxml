@@ -1,0 +1,157 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="Percentual Rejeito Periodo" language="java" pageWidth="535" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="17d73b92-0323-409e-a6c6-038c3c77fcbf">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box padding="0" leftPadding="2" rightPadding="2"/>
+	</style>
+	<parameter name="CSA_CODIGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<query language="sql"><![CDATA[SELECT DISTINCT tb_usuario.usu_codigo,tb_usuario.usu_login,tb_usuario.usu_nome,tb_usuario.stu_codigo,tb_usuario.usu_tipo_bloq,tb_perfil.per_codigo,tb_perfil.per_descricao,tb_usuario.usu_data_cad,tb_usuario.usu_data_exp_senha,IF(tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo, 'CSE', (IF(tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo, 'CSA', (IF(tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo, 'COR', 'ORG'))))) AS TIPO,IF(tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo, tb_consignante.cse_nome, (IF(tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo, tb_consignataria.csa_nome, (IF(tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo, CONCAT(CONCAT(CSA_COR.csa_nome,  ' - '  ), tb_correspondente.cor_nome), tb_orgao.org_nome))))) AS ENTIDADE FROM tb_usuario LEFT OUTER JOIN tb_usuario_cse ON (tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo) LEFT OUTER JOIN tb_consignante ON (tb_usuario_cse.cse_codigo = tb_consignante.cse_codigo) LEFT OUTER JOIN tb_usuario_csa ON (tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo) LEFT OUTER JOIN tb_consignataria ON (tb_usuario_csa.csa_codigo = tb_consignataria.csa_codigo) LEFT OUTER JOIN tb_usuario_cor ON (tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo) LEFT OUTER JOIN tb_correspondente ON (tb_usuario_cor.cor_codigo = tb_correspondente.cor_codigo) LEFT OUTER JOIN tb_consignataria CSA_COR ON (tb_correspondente.csa_codigo = CSA_COR.csa_codigo) LEFT OUTER JOIN tb_usuario_org ON (tb_usuario.usu_codigo = tb_usuario_org.usu_codigo) LEFT OUTER JOIN tb_orgao ON (tb_usuario_org.org_codigo = tb_orgao.org_codigo) LEFT OUTER JOIN tb_perfil_usuario ON (tb_perfil_usuario.usu_codigo = tb_usuario.usu_codigo) LEFT OUTER JOIN tb_perfil ON (tb_perfil.per_codigo = tb_perfil_usuario.per_codigo) WHERE (tb_usuario.usu_codigo = tb_usuario_cse.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_csa.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_cor.usu_codigo OR tb_usuario.usu_codigo = tb_usuario_org.usu_codigo) AND ( tb_usuario_org.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_cse.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_csa.usu_codigo = tb_usuario.usu_codigo OR  tb_usuario_cor.usu_codigo = tb_usuario.usu_codigo )  AND tb_usuario.stu_codigo IN ( 1,2 ) ORDER BY  TIPO, tb_usuario.usu_nome]]></query>
+	<field name="periodo" class="java.lang.String"/>
+	<field name="csa" class="java.lang.String"/>
+	<field name="liquidadas" class="java.math.BigDecimal"/>
+	<field name="rejeitadas" class="java.math.BigDecimal"/>
+	<field name="percRejeito" class="java.math.BigDecimal"/>
+	<field name="csaCodigo" class="java.lang.String"/>
+	<variable name="NRO_CSA" calculation="Count" class="java.lang.Integer">
+		<expression><![CDATA[$F{percRejeito}]]></expression>
+	</variable>
+	<variable name="ORDEM" calculation="DistinctCount" class="java.lang.Integer">
+		<expression><![CDATA[$F{percRejeito}]]></expression>
+	</variable>
+	<background splitType="Stretch"/>
+	<title splitType="Stretch"/>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader height="24" splitType="Stretch">
+		<element kind="textField" uuid="686ea3f3-5cbb-4e64-9cbe-b5cb2eec63fa" key="staticText-16" mode="Opaque" x="467" y="7" width="67" height="17" backcolor="#FFFFFF" markup="none" fontName="Arial" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentualrejeito.percentual", $P{RESPONSAVEL}).toUpperCase()]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="2d30c0c8-6d9b-4fe5-b1bc-6358edb50c83" key="staticText-15" mode="Opaque" x="400" y="7" width="67" height="17" backcolor="#FFFFFF" markup="none" fontName="Arial" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentualrejeito.rejeitadas", $P{RESPONSAVEL}).toUpperCase()]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="9aa1ae2e-602c-4ce2-9838-f9a4953a6e3e" key="staticText-14" mode="Opaque" x="40" y="7" width="56" height="17" backcolor="#FFFFFF" markup="none" fontName="Arial" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentualrejeito.periodo", $P{RESPONSAVEL}).toUpperCase()]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="216cb2d4-d14b-4a88-8f27-645743a1582f" key="staticText-17" mode="Opaque" x="333" y="7" width="67" height="17" backcolor="#FFFFFF" markup="none" fontName="Arial" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentualrejeito.liquidadas", $P{RESPONSAVEL}).toUpperCase()]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="33c6e7c9-fa9c-4de9-a75b-d5f94c33055d" key="staticText-18" mode="Opaque" x="96" y="7" width="237" height="17" backcolor="#FFFFFF" markup="none" fontName="Arial" fontSize="8.0" bold="true" hTextAlign="Left" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.consignataria.singular", $P{RESPONSAVEL}).toUpperCase()]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="d0896820-408e-496a-8e17-f79c7aee09f7" key="staticText-19" mode="Opaque" x="0" y="7" width="40" height="17" backcolor="#FFFFFF" markup="none" fontName="Arial" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentualrejeito.ordem", $P{RESPONSAVEL}).toUpperCase()]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<element kind="elementGroup">
+				<element kind="textField" uuid="8d7975d2-e2da-4beb-b167-3c783648c566" key="textField" x="40" y="0" width="56" height="13" fontSize="9.0" blankWhenNull="true" hTextAlign="Center" vTextAlign="Bottom" style="Celula">
+					<paragraph lineSpacing="Single"/>
+					<expression><![CDATA[$F{periodo}]]></expression>
+					<box style="Celula">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="8de9b3f8-2663-4554-ac55-8ed114855a8c" key="textField" x="400" y="0" width="67" height="13" fontSize="9.0" pattern="" blankWhenNull="true" hTextAlign="Center" vTextAlign="Bottom" style="Celula">
+					<expression><![CDATA[($P{CSA_CODIGO}.equals("") || $F{csaCodigo}.equals($P{CSA_CODIGO})) ? com.zetra.econsig.helper.texto.NumberHelper.reformat($F{rejeitadas}.toString(), "en", com.zetra.econsig.helper.texto.NumberHelper.getLang(), 0, 0) : "---"]]></expression>
+					<box style="Celula">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="63b3a4f8-4676-47ae-a1ae-5fdc4b7b34e5" key="textField" x="467" y="0" width="67" height="13" fontSize="9.0" pattern="#,##0.00" blankWhenNull="true" hTextAlign="Center" style="Celula">
+					<expression><![CDATA[$F{percRejeito}]]></expression>
+					<box style="Celula">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+			</element>
+			<element kind="textField" uuid="b3724c1f-0caa-4bd8-b42e-fa62b46b8c6b" key="textField-5" x="333" y="0" width="67" height="13" fontSize="9.0" pattern="" blankWhenNull="true" hTextAlign="Center" vTextAlign="Bottom" style="Celula">
+				<expression><![CDATA[($P{CSA_CODIGO}.equals("") || $F{csaCodigo}.equals($P{CSA_CODIGO})) ? com.zetra.econsig.helper.texto.NumberHelper.reformat($F{liquidadas}.toString(), "en", com.zetra.econsig.helper.texto.NumberHelper.getLang(), 0, 0) : "---"]]></expression>
+				<box style="Celula">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="3c482614-bb9a-4a79-b6fa-337aa4e60fdd" key="textField-6" x="96" y="0" width="237" height="13" fontSize="9.0" pattern="" blankWhenNull="true" hTextAlign="Justified" vTextAlign="Bottom" style="Celula">
+				<expression><![CDATA[($P{CSA_CODIGO}.equals("") || $F{csaCodigo}.equals($P{CSA_CODIGO})) ? $F{csa} : com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.consignataria.singular", $P{RESPONSAVEL}).toUpperCase() + " " + $V{NRO_CSA}]]></expression>
+				<box style="Celula">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="9889b556-1a22-4f98-9b23-ec4201e63cdd" key="textField-7" x="0" y="0" width="40" height="13" fontSize="9.0" pattern="#,##0" blankWhenNull="true" hTextAlign="Center" vTextAlign="Bottom" style="Celula">
+				<paragraph lineSpacing="Single"/>
+				<expression><![CDATA[$V{ORDEM}]]></expression>
+				<box style="Celula">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="37" splitType="Stretch">
+		<element kind="textField" uuid="f2cab44e-ea80-427a-bbb4-5018e70fa0a5" key="staticText-20" x="2" y="2" width="531" height="34" markup="none" fontName="Arial" fontSize="10.0" bold="true">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("mensagem.relatorio.percentualrejeito.aviso", $P{RESPONSAVEL})]]></expression>
+		</element>
+	</columnFooter>
+	<pageFooter splitType="Stretch"/>
+	<summary splitType="Stretch"/>
+</jasperReport>

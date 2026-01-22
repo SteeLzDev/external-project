@@ -1,0 +1,1 @@
+UPDATE tb_acesso_recurso SET ACR_METODO_HTTP = '1' WHERE ACR_CODIGO = '17140';

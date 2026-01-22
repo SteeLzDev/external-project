@@ -1,0 +1,91 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="InadimplenciaGeral" language="java" pageWidth="525" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="525" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" scriptletClass="com.zetra.econsig.report.reports.HeadingsScriptlet" uuid="957f252b-c414-480d-be51-b1ddb03c082a">
+	<property name="ireport.scriptlethandling" value="2"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box padding="0" leftPadding="2" rightPadding="2"/>
+	</style>
+	<parameter name="HeadingsCollection" forPrompting="false" class="java.util.Collection"/>
+	<parameter name="nomeCsa" class="java.lang.String"/>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<query language="sql"><![CDATA[]]></query>
+	<field name="valor1" class="java.lang.Double"/>
+	<field name="descricao" class="java.lang.String"/>
+	<background splitType="Stretch"/>
+	<title splitType="Stretch"/>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader splitType="Stretch"/>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter splitType="Stretch"/>
+	<summary height="259" splitType="Stretch">
+		<element kind="chart" chartType="bar" uuid="7d3b730b-ceae-41bd-a057-98f353446d4e" x="0" y="25" width="525" height="215" showLegend="false" customizerClass="com.zetra.econsig.report.jasper.dinamico.InadimplenciaCustomizer">
+			<dataset kind="category">
+				<series>
+					<seriesExpression><![CDATA[$F{descricao}]]></seriesExpression>
+					<categoryExpression><![CDATA[$F{descricao}]]></categoryExpression>
+					<valueExpression><![CDATA[$F{valor1}]]></valueExpression>
+					<labelExpression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.formata($F{valor1}.doubleValue(), com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.moeda.pattern", $P{RESPONSAVEL}))]]></labelExpression>
+				</series>
+			</dataset>
+			<plot labelRotation="70.0" showTickMarks="false" showTickLabels="false" showLabels="true" categoryAxisTickLabelRotation="70.0">
+				<categoryAxisLabelFont fontSize="8.0"/>
+				<categoryAxisTickLabelFont fontSize="5.0"/>
+				<valueAxisLabelExpression><![CDATA[]]></valueAxisLabelExpression>
+				<valueAxisLabelFont fontSize="8.0"/>
+				<valueAxisTickLabelFont fontSize="8.0"/>
+				<itemLabel>
+					<font fontSize="6.0"/>
+				</itemLabel>
+				<seriesColor order="0" color="#007EFF"/>
+				<seriesColor order="1" color="#FF0000"/>
+			</plot>
+		</element>
+		<element kind="textField" uuid="8abd9bab-2f80-4c9f-ac41-fd0af599ad6f" key="textField-1" x="88" y="0" width="197" height="18" evaluationTime="Report" pattern="" blankWhenNull="false" bold="false" hTextAlign="Left">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.inadimplenciageral.carteira.total.bancos", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="rectangle" uuid="55af2a64-d14b-4e4b-9f4f-8adbfd69b51a" positionType="Float" x="78" y="0" width="10" height="10" forecolor="#FEFEFE" backcolor="#007EFF"/>
+		<element kind="textField" uuid="8abd9bab-2f80-4c9f-ac41-fd0af599ad6f" key="textField-1" x="295" y="0" width="197" height="18" textAdjust="StretchHeight" evaluationTime="Report" pattern="" blankWhenNull="false" printWhenDetailOverflows="true" bold="false" hTextAlign="Left">
+			<expression><![CDATA[$P{nomeCsa}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="rectangle" uuid="55af2a64-d14b-4e4b-9f4f-8adbfd69b51a" positionType="Float" x="285" y="0" width="10" height="10" forecolor="#FEFEFE" backcolor="#FF0000"/>
+		<element kind="textField" uuid="8abd9bab-2f80-4c9f-ac41-fd0af599ad6f" key="textField-1" x="352" y="240" width="140" height="18" evaluationTime="Report" pattern="" blankWhenNull="false" bold="false" hTextAlign="Left">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.inadimplenciageral.inadimplente", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="8abd9bab-2f80-4c9f-ac41-fd0af599ad6f" key="textField-1" x="88" y="240" width="140" height="18" evaluationTime="Report" pattern="" blankWhenNull="false" bold="false" hTextAlign="Left">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.inadimplenciageral.total", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+	</summary>
+</jasperReport>

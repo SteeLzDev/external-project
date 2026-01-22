@@ -1,0 +1,95 @@
+package com.zetra.econsig.persistence.query.parcela;
+
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+
+import com.zetra.econsig.exception.HQueryException;
+import com.zetra.econsig.helper.texto.TextHelper;
+import com.zetra.econsig.persistence.query.HQuery;
+import com.zetra.econsig.values.Columns;
+
+/**
+ * <p>Title: ListaParcelasPeriodoQuery</p>
+ * <p>Description: Retorna as parcelas de um contrato na tabela do periodo.</p>
+ * <p>Copyright: Copyright (c) 2009</p>
+ * <p>Company: ZetraSoft</p>
+ * $Author$
+ * $Revision$
+ * $Date$
+ */
+@SuppressWarnings("java:S1104")
+public class ListaParcelasPeriodoQuery extends HQuery {
+
+    public String adeCodigo;
+    public List<String> spdCodigos;
+    public List<String> sadCodigos;
+
+    @Override
+    public Query<Object[]> preparar(Session session) throws HQueryException {
+        String corpo = "SELECT " +
+                       "prd.autDesconto.adeCodigo, " +
+                       "prd.prdNumero, " +
+                       "spd.spdCodigo, " +
+                       "spd.spdDescricao, " +
+                       "prd.prdDataDesconto, " +
+                       "prd.prdDataRealizado, " +
+                       "prd.prdVlrPrevisto, " +
+                       "prd.prdVlrRealizado, " +
+                       "prd.tipoDesconto.tdeCodigo ";
+
+        StringBuilder corpoBuilder = new StringBuilder(corpo);
+        corpoBuilder.append("FROM ParcelaDescontoPeriodo prd ");
+        corpoBuilder.append("INNER JOIN prd.statusParcelaDesconto spd ");
+
+        if (sadCodigos != null && !sadCodigos.isEmpty()) {
+            corpoBuilder.append("INNER JOIN prd.autDesconto ade ");
+        }
+
+        corpoBuilder.append("WHERE 1 = 1 ");
+
+        if (!TextHelper.isNull(adeCodigo)) {
+            corpoBuilder.append(" AND prd.autDesconto.adeCodigo ").append(criaClausulaNomeada("adeCodigo", adeCodigo));
+        }
+
+        if (spdCodigos != null && !spdCodigos.isEmpty()) {
+            corpoBuilder.append(" AND spd.spdCodigo ").append(criaClausulaNomeada("spdCodigo", spdCodigos));
+        }
+
+        if (sadCodigos != null && !sadCodigos.isEmpty()) {
+            corpoBuilder.append(" AND ade.statusAutorizacaoDesconto.sadCodigo ").append(criaClausulaNomeada("sadCodigo", sadCodigos));
+        }
+
+        Query<Object[]> query = instanciarQuery(session, corpoBuilder.toString());
+
+        if (!TextHelper.isNull(adeCodigo)) {
+            defineValorClausulaNomeada("adeCodigo", adeCodigo, query);
+        }
+
+        if (spdCodigos != null && !spdCodigos.isEmpty()) {
+            defineValorClausulaNomeada("spdCodigo", spdCodigos, query);
+        }
+
+        if (sadCodigos != null && !sadCodigos.isEmpty()) {
+            defineValorClausulaNomeada("sadCodigo", sadCodigos, query);
+        }
+
+        return query;
+    }
+
+    @Override
+    protected String[] getFields() {
+        return new String[] {
+                Columns.PRD_ADE_CODIGO,
+                Columns.PRD_NUMERO,
+                Columns.PRD_SPD_CODIGO,
+                Columns.SPD_DESCRICAO,
+                Columns.PRD_DATA_DESCONTO,
+                Columns.PRD_DATA_REALIZADO,
+                Columns.PRD_VLR_PREVISTO,
+                Columns.PRD_VLR_REALIZADO,
+                Columns.PRD_TDE_CODIGO
+        };
+    }
+}

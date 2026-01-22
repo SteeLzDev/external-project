@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="Usuario"
+    xmlns:ns20="PapelUsuario">
+  <xsd:import namespace="PapelUsuario" schemaLocation="PapelUsuario.xsd"/>
+  <xsd:complexType name="Usuario">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="1" name="login" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="nome" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="email" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="cpf" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="telefone" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="ipAcesso" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="dnsAcesso" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="dataFimVigencia" nillable="true" type="xsd:date"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="perfil" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="tipoEntidade" nillable="true" type="ns20:PapelUsuario"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="entidadeCodigo" nillable="true" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,26 @@
+-- DESENV-14146
+INSERT INTO tb_tipo_param_sist_consignante (TPC_CODIGO, TPC_DESCRICAO, TPC_DOMINIO, TPC_VLR_DEFAULT, TPC_CSE_ALTERA, TPC_CSE_CONSULTA, TPC_SUP_ALTERA, TPC_SUP_CONSULTA, GPS_CODIGO) 
+VALUES ('767', 'ID do agente de chatbot para usuários CSE/ORG/SUP autenticados', 'ALFA', NULL, 'N', 'N', 'N', 'N', NULL);
+
+INSERT INTO tb_tipo_param_sist_consignante (TPC_CODIGO, TPC_DESCRICAO, TPC_DOMINIO, TPC_VLR_DEFAULT, TPC_CSE_ALTERA, TPC_CSE_CONSULTA, TPC_SUP_ALTERA, TPC_SUP_CONSULTA, GPS_CODIGO) 
+VALUES ('768', 'ID do agente de chatbot para usuários CSA/COR autenticados', 'ALFA', NULL, 'N', 'N', 'N', 'N', NULL);
+
+INSERT INTO tb_tipo_param_sist_consignante (TPC_CODIGO, TPC_DESCRICAO, TPC_DOMINIO, TPC_VLR_DEFAULT, TPC_CSE_ALTERA, TPC_CSE_CONSULTA, TPC_SUP_ALTERA, TPC_SUP_CONSULTA, GPS_CODIGO) 
+VALUES ('769', 'ID do agente de chatbot para usuários SER autenticados', 'ALFA', NULL, 'N', 'N', 'N', 'N', NULL);
+
+INSERT INTO tb_tipo_param_sist_consignante (TPC_CODIGO, TPC_DESCRICAO, TPC_DOMINIO, TPC_VLR_DEFAULT, TPC_CSE_ALTERA, TPC_CSE_CONSULTA, TPC_SUP_ALTERA, TPC_SUP_CONSULTA, GPS_CODIGO) 
+VALUES ('770', 'ID do agente de chatbot para usuários não autenticados na página de login', 'ALFA', NULL, 'N', 'N', 'N', 'N', NULL);
+
+INSERT INTO tb_tipo_param_sist_consignante (TPC_CODIGO, TPC_DESCRICAO, TPC_DOMINIO, TPC_VLR_DEFAULT, TPC_CSE_ALTERA, TPC_CSE_CONSULTA, TPC_SUP_ALTERA, TPC_SUP_CONSULTA, GPS_CODIGO) 
+VALUES ('771', 'ID do agente de chatbot para servidores não autenticados na página de login', 'ALFA', NULL, 'N', 'N', 'N', 'N', NULL);
+
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15910', NULL, NULL, '/v3/iniciarChatbot', NULL, NULL, 1, 'N', 'N', NULL, 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15911', NULL, NULL, '/v3/enviarMensagemChatbot', NULL, NULL, 1, 'N', 'N', NULL, 'N', '2');
+
+
+INSERT INTO tb_tipo_entidade (TEN_CODIGO, TEN_DESCRICAO, TEN_CAMPO_ENT_00) 
+VALUES ('116', 'Atendimento via Chatbot', 'ATE_CODIGO');

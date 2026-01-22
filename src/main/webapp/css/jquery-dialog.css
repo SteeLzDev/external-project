@@ -1,0 +1,23 @@
+.dialog {
+    display: none; 
+    background-color: #F2F2F2; 
+    padding: 5px; 
+    color: #000000; 
+    font-weight: bold;
+}
+.ui-widget-overlay.custom-overlay {
+    background-color: #333333;
+    background-image: none;
+    opacity: 0.6;
+}
+.ui-dialog-buttonpane .ui-dialog-buttonset { 
+    text-align: center;
+    float: none !important;
+}
+.ui-dialog-buttonset .ui-button-spl1{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    color: #000000;
+    padding: 3px 10px 3px 10px; 
+    margin: 0 10px;
+}

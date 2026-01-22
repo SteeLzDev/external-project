@@ -1,0 +1,17 @@
+<Documento>
+        <Atributo Nome="CSA_IDENTIFICADOR" Indice="0" />
+        <Atributo Nome="DELIMITADOR" Indice="1" Default=";" />
+        <Atributo Nome="CSA_NOME" Indice="2" />
+        <Atributo Nome="DELIMITADOR" Indice="3" Default=";" />
+        <Atributo Nome="FAT_PERIODO" Indice="4" />
+        <Atributo Nome="DELIMITADOR" Indice="5" Default=";" />
+        <Atributo Nome="RSE_MATRICULA" Indice="6" />
+        <Atributo Nome="DELIMITADOR" Indice="7" Default=";" />
+        <Atributo Nome="CBE_NUMERO" Indice="8" />
+        <Atributo Nome="DELIMITADOR" Indice="9" Default=";" />
+        <Atributo Nome="TLA_CODIGO" Indice="10" />
+        <Atributo Nome="DELIMITADOR" Indice="11" Default=";" />
+        <Atributo Nome="VALOR_DEBITO" Indice="12" />
+        <Atributo Nome="DELIMITADOR" Indice="13" Default=";" />
+        <Atributo Nome="MOTIVO" Indice="14" />
+</Documento>

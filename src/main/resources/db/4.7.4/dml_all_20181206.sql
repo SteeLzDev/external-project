@@ -1,0 +1,14 @@
+-- DESENV-10090
+INSERT INTO tb_tipo_ocorrencia (TOC_CODIGO, TOC_DESCRICAO) 
+VALUES ('161', 'Retificação de motivo de operação');
+
+INSERT INTO tb_funcao (FUN_CODIGO, GRF_CODIGO, FUN_DESCRICAO, FUN_PERMITE_BLOQUEIO, FUN_EXIGE_TMO, FUN_EXIGE_SEGUNDA_SENHA_CSE, FUN_AUDITAVEL, FUN_RESTRITA_NCA, FUN_EXIGE_SEGUNDA_SENHA_SUP, FUN_EXIGE_SEGUNDA_SENHA_ORG, FUN_EXIGE_SEGUNDA_SENHA_CSA, FUN_EXIGE_SEGUNDA_SENHA_COR)
+VALUES ('436', '23', 'Registrar Ocorrência de Contrato de Benefício', 'N', 'N', 'N', 'S', 'N', 'N', 'N', 'N', 'N');
+
+-- INSERT INTO tb_papel_funcao (pap_codigo, fun_codigo) VALUES ('7', '436');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP) 
+VALUES ('15045', '7', '436', '/v3/registrarOcorrenciaContratoBeneficio', 'acao', 'iniciar', 1, 'S', 'S', NULL, 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP) 
+VALUES ('15047', '7', '436', '/v3/registrarOcorrenciaContratoBeneficio', 'acao', 'salvar', 1, 'S', 'S', NULL, 'N', '2');

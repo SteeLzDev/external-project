@@ -1,0 +1,171 @@
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 7.0.2-31532122640f516c6d17238ae0e41a08113d5ac0  -->
+<jasperReport name="Reclamacoes" language="java" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="782" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="861e7880-2e9b-48cd-8475-4da4bf630c4b">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="456"/>
+	<property name="ireport.y" value="0"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box padding="0" leftPadding="2" rightPadding="2"/>
+	</style>
+	<parameter name="CAMINHO_LOGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SUBTITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Subtitulo do relatório]]></description>
+	</parameter>
+	<parameter name="TEXTO_RODAPE" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Nome do Gestor(Consignante)]]></description>
+	</parameter>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="FORMATO_ARQUIVO" forPrompting="false" class="java.lang.String">
+		<defaultValueExpression><![CDATA["PDF"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<query language="sql"><![CDATA[select comunicaca0_.CMN_CODIGO
+, comunicaca0_.CMN_NUMERO
+, comunicaca0_.CMN_DATA
+, comunicaca0_.CMN_TEXTO
+, comunicaca0_.CMN_PENDENCIA
+, comunicaca0_.CMN_CODIGO_PAI
+, comunicaca0_.CMN_IP_ACESSO
+, usuario18_.USU_LOGIN
+, usuario18_.USU_NOME
+, comunicaca0_.USU_CODIGO
+, consignant2_.CSE_CODIGO
+, consignata4_.CSA_CODIGO
+, servidor6_.SER_CODIGO
+, registrose7_.RSE_CODIGO
+, registrose7_.RSE_MATRICULA
+, usuariocsa12_.CSA_CODIGO AS UCA_CSA_CODIGO
+, usuariocse13_.CSE_CODIGO AS UCE_CSE_CODIGO
+, usuariocor14_.COR_CODIGO AS UCO_COR_CODIGO
+, usuarioorg15_.org_codigo AS UOR_ORG_CODIGO
+, usuarioser16_.SER_CODIGO AS USE_SER_CODIGO
+, usuariosup17_.CSE_CODIGO AS USP_CSE_CODIGO
+, comunicaca1_.CME_DESTINATARIO
+, comunicaca3_.CMC_DESTINATARIO
+, comunicaca5_.CMS_DESTINATARIO
+, case when comunicaca1_.CME_DESTINATARIO='S' then consignant2_.CSE_CODIGO when comunicaca3_.CMC_DESTINATARIO='S' then consignata4_.CSA_CODIGO when comunicaca5_.CMS_DESTINATARIO='S' then servidor6_.SER_CODIGO end as CODIGO_ENTIDADE_DESTINATARIO
+, case when comunicaca1_.CME_DESTINATARIO='S' then 'CSE' when comunicaca3_.CMC_DESTINATARIO='S' then 'CSA' when comunicaca5_.CMS_DESTINATARIO='S' then 'SER' end as TIPO_ENTIDADE_DESTINATARIO
+, case when comunicaca1_.CME_DESTINATARIO='S' then consignant2_.CSE_NOME when comunicaca3_.CMC_DESTINATARIO='S' then consignata4_.CSA_NOME when comunicaca5_.CMS_DESTINATARIO='S' then servidor6_.SER_NOME end as NOME_ENTIDADE_DESTINATARIO
+, case when comunicaca1_.CME_DESTINATARIO='N' then consignant2_.CSE_CODIGO when comunicaca3_.CMC_DESTINATARIO='N' then consignata4_.CSA_CODIGO when comunicaca5_.CMS_DESTINATARIO='N' then servidor6_.SER_CODIGO end as CODIGO_ENTIDADE_REMETENTE
+, case when comunicaca1_.CME_DESTINATARIO='N' then 'CSE' when comunicaca3_.CMC_DESTINATARIO='N' then 'CSA' when comunicaca5_.CMS_DESTINATARIO='N' then 'SER' end as TIPO_ENTIDADE_REMETENTE
+, case when comunicaca1_.CME_DESTINATARIO='N' then consignant2_.CSE_NOME when comunicaca3_.CMC_DESTINATARIO='N' then consignata4_.CSA_NOME when comunicaca5_.CMS_DESTINATARIO='N' then servidor6_.SER_NOME end as NOME_ENTIDADE_REMETENTE
+from tb_comunicacao comunicaca0_
+left outer join tb_comunicacao_cse comunicaca1_ on comunicaca0_.CMN_CODIGO=comunicaca1_.CMN_CODIGO
+left outer join tb_consignante consignant2_ on comunicaca1_.CSE_CODIGO=consignant2_.CSE_CODIGO
+left outer join tb_comunicacao_csa comunicaca3_ on comunicaca0_.CMN_CODIGO=comunicaca3_.CMN_CODIGO
+left outer join tb_consignataria consignata4_ on comunicaca3_.CSA_CODIGO=consignata4_.CSA_CODIGO
+left outer join tb_comunicacao_ser comunicaca5_ on comunicaca0_.CMN_CODIGO=comunicaca5_.CMN_CODIGO
+left outer join tb_servidor servidor6_ on comunicaca5_.SER_CODIGO=servidor6_.SER_CODIGO
+left outer join tb_registro_servidor registrose7_ on comunicaca5_.RSE_CODIGO=registrose7_.RSE_CODIGO
+left outer join tb_orgao orgao8_ on registrose7_.ORG_CODIGO=orgao8_.ORG_CODIGO
+left outer join tb_estabelecimento estabeleci9_ on orgao8_.EST_CODIGO=estabeleci9_.EST_CODIGO
+left outer join tb_status_registro_servidor statusregi10_ on registrose7_.SRS_CODIGO=statusregi10_.SRS_CODIGO
+inner join tb_usuario usuario11_ on comunicaca0_.USU_CODIGO=usuario11_.USU_CODIGO
+left outer join tb_usuario_csa usuariocsa12_ on usuario11_.USU_CODIGO=usuariocsa12_.USU_CODIGO
+left outer join tb_usuario_cse usuariocse13_ on usuario11_.USU_CODIGO=usuariocse13_.USU_CODIGO
+left outer join tb_usuario_cor usuariocor14_ on usuario11_.USU_CODIGO=usuariocor14_.USU_CODIGO
+left outer join tb_usuario_org usuarioorg15_ on usuario11_.USU_CODIGO=usuarioorg15_.usu_codigo
+left outer join tb_usuario_ser usuarioser16_ on usuario11_.USU_CODIGO=usuarioser16_.USU_CODIGO
+left outer join tb_usuario_sup usuariosup17_ on usuario11_.USU_CODIGO=usuariosup17_.USU_CODIGO
+, tb_usuario usuario18_
+where comunicaca0_.USU_CODIGO=usuario18_.USU_CODIGO
+and 1=1
+and (comunicaca0_.CMN_CODIGO_PAI is null)
+order by comunicaca0_.CMN_DATA DESC limit 10;]]></query>
+	<field name="marDescricao" class="java.lang.String"/>
+	<field name="marPorcentagem" class="java.lang.String"/>
+	<field name="exibeMargemNegativaCsa" class="java.lang.String"/>
+	<variable name="BACKGROUND" calculation="DistinctCount" class="java.lang.Integer">
+		<expression><![CDATA[$F{marDescricao}]]></expression>
+		<initialValueExpression><![CDATA[new java.lang.String()]]></initialValueExpression>
+	</variable>
+	<background splitType="Stretch"/>
+	<title splitType="Stretch"/>
+	<pageHeader height="26" splitType="Stretch">
+		<element kind="textField" uuid="f63ceb9c-b66e-4c68-9c00-c8e3f756a5a1" key="textField-20" stretchType="ElementGroupHeight" x="0" y="0" width="777" height="26" fontName="Arial" textAdjust="StretchHeight" blankWhenNull="false" bold="true" hTextAlign="Left">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.regras.convenio.margem.titulo", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+	</pageHeader>
+	<columnHeader height="32" splitType="Stretch">
+		<element kind="textField" uuid="7a307606-705b-476b-a9ea-880232bc3b85" key="staticText-1" stretchType="ElementGroupHeight" mode="Opaque" x="0" y="0" width="230" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="9.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.regras.convenio.margem.descricao", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="92f5f2b7-31be-4521-95b6-dbed4f57a99f" key="staticText-2" stretchType="ElementGroupHeight" mode="Opaque" x="344" y="0" width="166" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="9.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.regras.convenio.margem.exibe.negativa.csa", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="ff72c74c-5acf-49d0-8235-49f20b6f5cf2" key="staticText-3" stretchType="ElementGroupHeight" mode="Opaque" x="230" y="0" width="114" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="9.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.regras.convenio.margem.porcentagem", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Prevent">
+			<element kind="staticText" uuid="50da7c72-217f-462e-a4f8-aabb17feb4fe" key="fundoLinha" stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="510" height="10" backcolor="#DDDDDD" printRepeatedValues="false">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0)]]></printWhenExpression>
+				<text><![CDATA[ ]]></text>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="971b52e1-6ad4-4fa0-95c8-6037bc5b9474" key="textField" stretchType="ElementGroupHeight" x="0" y="0" width="230" height="10" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Center" vTextAlign="Top" style="Celula">
+				<expression><![CDATA[$F{marDescricao}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.25" lineStyle="Solid"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="e6abe9cb-8548-496a-9b79-c41c1f7d0f58" key="textField" stretchType="ElementGroupHeight" x="344" y="0" width="166" height="10" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Center" vTextAlign="Top" style="Celula">
+				<expression><![CDATA[$F{exibeMargemNegativaCsa}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.25" lineStyle="Solid"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="971b52e1-6ad4-4fa0-95c8-6037bc5b9474" key="textField" stretchType="ElementGroupHeight" x="230" y="0" width="114" height="10" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Center" vTextAlign="Top" style="Celula">
+				<expression><![CDATA[$F{marPorcentagem}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.25" lineStyle="Solid"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid"/>
+				</box>
+			</element>
+		</band>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+</jasperReport>

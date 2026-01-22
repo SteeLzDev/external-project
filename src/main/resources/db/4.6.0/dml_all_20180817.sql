@@ -1,0 +1,13 @@
+-- DESENV-8795
+
+INSERT INTO tb_tipo_param_sist_consignante (TPC_CODIGO, GPS_CODIGO, TPC_DESCRICAO, TPC_DOMINIO, TPC_CSE_ALTERA, TPC_CSE_CONSULTA, TPC_VLR_DEFAULT, TPC_SUP_ALTERA, TPC_SUP_CONSULTA) 
+VALUES ('608', NULL, 'Criptografa arquivos do repositório externo do sistema', 'SN', 'N', 'N', 'N', 'N', 'N');
+
+INSERT INTO tb_param_sist_consignante (TPC_CODIGO, CSE_CODIGO, PSI_VLR)
+VALUES ('608', '1', 'N');
+
+INSERT INTO tb_papel (PAP_CODIGO, PAP_DESCRICAO) 
+VALUES ('5', 'ESTABELECIMENTO');
+
+INSERT INTO tb_tipo_arquivo (TAR_CODIGO, TAR_DESCRICAO, TAR_QTD_DIAS_LIMPEZA, TAR_UPLOAD_SUP, TAR_UPLOAD_CSE, TAR_UPLOAD_ORG, TAR_UPLOAD_CSA, TAR_UPLOAD_COR)
+VALUES ('39', 'Arquivo Cadastro de Margem Complementar', 0, 'S', 'S', 'S', 'N', 'N');

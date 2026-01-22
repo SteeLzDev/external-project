@@ -1,0 +1,110 @@
+package com.zetra.econsig.values;
+
+/**
+ * <p>Title: AgendamentoEnum</p>
+ * <p>Description: Enumeração de agendamentos.</p>
+ * <p>Copyright: Copyright (c) 2010</p>
+ * <p>Company: ZetraSoft</p>
+ * $Author$
+ * $Revision$
+ * $Date$
+ */
+public enum AgendamentoEnum {
+
+    CANCELAMENTO_AUTOMATICO_CONSIGNACOES("1"),
+    BLOQUEIO_CONSIGNATARIAS("2"),
+    CONTROLE_COMPRA_CONTRATO("3"),
+    VALIDA_LICENCA("4"),
+    CANCELAMENTO_SENHA_USUARIOS("5"),
+    VERIFICAR_SOLICITACAO_SALDO_DEVEDOR("6"),
+    LIMPEZA_COEFICIENTES_INATIVOS("7"),
+    BLOQUEIO_USUARIO_INATIVO("8"),
+    VALIDACAO_AMBIENTE_ECONSIG("9"),
+    BLOQUEIO_CSA_COMUNICACAO_PENDENTE("10"),
+    EXCLUSAO_RELATORIOS_ANTIGOS("11"),
+    GERA_HISTORICO_LOG("12"),
+    LIMPEZA_ARQUIVOS_ANTIGOS("13"),
+    RELATORIO_AUDITORIA("14"),
+    EMAIL_DIAS_PARA_BLOQUEIO_CSA("15"),
+    VALIDA_RELATORIO_INTEGRA_CSA("16"),
+    BLOQUEIO_USUARIO_FIM_VIGENCIA("17"),
+    DEFERIMENTO_AUTOMATICO_CONSIGNACOES("18"),
+    ATUALIZA_TABELA_CALENDARIO("19"),
+    ANIVERSARIO_CONVENIO("20"),
+    BLOQUEIO_CSA_LIQ_PENDENTE_ADE_PAGA_ANEXO("21"),
+    BLOQUEIO_CSA_MENSAGEM_NAO_LIDA("22"),
+    EMAIL_ALERTA_PROXIMIDADE_CORTE_CSA("23"),
+    ARQUIVAMENTO_CONSIGNACOES_FINALIZADAS("24"),
+    ENCERRAMENTO_LEILAO_SOLICITACAO("25"),
+    CONTROLE_PROCESSAMENTO_LOTE("26"),
+    LIQUIDACAO_AUTOMATICA_ADE_COMPRA("27"),
+    ENVIA_NOTIFICACAO_NOVA_PROPOSTA_LEILAO_DISPOSITVO("28"),
+    ENVIO_NOTIFICACAO_ENVIO_ARQUIVOS_FOLHA("29"),
+    ENVIO_ARQUIVOS_PARA_ASSINATURA("30"),
+    VERIFICACAO_ASSINATURA_DIGITAL_ARQUIVOS("31"),
+    ENVIO_NOTIFICACAO_EMAIL("32"),
+    ENVIO_NOTIFICACAO_EMAIL_RETORNO_SERVIDOR("33"),
+    ENVIO_NOTIFICACAO_EMAIL_CANCELAMENTO_CADASTRO_SERVIDOR("34"),
+    ENVIO_NOTIFICACAO_BLOQUEIO_USUARIO_INATIVO("35"),
+    ENVIO_EMAIL_DOWNLOAD_NAO_REALIZADO_MOV_FIN("36"),
+    ENVIO_NOTIFICACAO_EMAIL_COMUNICACAO_NAO_LIDA("37"),
+    REATIVACAO_AUTOMATICA_CONSIGNACAO("38"),
+    DESFAZER_CANCELAMENTO_SOLICITACAO_BENEFICIARIO("39"),
+    BLOQUEIO_CSA_ADE_SEM_NUM_ANEXOS_MINIMO("40"),
+    DESBLOQUEIO_AUTOMAT_CSA_PRAZO_PENALIDADE("41"),
+    GERA_ARQUIVO_MOVIMENTO_RESCISAO("42"),
+    BLOQUEIO_CONSIGNATARIA_NAO_CONFIRMACAO_SOLICITACAO_LIQUIDACAO("43"),
+    REMOVER_OPERACOES_LIBERACAO_MARGEM_POS_PRAZO("44"),
+    BLOQUEIO_PERFIL_DATA_EXPIRACAO("45"),
+    EMAIL_MENSAL_CSA_ATUALIZACAO_CET("46"),
+    EMAIL_DIARIO_CSA_CONTROLE_CET("47"),
+    AVALIACAO_OPERACAO_LIBERA_MARGEM_CONTROLE_SEGURANCA("48"),
+    EMAIL_SERVIDOR_CONTRATOS_SUSPENSOS_REATIVACAO("49"),
+    BLOQUEIO_CSA_POR_CET_EXPIRADO("50"),
+    EXPORTA_ORGAO_AUTOMATICAMENTE("51"),
+    CARREGA_CALENDARIO_FOLHA_AUTOMATICAMENTE("52"),
+    ENVIO_NOTIFICACAO_EMAIL_NOVO_VINCULO_CSA("53"),
+    GERA_ARQUIVO_MARGEM_SERVICO_EXTERNO("54"),
+    LIMPEZA_HISTORICO_OCORR_AGENDAMENTO("55"),
+    LIBERA_MARGEM_CONTRATO_RENEGOCIACAO_MENOR_PRAZO_ATINGIDO("56"),
+    ENVIO_NOTIFICACAO_VENCIMENTO_AUTORIZACAO("57"),
+    ENVIO_NOTIFICACAO_PRAZO_EXPIRACAO_SENHA("58"),
+    ENVIO_NOTIFICACAO_CSA_ALTERACAO_REGRA_CONVENIO("59")
+    ;
+
+    private final String codigo;
+
+    private AgendamentoEnum(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    /**
+     * Recupera um agendamento de acordo com o código passado.
+     *
+     * @param codigo Código do agendamento que deve ser recuperado.
+     * @return Retorna um agendamento
+     *
+     * @throws IllegalArgumentException Caso o código do agendamento informádo seja inválido
+     */
+    public static AgendamentoEnum recuperaTipoAgendamento(String codigo) {
+        AgendamentoEnum agendamento = null;
+
+        for (final AgendamentoEnum tipo : AgendamentoEnum.values()) {
+            if (tipo.getCodigo().equals(codigo)) {
+                agendamento = tipo;
+                break;
+            }
+        }
+
+        if (agendamento == null) {
+            throw new IllegalArgumentException("Código informado para o agendamento inválido!");
+        }
+
+        return agendamento;
+    }
+
+}

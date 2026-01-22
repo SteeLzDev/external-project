@@ -1,0 +1,548 @@
+//
+// Este arquivo foi gerado pela Eclipse Implementation of JAXB, v4.0.3 
+// Consulte https://eclipse-ee4j.github.io/jaxb-ri 
+// Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
+//
+
+
+package com.zetra.econsig.webservice.soap.operacional.v8;
+
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+
+
+/**
+ * <p>Classe Java de anonymous complex type.
+ * 
+ * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * 
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="cliente" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="convenio" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="usuario" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="senha" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="adeNumero" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
+ *         <element name="adeIdentificador" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="novoAdeIdentificador" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="senhaServidor" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="loginServidor" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="tokenAutServidor" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="codigoAutorizacao" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="coeficiente" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
+ *         <element name="alteraValorLiberado" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
+ *         <element name="banco" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="agencia" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="conta" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="codigoMotivoOperacao" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="obsMotivoOperacao" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "", propOrder = {
+    "cliente",
+    "convenio",
+    "usuario",
+    "senha",
+    "adeNumero",
+    "adeIdentificador",
+    "novoAdeIdentificador",
+    "senhaServidor",
+    "loginServidor",
+    "tokenAutServidor",
+    "codigoAutorizacao",
+    "coeficiente",
+    "alteraValorLiberado",
+    "banco",
+    "agencia",
+    "conta",
+    "codigoMotivoOperacao",
+    "obsMotivoOperacao"
+})
+@XmlRootElement(name = "confirmarSolicitacao", namespace = "HostaHostService-v8_0")
+public class ConfirmarSolicitacao {
+
+    @XmlElementRef(name = "cliente", namespace = "HostaHostService-v8_0", type = JAXBElement.class, required = false)
+    protected JAXBElement<java.lang.String> cliente;
+    @XmlElementRef(name = "convenio", namespace = "HostaHostService-v8_0", type = JAXBElement.class, required = false)
+    protected JAXBElement<java.lang.String> convenio;
+    @XmlElement(namespace = "HostaHostService-v8_0", required = true)
+    protected java.lang.String usuario;
+    @XmlElement(namespace = "HostaHostService-v8_0", required = true)
+    protected java.lang.String senha;
+    @XmlElementRef(name = "adeNumero", namespace = "HostaHostService-v8_0", type = JAXBElement.class, required = false)
+    protected JAXBElement<java.lang.Long> adeNumero;
+    @XmlElementRef(name = "adeIdentificador", namespace = "HostaHostService-v8_0", type = JAXBElement.class, required = false)
+    protected JAXBElement<java.lang.String> adeIdentificador;
+    @XmlElementRef(name = "novoAdeIdentificador", namespace = "HostaHostService-v8_0", type = JAXBElement.class, required = false)
+    protected JAXBElement<java.lang.String> novoAdeIdentificador;
+    @XmlElement(namespace = "HostaHostService-v8_0")
+    protected java.lang.String senhaServidor;
+    @XmlElement(namespace = "HostaHostService-v8_0")
+    protected java.lang.String loginServidor;
+    @XmlElement(namespace = "HostaHostService-v8_0")
+    protected java.lang.String tokenAutServidor;
+    @XmlElement(namespace = "HostaHostService-v8_0")
+    protected java.lang.String codigoAutorizacao;
+    @XmlElement(namespace = "HostaHostService-v8_0")
+    protected java.lang.Double coeficiente;
+    @XmlElement(namespace = "HostaHostService-v8_0")
+    protected java.lang.Boolean alteraValorLiberado;
+    @XmlElementRef(name = "banco", namespace = "HostaHostService-v8_0", type = JAXBElement.class, required = false)
+    protected JAXBElement<java.lang.String> banco;
+    @XmlElementRef(name = "agencia", namespace = "HostaHostService-v8_0", type = JAXBElement.class, required = false)
+    protected JAXBElement<java.lang.String> agencia;
+    @XmlElementRef(name = "conta", namespace = "HostaHostService-v8_0", type = JAXBElement.class, required = false)
+    protected JAXBElement<java.lang.String> conta;
+    @XmlElementRef(name = "codigoMotivoOperacao", namespace = "HostaHostService-v8_0", type = JAXBElement.class, required = false)
+    protected JAXBElement<java.lang.String> codigoMotivoOperacao;
+    @XmlElementRef(name = "obsMotivoOperacao", namespace = "HostaHostService-v8_0", type = JAXBElement.class, required = false)
+    protected JAXBElement<java.lang.String> obsMotivoOperacao;
+
+    /**
+     * Obtém o valor da propriedade cliente.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link java.lang.String }{@code >}
+     *     
+     */
+    public JAXBElement<java.lang.String> getCliente() {
+        return cliente;
+    }
+
+    /**
+     * Define o valor da propriedade cliente.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link java.lang.String }{@code >}
+     *     
+     */
+    public void setCliente(JAXBElement<java.lang.String> value) {
+        this.cliente = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade convenio.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link java.lang.String }{@code >}
+     *     
+     */
+    public JAXBElement<java.lang.String> getConvenio() {
+        return convenio;
+    }
+
+    /**
+     * Define o valor da propriedade convenio.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link java.lang.String }{@code >}
+     *     
+     */
+    public void setConvenio(JAXBElement<java.lang.String> value) {
+        this.convenio = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade usuario.
+     * 
+     * @return
+     *     possible object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public java.lang.String getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * Define o valor da propriedade usuario.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public void setUsuario(java.lang.String value) {
+        this.usuario = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade senha.
+     * 
+     * @return
+     *     possible object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public java.lang.String getSenha() {
+        return senha;
+    }
+
+    /**
+     * Define o valor da propriedade senha.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public void setSenha(java.lang.String value) {
+        this.senha = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade adeNumero.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link java.lang.Long }{@code >}
+     *     
+     */
+    public JAXBElement<java.lang.Long> getAdeNumero() {
+        return adeNumero;
+    }
+
+    /**
+     * Define o valor da propriedade adeNumero.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link java.lang.Long }{@code >}
+     *     
+     */
+    public void setAdeNumero(JAXBElement<java.lang.Long> value) {
+        this.adeNumero = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade adeIdentificador.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link java.lang.String }{@code >}
+     *     
+     */
+    public JAXBElement<java.lang.String> getAdeIdentificador() {
+        return adeIdentificador;
+    }
+
+    /**
+     * Define o valor da propriedade adeIdentificador.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link java.lang.String }{@code >}
+     *     
+     */
+    public void setAdeIdentificador(JAXBElement<java.lang.String> value) {
+        this.adeIdentificador = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade novoAdeIdentificador.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link java.lang.String }{@code >}
+     *     
+     */
+    public JAXBElement<java.lang.String> getNovoAdeIdentificador() {
+        return novoAdeIdentificador;
+    }
+
+    /**
+     * Define o valor da propriedade novoAdeIdentificador.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link java.lang.String }{@code >}
+     *     
+     */
+    public void setNovoAdeIdentificador(JAXBElement<java.lang.String> value) {
+        this.novoAdeIdentificador = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade senhaServidor.
+     * 
+     * @return
+     *     possible object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public java.lang.String getSenhaServidor() {
+        return senhaServidor;
+    }
+
+    /**
+     * Define o valor da propriedade senhaServidor.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public void setSenhaServidor(java.lang.String value) {
+        this.senhaServidor = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade loginServidor.
+     * 
+     * @return
+     *     possible object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public java.lang.String getLoginServidor() {
+        return loginServidor;
+    }
+
+    /**
+     * Define o valor da propriedade loginServidor.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public void setLoginServidor(java.lang.String value) {
+        this.loginServidor = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade tokenAutServidor.
+     * 
+     * @return
+     *     possible object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public java.lang.String getTokenAutServidor() {
+        return tokenAutServidor;
+    }
+
+    /**
+     * Define o valor da propriedade tokenAutServidor.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public void setTokenAutServidor(java.lang.String value) {
+        this.tokenAutServidor = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade codigoAutorizacao.
+     * 
+     * @return
+     *     possible object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public java.lang.String getCodigoAutorizacao() {
+        return codigoAutorizacao;
+    }
+
+    /**
+     * Define o valor da propriedade codigoAutorizacao.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public void setCodigoAutorizacao(java.lang.String value) {
+        this.codigoAutorizacao = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade coeficiente.
+     * 
+     * @return
+     *     possible object is
+     *     {@link java.lang.Double }
+     *     
+     */
+    public java.lang.Double getCoeficiente() {
+        return coeficiente;
+    }
+
+    /**
+     * Define o valor da propriedade coeficiente.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link java.lang.Double }
+     *     
+     */
+    public void setCoeficiente(java.lang.Double value) {
+        this.coeficiente = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade alteraValorLiberado.
+     * 
+     * @return
+     *     possible object is
+     *     {@link java.lang.Boolean }
+     *     
+     */
+    public java.lang.Boolean getAlteraValorLiberado() {
+        return alteraValorLiberado;
+    }
+
+    /**
+     * Define o valor da propriedade alteraValorLiberado.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link java.lang.Boolean }
+     *     
+     */
+    public void setAlteraValorLiberado(java.lang.Boolean value) {
+        this.alteraValorLiberado = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade banco.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link java.lang.String }{@code >}
+     *     
+     */
+    public JAXBElement<java.lang.String> getBanco() {
+        return banco;
+    }
+
+    /**
+     * Define o valor da propriedade banco.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link java.lang.String }{@code >}
+     *     
+     */
+    public void setBanco(JAXBElement<java.lang.String> value) {
+        this.banco = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade agencia.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link java.lang.String }{@code >}
+     *     
+     */
+    public JAXBElement<java.lang.String> getAgencia() {
+        return agencia;
+    }
+
+    /**
+     * Define o valor da propriedade agencia.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link java.lang.String }{@code >}
+     *     
+     */
+    public void setAgencia(JAXBElement<java.lang.String> value) {
+        this.agencia = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade conta.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link java.lang.String }{@code >}
+     *     
+     */
+    public JAXBElement<java.lang.String> getConta() {
+        return conta;
+    }
+
+    /**
+     * Define o valor da propriedade conta.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link java.lang.String }{@code >}
+     *     
+     */
+    public void setConta(JAXBElement<java.lang.String> value) {
+        this.conta = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade codigoMotivoOperacao.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link java.lang.String }{@code >}
+     *     
+     */
+    public JAXBElement<java.lang.String> getCodigoMotivoOperacao() {
+        return codigoMotivoOperacao;
+    }
+
+    /**
+     * Define o valor da propriedade codigoMotivoOperacao.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link java.lang.String }{@code >}
+     *     
+     */
+    public void setCodigoMotivoOperacao(JAXBElement<java.lang.String> value) {
+        this.codigoMotivoOperacao = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade obsMotivoOperacao.
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link java.lang.String }{@code >}
+     *     
+     */
+    public JAXBElement<java.lang.String> getObsMotivoOperacao() {
+        return obsMotivoOperacao;
+    }
+
+    /**
+     * Define o valor da propriedade obsMotivoOperacao.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link java.lang.String }{@code >}
+     *     
+     */
+    public void setObsMotivoOperacao(JAXBElement<java.lang.String> value) {
+        this.obsMotivoOperacao = value;
+    }
+
+}

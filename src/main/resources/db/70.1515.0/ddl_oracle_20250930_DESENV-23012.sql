@@ -1,0 +1,1 @@
+ALTER TABLE tb_usuario MODIFY usu_senha varchar(264) NULL;

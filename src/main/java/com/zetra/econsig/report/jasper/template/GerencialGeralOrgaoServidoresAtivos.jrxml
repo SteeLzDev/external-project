@@ -1,0 +1,66 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="GerencialGeralOrgaoServidoresAtivos" language="java" pageWidth="535" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" scriptletClass="com.zetra.econsig.report.reports.HeadingsScriptlet" uuid="fde5f427-f3bb-4777-b92e-2bd2dde9e10d">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="1.996500000000001"/>
+	<property name="ireport.x" value="197"/>
+	<property name="ireport.y" value="0"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box padding="0" leftPadding="2" rightPadding="2"/>
+	</style>
+	<parameter name="CAMINHO_LOGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SUBTITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Subtitulo do relatório]]></description>
+	</parameter>
+	<parameter name="TEXTO_RODAPE" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Nome do Gestor(Consignante)]]></description>
+	</parameter>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="FORMATO_ARQUIVO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="HeadingsCollection" forPrompting="false" class="java.util.Collection"/>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<parameter name="QTDE_SER_ATIVOS" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QTDE_ORGAOS_ATIVOS" forPrompting="false" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<query language="sql"><![CDATA[]]></query>
+	<field name="nome" class="java.lang.String"/>
+	<field name="quantidade" class="java.lang.Long"/>
+	<variable name="BACKGROUND" calculation="DistinctCount" class="java.lang.Integer">
+		<expression><![CDATA[$V{BACKGROUND}]]></expression>
+		<initialValueExpression><![CDATA[new java.lang.Integer(0)]]></initialValueExpression>
+	</variable>
+	<background splitType="Stretch"/>
+	<title height="52" splitType="Stretch">
+		<element kind="textField" uuid="19a5a667-5080-42df-aad9-c0f26313ce3e" key="textField-4" stretchType="ContainerHeight" x="1" y="1" width="522" height="23" fontName="Arial" fontSize="10.0" blankWhenNull="false" printWhenDetailOverflows="true" bold="true">
+			<expression><![CDATA["3.6. " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeral.orgao.servidores.ativos", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="19a5a667-5080-42df-aad9-c0f26313ce3e" key="textField-4" stretchType="ContainerHeight" x="1" y="24" width="522" height="28" fontName="Arial" fontSize="10.0" blankWhenNull="true" printWhenDetailOverflows="true" bold="false">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeral.orgao.servidores.ativos.descricao", $P{RESPONSAVEL},$P{QTDE_ORGAOS_ATIVOS}.toString(),$P{QTDE_SER_ATIVOS}.toString())]]></expression>
+		</element>
+	</title>
+	<columnHeader height="35" splitType="Stretch">
+		<element kind="textField" uuid="02a52caf-8867-4164-8495-c4a8583e9948" key="staticText-9" mode="Opaque" x="0" y="0" width="253" height="34" markup="none" fontName="Arial" blankWhenNull="true" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.orgao.plural", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="5a4cf308-7f2c-498d-9dd9-467ffa1f447d" key="header-3" positionType="Float" mode="Opaque" x="415" y="1" width="108" height="34" backcolor="#FEFEFE" fontName="Arial" fontSize="9.0" blankWhenNull="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralorgaoporservidor.quantidade.servidores", $P{RESPONSAVEL})]]></expression>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<element kind="textField" uuid="32aec57d-9e72-4191-9d07-e8827bd2309d" key="textField-1" x="1" y="0" width="393" height="17" fontSize="8.0" blankWhenNull="true">
+				<expression><![CDATA[$F{nome} != null ? $F{nome} : com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.campo.nao.definido.abreviado", $P{RESPONSAVEL})]]></expression>
+			</element>
+			<element kind="textField" uuid="f795c53d-ea59-41ba-b0de-a78e8b9f6671" key="textField-2" x="399" y="0" width="124" height="17" fontSize="8.0" pattern="#,##0" blankWhenNull="true" hTextAlign="Right">
+				<expression><![CDATA[$F{quantidade}]]></expression>
+			</element>
+		</band>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+</jasperReport>

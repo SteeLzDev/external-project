@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="TipoArquivo">
+  <xsd:complexType name="TipoArquivo">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="0" name="bloqueioServidor" nillable="false" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="contracheque" nillable="false" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="critica" nillable="false" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="desligado" nillable="false" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="dirf" nillable="false" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="falecido" nillable="false" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="margem" nillable="false" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="margemComplementar" nillable="false" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="movimento" nillable="false" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="relatorioIntegracao" nillable="false" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="retorno" nillable="false" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="retornoAtrasado" nillable="false" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="transferidos" nillable="false" type="xsd:boolean"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

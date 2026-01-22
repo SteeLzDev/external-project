@@ -1,0 +1,53 @@
+<Documento>
+	<Mapeamento Entrada="__ACAO__"          Saida="__ACAO__"          Tipo="Texto"/>
+	<Mapeamento Entrada="SER_CPF"           Saida="SER_CPF"           Tipo="Texto" FormatoSaida="###.###.###-##"/>
+	<Mapeamento Entrada="SER_DATA_NASC"     Saida="SER_DATA_NASC"     Tipo="Data"  FormatoEntrada="ddMMyyyy" FormatoSaida="yyyy-MM-dd"/>
+	<Mapeamento Entrada="SER_NOME_MAE"      Saida="SER_NOME_MAE"      Tipo="Texto"/>
+	<Mapeamento Entrada="SER_NOME_PAI"      Saida="SER_NOME_PAI"      Tipo="Texto"/>
+	<Mapeamento Entrada="SER_NOME"          Saida="SER_NOME"          Tipo="Texto"/>
+	<Mapeamento Entrada="SER_SEXO"          Saida="SER_SEXO"          Tipo="Texto"/>
+	<Mapeamento Entrada="SER_EST_CIVIL"     Saida="SER_EST_CIVIL"     Tipo="Texto"/>
+	<Mapeamento Entrada="SER_NACIONALIDADE" Saida="SER_NACIONALIDADE" Tipo="Texto"/>	
+	<Mapeamento Entrada="SER_NRO_IDT"       Saida="SER_NRO_IDT"       Tipo="Texto"/>
+	<Mapeamento Entrada="SER_CART_PROF"     Saida="SER_CART_PROF"     Tipo="Texto"/>
+	<Mapeamento Entrada="SER_PIS"           Saida="SER_PIS"           Tipo="Texto"/>
+	<Mapeamento Entrada="SER_END"           Saida="SER_END"           Tipo="Texto"/>
+	<Mapeamento Entrada="SER_BAIRRO"        Saida="SER_BAIRRO"        Tipo="Texto"/>
+	<Mapeamento Entrada="SER_CIDADE"        Saida="SER_CIDADE"        Tipo="Texto"/>
+	<Mapeamento Entrada="SER_COMPL"         Saida="SER_COMPL"         Tipo="Texto"/>
+	<Mapeamento Entrada="SER_NRO"           Saida="SER_NRO"           Tipo="Texto"/>
+	<Mapeamento Entrada="SER_CEP"           Saida="SER_CEP"           Tipo="Texto" FormatoEntrada="########" FormatoSaida="##.###-###"/>
+	<Mapeamento Entrada="SER_UF"            Saida="SER_UF"            Tipo="Texto"/>
+	<Mapeamento Entrada="SER_TEL"           Saida="SER_TEL"           Tipo="Texto"/>
+	<Mapeamento Entrada="RSE_TIPO"          Saida="RSE_TIPO"          Tipo="Texto"/>
+	<Mapeamento Entrada="RSE_PRAZO"         Saida="RSE_PRAZO"         Tipo="Texto"/>
+	<Mapeamento Entrada="ORG_IDENTIFICADOR" Saida="ORG_IDENTIFICADOR" Tipo="Texto"/>
+	<Mapeamento Entrada="RSE_MATRICULA"     Saida="RSE_MATRICULA"     Tipo="Texto"/>
+	<Mapeamento Entrada="RSE_MARGEM"        Saida="RSE_MARGEM"    Tipo="Numerico" FormatoEntrada="########.##" FormatoSaida="########.##" />
+	<Mapeamento Entrada="RSE_MARGEM_2"      Saida="RSE_MARGEM_2"    Tipo="Numerico" FormatoEntrada="########.##" FormatoSaida="########.##" />
+	<Mapeamento Entrada="RSE_MARGEM_3"      Saida="RSE_MARGEM_3"    Tipo="Numerico" FormatoEntrada="########.##" FormatoSaida="########.##" />
+	<Mapeamento Entrada="SER_UF_IDT"        Saida="SER_UF_IDT"  Tipo="Texto"/>
+	<Mapeamento Entrada="SER_CART_PROF"     Saida="SER_CART_PROF"  Tipo="Texto"/>
+	<Mapeamento Entrada="SER_CELULAR"       Saida="SER_CELULAR"       Tipo="Texto"/>
+	<Mapeamento Entrada="SER_EMAIL"         Saida="SER_EMAIL"       Tipo="Texto"/>
+	<Mapeamento Entrada="SER_DATA_IDT"      Saida="SER_DATA_IDT"     Tipo="Data"  FormatoEntrada="ddMMyyyy" FormatoSaida="yyyy-MM-dd"/>
+	<Mapeamento Entrada="ORG_NOME"         Saida="ORG_NOME"       Tipo="Texto"/>
+   <Mapeamento Entrada="EST_NOME"         Saida="EST_NOME"       Tipo="Texto"/>
+   <Mapeamento Entrada="SBO_DESCRICAO"         Saida="SBO_DESCRICAO"       Tipo="Texto"/>
+   <Mapeamento Entrada="UNI_DESCRICAO"         Saida="UNI_DESCRICAO"       Tipo="Texto"/>
+   <Mapeamento Entrada="VRS_DESCRICAO"         Saida="VRS_DESCRICAO"       Tipo="Texto"/>
+   <Mapeamento Entrada="EST_IDENTIFICADOR"         Saida="EST_IDENTIFICADOR"       Tipo="Texto"/>
+   <Mapeamento Entrada="UNI_IDENTIFICADOR"         Saida="UNI_IDENTIFICADOR"       Tipo="Texto"/>
+   <Mapeamento Entrada="VRS_IDENTIFICADOR"         Saida="VRS_IDENTIFICADOR"       Tipo="Texto"/>
+   <Mapeamento Entrada="SBO_IDENTIFICADOR"         Saida="SBO_IDENTIFICADOR"       Tipo="Texto"/>
+   <Mapeamento Entrada="SRS_CODIGO"         Saida="SRS_CODIGO"       Tipo="Texto"/>
+   <Mapeamento Entrada="RSE_DATA_ADMISSAO"      Saida="RSE_DATA_ADMISSAO"     Tipo="Data"  FormatoEntrada="ddMMyyyy" FormatoSaida="yyyy-MM-dd"/>
+   <Mapeamento Entrada="RSE_DATA_LIMITE_PERMANENCIA"      Saida="RSE_DATA_LIMITE_PERMANENCIA"     Tipo="Data"  FormatoEntrada="ddMMyyyy" FormatoSaida="yyyy-MM-dd"/>
+   <Mapeamento Entrada="RSE_DATA_FIM_ENGAJAMENTO"      Saida="RSE_DATA_FIM_ENGAJAMENTO"     Tipo="Data"  FormatoEntrada="ddMMyyyy" FormatoSaida="yyyy-MM-dd"/>
+   <Mapeamento Entrada="RSE_DATA_SAIDA"      Saida="RSE_DATA_SAIDA"     Tipo="Data"  FormatoEntrada="ddMMyyyy" FormatoSaida="yyyy-MM-dd"/>
+   <Mapeamento Entrada="RSE_DATA_ULT_SALARIO"      Saida="RSE_DATA_ULT_SALARIO"     Tipo="Data"  FormatoEntrada="ddMMyyyy" FormatoSaida="yyyy-MM-dd"/>
+   <Mapeamento Entrada="RSE_DATA_RETORNO"      Saida="RSE_DATA_RETORNO"     Tipo="Data"  FormatoEntrada="ddMMyyyy" FormatoSaida="yyyy-MM-dd"/>
+   <Mapeamento Entrada="MRS_MARGEM_101"        Saida="MRS_MARGEM_101"  Tipo="Numerico" FormatoEntrada="###########" FormatoSaida="#########.##"/>
+   <Mapeamento Entrada="BCS_VALOR_02"           Saida="BCS_VALOR_02"           Tipo="Texto" FormatoEntrada="####" FormatoSaida="##.##"/>
+   <Mapeamento Entrada="EST_CNPJ"           Saida="EST_CNPJ"           Tipo="Texto" FormatoEntrada="##############" FormatoSaida="##.###.###/####-##"/>
+</Documento>

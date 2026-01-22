@@ -1,0 +1,190 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="GerencialGeral" language="java" pageWidth="535" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" scriptletClass="com.zetra.econsig.report.reports.HeadingsScriptlet" uuid="8be84e21-4506-491d-a349-1d3d28ade638">
+	<property name="ireport.scriptlethandling" value="2"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box padding="0" leftPadding="2" rightPadding="2"/>
+	</style>
+	<dataset name="evolucaoDataSet" uuid="36e70c7f-9117-49f2-bac0-623da0ab9ace">
+		<parameter name="QUINZENAL" class="java.lang.Boolean">
+			<description><![CDATA[Informa se o período é quinzenal]]></description>
+			<defaultValueExpression><![CDATA[new java.lang.Boolean(false)]]></defaultValueExpression>
+		</parameter>
+		<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+		<query language="SQL"><![CDATA[]]></query>
+		<field name="periodoEvolucaoInadimplencia" class="java.util.Date"/>
+		<field name="porcEvolucaoInadimplencia" class="java.lang.Float"/>
+	</dataset>
+	<parameter name="CAMINHO_LOGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SUBTITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Subtitulo do relatório]]></description>
+	</parameter>
+	<parameter name="TEXTO_RODAPE" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Nome do Gestor(Consignante)]]></description>
+	</parameter>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Titulo do relatorio]]></description>
+	</parameter>
+	<parameter name="HeadingsCollection" forPrompting="false" class="java.util.Collection"/>
+	<parameter name="COUNT_TOTAL_CARTEIRA" forPrompting="false" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new java.lang.Long(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PORC_TOTAL_CONTRATOS_INADIMPLENCIA" forPrompting="false" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[new java.lang.Float(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="COUNT_TOTAL_CARTEIRA_EMPRESTIMO" forPrompting="false" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new java.lang.Long(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PORC_EMPRESTIMO_CONTRATOS_INADIMPLENCIA" forPrompting="false" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[new java.lang.Float(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CSA_INADIMPLENCIA" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PERIODO_INADIMPLENCIA" class="java.util.Date"/>
+	<parameter name="EVOLUCAO" forPrompting="false" class="java.util.List">
+		<defaultValueExpression><![CDATA[new java.util.ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="QUINZENAL" class="java.lang.Boolean">
+		<description><![CDATA[Informa se o período é quinzenal]]></description>
+		<defaultValueExpression><![CDATA[new java.lang.Boolean(false)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<field name="csaNome" class="java.lang.String"/>
+	<field name="csaQtdeInadimplencia" class="java.lang.Long"/>
+	<field name="csaPercInadimplencia" class="java.lang.Double"/>
+	<background splitType="Stretch"/>
+	<title height="654" splitType="Stretch">
+		<element kind="textField" uuid="e823d1bb-d98d-40c6-81af-3ea732a3f0cc" key="textField-4" x="0" y="0" width="334" height="17" fontName="Arial" fontSize="10.0" blankWhenNull="false" bold="true">
+			<expression><![CDATA["3.3. " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralinadimplencia.inadimplencia", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="b398c440-88d5-4423-8cb6-53296d6d6d4f" key="textField-3" x="0" y="17" width="522" height="15" evaluationTime="Report" blankWhenNull="false" removeLineWhenBlank="true" printInFirstWholeBand="true">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("mensagem.relatorio.gerencialgeralinadimplencia.grafico.abaixo.ilustra.inadimplencia", $P{RESPONSAVEL}, com.zetra.econsig.helper.texto.DateHelper.toPeriodString($P{PERIODO_INADIMPLENCIA}))]]></expression>
+		</element>
+		<element kind="chart" chartType="bar" uuid="90320d08-bd8b-4153-a876-07bbb1e442e0" x="152" y="49" width="370" height="280" showLegend="false" evaluationTime="Report" legendPosition="Bottom">
+			<titleFont fontSize="8.0"/>
+			<titleExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralinadimplencia.grafico.titulo", $P{RESPONSAVEL})]]></titleExpression>
+			<dataset kind="category">
+				<series>
+					<seriesExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralinadimplencia.total.inadimplencia", $P{RESPONSAVEL})]]></seriesExpression>
+					<categoryExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralinadimplencia.total.inadimplencia", $P{RESPONSAVEL})]]></categoryExpression>
+					<valueExpression><![CDATA[$P{PORC_TOTAL_CONTRATOS_INADIMPLENCIA}]]></valueExpression>
+					<labelExpression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.formata(Double.parseDouble($P{PORC_TOTAL_CONTRATOS_INADIMPLENCIA}.toString()), "#,###0.00; -#,###0.00") + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.porcentagem", $P{RESPONSAVEL})]]></labelExpression>
+				</series>
+				<series>
+					<seriesExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralinadimplencia.emprestimo.inadimplencia", $P{RESPONSAVEL})]]></seriesExpression>
+					<categoryExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralinadimplencia.emprestimo.inadimplencia", $P{RESPONSAVEL})]]></categoryExpression>
+					<valueExpression><![CDATA[$P{PORC_EMPRESTIMO_CONTRATOS_INADIMPLENCIA}]]></valueExpression>
+					<labelExpression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.formata(Double.parseDouble($P{PORC_EMPRESTIMO_CONTRATOS_INADIMPLENCIA}.toString()), "#,###0.00; -#,###0.00") + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.porcentagem", $P{RESPONSAVEL})]]></labelExpression>
+				</series>
+			</dataset>
+			<plot categoryAxisVerticalTickLabels="true" showTickMarks="true" showTickLabels="true" showLabels="true">
+				<categoryAxisLabelFont fontSize="8.0"/>
+				<categoryAxisTickLabelFont fontSize="8.0"/>
+				<valueAxisLabelFont fontSize="8.0"/>
+				<valueAxisTickLabelFont fontSize="8.0"/>
+				<itemLabel>
+					<font fontName="Serif" fontSize="8.0"/>
+				</itemLabel>
+			</plot>
+		</element>
+		<element kind="textField" uuid="b398c440-88d5-4423-8cb6-53296d6d6d4f" key="textField-3" x="0" y="329" width="522" height="15" blankWhenNull="false" removeLineWhenBlank="true" printInFirstWholeBand="true">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("mensagem.relatorio.gerencialgeralinadimplencia.segue.evolucao.inadimplencia", $P{RESPONSAVEL}, new java.lang.Integer($P{EVOLUCAO}.size()).toString())]]></expression>
+		</element>
+		<element kind="break" uuid="fdfd0948-61b5-4cde-80fc-237f2b2e5ddd" x="0" y="648" width="100" height="1">
+			<printWhenExpression><![CDATA[!$F{csaNome}.isEmpty()]]></printWhenExpression>
+		</element>
+		<element kind="textField" uuid="5d7d72b8-fcfb-493f-92cf-50ee4fa4cf19" key="textField-1" x="10" y="159" width="132" height="15" fontSize="9.0" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.formata(Double.parseDouble($P{COUNT_TOTAL_CARTEIRA}.toString()), "#,###; -#,###") + " (100" + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.porcentagem", $P{RESPONSAVEL}) + ")"]]></expression>
+		</element>
+		<element kind="textField" uuid="b55c3f64-aa5d-422e-a551-2a6573874138" key="staticText-1" x="10" y="144" width="132" height="15" markup="none" fontName="Arial" fontSize="9.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralinadimplencia.carteira.total", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="afee55a5-1830-4f41-b289-1fd07efd9242" key="staticText-1" x="10" y="180" width="132" height="15" markup="none" fontName="Arial" fontSize="9.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralinadimplencia.carteira.emprestimo", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="ff5f0cd6-04c7-4b1c-8fb2-52cfef55ee29" key="textField-1" x="10" y="195" width="132" height="15" fontSize="9.0" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.formata(Double.parseDouble($P{COUNT_TOTAL_CARTEIRA_EMPRESTIMO}.toString()), "#,###; -#,###") + " (100" + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.porcentagem", $P{RESPONSAVEL}) + ")"]]></expression>
+		</element>
+		<element kind="chart" chartType="bar" uuid="97e81628-56e6-4e36-bb76-fc0c20942b68" x="0" y="350" width="525" height="290" showLegend="false" theme="default" customizerClass="com.zetra.econsig.report.jasper.dinamico.InadimplenciaCustomizer">
+			<dataset kind="category">
+				<datasetRun uuid="a682d979-2c85-4c40-8e92-a6dc1b8abe45" subDataset="evolucaoDataSet">
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{EVOLUCAO})]]></dataSourceExpression>
+				</datasetRun>
+				<series>
+					<seriesExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.meses", $P{RESPONSAVEL})]]></seriesExpression>
+					<categoryExpression><![CDATA[com.zetra.econsig.helper.texto.DateHelper.toPeriodMesExtensoString($F{periodoEvolucaoInadimplencia})]]></categoryExpression>
+					<valueExpression><![CDATA[$F{porcEvolucaoInadimplencia}]]></valueExpression>
+					<labelExpression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.formata(Double.parseDouble($F{porcEvolucaoInadimplencia}.toString()), "#,###0.00; -#,###0.00") + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.porcentagem", $P{RESPONSAVEL})]]></labelExpression>
+				</series>
+			</dataset>
+			<plot orientation="Horizontal" labelRotation="0.0" categoryAxisVerticalTickLabels="true" valueAxisVerticalTickLabels="false" showTickMarks="true" showTickLabels="true" showLabels="true" categoryAxisTickLabelRotation="0.0">
+				<categoryAxisLabelFont fontSize="8.0"/>
+				<categoryAxisTickLabelFont fontSize="5.0"/>
+				<valueAxisLabelExpression><![CDATA[]]></valueAxisLabelExpression>
+				<valueAxisLabelFont fontSize="8.0"/>
+				<valueAxisTickLabelFont fontSize="8.0"/>
+				<itemLabel>
+					<font fontSize="6.0"/>
+				</itemLabel>
+				<seriesColor order="0" color="#007EFF"/>
+				<seriesColor order="1" color="#007EFF"/>
+			</plot>
+		</element>
+	</title>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader splitType="Stretch"/>
+	<detail>
+		<band height="38" splitType="Stretch">
+			<printWhenExpression><![CDATA[$V{REPORT_COUNT}.intValue() == 1 && !$F{csaNome}.isEmpty()]]></printWhenExpression>
+			<element kind="textField" uuid="b398c440-88d5-4423-8cb6-53296d6d6d4f" key="textField-3" x="0" y="0" width="522" height="15" fontName="Arial" fontSize="10.0" evaluationTime="Report" blankWhenNull="false" removeLineWhenBlank="true" printInFirstWholeBand="true" bold="false" vTextAlign="Middle">
+				<expression><![CDATA[($V{REPORT_COUNT}.intValue() >= 10) ? com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("mensagem.relatorio.gerencialgeralinadimplencia.seguem.dez.consignatarias.maior.inadimplencia", $P{RESPONSAVEL}) : com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("mensagem.relatorio.gerencialgeralinadimplencia.seguem.consignatarias.maior.inadimplencia", $P{RESPONSAVEL})]]></expression>
+			</element>
+			<element kind="textField" uuid="a10414a9-de0b-40a0-b9ba-e63a6f264fcd" key="staticText-1" x="87" y="23" width="234" height="15" markup="none" fontName="Arial" fontSize="9.0" removeLineWhenBlank="true" printInFirstWholeBand="true" bold="true" vTextAlign="Middle">
+				<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.consignataria.singular", $P{RESPONSAVEL})]]></expression>
+			</element>
+			<element kind="textField" uuid="215ec7b4-9d07-400c-a592-02efe70efaed" key="staticText-2" x="321" y="23" width="120" height="15" markup="none" fontName="Arial" fontSize="9.0" removeLineWhenBlank="true" printInFirstWholeBand="true" bold="true" hTextAlign="Right" vTextAlign="Middle">
+				<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralinadimplencia.quantidade.contratos", $P{RESPONSAVEL})]]></expression>
+			</element>
+		</band>
+		<band height="14">
+			<printWhenExpression><![CDATA[!$F{csaNome}.isEmpty()]]></printWhenExpression>
+			<element kind="textField" uuid="26796121-a253-4415-93cc-2cf5d492020e" key="textField-1" x="87" y="0" width="234" height="14" fontSize="8.0" blankWhenNull="false" removeLineWhenBlank="true" printInFirstWholeBand="true">
+				<expression><![CDATA[$F{csaNome}]]></expression>
+			</element>
+			<element kind="textField" uuid="358ddd06-47e8-4ca9-a320-c044f8aff732" key="textField-2" x="321" y="0" width="120" height="14" fontSize="8.0" pattern="#,##0" blankWhenNull="false" removeLineWhenBlank="true" printInFirstWholeBand="true" hTextAlign="Right">
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.formata(Double.parseDouble($F{csaQtdeInadimplencia}.toString()), "#,###; -#,###")]]></expression>
+			</element>
+		</band>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter splitType="Stretch"/>
+	<summary height="399" splitType="Stretch">
+		<printWhenExpression><![CDATA[$V{REPORT_COUNT}.intValue() > 1]]></printWhenExpression>
+		<element kind="chart" chartType="bar" uuid="e4c3c6a3-a2e6-476e-85dd-b94481ea93e1" mode="Transparent" x="33" y="39" width="458" height="350" forecolor="#000000" backcolor="#FFFFFF" showLegend="false" evaluationTime="Report" legendPosition="Bottom">
+			<dataset kind="category">
+				<series>
+					<seriesExpression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.consignataria.sigla", $P{RESPONSAVEL})]]></seriesExpression>
+					<categoryExpression><![CDATA[$F{csaNome}]]></categoryExpression>
+					<valueExpression><![CDATA[$F{csaQtdeInadimplencia}]]></valueExpression>
+					<labelExpression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.formata(Double.parseDouble($F{csaPercInadimplencia}.toString()), "#,###0.00; -#,###0.00") + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.porcentagem", $P{RESPONSAVEL})]]></labelExpression>
+				</series>
+			</dataset>
+			<plot labelRotation="45.0" categoryAxisVerticalTickLabels="false" showTickLabels="true" showLabels="true" categoryAxisTickLabelRotation="45.0">
+				<categoryAxisLabelFont fontSize="8.0"/>
+				<categoryAxisTickLabelFont fontSize="8.0"/>
+				<valueAxisLabelFont fontSize="6.0"/>
+				<valueAxisTickLabelFont fontSize="8.0"/>
+				<itemLabel>
+					<font fontName="Serif" fontSize="8.0"/>
+				</itemLabel>
+			</plot>
+		</element>
+	</summary>
+</jasperReport>

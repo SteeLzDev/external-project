@@ -1,0 +1,2 @@
+-- DESENV-14662
+UPDATE tb_menu SET MNU_IMAGEM = 'i-rescisao' WHERE MNU_CODIGO = '7';

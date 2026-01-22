@@ -1,0 +1,1932 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="ConfCadMargem" language="java" pageWidth="782" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="782" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" formatFactoryClass="com.zetra.econsig.report.format.DefaultFormatFactory" uuid="56333de7-6d53-4dcb-bbcf-ca81db9ca44e">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="980"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula" default="true" fontSize="10.0">
+		<box leftPadding="2" rightPadding="2">
+			<pen lineWidth="0.0"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<parameter name="CAMINHO_LOGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SUBTITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Subtitulo do relatÃ³rio]]></description>
+	</parameter>
+	<parameter name="TEXTO_RODAPE" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Nome do Gestor(Consignante)]]></description>
+	</parameter>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SITUACAO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="ORGAO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="ESTABELECIMENTO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="MARGEM" forPrompting="false" class="java.lang.String"/>
+	<parameter name="MARGEM_2" forPrompting="false" class="java.lang.String"/>
+	<parameter name="MARGEM_3" forPrompting="false" class="java.lang.String"/>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<parameter name="MAR_CODIGO" class="java.lang.Short"/>
+	<parameter name="MAR_CODIGO_2" class="java.lang.Short"/>
+	<parameter name="MAR_CODIGO_3" class="java.lang.Short"/>
+	<parameter name="MAR_CODIGO_4" class="java.lang.Short"/>
+	<parameter name="MAR_CODIGO_5" class="java.lang.Short"/>
+	<parameter name="MAR_CODIGO_6" class="java.lang.Short"/>
+	<parameter name="MAR_CODIGO_7" class="java.lang.Short"/>
+	<parameter name="MAR_CODIGO_8" class="java.lang.Short"/>
+	<parameter name="MAR_CODIGO_9" class="java.lang.Short"/>
+	<parameter name="MAR_CODIGO_10" class="java.lang.Short"/>
+	<parameter name="MAR_CODIGO_11" class="java.lang.Short"/>
+	<parameter name="MAR_CODIGO_12" class="java.lang.Short"/>
+	<parameter name="MAR_CODIGO_13" class="java.lang.Short"/>
+	<parameter name="MAR_CODIGO_14" class="java.lang.Short"/>
+	<parameter name="MAR_CODIGO_15" class="java.lang.Short"/>
+	<parameter name="MAR_CODIGO_16" class="java.lang.Short"/>
+	<parameter name="MAR_CODIGO_17" class="java.lang.Short"/>
+	<parameter name="MAR_CODIGO_18" class="java.lang.Short"/>
+	<parameter name="MAR_CODIGO_19" class="java.lang.Short"/>
+	<parameter name="MAR_CODIGO_20" class="java.lang.Short"/>
+	<parameter name="FORMATO_ARQUIVO" class="java.lang.String"/>
+	<parameter name="DELIMITADOR" forPrompting="false" class="java.lang.String"/>
+	<parameter name="EXIBE_VARIACAO" forPrompting="false" class="java.lang.Boolean"/>
+	<query language="sql"><![CDATA[SELECT
+ser.ser_nome as ser_nome,
+ser.ser_cpf as ser_cpf,
+rse.rse_matricula as rse_matricula,
+srs.srs_descricao as srs_descricao,
+rse.rse_tipo as rse_tipo,
+rse.rse_margem as rse_margem,
+rse.rse_margem_rest as rse_margem_rest,
+COALESCE(rse.rse_margem_2, 0.00) as rse_margem2,
+COALESCE(rse.rse_margem_rest_2, 0.00) as rse_margem_rest2,
+COALESCE(rse.rse_margem_3, 0.00) as rse_margem3,
+COALESCE(rse.rse_margem_rest_3, 0.00) as rse_margem_rest3,
+concat(concat(est.est_identificador, ' - '), est.est_nome) as estabelecimento,
+concat(concat(org.org_identificador, ' - '), org.org_nome) as orgao,
+(CASE WHEN (ade.ade_inc_margem = 1 or (coalesce(psi091.psi_vlr, 'N') = 'S' and ade.ade_inc_margem = 3) or (coalesce(psi173.psi_vlr, 'N') = 'S' and ade.ade_inc_margem in (2,3)) or (coalesce(psi218.psi_vlr, 'N') = 'S' and ade.ade_inc_margem = 3) or (coalesce(psi219.psi_vlr, 'N') = 'S' and ade.ade_inc_margem in (2,3))) THEN (case (coalesce(sum(coalesce(ade.ade_vlr_folha, ade.ade_vlr)), 0) + rse.rse_margem_rest) WHEN 0 THEN 0 ELSE ((coalesce(sum(coalesce(ade.ade_vlr_folha, ade.ade_vlr)), 0)*100.00)/(coalesce(sum(coalesce(ade.ade_vlr_folha, ade.ade_vlr)), 0) + rse.rse_margem_rest)) END) ELSE 0 END) AS PERC_COMP_MARGEM_1,
+(CASE WHEN (ade.ade_inc_margem = 2 or (coalesce(psi173.psi_vlr, 'N') = 'S' and ade.ade_inc_margem = 3) or (coalesce(psi219.psi_vlr, 'N') = 'S' and ade.ade_inc_margem in (1,3))) THEN (case(coalesce(sum(coalesce(ade.ade_vlr_folha, ade.ade_vlr)), 0) + rse.rse_margem_rest_2) WHEN 0 THEN 0 ELSE ((coalesce(sum(coalesce(ade.ade_vlr_folha, ade.ade_vlr)), 0)*100.00)/(coalesce(sum(coalesce(ade.ade_vlr_folha, ade.ade_vlr)), 0) + rse.rse_margem_rest_2)) END) ELSE 0 END) as PERC_COMP_MARGEM_2,
+(CASE WHEN (ade.ade_inc_margem = 3 or (coalesce(psi218.psi_vlr, 'N') = 'S' and ade.ade_inc_margem = 1) or (coalesce(psi219.psi_vlr, 'N') = 'S' and ade.ade_inc_margem in (1,2))) THEN (case(coalesce(sum(coalesce(ade.ade_vlr_folha, ade.ade_vlr)), 0) + rse.rse_margem_rest_3) WHEN 0 THEN 0 ELSE ((coalesce(sum(coalesce(ade.ade_vlr_folha, ade.ade_vlr)), 0)*100.00)/(coalesce(sum(coalesce(ade.ade_vlr_folha, ade.ade_vlr)), 0) + rse.rse_margem_rest_3)) END) ELSE 0 END) as PERC_COMP_MARGEM_3
+FROM tb_servidor ser
+INNER JOIN tb_registro_servidor rse on (ser.ser_codigo = rse.ser_codigo)
+INNER JOIN tb_orgao org on (org.org_codigo = rse.org_codigo)
+INNER JOIN tb_estabelecimento est on (est.est_codigo = org.est_codigo)
+INNER JOIN tb_status_registro_servidor srs on (srs.srs_codigo = rse.srs_codigo)
+LEFT OUTER JOIN tb_aut_desconto ade on (ade.rse_codigo = rse.rse_codigo AND ade.sad_codigo not in ('3','7','8','9'))
+LEFT OUTER JOIN tb_param_sist_consignante psi091 on (psi091.tpc_codigo = '91')
+LEFT OUTER JOIN tb_param_sist_consignante psi173 on (psi173.tpc_codigo = '173')
+LEFT OUTER JOIN tb_param_sist_consignante psi218 on (psi218.tpc_codigo = '218')
+LEFT OUTER JOIN tb_param_sist_consignante psi219 on (psi219.tpc_codigo = '219')
+WHERE 1 = 1
+AND rse.rse_tipo like '%teste%'
+GROUP BY ser.ser_nome,
+ser.ser_cpf,
+rse.rse_matricula,
+srs.srs_descricao,
+rse.rse_tipo,
+rse.rse_margem,
+rse.rse_margem_rest,
+rse.rse_margem_2,
+rse.rse_margem_rest_2,
+rse.rse_margem_3,
+rse.rse_margem_rest_3,
+est.est_codigo,
+est.est_identificador,
+est.est_nome,
+org.org_codigo,
+org.org_identificador,
+org.org_nome
+ORDER BY est.est_codigo, org.org_codigo, ser.ser_nome]]></query>
+	<field name="rseMargemRest20" class="java.math.BigDecimal"/>
+	<field name="rseMargem20" class="java.math.BigDecimal"/>
+	<field name="rseMargemRest19" class="java.math.BigDecimal"/>
+	<field name="rseMargem19" class="java.math.BigDecimal"/>
+	<field name="rseMargemRest18" class="java.math.BigDecimal"/>
+	<field name="rseMargem18" class="java.math.BigDecimal"/>
+	<field name="rseMargemRest17" class="java.math.BigDecimal"/>
+	<field name="rseMargem17" class="java.math.BigDecimal"/>
+	<field name="rseMargemRest16" class="java.math.BigDecimal"/>
+	<field name="rseMargem16" class="java.math.BigDecimal"/>
+	<field name="rseMargemRest15" class="java.math.BigDecimal"/>
+	<field name="rseMargem15" class="java.math.BigDecimal"/>
+	<field name="rseMargemRest14" class="java.math.BigDecimal"/>
+	<field name="rseMargem14" class="java.math.BigDecimal"/>
+	<field name="rseMargemRest13" class="java.math.BigDecimal"/>
+	<field name="rseMargem13" class="java.math.BigDecimal"/>
+	<field name="rseMargemRest12" class="java.math.BigDecimal"/>
+	<field name="rseMargem12" class="java.math.BigDecimal"/>
+	<field name="rseMargemRest11" class="java.math.BigDecimal"/>
+	<field name="rseMargem11" class="java.math.BigDecimal"/>
+	<field name="rseMargemRest10" class="java.math.BigDecimal"/>
+	<field name="rseMargem10" class="java.math.BigDecimal"/>
+	<field name="rseMargemRest9" class="java.math.BigDecimal"/>
+	<field name="rseMargem9" class="java.math.BigDecimal"/>
+	<field name="rseMargemRest8" class="java.math.BigDecimal"/>
+	<field name="rseMargem8" class="java.math.BigDecimal"/>
+	<field name="rseMargemRest7" class="java.math.BigDecimal"/>
+	<field name="rseMargem7" class="java.math.BigDecimal"/>
+	<field name="rseMargemRest6" class="java.math.BigDecimal"/>
+	<field name="rseMargem6" class="java.math.BigDecimal"/>
+	<field name="rseMargemRest5" class="java.math.BigDecimal"/>
+	<field name="rseMargem5" class="java.math.BigDecimal"/>
+	<field name="rseMargemRest4" class="java.math.BigDecimal"/>
+	<field name="rseMargem4" class="java.math.BigDecimal"/>
+	<field name="rseMargemRest3" class="java.math.BigDecimal"/>
+	<field name="rseMargem3" class="java.math.BigDecimal"/>
+	<field name="rseMargemRest2" class="java.math.BigDecimal"/>
+	<field name="rseMargem2" class="java.math.BigDecimal"/>
+	<field name="rseMargemRest1" class="java.math.BigDecimal"/>
+	<field name="rseMargem1" class="java.math.BigDecimal"/>
+	<field name="rseTipo" class="java.lang.String"/>
+	<field name="rseMatricula" class="java.lang.String"/>
+	<field name="serCpf" class="java.lang.String"/>
+	<field name="serNome" class="java.lang.String"/>
+	<field name="orgao" class="java.lang.String"/>
+	<field name="estabelecimento" class="java.lang.String"/>
+	<field name="percCompMargem1" class="java.math.BigDecimal"/>
+	<field name="percCompMargem2" class="java.math.BigDecimal"/>
+	<field name="percCompMargem3" class="java.math.BigDecimal"/>
+	<field name="percCompMargem4" class="java.math.BigDecimal"/>
+	<field name="percCompMargem5" class="java.math.BigDecimal"/>
+	<field name="percCompMargem6" class="java.math.BigDecimal"/>
+	<field name="percCompMargem7" class="java.math.BigDecimal"/>
+	<field name="percCompMargem8" class="java.math.BigDecimal"/>
+	<field name="percCompMargem9" class="java.math.BigDecimal"/>
+	<field name="percCompMargem10" class="java.math.BigDecimal"/>
+	<field name="percCompMargem11" class="java.math.BigDecimal"/>
+	<field name="percCompMargem12" class="java.math.BigDecimal"/>
+	<field name="percCompMargem13" class="java.math.BigDecimal"/>
+	<field name="percCompMargem14" class="java.math.BigDecimal"/>
+	<field name="percCompMargem15" class="java.math.BigDecimal"/>
+	<field name="percCompMargem16" class="java.math.BigDecimal"/>
+	<field name="percCompMargem17" class="java.math.BigDecimal"/>
+	<field name="percCompMargem18" class="java.math.BigDecimal"/>
+	<field name="percCompMargem19" class="java.math.BigDecimal"/>
+	<field name="percCompMargem20" class="java.math.BigDecimal"/>
+	<field name="srsDescricao" class="java.lang.String"/>
+	<field name="variacaoMargem1" class="java.math.BigDecimal"/>
+	<field name="variacaoMargem2" class="java.math.BigDecimal"/>
+	<field name="variacaoMargem3" class="java.math.BigDecimal"/>
+	<field name="variacaoMargem4" class="java.math.BigDecimal"/>
+	<field name="variacaoMargem5" class="java.math.BigDecimal"/>
+	<field name="variacaoMargem6" class="java.math.BigDecimal"/>
+	<field name="variacaoMargem7" class="java.math.BigDecimal"/>
+	<field name="variacaoMargem8" class="java.math.BigDecimal"/>
+	<field name="variacaoMargem9" class="java.math.BigDecimal"/>
+	<field name="variacaoMargem10" class="java.math.BigDecimal"/>
+	<field name="variacaoMargem11" class="java.math.BigDecimal"/>
+	<field name="variacaoMargem12" class="java.math.BigDecimal"/>
+	<field name="variacaoMargem13" class="java.math.BigDecimal"/>
+	<field name="variacaoMargem14" class="java.math.BigDecimal"/>
+	<field name="variacaoMargem15" class="java.math.BigDecimal"/>
+	<field name="variacaoMargem16" class="java.math.BigDecimal"/>
+	<field name="variacaoMargem17" class="java.math.BigDecimal"/>
+	<field name="variacaoMargem18" class="java.math.BigDecimal"/>
+	<field name="variacaoMargem19" class="java.math.BigDecimal"/>
+	<field name="variacaoMargem20" class="java.math.BigDecimal"/>
+	<field name="margemAnterior1" class="java.math.BigDecimal"/>
+	<field name="margemAnterior2" class="java.math.BigDecimal"/>
+	<field name="margemAnterior3" class="java.math.BigDecimal"/>
+	<field name="margemAnterior4" class="java.math.BigDecimal"/>
+	<field name="margemAnterior5" class="java.math.BigDecimal"/>
+	<field name="margemAnterior6" class="java.math.BigDecimal"/>
+	<field name="margemAnterior7" class="java.math.BigDecimal"/>
+	<field name="margemAnterior8" class="java.math.BigDecimal"/>
+	<field name="margemAnterior9" class="java.math.BigDecimal"/>
+	<field name="margemAnterior10" class="java.math.BigDecimal"/>
+	<field name="margemAnterior11" class="java.math.BigDecimal"/>
+	<field name="margemAnterior12" class="java.math.BigDecimal"/>
+	<field name="margemAnterior13" class="java.math.BigDecimal"/>
+	<field name="margemAnterior14" class="java.math.BigDecimal"/>
+	<field name="margemAnterior15" class="java.math.BigDecimal"/>
+	<field name="margemAnterior16" class="java.math.BigDecimal"/>
+	<field name="margemAnterior17" class="java.math.BigDecimal"/>
+	<field name="margemAnterior18" class="java.math.BigDecimal"/>
+	<field name="margemAnterior19" class="java.math.BigDecimal"/>
+	<field name="margemAnterior20" class="java.math.BigDecimal"/>
+	<group name="ORGAO" startNewPage="true" reprintHeaderOnEachPage="true">
+		<expression><![CDATA[$F{orgao}]]></expression>
+		<groupHeader>
+			<band height="106" splitType="Stretch">
+				<element kind="textField" uuid="3c7a66a8-0e03-4786-a6e6-374068280d27" key="header-12" stretchType="ElementGroupHeight" mode="Opaque" x="162" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_3})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull(com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_3}, $P{RESPONSAVEL})) ? com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_3}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.folha", $P{RESPONSAVEL}) : ""]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="11220018-ac17-4cf0-9870-e13501ba9902" key="header-10" stretchType="ElementGroupHeight" mode="Opaque" x="142" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_2})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_2}, $P{RESPONSAVEL})]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="b4418b67-584b-4de6-8e11-4ab89c8c5b2f" key="header-09" stretchType="ElementGroupHeight" mode="Opaque" x="132" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_2})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull(com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_2}, $P{RESPONSAVEL})) ? com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_2}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.folha", $P{RESPONSAVEL}) : ""]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="2e56b269-390b-419e-8367-e85826557e54" key="header-07" stretchType="ElementGroupHeight" mode="Opaque" x="112" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO}, $P{RESPONSAVEL})]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="47421d92-11f5-4c00-88bf-bcd90802658a" key="header-05" stretchType="ContainerHeight" mode="Opaque" x="82" y="31" width="20" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<paragraph lineSpacing="Single"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.categoria", $P{RESPONSAVEL})]]></expression>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="5fb0dcc2-9470-477c-8deb-d921e848fc3a" key="header-03" stretchType="ContainerHeight" mode="Opaque" x="42" y="31" width="20" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" blankWhenNull="false" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.servidor.matricula", $P{RESPONSAVEL}).toUpperCase()]]></expression>
+					<box leftPadding="2">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="9f242f73-a2a2-4e63-ac9c-8db96579c3a3" key="header-02" stretchType="ContainerHeight" mode="Opaque" x="24" y="31" width="18" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" removeLineWhenBlank="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<paragraph lineSpacing="Single"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.cpf", $P{RESPONSAVEL})]]></expression>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="680f7af6-12cb-43af-ad5d-3a383f48c0cc" key="header-01" mode="Opaque" x="0" y="31" width="24" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" blankWhenNull="false" removeLineWhenBlank="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.servidor.singular", $P{RESPONSAVEL}).toUpperCase()]]></expression>
+					<box leftPadding="2" bottomPadding="2" rightPadding="2">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="47998fbe-256f-4073-8c4b-f49fd86db7d0" key="header-13" stretchType="ElementGroupHeight" mode="Opaque" x="172" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_3})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_3}, $P{RESPONSAVEL})]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="ade8f4e3-468d-448a-8348-fd972a58bdf4" key="header-06" stretchType="ElementGroupHeight" mode="Opaque" x="102" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull(com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO}, $P{RESPONSAVEL})) ? com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.folha", $P{RESPONSAVEL}) : ""]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="26244c7b-8de1-4d3a-beff-e10485891ec6" key="textField-81" x="0" y="15" width="782" height="16" fontName="Arial" blankWhenNull="false" bold="true">
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.orgao.singular", $P{RESPONSAVEL}) + ": " + ($F{orgao} == null ? com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.nenhum", $P{RESPONSAVEL}) : $F{orgao})]]></expression>
+					<box leftPadding="2" rightPadding="2">
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="84d976b6-7daa-4262-8d5e-39c7feb954e7" key="textField-82" x="0" y="2" width="782" height="13" fontName="Arial" blankWhenNull="false" bold="true">
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.estabelecimento.singular", $P{RESPONSAVEL}) + ": " + ($F{estabelecimento} == null ? com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.nenhum", $P{RESPONSAVEL}) : $F{estabelecimento})]]></expression>
+					<box leftPadding="2" rightPadding="2">
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="fdea5ecd-03ca-4017-a938-d63031e1cd65" key="header-04" stretchType="ContainerHeight" mode="Opaque" x="62" y="31" width="20" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<paragraph lineSpacing="Single"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.situacao", $P{RESPONSAVEL})]]></expression>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="5e241a8f-cb3f-4bad-8640-2b0b270be388" key="header-08" stretchType="ElementGroupHeight" mode="Opaque" x="122" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.perc.comp", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO}, $P{RESPONSAVEL}) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentual.variacao.margem", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO}, $P{RESPONSAVEL}) +  $P{DELIMITADOR} + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.margem.anterior", $P{RESPONSAVEL})
+: "")]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="5c888cd2-b908-49d6-bf3b-5510c0c60157" key="header-11" stretchType="ElementGroupHeight" mode="Opaque" x="152" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_2})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.perc.comp", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_2}, $P{RESPONSAVEL}) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentual.variacao.margem", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_2}, $P{RESPONSAVEL}) +  $P{DELIMITADOR} + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_2}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.margem.anterior", $P{RESPONSAVEL})
+: "")]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="47998fbe-256f-4073-8c4b-f49fd86db7d0" key="header-19" stretchType="ElementGroupHeight" mode="Opaque" x="232" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_5})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_5}, $P{RESPONSAVEL})]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="3c7a66a8-0e03-4786-a6e6-374068280d27" key="header-18" stretchType="ElementGroupHeight" mode="Opaque" x="222" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_5})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull(com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_5}, $P{RESPONSAVEL})) ? com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_5}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.folha", $P{RESPONSAVEL}) : ""]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="98d05df7-f85d-46d1-bd0d-5be8afe4e342" key="header-20" stretchType="ElementGroupHeight" mode="Opaque" x="242" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_5})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.perc.comp", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_5}, $P{RESPONSAVEL}) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentual.variacao.margem", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_5}, $P{RESPONSAVEL}) +  $P{DELIMITADOR} + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_5}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.margem.anterior", $P{RESPONSAVEL})
+: "")]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="47998fbe-256f-4073-8c4b-f49fd86db7d0" key="header-22" stretchType="ElementGroupHeight" mode="Opaque" x="262" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_6})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_6}, $P{RESPONSAVEL})]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="3c7a66a8-0e03-4786-a6e6-374068280d27" key="header-21" stretchType="ElementGroupHeight" mode="Opaque" x="252" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_6})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull(com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_6}, $P{RESPONSAVEL})) ? com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_6}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.folha", $P{RESPONSAVEL}) : ""]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="98d05df7-f85d-46d1-bd0d-5be8afe4e342" key="header-23" stretchType="ElementGroupHeight" mode="Opaque" x="272" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_6})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.perc.comp", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_6}, $P{RESPONSAVEL}) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentual.variacao.margem", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_6}, $P{RESPONSAVEL}) +  $P{DELIMITADOR} + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_6}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.margem.anterior", $P{RESPONSAVEL})
+: "")]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="47998fbe-256f-4073-8c4b-f49fd86db7d0" key="header-25" stretchType="ElementGroupHeight" mode="Opaque" x="292" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_7})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_7}, $P{RESPONSAVEL})]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="3c7a66a8-0e03-4786-a6e6-374068280d27" key="header-24" stretchType="ElementGroupHeight" mode="Opaque" x="282" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_7})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull(com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_7}, $P{RESPONSAVEL})) ? com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_7}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.folha", $P{RESPONSAVEL}) : ""]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="98d05df7-f85d-46d1-bd0d-5be8afe4e342" key="header-26" stretchType="ElementGroupHeight" mode="Opaque" x="302" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_7})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.perc.comp", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_7}, $P{RESPONSAVEL}) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentual.variacao.margem", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_7}, $P{RESPONSAVEL}) +  $P{DELIMITADOR} + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_7}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.margem.anterior", $P{RESPONSAVEL})
+: "")]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="47998fbe-256f-4073-8c4b-f49fd86db7d0" key="header-28" stretchType="ElementGroupHeight" mode="Opaque" x="322" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_8})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_8}, $P{RESPONSAVEL})]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="3c7a66a8-0e03-4786-a6e6-374068280d27" key="header-27" stretchType="ElementGroupHeight" mode="Opaque" x="312" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_8})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull(com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_8}, $P{RESPONSAVEL})) ? com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_8}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.folha", $P{RESPONSAVEL}) : ""]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="98d05df7-f85d-46d1-bd0d-5be8afe4e342" key="header-29" stretchType="ElementGroupHeight" mode="Opaque" x="332" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_8})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.perc.comp", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_8}, $P{RESPONSAVEL}) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentual.variacao.margem", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_8}, $P{RESPONSAVEL}) +  $P{DELIMITADOR} + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_8}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.margem.anterior", $P{RESPONSAVEL})
+: "")]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="47998fbe-256f-4073-8c4b-f49fd86db7d0" key="header-31" stretchType="ElementGroupHeight" mode="Opaque" x="352" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_9})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_9}, $P{RESPONSAVEL})]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="3c7a66a8-0e03-4786-a6e6-374068280d27" key="header-30" stretchType="ElementGroupHeight" mode="Opaque" x="342" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_9})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull(com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_9}, $P{RESPONSAVEL})) ? com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_9}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.folha", $P{RESPONSAVEL}) : ""]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="98d05df7-f85d-46d1-bd0d-5be8afe4e342" key="header-32" stretchType="ElementGroupHeight" mode="Opaque" x="362" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_9})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.perc.comp", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_9}, $P{RESPONSAVEL}) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentual.variacao.margem", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_9}, $P{RESPONSAVEL}) +  $P{DELIMITADOR} + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_9}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.margem.anterior", $P{RESPONSAVEL})
+: "")]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="47998fbe-256f-4073-8c4b-f49fd86db7d0" key="header-34" stretchType="ElementGroupHeight" mode="Opaque" x="382" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_10})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_10}, $P{RESPONSAVEL})]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="3c7a66a8-0e03-4786-a6e6-374068280d27" key="header-33" stretchType="ElementGroupHeight" mode="Opaque" x="372" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_10})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull(com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_10}, $P{RESPONSAVEL})) ? com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_10}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.folha", $P{RESPONSAVEL}) : ""]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="98d05df7-f85d-46d1-bd0d-5be8afe4e342" key="header-35" stretchType="ElementGroupHeight" mode="Opaque" x="392" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_10})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.perc.comp", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_10}, $P{RESPONSAVEL}) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentual.variacao.margem", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_10}, $P{RESPONSAVEL}) +  $P{DELIMITADOR} + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_10}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.margem.anterior", $P{RESPONSAVEL})
+: "")]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="47998fbe-256f-4073-8c4b-f49fd86db7d0" key="header-37" stretchType="ElementGroupHeight" mode="Opaque" x="412" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_11})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_11}, $P{RESPONSAVEL})]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="3c7a66a8-0e03-4786-a6e6-374068280d27" key="header-36" stretchType="ElementGroupHeight" mode="Opaque" x="402" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_11})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull(com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_12}, $P{RESPONSAVEL})) ? com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_11}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.folha", $P{RESPONSAVEL}) : ""]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="98d05df7-f85d-46d1-bd0d-5be8afe4e342" key="header-38" stretchType="ElementGroupHeight" mode="Opaque" x="422" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_11})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.perc.comp", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_11}, $P{RESPONSAVEL}) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentual.variacao.margem", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_11}, $P{RESPONSAVEL}) +  $P{DELIMITADOR} + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_11}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.margem.anterior", $P{RESPONSAVEL})
+: "")]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="47998fbe-256f-4073-8c4b-f49fd86db7d0" key="header-40" stretchType="ElementGroupHeight" mode="Opaque" x="442" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_12})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_12}, $P{RESPONSAVEL})]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="3c7a66a8-0e03-4786-a6e6-374068280d27" key="header-39" stretchType="ElementGroupHeight" mode="Opaque" x="432" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_12})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull(com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_12}, $P{RESPONSAVEL})) ? com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_12}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.folha", $P{RESPONSAVEL}) : ""]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="98d05df7-f85d-46d1-bd0d-5be8afe4e342" key="header-41" stretchType="ElementGroupHeight" mode="Opaque" x="452" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_12})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.perc.comp", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_12}, $P{RESPONSAVEL}) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentual.variacao.margem", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_12}, $P{RESPONSAVEL}) +  $P{DELIMITADOR} + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_12}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.margem.anterior", $P{RESPONSAVEL})
+: "")]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="98d05df7-f85d-46d1-bd0d-5be8afe4e342" key="header-44" stretchType="ElementGroupHeight" mode="Opaque" x="482" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_13})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.perc.comp", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_13}, $P{RESPONSAVEL}) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentual.variacao.margem", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_13}, $P{RESPONSAVEL}) +  $P{DELIMITADOR} + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_13}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.margem.anterior", $P{RESPONSAVEL})
+: "")]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="3c7a66a8-0e03-4786-a6e6-374068280d27" key="header-42" stretchType="ElementGroupHeight" mode="Opaque" x="462" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_13})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull(com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_13}, $P{RESPONSAVEL})) ? com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_13}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.folha", $P{RESPONSAVEL}) : ""]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="47998fbe-256f-4073-8c4b-f49fd86db7d0" key="header-43" stretchType="ElementGroupHeight" mode="Opaque" x="472" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_13})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_13}, $P{RESPONSAVEL})]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="98d05df7-f85d-46d1-bd0d-5be8afe4e342" key="header-47" stretchType="ElementGroupHeight" mode="Opaque" x="512" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_14})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.perc.comp", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_14}, $P{RESPONSAVEL}) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentual.variacao.margem", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_14}, $P{RESPONSAVEL}) +  $P{DELIMITADOR} + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_14}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.margem.anterior", $P{RESPONSAVEL})
+: "")]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="3c7a66a8-0e03-4786-a6e6-374068280d27" key="header-45" stretchType="ElementGroupHeight" mode="Opaque" x="492" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_14})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull(com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_14}, $P{RESPONSAVEL})) ? com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_14}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.folha", $P{RESPONSAVEL}) : ""]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="47998fbe-256f-4073-8c4b-f49fd86db7d0" key="header-46" stretchType="ElementGroupHeight" mode="Opaque" x="502" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_14})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_14}, $P{RESPONSAVEL})]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="98d05df7-f85d-46d1-bd0d-5be8afe4e342" key="header-50" stretchType="ElementGroupHeight" mode="Opaque" x="542" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_15})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.perc.comp", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_15}, $P{RESPONSAVEL}) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentual.variacao.margem", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_15}, $P{RESPONSAVEL}) +  $P{DELIMITADOR} + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_15}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.margem.anterior", $P{RESPONSAVEL})
+: "")]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="3c7a66a8-0e03-4786-a6e6-374068280d27" key="header-48" stretchType="ElementGroupHeight" mode="Opaque" x="522" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_15})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull(com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_15}, $P{RESPONSAVEL})) ? com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_15}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.folha", $P{RESPONSAVEL}) : ""]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="47998fbe-256f-4073-8c4b-f49fd86db7d0" key="header-49" stretchType="ElementGroupHeight" mode="Opaque" x="532" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_15})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_15}, $P{RESPONSAVEL})]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="98d05df7-f85d-46d1-bd0d-5be8afe4e342" key="header-53" stretchType="ElementGroupHeight" mode="Opaque" x="572" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_16})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.perc.comp", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_16}, $P{RESPONSAVEL}) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentual.variacao.margem", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_16}, $P{RESPONSAVEL}) +  $P{DELIMITADOR} + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_16}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.margem.anterior", $P{RESPONSAVEL})
+: "")]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="3c7a66a8-0e03-4786-a6e6-374068280d27" key="header-51" stretchType="ElementGroupHeight" mode="Opaque" x="552" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_16})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull(com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_16}, $P{RESPONSAVEL})) ? com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_16}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.folha", $P{RESPONSAVEL}) : ""]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="47998fbe-256f-4073-8c4b-f49fd86db7d0" key="header-52" stretchType="ElementGroupHeight" mode="Opaque" x="562" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_16})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_16}, $P{RESPONSAVEL})]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="98d05df7-f85d-46d1-bd0d-5be8afe4e342" key="header-56" stretchType="ElementGroupHeight" mode="Opaque" x="602" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_17})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.perc.comp", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_17}, $P{RESPONSAVEL}) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentual.variacao.margem", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_17}, $P{RESPONSAVEL}) +  $P{DELIMITADOR} + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_17}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.margem.anterior", $P{RESPONSAVEL})
+: "")]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="3c7a66a8-0e03-4786-a6e6-374068280d27" key="header-54" stretchType="ElementGroupHeight" mode="Opaque" x="582" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_17})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull(com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_17}, $P{RESPONSAVEL})) ? com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_17}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.folha", $P{RESPONSAVEL}) : ""]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="47998fbe-256f-4073-8c4b-f49fd86db7d0" key="header-55" stretchType="ElementGroupHeight" mode="Opaque" x="592" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_17})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_17}, $P{RESPONSAVEL})]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="98d05df7-f85d-46d1-bd0d-5be8afe4e342" key="header-59" stretchType="ElementGroupHeight" mode="Opaque" x="632" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_18})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.perc.comp", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_18}, $P{RESPONSAVEL}) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentual.variacao.margem", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_18}, $P{RESPONSAVEL}) +  $P{DELIMITADOR} + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_18}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.margem.anterior", $P{RESPONSAVEL})
+: "")]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="3c7a66a8-0e03-4786-a6e6-374068280d27" key="header-57" stretchType="ElementGroupHeight" mode="Opaque" x="612" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_18})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull(com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_18}, $P{RESPONSAVEL})) ? com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_18}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.folha", $P{RESPONSAVEL}) : ""]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="47998fbe-256f-4073-8c4b-f49fd86db7d0" key="header-58" stretchType="ElementGroupHeight" mode="Opaque" x="622" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_18})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_18}, $P{RESPONSAVEL})]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="98d05df7-f85d-46d1-bd0d-5be8afe4e342" key="header-62" stretchType="ElementGroupHeight" mode="Opaque" x="662" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_19})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.perc.comp", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_19}, $P{RESPONSAVEL}) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentual.variacao.margem", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_19}, $P{RESPONSAVEL}) +  $P{DELIMITADOR} + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_19}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.margem.anterior", $P{RESPONSAVEL})
+: "")]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="3c7a66a8-0e03-4786-a6e6-374068280d27" key="header-60" stretchType="ElementGroupHeight" mode="Opaque" x="642" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_19})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull(com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_19}, $P{RESPONSAVEL})) ? com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_19}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.folha", $P{RESPONSAVEL}) : ""]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="47998fbe-256f-4073-8c4b-f49fd86db7d0" key="header-61" stretchType="ElementGroupHeight" mode="Opaque" x="652" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_19})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_19}, $P{RESPONSAVEL})]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="98d05df7-f85d-46d1-bd0d-5be8afe4e342" key="header-65" stretchType="ElementGroupHeight" mode="Opaque" x="692" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_20})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.perc.comp", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_20}, $P{RESPONSAVEL}) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentual.variacao.margem", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_20}, $P{RESPONSAVEL}) +  $P{DELIMITADOR} + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_20}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.margem.anterior", $P{RESPONSAVEL})
+: "")]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="3c7a66a8-0e03-4786-a6e6-374068280d27" key="header-63" stretchType="ElementGroupHeight" mode="Opaque" x="672" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_20})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull(com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_20}, $P{RESPONSAVEL})) ? com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_20}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.folha", $P{RESPONSAVEL}) : ""]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="47998fbe-256f-4073-8c4b-f49fd86db7d0" key="header-64" stretchType="ElementGroupHeight" mode="Opaque" x="682" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_20})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_20}, $P{RESPONSAVEL})]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="3c7a66a8-0e03-4786-a6e6-374068280d27" key="header-15" stretchType="ElementGroupHeight" mode="Opaque" x="192" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_5})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull(com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_4}, $P{RESPONSAVEL})) ? com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_4}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.folha", $P{RESPONSAVEL}) : ""]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="47998fbe-256f-4073-8c4b-f49fd86db7d0" key="header-16" stretchType="ElementGroupHeight" mode="Opaque" x="202" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_5})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_4}, $P{RESPONSAVEL})]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="98d05df7-f85d-46d1-bd0d-5be8afe4e342" key="header-17" stretchType="ElementGroupHeight" mode="Opaque" x="212" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_5})]]></printWhenExpression>
+					<paragraph lineSpacing="Single" tabStopWidth="100"/>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.perc.comp", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_4}, $P{RESPONSAVEL}) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentual.variacao.margem", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_4}, $P{RESPONSAVEL}) +  $P{DELIMITADOR} + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_4}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.margem.anterior", $P{RESPONSAVEL})
+: "")]]></expression>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.25" lineColor="#000000"/>
+						<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="elementGroup">
+					<element kind="textField" uuid="98d05df7-f85d-46d1-bd0d-5be8afe4e342" key="header-14" stretchType="ElementGroupHeight" mode="Opaque" x="182" y="31" width="10" height="75" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true" strikeThrough="false" bold="true" hTextAlign="Center" vTextAlign="Middle">
+						<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_3})]]></printWhenExpression>
+						<paragraph lineSpacing="Single" tabStopWidth="100"/>
+						<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.perc.comp", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_3}, $P{RESPONSAVEL}) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.percentual.variacao.margem", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_3}, $P{RESPONSAVEL}) +  $P{DELIMITADOR} + com.zetra.econsig.helper.margem.MargemHelper.getInstance().getMarDescricao($P{MAR_CODIGO_3}, $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.margem.anterior", $P{RESPONSAVEL})
+: "")]]></expression>
+						<box>
+							<pen lineWidth="0.25"/>
+							<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.25" lineColor="#000000"/>
+							<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+					</element>
+				</element>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20" splitType="Stretch">
+				<element kind="textField" uuid="6616ae30-c3a3-4a8e-b034-e35541b06d58" key="textField-72" mode="Opaque" x="0" y="3" width="153" height="13" forecolor="#000000" backcolor="#CCCCCC" fontName="Arial" blankWhenNull="false" bold="true" hTextAlign="Left">
+					<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() != 0)]]></printWhenExpression>
+					<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.confcadmargem.registros", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.orgao.singular", $P{RESPONSAVEL}).toUpperCase() + ":"]]></expression>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="textField" uuid="7a298fe7-3ee7-4046-be33-2086f1353957" key="textField-30" mode="Opaque" x="153" y="3" width="48" height="13" backcolor="#CCCCCC" blankWhenNull="false" hTextAlign="Right">
+					<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() != 0)]]></printWhenExpression>
+					<expression><![CDATA[$V{ORGAO_COUNT}]]></expression>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+				</element>
+				<element kind="line" uuid="15d71ee7-a747-445b-88b5-b25169c36c4b" key="line-1" x="0" y="19" width="781" height="1" style="Celula">
+					<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() != 0)]]></printWhenExpression>
+				</element>
+			</band>
+		</groupFooter>
+	</group>
+	<background splitType="Stretch"/>
+	<title splitType="Stretch"/>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader splitType="Stretch"/>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<element kind="staticText" uuid="611ec8ce-a29a-44b1-8ae1-f555f4218936" key="fundoLinha" stretchType="ElementGroupHeight" mode="Opaque" x="0" y="0" width="781" height="15" backcolor="#DDDDDD">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($V{REPORT_COUNT}.intValue() % 2)==0)]]></printWhenExpression>
+				<text><![CDATA[ ]]></text>
+				<box>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="5cb94803-6288-480c-9a63-22168267fafc" key="textField-03" stretchType="ElementGroupHeight" x="42" y="0" width="20" height="15" fontSize="9.0" textAdjust="StretchHeight" blankWhenNull="false" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+				<expression><![CDATA[$F{rseMatricula}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25" lineStyle="Solid"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="d4d8d82a-840b-4bca-bdf3-083bbce12d10" key="textField-07" stretchType="ElementGroupHeight" x="112" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargemRest1}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="e5f2d4f5-8b8e-4cda-ae44-aa21a568cdf9" key="textField-02" stretchType="ElementGroupHeight" x="24" y="0" width="18" height="15" fontSize="9.0" textAdjust="StretchHeight" blankWhenNull="false" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+				<expression><![CDATA[$F{serCpf}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25" lineStyle="Solid"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8e74d98d-27c4-4c3e-97ff-297d02a92762" key="textField-09" stretchType="ElementGroupHeight" x="132" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_2})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargem2}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="139673fb-9a23-4ea2-9ee6-4415b65e5b82" key="textField-10" stretchType="ElementGroupHeight" x="142" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_2})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargemRest2}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="b0ebc470-b3b1-4734-936f-58335ed35c13" key="textField-05" stretchType="ElementGroupHeight" x="82" y="0" width="20" height="15" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+				<expression><![CDATA[$F{rseTipo}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fefe69d9-f28b-4180-be18-665040d0142e" key="textField-12" stretchType="ElementGroupHeight" x="162" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_3})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargem3}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8d6fb2f2-bc0e-4fc2-872e-62243d33c2d9" key="textField-13" stretchType="ElementGroupHeight" x="172" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_3})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargemRest3}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="d9439d6d-4827-4e44-96b4-f1e4abfe899e" key="textField-06" stretchType="ElementGroupHeight" x="102" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargem1}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="41b6f836-2e4c-4933-adf5-79dceee9122a" key="textField-01" stretchType="ElementGroupHeight" x="0" y="0" width="24" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="" blankWhenNull="false" hTextAlign="Left" vTextAlign="Middle" style="Celula">
+				<expression><![CDATA[$F{serNome}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25" lineStyle="Solid"/>
+					<topPen lineWidth="0.25" lineStyle="Solid"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="d70dd3ca-c846-4dd1-a1ae-358a2fb2ccc1" key="textField-04" stretchType="ElementGroupHeight" x="62" y="0" width="20" height="15" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" hTextAlign="Center" vTextAlign="Middle" style="Celula">
+				<expression><![CDATA[$F{srsDescricao}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="1b1bcdde-ba02-4c64-83eb-db5e8ecbe05b" key="textField-08" stretchType="ElementGroupHeight" x="122" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO})]]></printWhenExpression>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.format(($F{percCompMargem1} != null ? $F{percCompMargem1}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.NumberHelper.format(($F{variacaoMargem1} != null ? $F{variacaoMargem1}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) + $P{DELIMITADOR} +
+$F{margemAnterior1}
+: "")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="445dcc4b-2d17-4031-bae6-f9a70195f353" key="textField-11" stretchType="ElementGroupHeight" x="152" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_2})]]></printWhenExpression>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.format(($F{percCompMargem2} != null ? $F{percCompMargem2}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.NumberHelper.format(($F{variacaoMargem2} != null ? $F{variacaoMargem2}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) + $P{DELIMITADOR} +
+$F{margemAnterior2}
+: "")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="de384cd3-27c5-40e9-ab59-bc0a2739122a" key="textField-14" stretchType="ElementGroupHeight" x="182" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_3})]]></printWhenExpression>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.format(($F{percCompMargem3} != null ? $F{percCompMargem3}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.NumberHelper.format(($F{variacaoMargem3} != null ? $F{variacaoMargem3}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) + $P{DELIMITADOR} +
+$F{margemAnterior3}
+: "")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="de384cd3-27c5-40e9-ab59-bc0a2739122a" key="textField-20" stretchType="ElementGroupHeight" x="242" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_5})]]></printWhenExpression>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.format(($F{percCompMargem5} != null ? $F{percCompMargem5}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.NumberHelper.format(($F{variacaoMargem5} != null ? $F{variacaoMargem5}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) + $P{DELIMITADOR} +
+$F{margemAnterior5}
+: "")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fefe69d9-f28b-4180-be18-665040d0142e" key="textField-18" stretchType="ElementGroupHeight" x="222" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_5})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargem5}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8d6fb2f2-bc0e-4fc2-872e-62243d33c2d9" key="textField-19" stretchType="ElementGroupHeight" x="232" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_5})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargemRest5}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="de384cd3-27c5-40e9-ab59-bc0a2739122a" key="textField-23" stretchType="ElementGroupHeight" x="272" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_6})]]></printWhenExpression>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.format(($F{percCompMargem6} != null ? $F{percCompMargem6}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.NumberHelper.format(($F{variacaoMargem6} != null ? $F{variacaoMargem6}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) + $P{DELIMITADOR} +
+$F{margemAnterior6}
+: "")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fefe69d9-f28b-4180-be18-665040d0142e" key="textField-21" stretchType="ElementGroupHeight" x="252" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_6})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargem6}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8d6fb2f2-bc0e-4fc2-872e-62243d33c2d9" key="textField-22" stretchType="ElementGroupHeight" x="262" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_6})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargemRest6}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="de384cd3-27c5-40e9-ab59-bc0a2739122a" key="textField-26" stretchType="ElementGroupHeight" x="302" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_7})]]></printWhenExpression>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.format(($F{percCompMargem7} != null ? $F{percCompMargem7}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.NumberHelper.format(($F{variacaoMargem7} != null ? $F{variacaoMargem7}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) + $P{DELIMITADOR} +
+$F{margemAnterior7}
+: "")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8d6fb2f2-bc0e-4fc2-872e-62243d33c2d9" key="textField-25" stretchType="ElementGroupHeight" x="292" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_7})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargemRest7}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fefe69d9-f28b-4180-be18-665040d0142e" key="textField-24" stretchType="ElementGroupHeight" x="282" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_7})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargem7}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="de384cd3-27c5-40e9-ab59-bc0a2739122a" key="textField-29" stretchType="ElementGroupHeight" x="332" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_8})]]></printWhenExpression>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.format(($F{percCompMargem8} != null ? $F{percCompMargem8}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.NumberHelper.format(($F{variacaoMargem8} != null ? $F{variacaoMargem8}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) + $P{DELIMITADOR} +
+$F{margemAnterior8}
+: "")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8d6fb2f2-bc0e-4fc2-872e-62243d33c2d9" key="textField-28" stretchType="ElementGroupHeight" x="322" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_8})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargemRest8}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fefe69d9-f28b-4180-be18-665040d0142e" key="textField-27" stretchType="ElementGroupHeight" x="312" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_8})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargem8}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="de384cd3-27c5-40e9-ab59-bc0a2739122a" key="textField-32" stretchType="ElementGroupHeight" x="362" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_9})]]></printWhenExpression>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.format(($F{percCompMargem9} != null ? $F{percCompMargem9}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.NumberHelper.format(($F{variacaoMargem9} != null ? $F{variacaoMargem9}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) + $P{DELIMITADOR} +
+$F{margemAnterior9}
+: "")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8d6fb2f2-bc0e-4fc2-872e-62243d33c2d9" key="textField-31" stretchType="ElementGroupHeight" x="352" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_9})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargemRest9}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fefe69d9-f28b-4180-be18-665040d0142e" key="textField-30" stretchType="ElementGroupHeight" x="342" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_9})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargem9}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="de384cd3-27c5-40e9-ab59-bc0a2739122a" key="textField-35" stretchType="ElementGroupHeight" x="392" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_10})]]></printWhenExpression>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.format(($F{percCompMargem10} != null ? $F{percCompMargem10}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.NumberHelper.format(($F{variacaoMargem10} != null ? $F{variacaoMargem10}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) + $P{DELIMITADOR} +
+$F{margemAnterior10}
+: "")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8d6fb2f2-bc0e-4fc2-872e-62243d33c2d9" key="textField-34" stretchType="ElementGroupHeight" x="382" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_10})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargemRest10}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fefe69d9-f28b-4180-be18-665040d0142e" key="textField-33" stretchType="ElementGroupHeight" x="372" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_10})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargem10}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="de384cd3-27c5-40e9-ab59-bc0a2739122a" key="textField-38" stretchType="ElementGroupHeight" x="422" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_11})]]></printWhenExpression>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.format(($F{percCompMargem11} != null ? $F{percCompMargem11}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.NumberHelper.format(($F{variacaoMargem11} != null ? $F{variacaoMargem11}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) + $P{DELIMITADOR} +
+$F{margemAnterior11}
+: "")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8d6fb2f2-bc0e-4fc2-872e-62243d33c2d9" key="textField-37" stretchType="ElementGroupHeight" x="412" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_11})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargemRest11}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fefe69d9-f28b-4180-be18-665040d0142e" key="textField-36" stretchType="ElementGroupHeight" x="402" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_11})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargem11}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fefe69d9-f28b-4180-be18-665040d0142e" key="textField-39" stretchType="ElementGroupHeight" x="432" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_12})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargem12}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="de384cd3-27c5-40e9-ab59-bc0a2739122a" key="textField-41" stretchType="ElementGroupHeight" x="452" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_12})]]></printWhenExpression>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.format(($F{percCompMargem12} != null ? $F{percCompMargem12}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.NumberHelper.format(($F{variacaoMargem12} != null ? $F{variacaoMargem12}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) + $P{DELIMITADOR} +
+$F{margemAnterior12}
+: "")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8d6fb2f2-bc0e-4fc2-872e-62243d33c2d9" key="textField-40" stretchType="ElementGroupHeight" x="442" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_12})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargemRest12}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fefe69d9-f28b-4180-be18-665040d0142e" key="textField-42" stretchType="ElementGroupHeight" x="462" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_13})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargem13}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="de384cd3-27c5-40e9-ab59-bc0a2739122a" key="textField-44" stretchType="ElementGroupHeight" x="482" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_13})]]></printWhenExpression>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.format(($F{percCompMargem13} != null ? $F{percCompMargem13}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.NumberHelper.format(($F{variacaoMargem13} != null ? $F{variacaoMargem13}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) + $P{DELIMITADOR} +
+$F{margemAnterior13}
+: "")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8d6fb2f2-bc0e-4fc2-872e-62243d33c2d9" key="textField-43" stretchType="ElementGroupHeight" x="472" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_13})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargemRest13}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fefe69d9-f28b-4180-be18-665040d0142e" key="textField-45" stretchType="ElementGroupHeight" x="492" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_14})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargem14}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="de384cd3-27c5-40e9-ab59-bc0a2739122a" key="textField-47" stretchType="ElementGroupHeight" x="512" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_14})]]></printWhenExpression>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.format(($F{percCompMargem14} != null ? $F{percCompMargem14}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.NumberHelper.format(($F{variacaoMargem14} != null ? $F{variacaoMargem14}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) + $P{DELIMITADOR} +
+$F{margemAnterior14}
+: "")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8d6fb2f2-bc0e-4fc2-872e-62243d33c2d9" key="textField-46" stretchType="ElementGroupHeight" x="502" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_14})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargemRest14}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fefe69d9-f28b-4180-be18-665040d0142e" key="textField-48" stretchType="ElementGroupHeight" x="522" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_15})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargem15}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="de384cd3-27c5-40e9-ab59-bc0a2739122a" key="textField-50" stretchType="ElementGroupHeight" x="542" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_15})]]></printWhenExpression>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.format(($F{percCompMargem15} != null ? $F{percCompMargem15}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.NumberHelper.format(($F{variacaoMargem15} != null ? $F{variacaoMargem15}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) + $P{DELIMITADOR} +
+$F{margemAnterior15}
+: "")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8d6fb2f2-bc0e-4fc2-872e-62243d33c2d9" key="textField-49" stretchType="ElementGroupHeight" x="532" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_15})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargemRest15}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="de384cd3-27c5-40e9-ab59-bc0a2739122a" key="textField-53" stretchType="ElementGroupHeight" x="572" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_16})]]></printWhenExpression>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.format(($F{percCompMargem16} != null ? $F{percCompMargem16}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.NumberHelper.format(($F{variacaoMargem16} != null ? $F{variacaoMargem16}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) + $P{DELIMITADOR} +
+$F{margemAnterior16}
+: "")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fefe69d9-f28b-4180-be18-665040d0142e" key="textField-51" stretchType="ElementGroupHeight" x="552" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_16})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargem16}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8d6fb2f2-bc0e-4fc2-872e-62243d33c2d9" key="textField-52" stretchType="ElementGroupHeight" x="562" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_16})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargemRest16}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="de384cd3-27c5-40e9-ab59-bc0a2739122a" key="textField-56" stretchType="ElementGroupHeight" x="602" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_17})]]></printWhenExpression>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.format(($F{percCompMargem17} != null ? $F{percCompMargem17}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.NumberHelper.format(($F{variacaoMargem17} != null ? $F{variacaoMargem17}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) + $P{DELIMITADOR} +
+$F{margemAnterior17}
+: "")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fefe69d9-f28b-4180-be18-665040d0142e" key="textField-54" stretchType="ElementGroupHeight" x="582" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_17})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargem17}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8d6fb2f2-bc0e-4fc2-872e-62243d33c2d9" key="textField-55" stretchType="ElementGroupHeight" x="592" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_17})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargemRest17}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="de384cd3-27c5-40e9-ab59-bc0a2739122a" key="textField-59" stretchType="ElementGroupHeight" x="632" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_18})]]></printWhenExpression>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.format(($F{percCompMargem18} != null ? $F{percCompMargem18}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.NumberHelper.format(($F{variacaoMargem18} != null ? $F{variacaoMargem18}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) + $P{DELIMITADOR} +
+$F{margemAnterior18}
+: "")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fefe69d9-f28b-4180-be18-665040d0142e" key="textField-57" stretchType="ElementGroupHeight" x="612" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_18})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargem18}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8d6fb2f2-bc0e-4fc2-872e-62243d33c2d9" key="textField-58" stretchType="ElementGroupHeight" x="622" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_18})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargemRest18}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="de384cd3-27c5-40e9-ab59-bc0a2739122a" key="textField-62" stretchType="ElementGroupHeight" x="662" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_19})]]></printWhenExpression>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.format(($F{percCompMargem19} != null ? $F{percCompMargem19}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.NumberHelper.format(($F{variacaoMargem19} != null ? $F{variacaoMargem19}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) + $P{DELIMITADOR} +
+$F{margemAnterior19}
+: "")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fefe69d9-f28b-4180-be18-665040d0142e" key="textField-60" stretchType="ElementGroupHeight" x="642" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_19})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargem19}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8d6fb2f2-bc0e-4fc2-872e-62243d33c2d9" key="textField-61" stretchType="ElementGroupHeight" x="652" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_19})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargemRest19}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="de384cd3-27c5-40e9-ab59-bc0a2739122a" key="textField-65" stretchType="ElementGroupHeight" x="692" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_20})]]></printWhenExpression>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.format(($F{percCompMargem20} != null ? $F{percCompMargem20}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.NumberHelper.format(($F{variacaoMargem20} != null ? $F{variacaoMargem20}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) + $P{DELIMITADOR} +
+$F{margemAnterior20}
+: "")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fefe69d9-f28b-4180-be18-665040d0142e" key="textField-63" stretchType="ElementGroupHeight" x="672" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_20})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargem20}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8d6fb2f2-bc0e-4fc2-872e-62243d33c2d9" key="textField-64" stretchType="ElementGroupHeight" x="682" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_20})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargemRest20}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="de384cd3-27c5-40e9-ab59-bc0a2739122a" key="textField-17" stretchType="ElementGroupHeight" x="212" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_5})]]></printWhenExpression>
+				<expression><![CDATA[com.zetra.econsig.helper.texto.NumberHelper.format(($F{percCompMargem4} != null ? $F{percCompMargem4}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) +
+((($P{FORMATO_ARQUIVO}.equalsIgnoreCase("text") || $P{FORMATO_ARQUIVO}.equalsIgnoreCase("csv")) && $P{EXIBE_VARIACAO}) ?
+$P{DELIMITADOR} + com.zetra.econsig.helper.texto.NumberHelper.format(($F{variacaoMargem4} != null ? $F{variacaoMargem4}.doubleValue() : 0.0), com.zetra.econsig.helper.texto.NumberHelper.getLang()) + $P{DELIMITADOR} +
+$F{margemAnterior4}
+: "")]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="fefe69d9-f28b-4180-be18-665040d0142e" key="textField-15" stretchType="ElementGroupHeight" x="192" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_5})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargem4}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8d6fb2f2-bc0e-4fc2-872e-62243d33c2d9" key="textField-16" stretchType="ElementGroupHeight" x="202" y="0" width="10" height="15" fontSize="9.0" textAdjust="StretchHeight" pattern="#,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right" vTextAlign="Middle" style="Celula">
+				<printWhenExpression><![CDATA[!com.zetra.econsig.helper.texto.TextHelper.isNull($P{MAR_CODIGO_5})]]></printWhenExpression>
+				<expression><![CDATA[$F{rseMargemRest4}]]></expression>
+				<box leftPadding="2" rightPadding="2" style="Celula">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+		</band>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter splitType="Stretch"/>
+	<summary height="18" splitType="Stretch">
+		<element kind="textField" uuid="fcf910d1-966d-4f72-8f0e-b03c68548276" key="textField-71" mode="Opaque" x="2" y="3" width="153" height="13" forecolor="#000000" backcolor="#CCCCCC" fontName="Arial" blankWhenNull="false" bold="true" hTextAlign="Left">
+			<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() != 0)]]></printWhenExpression>
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.total.registros", $P{RESPONSAVEL})+":"]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="017ad324-7bc4-420a-8ef0-dc4f1a121c6a" key="textField-68" mode="Opaque" x="155" y="3" width="48" height="13" backcolor="#CCCCCC" blankWhenNull="false" hTextAlign="Right">
+			<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() != 0)]]></printWhenExpression>
+			<expression><![CDATA[$V{REPORT_COUNT}.intValue() != 0 ? $V{REPORT_COUNT}.toString() : ""]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+	</summary>
+</jasperReport>

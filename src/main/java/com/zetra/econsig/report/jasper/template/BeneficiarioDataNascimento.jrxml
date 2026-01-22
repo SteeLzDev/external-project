@@ -1,0 +1,358 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="Reclamacoes" language="java" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="782" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="861e7880-2e9b-48cd-8475-4da4bf630c4b">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="1674"/>
+	<property name="ireport.y" value="0"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box padding="0" leftPadding="2" rightPadding="2"/>
+	</style>
+	<parameter name="CAMINHO_LOGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SUBTITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Subtitulo do relatório]]></description>
+	</parameter>
+	<parameter name="TEXTO_RODAPE" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Nome do Gestor(Consignante)]]></description>
+	</parameter>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="FORMATO_ARQUIVO" forPrompting="false" class="java.lang.String">
+		<defaultValueExpression><![CDATA["PDF"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<query language="sql"><![CDATA[select comunicaca0_.CMN_CODIGO
+, comunicaca0_.CMN_NUMERO
+, comunicaca0_.CMN_DATA
+, comunicaca0_.CMN_TEXTO
+, comunicaca0_.CMN_PENDENCIA
+, comunicaca0_.CMN_CODIGO_PAI
+, comunicaca0_.CMN_IP_ACESSO
+, usuario18_.USU_LOGIN
+, usuario18_.USU_NOME
+, comunicaca0_.USU_CODIGO
+, consignant2_.CSE_CODIGO
+, consignata4_.CSA_CODIGO
+, servidor6_.SER_CODIGO
+, registrose7_.RSE_CODIGO
+, registrose7_.RSE_MATRICULA
+, usuariocsa12_.CSA_CODIGO AS UCA_CSA_CODIGO
+, usuariocse13_.CSE_CODIGO AS UCE_CSE_CODIGO
+, usuariocor14_.COR_CODIGO AS UCO_COR_CODIGO
+, usuarioorg15_.org_codigo AS UOR_ORG_CODIGO
+, usuarioser16_.SER_CODIGO AS USE_SER_CODIGO
+, usuariosup17_.CSE_CODIGO AS USP_CSE_CODIGO
+, comunicaca1_.CME_DESTINATARIO
+, comunicaca3_.CMC_DESTINATARIO
+, comunicaca5_.CMS_DESTINATARIO
+, case when comunicaca1_.CME_DESTINATARIO='S' then consignant2_.CSE_CODIGO when comunicaca3_.CMC_DESTINATARIO='S' then consignata4_.CSA_CODIGO when comunicaca5_.CMS_DESTINATARIO='S' then servidor6_.SER_CODIGO end as CODIGO_ENTIDADE_DESTINATARIO
+, case when comunicaca1_.CME_DESTINATARIO='S' then 'CSE' when comunicaca3_.CMC_DESTINATARIO='S' then 'CSA' when comunicaca5_.CMS_DESTINATARIO='S' then 'SER' end as TIPO_ENTIDADE_DESTINATARIO
+, case when comunicaca1_.CME_DESTINATARIO='S' then consignant2_.CSE_NOME when comunicaca3_.CMC_DESTINATARIO='S' then consignata4_.CSA_NOME when comunicaca5_.CMS_DESTINATARIO='S' then servidor6_.SER_NOME end as NOME_ENTIDADE_DESTINATARIO
+, case when comunicaca1_.CME_DESTINATARIO='N' then consignant2_.CSE_CODIGO when comunicaca3_.CMC_DESTINATARIO='N' then consignata4_.CSA_CODIGO when comunicaca5_.CMS_DESTINATARIO='N' then servidor6_.SER_CODIGO end as CODIGO_ENTIDADE_REMETENTE
+, case when comunicaca1_.CME_DESTINATARIO='N' then 'CSE' when comunicaca3_.CMC_DESTINATARIO='N' then 'CSA' when comunicaca5_.CMS_DESTINATARIO='N' then 'SER' end as TIPO_ENTIDADE_REMETENTE
+, case when comunicaca1_.CME_DESTINATARIO='N' then consignant2_.CSE_NOME when comunicaca3_.CMC_DESTINATARIO='N' then consignata4_.CSA_NOME when comunicaca5_.CMS_DESTINATARIO='N' then servidor6_.SER_NOME end as NOME_ENTIDADE_REMETENTE
+from tb_comunicacao comunicaca0_
+left outer join tb_comunicacao_cse comunicaca1_ on comunicaca0_.CMN_CODIGO=comunicaca1_.CMN_CODIGO
+left outer join tb_consignante consignant2_ on comunicaca1_.CSE_CODIGO=consignant2_.CSE_CODIGO
+left outer join tb_comunicacao_csa comunicaca3_ on comunicaca0_.CMN_CODIGO=comunicaca3_.CMN_CODIGO
+left outer join tb_consignataria consignata4_ on comunicaca3_.CSA_CODIGO=consignata4_.CSA_CODIGO
+left outer join tb_comunicacao_ser comunicaca5_ on comunicaca0_.CMN_CODIGO=comunicaca5_.CMN_CODIGO
+left outer join tb_servidor servidor6_ on comunicaca5_.SER_CODIGO=servidor6_.SER_CODIGO
+left outer join tb_registro_servidor registrose7_ on comunicaca5_.RSE_CODIGO=registrose7_.RSE_CODIGO
+left outer join tb_orgao orgao8_ on registrose7_.ORG_CODIGO=orgao8_.ORG_CODIGO
+left outer join tb_estabelecimento estabeleci9_ on orgao8_.EST_CODIGO=estabeleci9_.EST_CODIGO
+left outer join tb_status_registro_servidor statusregi10_ on registrose7_.SRS_CODIGO=statusregi10_.SRS_CODIGO
+inner join tb_usuario usuario11_ on comunicaca0_.USU_CODIGO=usuario11_.USU_CODIGO
+left outer join tb_usuario_csa usuariocsa12_ on usuario11_.USU_CODIGO=usuariocsa12_.USU_CODIGO
+left outer join tb_usuario_cse usuariocse13_ on usuario11_.USU_CODIGO=usuariocse13_.USU_CODIGO
+left outer join tb_usuario_cor usuariocor14_ on usuario11_.USU_CODIGO=usuariocor14_.USU_CODIGO
+left outer join tb_usuario_org usuarioorg15_ on usuario11_.USU_CODIGO=usuarioorg15_.usu_codigo
+left outer join tb_usuario_ser usuarioser16_ on usuario11_.USU_CODIGO=usuarioser16_.USU_CODIGO
+left outer join tb_usuario_sup usuariosup17_ on usuario11_.USU_CODIGO=usuariosup17_.USU_CODIGO
+, tb_usuario usuario18_
+where comunicaca0_.USU_CODIGO=usuario18_.USU_CODIGO
+and 1=1
+and (comunicaca0_.CMN_CODIGO_PAI is null)
+order by comunicaca0_.CMN_DATA DESC limit 10;]]></query>
+	<field name="RSE_MATRICULA" class="java.lang.String"/>
+	<field name="SER_NOME" class="java.lang.String"/>
+	<field name="SER_CPF" class="java.lang.String"/>
+	<field name="BFC_NOME" class="java.lang.String"/>
+	<field name="BFC_CPF" class="java.lang.String"/>
+	<field name="BFC_DATA_NASCIMENTO" class="java.sql.Date"/>
+	<field name="BFC_NOME_MAE" class="java.lang.String"/>
+	<field name="BEN_DESCRICAO" class="java.lang.String"/>
+	<field name="CSA_NOME" class="java.lang.String"/>
+	<field name="CBE_NUMERO" class="java.lang.String"/>
+	<field name="SCB_DESCRICAO" class="java.lang.String"/>
+	<variable name="BACKGROUND" calculation="DistinctCount" class="java.lang.Integer">
+		<expression><![CDATA[$V{BACKGROUND}]]></expression>
+		<initialValueExpression><![CDATA[new java.lang.Integer(0)]]></initialValueExpression>
+	</variable>
+	<background splitType="Stretch"/>
+	<title splitType="Stretch"/>
+	<pageHeader height="69" splitType="Stretch">
+		<element kind="textField" uuid="f63ceb9c-b66e-4c68-9c00-c8e3f756a5a1" key="textField-20" stretchType="ElementGroupHeight" x="2" y="34" width="777" height="26" fontName="Arial" textAdjust="StretchHeight" blankWhenNull="false" bold="true" hTextAlign="Left">
+			<expression><![CDATA[$P{SUBTITULO}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="image" uuid="5afee865-5463-4270-b57f-10f52ef03d1b" key="image-1" x="2" y="1" width="63" height="20" onErrorType="Blank" usingCache="true" lazy="true">
+			<expression><![CDATA[$P{CAMINHO_LOGO}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="3b503a2e-0a84-405a-a557-2a1d57f10d48" key="textField-11" x="68" y="3" width="714" height="13" fontName="Arial" blankWhenNull="false" bold="true" hTextAlign="Left">
+			<expression><![CDATA[$P{TITULO}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+	</pageHeader>
+	<columnHeader height="32" splitType="Stretch">
+		<element kind="textField" uuid="7a307606-705b-476b-a9ea-880232bc3b85" key="staticText-1" stretchType="ElementGroupHeight" mode="Opaque" x="0" y="0" width="49" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.beneficiario.data.nascimento.matricula.titular", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="7a307606-705b-476b-a9ea-880232bc3b85" key="staticText-2" stretchType="ElementGroupHeight" mode="Opaque" x="49" y="0" width="100" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.beneficiario.data.nascimento.nome.titular", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="7a307606-705b-476b-a9ea-880232bc3b85" key="staticText-3" stretchType="ElementGroupHeight" mode="Opaque" x="149" y="0" width="62" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.beneficiario.data.nascimento.cpf.titular", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="7a307606-705b-476b-a9ea-880232bc3b85" key="staticText-4" stretchType="ElementGroupHeight" mode="Opaque" x="211" y="0" width="100" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.beneficiario.data.nascimento.nome.beneficiario", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="7a307606-705b-476b-a9ea-880232bc3b85" key="staticText-5" stretchType="ElementGroupHeight" mode="Opaque" x="311" y="0" width="62" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.beneficiario.data.nascimento.cpf.beneficiario", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="7a307606-705b-476b-a9ea-880232bc3b85" key="staticText-6" stretchType="ElementGroupHeight" mode="Opaque" x="373" y="0" width="50" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.beneficiario.data.nascimento.data.nascimento.beneficiario", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="7a307606-705b-476b-a9ea-880232bc3b85" key="staticText-7" stretchType="ElementGroupHeight" mode="Opaque" x="423" y="0" width="85" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.beneficiario.data.nascimento.nome.mae", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="7a307606-705b-476b-a9ea-880232bc3b85" key="staticText-8" stretchType="ElementGroupHeight" mode="Opaque" x="508" y="0" width="85" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.beneficiario.data.nascimento.beneficio", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="7a307606-705b-476b-a9ea-880232bc3b85" key="staticText-9" stretchType="ElementGroupHeight" mode="Opaque" x="593" y="0" width="60" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.beneficiario.data.nascimento.operadora", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="7a307606-705b-476b-a9ea-880232bc3b85" key="staticText-10" stretchType="ElementGroupHeight" mode="Opaque" x="653" y="0" width="81" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.beneficiario.data.nascimento.numero.cartao.definitivo", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="7a307606-705b-476b-a9ea-880232bc3b85" key="staticText-11" stretchType="ElementGroupHeight" mode="Opaque" x="734" y="0" width="48" height="32" backcolor="#CCCCCC" markup="none" fontName="Arial" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.beneficiario.data.nascimento.situacao.contrato", $P{RESPONSAVEL})]]></expression>
+			<box>
+				<topPen lineWidth="0.25"/>
+				<leftPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Prevent">
+			<element kind="staticText" uuid="50da7c72-217f-462e-a4f8-aabb17feb4fe" key="fundoLinha" stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="782" height="25" backcolor="#DDDDDD" printRepeatedValues="false">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($V{BACKGROUND}.intValue() % 2)==0)]]></printWhenExpression>
+				<text><![CDATA[ ]]></text>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="05da353e-37eb-4031-befe-76a54c77b26b" stretchType="ContainerHeight" x="0" y="0" width="49" height="25" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true">
+				<expression><![CDATA[$F{RSE_MATRICULA}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="7134432c-44f3-464c-93cb-d7f4496a0fbd" stretchType="ContainerHeight" x="49" y="0" width="100" height="25" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true">
+				<expression><![CDATA[$F{SER_NOME}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="a71c80e1-09fe-479a-b6d2-7824ea3afc5f" stretchType="ContainerHeight" x="149" y="0" width="62" height="25" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true">
+				<expression><![CDATA[$F{SER_CPF}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="833a8f93-668e-43de-ba2a-fc6c36a7db2d" stretchType="ContainerHeight" x="211" y="0" width="100" height="25" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true">
+				<expression><![CDATA[$F{BFC_NOME}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="c0194bdb-b311-47a4-913f-fcb16e9debc0" stretchType="ContainerHeight" x="311" y="0" width="62" height="25" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true">
+				<expression><![CDATA[$F{BFC_CPF}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="6466b17d-0edc-4eb0-b05f-bbf701079890" stretchType="ContainerHeight" x="373" y="0" width="50" height="25" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true">
+				<expression><![CDATA[(com.zetra.econsig.helper.texto.DateHelper.format($F{BFC_DATA_NASCIMENTO}, com.zetra.econsig.helper.texto.LocaleHelper.getDatePattern())).toString()]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="a4c4788c-6d25-4953-b86c-6fd3d9a78076" stretchType="ContainerHeight" x="423" y="0" width="85" height="25" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true">
+				<expression><![CDATA[$F{BFC_NOME_MAE}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8f16cce8-c36b-41f7-96f6-377ab074cabf" stretchType="ContainerHeight" x="508" y="0" width="85" height="25" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true">
+				<expression><![CDATA[$F{BEN_DESCRICAO}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="2b436222-4335-4ba5-85d8-e949854ef151" stretchType="ContainerHeight" x="593" y="0" width="60" height="25" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true">
+				<expression><![CDATA[$F{CSA_NOME}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="18225e27-8a16-4877-9e84-9b42eb6c95cb" stretchType="ContainerHeight" x="653" y="0" width="81" height="25" fontSize="8.0" textAdjust="StretchHeight" blankWhenNull="true" printWhenDetailOverflows="true">
+				<expression><![CDATA[$F{CBE_NUMERO}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="7b4935e8-5254-48ec-898b-3fadf898ec45" stretchType="ElementGroupHeight" x="734" y="0" width="48" height="25" fontSize="8.0" textAdjust="StretchHeight">
+				<expression><![CDATA[$F{SCB_DESCRICAO}]]></expression>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+			</element>
+		</band>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter height="25" splitType="Stretch">
+		<element kind="textField" uuid="4e2f3706-771d-4c89-9aac-1d453b4b8e07" key="textField" x="0" y="4" width="674" height="13" fontName="Times New Roman" fontSize="7.0" blankWhenNull="true">
+			<expression><![CDATA[$P{TEXTO_RODAPE}]]></expression>
+			<box>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<bottomPen lineWidth="0.0" lineColor="#000000"/>
+				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			</box>
+		</element>
+		<element kind="textField" uuid="ee955f5e-652c-4e87-817e-e2444ede0c7b" key="textField" x="674" y="4" width="60" height="13" blankWhenNull="false" hTextAlign="Right">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.pagina", $P{RESPONSAVEL}) + " " + com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.pagina.de", $P{RESPONSAVEL}, $V{PAGE_NUMBER}.toString())]]></expression>
+		</element>
+		<element kind="textField" uuid="e46f6935-de7a-45e4-b521-33b34ea08c20" key="textField" x="734" y="4" width="45" height="13" evaluationTime="Report" blankWhenNull="false">
+			<expression><![CDATA[" " + $V{PAGE_NUMBER} + ""]]></expression>
+		</element>
+	</pageFooter>
+	<summary splitType="Stretch"/>
+</jasperReport>

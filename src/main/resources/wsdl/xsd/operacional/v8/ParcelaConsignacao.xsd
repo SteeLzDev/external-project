@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="ParcelaConsignacao">
+   <xsd:complexType name="ParcelaConsignacao">
+       <xsd:sequence>
+		 <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="false" type="xsd:long"/>
+		 <xsd:element maxOccurs="1" minOccurs="0" name="adeIdentificador" nillable="false" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="0" name="servico" nillable="false" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="0" name="servicoCodigo" nillable="false" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="0" name="codVerba" nillable="false" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="0" name="servidor" nillable="false" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="0" name="cpf" nillable="false" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="0" name="matricula" nillable="false" type="xsd:string"/>
+		 <xsd:element maxOccurs="1" minOccurs="0" name="numeroParcela" nillable="false" type="xsd:int"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="dataDesconto" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="dataRealizado" nillable="false" type="xsd:date"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="valorPrevisto" nillable="false" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="valorRealizado" nillable="false" type="xsd:double"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="status" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="0" name="observacao" nillable="false" type="xsd:string"/>
+       </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,104 @@
+ul.uedit_complete_button_strip
+{
+    width: 672px;
+    height: 32px;
+    position: relative;
+    margin: 0 0 10px 0;
+    padding:0;
+    
+}
+
+.uedit_complete_textarea
+{
+    width: 672px;
+    height: 500px;
+    border: 1px solid #888888;
+}
+
+li.uedit_complete_button
+{
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: absolute; 
+    top: 0;
+}
+
+li.uedit_complete_button a
+{
+    display: block;   
+    background: transparent url(../img/uedit/strip.png) 0 0 no-repeat;
+    height: 32px;
+}
+
+/* Button sprites */
+li.uedit_complete_button_align_left a { background-position: -1px -1px; width: 31px; height: 31px; }
+
+li.uedit_complete_button_align_center a { background-position: -33px -1px; width: 31px; height: 31px; }
+
+li.uedit_complete_button_align_right a { background-position: -65px -1px; width: 31px; height: 31px; }
+
+li.uedit_complete_button_bold a { background-position: -129px -3px; width: 30px; height: 27px; }
+
+li.uedit_complete_button_italic a { background-position: -161px -3px; width: 30px; height: 27px; }
+
+li.uedit_complete_button_deleted a { background-position: -196px -2px; width: 29px; height: 29px; }
+
+li.uedit_complete_button_colorRed a { background-position: -1px -72px; width: 28px; height: 26px; }
+
+li.uedit_complete_button_colorYellow a { background-position: -31px -72px; width: 28px; height: 26px; }
+
+li.uedit_complete_button_colorGreen a { background-position: -61px -72px; width: 28px; height: 26px; }
+
+li.uedit_complete_button_colorBlue a { background-position: -91px -72px; width: 28px; height: 26px; }
+
+li.uedit_complete_button_estiloTitulo a { background-position: -129px -69px; width: 31px; height: 31px; }
+
+li.uedit_complete_button_estiloSubtitulo a { background-position: -161px -69px; width: 31px; height: 31px; }
+
+li.uedit_complete_button_estiloTexto a { background-position: -193px -69px; width: 31px; height: 31px; }
+
+li.uedit_complete_button_image a { background-position: -385px -4px; }
+
+li.uedit_complete_button_video a { background-position: -352px -0px; }
+
+li.uedit_complete_button_ulist a { background-position: -416px 0px; }
+
+li.uedit_complete_button_numlist a { background-position: -448px 0px; }
+
+li.uedit_complete_button_undo a { background-position: -480px 0px; }
+
+li.uedit_complete_button_redo a { background-position: -512px 0px; }
+
+li.uedit_complete_button_help a { background-position: -288px 0px; }
+
+/* Button positions */
+
+li.uedit_complete_button_colorRed { left: 0px; }
+li.uedit_complete_button_colorYellow { left: 32px; }
+li.uedit_complete_button_colorGreen { left: 64px; }
+li.uedit_complete_button_colorBlue { left: 96px; }
+
+li.uedit_complete_button_bold { left: 128px; }
+li.uedit_complete_button_italic { left: 160px; }
+li.uedit_complete_button_deleted { left: 192px; }
+
+li.uedit_complete_button_estiloTitulo { left: 224px; }
+li.uedit_complete_button_estiloSubtitulo { left: 256px; }
+li.uedit_complete_button_estiloTexto { left: 288px; }
+
+li.uedit_complete_button_align_left { left: 320px; }
+li.uedit_complete_button_align_center { left: 352px; }
+li.uedit_complete_button_align_right { left: 384px; }
+
+li.uedit_complete_button_ulist { left: 416px; }
+li.uedit_complete_button_numlist { left: 448px; }
+li.uedit_complete_button_image { left: 480px; }
+li.uedit_complete_button_video { left: 512px; }
+
+li.uedit_complete_button_undo { left: 544px; }
+li.uedit_complete_button_redo { left: 576px; }
+
+li.uedit_complete_button_help { left: 608px; }

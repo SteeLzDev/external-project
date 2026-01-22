@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="SituacaoUsuario">
+  <xsd:complexType name="SituacaoUsuario">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="0" name="ativo" nillable="false" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="bloqueado" nillable="false" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="excluido" nillable="false" type="xsd:boolean"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

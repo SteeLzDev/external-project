@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="Parcela">
+  <xsd:complexType name="Parcela">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="1" name="numero" nillable="false" type="xsd:int"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="dataDesconto" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="dataRealizado" nillable="false" type="xsd:date"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="valorPrevisto" nillable="false" type="xsd:double"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="valorRealizado" nillable="false" type="xsd:double"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="status" nillable="false" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="observacao" nillable="false" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

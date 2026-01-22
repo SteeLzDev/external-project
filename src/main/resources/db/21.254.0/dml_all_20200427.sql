@@ -1,0 +1,2 @@
+-- DESENV-13520
+INSERT INTO tb_tipo_log (TLO_CODIGO, TLO_DESCRICAO) VALUES ('9', 'Consulta');

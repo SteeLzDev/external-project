@@ -1,0 +1,11 @@
+-- DESENV-11872
+INSERT INTO tb_tipo_dado_adicional (TDA_CODIGO, TEN_CODIGO, TDA_DESCRICAO, TDA_EXPORTA, TDA_SUP_CONSULTA, TDA_CSE_CONSULTA, TDA_CSA_CONSULTA, TDA_SER_CONSULTA, TDA_SUP_ALTERA, TDA_CSE_ALTERA, TDA_CSA_ALTERA, TDA_SER_ALTERA, TDA_DOMINIO)
+VALUES ('40', '19', 'E-mail do servidor - Solicitação', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'ALFA');
+
+INSERT INTO tb_tipo_dado_adicional (TDA_CODIGO, TEN_CODIGO, TDA_DESCRICAO, TDA_EXPORTA, TDA_SUP_CONSULTA, TDA_CSE_CONSULTA, TDA_CSA_CONSULTA, TDA_SER_CONSULTA, TDA_SUP_ALTERA, TDA_CSE_ALTERA, TDA_CSA_ALTERA, TDA_SER_ALTERA, TDA_DOMINIO)
+VALUES ('41', '19', 'Observação - Solicitação', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'ALFA');
+
+UPDATE tb_texto_sistema set TEX_TEXTO = 'Selecione um ou mais arquivos para upload' WHERE TEX_CHAVE = 'mensagem.informe.arquivo.upload';
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('15259', '6', '405', '/v3/editarAnexosConsignacao', 'acao', 'exibirAssDigital', 1, 'S', 'S', NULL, 'N', '2');

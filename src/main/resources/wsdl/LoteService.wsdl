@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="LoteService"      
+     xmlns:soapenc12="http://www.w3.org/2003/05/soap-encoding"
+     xmlns:tns="LoteService"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:soap11="http://schemas.xmlsoap.org/soap/envelope/"
+     xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" 
+     xmlns:soapenc11="http://schemas.xmlsoap.org/soap/encoding/"
+     xmlns:ns11="Anexo">
+<wsdl:types>
+  <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="LoteService">
+    <xsd:element name="loteUploadRequest">
+      <xsd:complexType>
+        <xsd:sequence>
+          <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="1" name="tipo" nillable="false" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="1" name="leiaute" nillable="false" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="1" name="lote" nillable="false" type="ns11:Anexo" />
+          <xsd:element maxOccurs="1" minOccurs="1" name="identificador" nillable="false" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="loteUploadResponse">
+      <xsd:complexType>
+        <xsd:sequence>
+          <xsd:element maxOccurs="1" minOccurs="1" name="codRetorno" nillable="false" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="false" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="loteResultRequest">
+      <xsd:complexType>
+        <xsd:sequence>
+          <xsd:element maxOccurs="1" minOccurs="1" name="usuario" nillable="false" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="1" name="senha" nillable="false" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="1" name="identificador" nillable="false" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="loteResultResponse">
+      <xsd:complexType>
+        <xsd:sequence>
+          <xsd:element maxOccurs="1" minOccurs="1" name="codRetorno" nillable="false" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="1" name="mensagem" nillable="true" type="xsd:string"/>
+          <xsd:element maxOccurs="1" minOccurs="0" name="lote" nillable="false" type="ns11:Anexo" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="Anexo"
+        xmlns:soapenc11="http://schemas.xmlsoap.org/soap/encoding/">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" schemaLocation="xsd/schemas.xmlsoap.org_soap_encoding.xsd"/>
+    <xsd:complexType name="Anexo">
+       <xsd:sequence>         
+         <xsd:element maxOccurs="1" minOccurs="1" name="nomeArquivo" nillable="false" type="xsd:string"/>
+         <xsd:element maxOccurs="1" minOccurs="1" name="arquivo" type="soapenc11:base64"/>
+       </xsd:sequence>
+    </xsd:complexType>
+  </xsd:schema>
+</wsdl:types>
+<wsdl:message name="loteUploadRequest">
+  <wsdl:part name="parameters" element="tns:loteUploadRequest"/>
+</wsdl:message>
+<wsdl:message name="loteUploadResponse">
+  <wsdl:part name="parameters" element="tns:loteUploadResponse"/>
+</wsdl:message>
+<wsdl:message name="loteResultRequest">
+  <wsdl:part name="parameters" element="tns:loteResultRequest"/>
+</wsdl:message>
+<wsdl:message name="loteResultResponse">
+  <wsdl:part name="parameters" element="tns:loteResultResponse"/>
+</wsdl:message>
+<wsdl:portType name="LotePortType">
+  <wsdl:operation name="loteUpload">
+    <wsdl:input name="loteUploadRequest" message="tns:loteUploadRequest"/>
+    <wsdl:output name="loteUploadResponse" message="tns:loteUploadResponse"/>
+  </wsdl:operation>
+  <wsdl:operation name="loteResult">
+    <wsdl:input name="loteResultRequest" message="tns:loteResultRequest"/>
+    <wsdl:output name="loteResultResponse" message="tns:loteResultResponse"/>
+  </wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="LoteHttpBinding" type="tns:LotePortType">
+  <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <wsdl:operation name="loteUpload">
+    <wsdlsoap:operation soapAction="urn:loteUpload"/>
+    <wsdl:input name="loteUploadRequest">
+      <wsdlsoap:body use="literal"/>
+    </wsdl:input>
+    <wsdl:output name="loteUploadResponse">
+      <wsdlsoap:body use="literal"/>
+    </wsdl:output>
+  </wsdl:operation>
+  <wsdl:operation name="loteResult">
+    <wsdlsoap:operation soapAction="urn:loteResult"/>
+    <wsdl:input name="loteResultRequest">
+      <wsdlsoap:body use="literal"/>
+    </wsdl:input>
+    <wsdl:output name="loteResultResponse">
+      <wsdlsoap:body use="literal"/>
+    </wsdl:output>
+  </wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="LoteService">
+  <wsdl:port name="LoteHttpPort" binding="tns:LoteHttpBinding">
+    <wsdlsoap:address location="http://localhost:8080/services/LoteService"/>
+  </wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

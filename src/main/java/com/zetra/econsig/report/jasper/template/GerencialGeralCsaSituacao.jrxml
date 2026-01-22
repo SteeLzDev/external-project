@@ -1,0 +1,66 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="GerencialGeral" language="java" pageWidth="535" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" scriptletClass="com.zetra.econsig.report.reports.HeadingsScriptlet" uuid="fafc6ca9-d65b-4dbc-8907-416e7ee1a774">
+	<property name="ireport.scriptlethandling" value="2"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<property name="ireport.zoom" value="3.5369215365000035"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import>net.sf.jasperreports.engine.*</import>
+	<import>java.util.*</import>
+	<import>net.sf.jasperreports.engine.data.*</import>
+	<style name="Celula">
+		<box padding="0" leftPadding="2" rightPadding="2"/>
+	</style>
+	<parameter name="CAMINHO_LOGO" forPrompting="false" class="java.lang.String"/>
+	<parameter name="SUBTITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Subtitulo do relatório]]></description>
+	</parameter>
+	<parameter name="TEXTO_RODAPE" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Nome do Gestor(Consignante)]]></description>
+	</parameter>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String">
+		<description><![CDATA[Titulo do relatorio]]></description>
+	</parameter>
+	<parameter name="HeadingsCollection" forPrompting="false" class="java.util.Collection"/>
+	<parameter name="QTDE_CSA_TOTAL" forPrompting="false" class="java.lang.Integer"/>
+	<parameter name="RESPONSAVEL" class="com.zetra.econsig.helper.seguranca.AcessoSistema"/>
+	<parameter name="PERIODO" class="java.lang.String">
+		<description><![CDATA[PERÍODO DO FILTRO DE PERÍODO]]></description>
+	</parameter>
+	<query language="sql"><![CDATA[]]></query>
+	<field name="consignataria" class="java.lang.String"/>
+	<field name="status" class="java.lang.String"/>
+	<field name="observacao" class="java.lang.String"/>
+	<background splitType="Stretch"/>
+	<title height="59" splitType="Stretch">
+		<element kind="textField" uuid="1866b565-5590-4649-bfe1-8e9ac0394d87" key="staticText-2" x="190" y="45" width="88" height="14" markup="none" fontName="Arial" fontSize="9.0" bold="true" hTextAlign="Right">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralcsa.status", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="b398c440-88d5-4423-8cb6-53296d6d6d4f" key="textField-3" x="1" y="26" width="522" height="17" blankWhenNull="false">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralcsa.quantidade.convenio", $P{RESPONSAVEL}, com.zetra.econsig.helper.texto.NumberHelper.formata(Double.parseDouble($P{QTDE_CSA_TOTAL}.toString()), "#,###; -#,###"))]]></expression>
+		</element>
+		<element kind="textField" uuid="88806de4-7131-42db-af2a-5f4afdd2b1ab" key="staticText-5" x="278" y="45" width="245" height="14" markup="none" fontName="Arial" fontSize="9.0" bold="true" hTextAlign="Right">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.relatorio.gerencialgeralcsa.observacao.convenio", $P{RESPONSAVEL})]]></expression>
+		</element>
+		<element kind="textField" uuid="132a77a8-3b71-4eb1-ae31-01b7db3ee51e" key="staticText-2" x="13" y="45" width="177" height="14" markup="none" fontName="Arial" fontSize="9.0" bold="true" hTextAlign="Left">
+			<expression><![CDATA[com.zetra.econsig.helper.texto.ApplicationResourcesHelper.getMessage("rotulo.consignataria.plural", $P{RESPONSAVEL})]]></expression>
+		</element>
+	</title>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader splitType="Stretch"/>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<element kind="textField" uuid="26796121-a253-4415-93cc-2cf5d492020e" key="textField-1" x="13" y="1" width="177" height="14" fontSize="8.0" blankWhenNull="true">
+				<expression><![CDATA[$F{consignataria}]]></expression>
+			</element>
+			<element kind="textField" uuid="358ddd06-47e8-4ca9-a320-c044f8aff732" key="textField-2" x="190" y="1" width="88" height="14" fontSize="8.0" pattern="#,##0" blankWhenNull="true" hTextAlign="Right">
+				<expression><![CDATA[$F{status}]]></expression>
+			</element>
+			<element kind="textField" uuid="e09dddf4-c4ae-4429-bab7-45ec658e76be" key="textField-6" x="278" y="1" width="245" height="14" fontSize="8.0" textAdjust="StretchHeight" pattern="¤ #,##0.00" blankWhenNull="true" printWhenDetailOverflows="true" hTextAlign="Right">
+				<expression><![CDATA[$F{observacao}]]></expression>
+			</element>
+		</band>
+	</detail>
+	<columnFooter splitType="Stretch"/>
+	<pageFooter splitType="Stretch"/>
+</jasperReport>

@@ -1,0 +1,14 @@
+-- DESENV-11199
+
+UPDATE tb_acesso_recurso SET ACR_RECURSO = '/v3/consultarRelatoriosBI', ACR_PARAMETRO = 'acao', ACR_OPERACAO = 'listarConsultas'  WHERE FUN_CODIGO = '233' and ACR_RECURSO = '/bi/lst_consulta.jsp';
+UPDATE tb_acesso_recurso SET ACR_RECURSO = '/v3/consultarRelatoriosBI', ACR_PARAMETRO = 'acao', ACR_OPERACAO = 'executarConsulta' WHERE FUN_CODIGO = '233' and ACR_RECURSO = '/bi/consulta.jsp';
+UPDATE tb_acesso_recurso SET ACR_RECURSO = '/v3/manterConsultaBI',      ACR_PARAMETRO = 'acao', ACR_OPERACAO = 'excluirConsulta', ACR_METODO_HTTP = '2' WHERE FUN_CODIGO = '233' and ACR_RECURSO = '/bi/modifica_consulta.jsp';
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP) 
+VALUES ('15317', '1', '233', '/v3/manterConsultaBI', NULL, NULL, 1, 'S', 'S', NULL, 'S', '0'); 
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP) 
+VALUES ('15318', '2', '233', '/v3/manterConsultaBI', NULL, NULL, 1, 'S', 'S', NULL, 'S', '0'); 
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ITM_CODIGO, ACR_FIM_FLUXO, ACR_METODO_HTTP) 
+VALUES ('15319', '3', '233', '/v3/manterConsultaBI', NULL, NULL, 1, 'S', 'S', NULL, 'S', '0'); 

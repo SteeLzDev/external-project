@@ -1,0 +1,6 @@
+-- DESENV-11704
+UPDATE tb_tipo_dado_adicional
+SET TDA_SER_ALTERA = 'S', TDA_DOMINIO = 'ALFA'
+WHERE TDA_CODIGO = '25'
+AND COALESCE((SELECT PSI_VLR FROM tb_param_sist_consignante WHERE TPC_CODIGO = '316'), 'N') = 'S'
+;

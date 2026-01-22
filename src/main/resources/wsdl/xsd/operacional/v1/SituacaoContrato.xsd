@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="SituacaoContrato">
+  <xsd:complexType name="SituacaoContrato">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="1" name="solicitado" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="aguardandoConfirmacao" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="aguardandoDeferimento" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="indeferida" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="deferida" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="emAndamento" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="suspensa" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="cancelada" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="liquidada" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="concluido" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="suspensaPeloConsignante" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="aguardandoLiquidacao" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="estoque" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="estoqueNaoLiberado" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="emCarencia" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="aguardandoLiquidacaoCompra" nillable="true" type="xsd:boolean"/>
+      <xsd:element maxOccurs="1" minOccurs="1" name="estoqueMensal" nillable="true" type="xsd:boolean"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

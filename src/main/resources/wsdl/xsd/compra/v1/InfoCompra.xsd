@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="InfoCompra">
+  <xsd:complexType name="InfoCompra">
+    <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="0" name="adeNumero" nillable="true" type="xsd:long"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="codigoConsignataria" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="nomeConsignataria" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="nomeServidor" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="matricula" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="cpf" nillable="true" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="dataCompra" nillable="true" type="xsd:dateTime"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="dataInfoSaldoDevedor" nillable="true" type="xsd:dateTime"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="valorSaldoDevedor" nillable="true" type="xsd:double"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="dataAprovacaoSaldoDevedor" nillable="true" type="xsd:dateTime"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="dataPagamentoSaldoDevedor" nillable="true" type="xsd:dateTime"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="situacao" nillable="true" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

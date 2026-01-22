@@ -1,0 +1,139 @@
+{
+  "properties": [
+    {
+      "name": "external.cache.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache externo"
+    },
+    {
+      "name": "external.cache.paramsist.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.parametro.ParamSist"
+    },
+    {
+      "name": "external.cache.paramsvc.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.dto.entidade.ParamSvcTO"
+    },
+    {
+      "name": "external.cache.controle-consulta.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.margem.ControleConsulta"
+    },
+    {
+      "name": "external.cache.controle-comunicacao-permitida.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.comunicacao.ControleComunicacaoPermitida"
+    },
+    {
+      "name": "external.cache.controle-tipo-entidade.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.log.ControleTipoEntidade"
+    },
+    {
+      "name": "external.cache.acesso-recurso.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.seguranca.AcessoRecursoHelper"
+    },
+    {
+      "name": "external.cache.margem.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.margem.MargemHelper"
+    },
+    {
+      "name": "external.cache.natureza-rel-svc.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.servico.NaturezaRelSvc"
+    },
+    {
+      "name": "external.cache.certificado-digital.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.usuario.CertificadoDigital"
+    },
+    {
+      "name": "external.cache.funcao-exige-motivo.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.seguranca.FuncaoExigeMotivo"
+    },
+    {
+      "name": "external.cache.config-relatorio.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.report.config.ConfigRelatorio"
+    },
+    {
+      "name": "external.cache.controle-restricao-acesso.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.seguranca.ControleRestricaoAcesso"
+    },
+    {
+      "name": "external.cache.casamento-margem.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.margem.CasamentoMargem"
+    },
+    {
+      "name": "external.cache.status-autorizacao-desconto.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.consignacao.StatusAutorizacaoDesconto"
+    },
+    {
+      "name": "external.cache.periodo.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.periodo.PeriodoHelper"
+    },
+    {
+      "name": "external.cache.repasse.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.periodo.RepasseHelper"
+    },
+    {
+      "name": "external.cache.controle-acesso-seguranca.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.seguranca.ControleAcessoSeguranca"
+    },
+    {
+      "name": "external.cache.application-resources.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.texto.ApplicationResourcesHelper"
+    },
+    {
+      "name": "external.cache.param-senha-externa.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.senhaexterna.ParamSenhaExternaHelper"
+    },
+    {
+      "name": "external.cache.controle-envio-email.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.email.ControleEnvioEmail"
+    },
+    {
+      "name": "external.cache.show-field.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.sistema.ShowFieldHelper"
+    },
+    {
+      "name": "external.cache.view-image.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.sistema.ViewImageHelper"
+    },
+    {
+      "name": "external.cache.ip-watchdog.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.webservice.rest.filter.IpWatchdog"
+    },
+    {
+      "name": "external.cache.recurso-sistema.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.sistema.RecursoSistemaHelper"
+    },
+    {
+      "name": "external.cache.regra-limite-operacao.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.limiteoperacao.RegraLimiteOperacaoCache"
+    },
+    {
+      "name": "external.cache.limite-consignacao-csa-diario.enabled",
+      "type": "java.lang.String",
+      "description": "Habilita o cache para a classe com.zetra.econsig.helper.contabilizacao.ContabilizacaoInclusaoContratos"
+    }
+  ]
+}

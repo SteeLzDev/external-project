@@ -1,0 +1,17 @@
+-- DESENV-9311
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16246', '1', '196', '/v3/excluirArquivo', 'tipo', 'imagem', 1, 'S', 'S', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16247', '7', '196', '/v3/excluirArquivo', 'tipo', 'imagem', 1, 'S', 'S', 'N', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16248', '1', '196', '/v3/manterBanner', 'acao', 'upload', 1, 'S', 'S', 'S', '2');
+
+INSERT INTO tb_acesso_recurso (ACR_CODIGO, PAP_CODIGO, FUN_CODIGO, ACR_RECURSO, ACR_PARAMETRO, ACR_OPERACAO, ACR_ATIVO, ACR_BLOQUEIO, ACR_SESSAO, ACR_FIM_FLUXO, ACR_METODO_HTTP)
+VALUES ('16249', '7', '196', '/v3/manterBanner', 'acao', 'upload', 1, 'S', 'S', 'S', '2');
+
+UPDATE tb_acesso_recurso SET ACR_RECURSO = '/v3/manterBanner', ACR_PARAMETRO = 'acao', ACR_OPERACAO = 'iniciar'   WHERE ACR_CODIGO = '11436';
+UPDATE tb_acesso_recurso SET ACR_RECURSO = '/v3/manterBanner', ACR_PARAMETRO = 'acao', ACR_OPERACAO = 'iniciar'   WHERE ACR_CODIGO = '12409';
+UPDATE tb_acesso_recurso SET ACR_RECURSO = '/v3/manterBanner', ACR_PARAMETRO = 'acao', ACR_OPERACAO = 'consultar' WHERE ACR_CODIGO = '11437';
+UPDATE tb_acesso_recurso SET ACR_RECURSO = '/v3/manterBanner', ACR_PARAMETRO = 'acao', ACR_OPERACAO = 'consultar' WHERE ACR_CODIGO = '12410';

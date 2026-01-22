@@ -1,0 +1,2 @@
+-- DESENV-11243
+UPDATE tb_tipo_notificacao SET TNO_ENVIO = 'I' WHERE TNO_CODIGO = '8';

@@ -1,0 +1,242 @@
+//
+// Este arquivo foi gerado pela Eclipse Implementation of JAXB, v4.0.3 
+// Consulte https://eclipse-ee4j.github.io/jaxb-ri 
+// Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
+//
+
+
+package com.zetra.econsig.webservice.soap.folha.v1;
+
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+
+
+/**
+ * <p>Classe Java de anonymous complex type.
+ * 
+ * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * 
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="usuario" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="senha" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="tipoEntidade" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="codigoEntidade" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="diaCorte" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         <element name="periodoInicial" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="quantidadePeriodos" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         <element name="diaPrevisaoRetorno" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "", propOrder = {
+    "usuario",
+    "senha",
+    "tipoEntidade",
+    "codigoEntidade",
+    "diaCorte",
+    "periodoInicial",
+    "quantidadePeriodos",
+    "diaPrevisaoRetorno"
+})
+@XmlRootElement(name = "atualizarCalendarioFolha", namespace = "FolhaService-v1_0")
+public class AtualizarCalendarioFolha {
+
+    @XmlElement(namespace = "FolhaService-v1_0", required = true)
+    protected java.lang.String usuario;
+    @XmlElement(namespace = "FolhaService-v1_0", required = true)
+    protected java.lang.String senha;
+    @XmlElement(namespace = "FolhaService-v1_0", required = true)
+    protected java.lang.String tipoEntidade;
+    @XmlElement(namespace = "FolhaService-v1_0", required = true)
+    protected java.lang.String codigoEntidade;
+    @XmlElement(namespace = "FolhaService-v1_0")
+    protected int diaCorte;
+    @XmlElement(namespace = "FolhaService-v1_0", required = true)
+    protected java.lang.String periodoInicial;
+    @XmlElement(namespace = "FolhaService-v1_0")
+    protected int quantidadePeriodos;
+    @XmlElement(namespace = "FolhaService-v1_0")
+    protected int diaPrevisaoRetorno;
+
+    /**
+     * Obtém o valor da propriedade usuario.
+     * 
+     * @return
+     *     possible object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public java.lang.String getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * Define o valor da propriedade usuario.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public void setUsuario(java.lang.String value) {
+        this.usuario = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade senha.
+     * 
+     * @return
+     *     possible object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public java.lang.String getSenha() {
+        return senha;
+    }
+
+    /**
+     * Define o valor da propriedade senha.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public void setSenha(java.lang.String value) {
+        this.senha = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade tipoEntidade.
+     * 
+     * @return
+     *     possible object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public java.lang.String getTipoEntidade() {
+        return tipoEntidade;
+    }
+
+    /**
+     * Define o valor da propriedade tipoEntidade.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public void setTipoEntidade(java.lang.String value) {
+        this.tipoEntidade = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade codigoEntidade.
+     * 
+     * @return
+     *     possible object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public java.lang.String getCodigoEntidade() {
+        return codigoEntidade;
+    }
+
+    /**
+     * Define o valor da propriedade codigoEntidade.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public void setCodigoEntidade(java.lang.String value) {
+        this.codigoEntidade = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade diaCorte.
+     * 
+     */
+    public int getDiaCorte() {
+        return diaCorte;
+    }
+
+    /**
+     * Define o valor da propriedade diaCorte.
+     * 
+     */
+    public void setDiaCorte(int value) {
+        this.diaCorte = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade periodoInicial.
+     * 
+     * @return
+     *     possible object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public java.lang.String getPeriodoInicial() {
+        return periodoInicial;
+    }
+
+    /**
+     * Define o valor da propriedade periodoInicial.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link java.lang.String }
+     *     
+     */
+    public void setPeriodoInicial(java.lang.String value) {
+        this.periodoInicial = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade quantidadePeriodos.
+     * 
+     */
+    public int getQuantidadePeriodos() {
+        return quantidadePeriodos;
+    }
+
+    /**
+     * Define o valor da propriedade quantidadePeriodos.
+     * 
+     */
+    public void setQuantidadePeriodos(int value) {
+        this.quantidadePeriodos = value;
+    }
+
+    /**
+     * Obtém o valor da propriedade diaPrevisaoRetorno.
+     * 
+     */
+    public int getDiaPrevisaoRetorno() {
+        return diaPrevisaoRetorno;
+    }
+
+    /**
+     * Define o valor da propriedade diaPrevisaoRetorno.
+     * 
+     */
+    public void setDiaPrevisaoRetorno(int value) {
+        this.diaPrevisaoRetorno = value;
+    }
+
+}

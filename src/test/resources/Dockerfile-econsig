@@ -1,0 +1,2 @@
+FROM flyway/flyway:6.4.4
+COPY sql/econsig /flyway/sql

@@ -1,0 +1,111 @@
+package com.zetra.econsig.folha.exportacao.validacao.regra;
+
+import java.util.Iterator;
+import java.util.List;
+
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+
+import com.zetra.econsig.dto.TransferObject;
+import com.zetra.econsig.dto.entidade.RegraValidacaoMovimentoTO;
+import com.zetra.econsig.dto.entidade.ResultadoRegraValidacaoMovimentoTO;
+import com.zetra.econsig.dto.entidade.ResultadoValidacaoMovimentoTO;
+import com.zetra.econsig.exception.DAOException;
+import com.zetra.econsig.helper.texto.DateHelper;
+import com.zetra.econsig.persistence.dao.MySqlGenericDAO;
+import com.zetra.econsig.persistence.dao.mysql.MySqlDAOFactory;
+import com.zetra.econsig.values.CodedValues;
+
+/**
+ * <p>Title: RegraVrcTotalRegistros</p>
+ * <p>Description: Implementação MYSQL da regra com a comparação da quantidade total de registros gerados.</p>
+ * <p>Copyright: Copyright (c) 2003-2006</p>
+ * <p>Company: ZetraSoft Ltda.</p>
+ * $Author$
+ * $Revision$
+ * $Date$
+ */
+public class RegraVrcTotalRegistros extends Regra {
+    private static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory.getLog(RegraVrcTotalRegistros.class);
+
+    @Override
+    public void executar(List<String> estCodigos, List<String> orgCodigos, ResultadoValidacaoMovimentoTO rva, RegraValidacaoMovimentoTO regra) {
+        // Define os códigos da regra atual.
+        rvaCodigo = rva.getRvaCodigo();
+        rvmCodigo = regra.getRvmCodigo();
+        this.estCodigos = estCodigos;
+        this.orgCodigos = orgCodigos;
+        periodo = DateHelper.format(rva.getRvaPeriodo(), "yyyy-MM-dd");
+
+        int limiteErro = Integer.parseInt(regra.getRvmLimiteErro());
+        int limiteAviso = Integer.parseInt(regra.getRvmLimiteAviso());
+
+        resultado = new ResultadoRegraValidacaoMovimentoTO(rvaCodigo, rvmCodigo);
+        String rrvResultado = CodedValues.VALIDACAO_MOVIMENTO_RESULTADO_OK;
+        StringBuilder rrvValorEncontrado = new StringBuilder();
+
+        List<TransferObject> variacaoCsa = buscaVariacaoPorCsa();
+
+        if (variacaoCsa != null) {
+            rrvValorEncontrado.append("Consignatárias com variação acima do limite: ");
+
+            Iterator<TransferObject> it = variacaoCsa.iterator();
+            while (it.hasNext()) {
+                TransferObject next = it.next();
+                String csaNome = next.getAttribute("CSA_NOME").toString();
+                String codVerba = (next.getAttribute("COD_VERBA") != null ? next.getAttribute("COD_VERBA").toString() : "VAZIO");
+                int qtdAtual = Integer.valueOf(next.getAttribute("QTD_ATUAL").toString());
+                int qtdAnterior = Integer.valueOf(next.getAttribute("QTD_ANTERIOR").toString());
+                if (qtdAnterior > 0) {
+                    long diferencaPercentual =  100 * Math.abs(qtdAtual - qtdAnterior) / qtdAnterior;
+
+                    if (diferencaPercentual >= limiteErro) {
+                        rrvValorEncontrado.append("<br>\n").append(csaNome).append(" - ").append(codVerba).append(": ").append(qtdAtual).append("/").append(qtdAnterior).append(" **");
+                        rrvResultado = CodedValues.VALIDACAO_MOVIMENTO_RESULTADO_ERRO;
+                    } else if (diferencaPercentual >= limiteAviso) {
+                        rrvValorEncontrado.append("<br>\n").append(csaNome).append(" - ").append(codVerba).append(": ").append(qtdAtual).append("/").append(qtdAnterior).append(" *");
+                        if (CodedValues.VALIDACAO_MOVIMENTO_RESULTADO_OK.equals(rrvResultado)) {
+                            rrvResultado = CodedValues.VALIDACAO_MOVIMENTO_RESULTADO_AVISO;
+                        }
+                    }
+                }
+            }
+
+            if (CodedValues.VALIDACAO_MOVIMENTO_RESULTADO_OK.equals(rrvResultado)) {
+                rrvValorEncontrado.append("OK");
+            }
+        }
+
+        resultado.setRrvResultado(rrvResultado);
+        resultado.setRrvValorEncontrado(rrvValorEncontrado.toString());
+    }
+
+    private List<TransferObject> buscaVariacaoPorCsa() {
+        final MapSqlParameterSource queryParams = new MapSqlParameterSource();
+        try {
+            StringBuilder query = new StringBuilder();
+            query.append("select coalesce(nullif(csa.csa_nome_abrev, ''), csa.csa_nome) as CSA_NOME, cnv.cnv_cod_verba as COD_VERBA, ");
+            query.append("sum(coalesce((select sum(hmf_qtd) from tb_historico_mov_fin hmf where hmf.cnv_codigo = cnv.cnv_codigo and hmf_periodo = date_sub('").append(periodo).append("', interval 1 month)), 0)) as QTD_ANTERIOR, ");
+            query.append("sum(coalesce((select count(*) from tb_arquivo_movimento_validacao amv where amv.cnv_codigo = cnv.cnv_codigo), 0)) as QTD_ATUAL ");
+            query.append("from tb_consignataria csa ");
+            query.append("inner join tb_convenio cnv on (cnv.csa_codigo = csa.csa_codigo) ");
+            query.append("inner join tb_orgao org on (cnv.org_codigo = org.org_codigo) ");
+            query.append("where 1=1 ");
+            if (estCodigos != null && estCodigos.size() > 0) {
+                query.append("and org.est_codigo IN (:estCodigos) ");
+                queryParams.addValue("estCodigos", estCodigos);
+            }
+            if (orgCodigos != null && orgCodigos.size() > 0) {
+                query.append("AND org.org_codigo in (:orgCodigos) ");
+                queryParams.addValue("orgCodigos", orgCodigos);
+            }
+            query.append("group by csa.csa_codigo, cnv.cnv_cod_verba ");
+            query.append("order by 1 ");
+
+            LOG.debug(query.toString());
+            return MySqlGenericDAO.getFieldsValuesList(queryParams, query.toString(), "CSA_NOME,COD_VERBA,QTD_ANTERIOR,QTD_ATUAL", MySqlDAOFactory.SEPARADOR);
+        } catch (DAOException e) {
+            LOG.error(e.getMessage(), e);
+            return null;
+        }
+    }
+}

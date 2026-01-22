@@ -1,0 +1,31 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="CHART-GRID-LINE" language="java" columnCount="1" pageWidth="765" pageHeight="400" orientation="Landscape" whenNoDataType="NoPages" columnWidth="761" leftMargin="2" rightMargin="2" topMargin="2" bottomMargin="2" uuid="48ec7f48-383f-49fc-a616-c0e386980f05">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="ISO-8859-1"/>
+	<import></import>
+	<parameter name="TITULO" forPrompting="false" class="java.lang.String"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="valor" class="java.lang.Long"/>
+	<field name="periodo" class="java.lang.String"/>
+	<background/>
+	<title/>
+	<pageHeader/>
+	<columnHeader/>
+	<columnFooter/>
+	<pageFooter/>
+	<summary height="396">
+		<element kind="chart" chartType="line" uuid="72383bac-f81f-413a-a4c9-ef276695d0ac" x="0" y="3" width="760" height="393" evaluationTime="Report" linkTarget="Self" titleColor="#000000" legendColor="#000000" legendBackgroundColor="#FFFFFF" customizerClass="com.zetra.econsig.report.jasper.dinamico.ChartCustomizer">
+			<titleFont fontName="Arial" fontSize="14.0" pdfEncoding="Cp1252" underline="false" strikeThrough="false" pdfEmbedded="false" bold="true" italic="false"/>
+			<legendFont fontName="Arial" fontSize="9.0"/>
+			<titleExpression><![CDATA[$P{TITULO}]]></titleExpression>
+			<dataset kind="category">
+				<series>
+					<seriesExpression><![CDATA[$F{nome}]]></seriesExpression>
+					<categoryExpression><![CDATA[$F{periodo}]]></categoryExpression>
+					<valueExpression><![CDATA[$F{valor}]]></valueExpression>
+				</series>
+			</dataset>
+			<plot/>
+		</element>
+	</summary>
+</jasperReport>

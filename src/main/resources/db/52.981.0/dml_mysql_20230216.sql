@@ -1,0 +1,6 @@
+-- DESENV-19489
+UPDATE tb_tipo_param_sist_consignante SET TPC_VLR_DEFAULT = 'N' WHERE TPC_CODIGO = '343' AND TPC_VLR_DEFAULT IS NULL;
+UPDATE tb_tipo_param_sist_consignante SET TPC_VLR_DEFAULT = 'N' WHERE TPC_CODIGO = '748' AND TPC_VLR_DEFAULT IS NULL;
+UPDATE tb_tipo_param_sist_consignante SET TPC_VLR_DEFAULT = 'N' WHERE TPC_CODIGO = '902' AND TPC_VLR_DEFAULT IS NULL;
+UPDATE tb_tipo_param_sist_consignante SET TPC_VLR_DEFAULT = '0', TPC_DOMINIO = CONCAT('ESCOLHA[0=Desabilitado', 0x3b, '1=SMS', 0x3b, '2=Email', 0x3b, '3=SMS/Email]') WHERE TPC_CODIGO = '539' AND TPC_VLR_DEFAULT IS NULL;
+

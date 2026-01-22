@@ -1,0 +1,67 @@
+<Documento>
+	<Propriedades SeExiste="Atualizar" />
+
+	<!--<Parametro Nome="tb_servidor_insert" Valor="INSERT INTO tb_servidor (SER_CODIGO, SER_CPF, SER_DATA_NASC, SER_NOME_MAE, SER_NOME_PAI, SER_NOME, SER_SEXO, SER_EST_CIVIL, SER_NACIONALIDADE, SER_NRO_IDT, SER_CART_PROF, SER_PIS, SER_END, SER_BAIRRO, SER_CIDADE, SER_COMPL, SER_NRO, SER_CEP, SER_UF, SER_TEL) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"/>
+	<Parametro Nome="tb_servidor_update" Valor="UPDATE tb_servidor SET SER_DATA_NASC=?, SER_NOME_MAE=?, SER_NOME_PAI=?, SER_SEXO=?, SER_EST_CIVIL=?, SER_NACIONALIDADE=?, SER_NRO_IDT=?, SER_CART_PROF=?, SER_PIS=?, SER_END=?, SER_BAIRRO=?, SER_CIDADE=?, SER_COMPL=?, SER_NRO=?, SER_CEP=?, SER_UF=?, SER_TEL=? WHERE SER_CPF=? AND SER_NOME=?"/>
+	<Parametro Nome="tb_servidor_delete" Valor="UPDATE tb_servidor SET SER_NOME=SER_NOME WHERE SER_NOME=? AND SER_CPF=?"/>
+
+	<Coluna Nome="SER_CODIGO"        Tipo="Chave Primaria" IndiceInsert="1"  IndiceUpdate="0"  IndiceDelete="0" Tabela="tb_servidor" Nulo="Nao"/>
+	<Coluna Nome="SER_CPF"           Tipo="Texto"          IndiceInsert="2"  IndiceUpdate="18" IndiceDelete="2" Tabela="tb_servidor" Nulo="Nao" Chave="Sim"/>
+	<Coluna Nome="SER_DATA_NASC"     Tipo="Data"           IndiceInsert="3"  IndiceUpdate="1"  IndiceDelete="0" Tabela="tb_servidor" Default="0000-00-00"/>
+	<Coluna Nome="SER_NOME_MAE"      Tipo="Texto"          IndiceInsert="4"  IndiceUpdate="2"  IndiceDelete="0" Tabela="tb_servidor" Default=" "/>
+	<Coluna Nome="SER_NOME_PAI"      Tipo="Texto"          IndiceInsert="5"  IndiceUpdate="3"  IndiceDelete="0" Tabela="tb_servidor" Default=" "/>
+	<Coluna Nome="SER_NOME"          Tipo="Texto"          IndiceInsert="6"  IndiceUpdate="19" IndiceDelete="1" Tabela="tb_servidor" Nulo="Nao"/>
+	<Coluna Nome="SER_SEXO"          Tipo="Texto"          IndiceInsert="7"  IndiceUpdate="4"  IndiceDelete="0" Tabela="tb_servidor" Default="M"/>
+	<Coluna Nome="SER_EST_CIVIL"     Tipo="Texto"          IndiceInsert="8"  IndiceUpdate="5"  IndiceDelete="0" Tabela="tb_servidor" Default="S"/>
+	<Coluna Nome="SER_NACIONALIDADE" Tipo="Texto"          IndiceInsert="9"  IndiceUpdate="6"  IndiceDelete="0" Tabela="tb_servidor" Default="BRASILEIRO"/>	
+	<Coluna Nome="SER_NRO_IDT"       Tipo="Texto"          IndiceInsert="10" IndiceUpdate="7"  IndiceDelete="0" Tabela="tb_servidor" />
+	<Coluna Nome="SER_CART_PROF"     Tipo="Texto"          IndiceInsert="11" IndiceUpdate="8"  IndiceDelete="0" Tabela="tb_servidor" />
+	<Coluna Nome="SER_PIS"           Tipo="Texto"          IndiceInsert="12" IndiceUpdate="9"  IndiceDelete="0" Tabela="tb_servidor" />
+	<Coluna Nome="SER_END"           Tipo="Texto"          IndiceInsert="13" IndiceUpdate="10" IndiceDelete="0" Tabela="tb_servidor" />
+	<Coluna Nome="SER_BAIRRO"        Tipo="Texto"          IndiceInsert="14" IndiceUpdate="11" IndiceDelete="0" Tabela="tb_servidor" />
+	<Coluna Nome="SER_CIDADE"        Tipo="Texto"          IndiceInsert="15" IndiceUpdate="12" IndiceDelete="0" Tabela="tb_servidor" />
+	<Coluna Nome="SER_COMPL"         Tipo="Texto"          IndiceInsert="16" IndiceUpdate="13" IndiceDelete="0" Tabela="tb_servidor" />
+	<Coluna Nome="SER_NRO"           Tipo="Numerico"       IndiceInsert="17" IndiceUpdate="14" IndiceDelete="0" Tabela="tb_servidor" />
+	<Coluna Nome="SER_CEP"           Tipo="Texto"          IndiceInsert="18" IndiceUpdate="15" IndiceDelete="0" Tabela="tb_servidor" />
+	<Coluna Nome="SER_UF"            Tipo="Texto"          IndiceInsert="19" IndiceUpdate="16" IndiceDelete="0" Tabela="tb_servidor" />
+	<Coluna Nome="SER_TEL"           Tipo="Texto"          IndiceInsert="20" IndiceUpdate="17" IndiceDelete="0" Tabela="tb_servidor" />
+
+	<Parametro Nome="tb_registro_servidor_insert" Valor="INSERT INTO tb_registro_servidor (RSE_CODIGO, SER_CODIGO, ORG_CODIGO, RSE_MATRICULA, RSE_MARGEM, RSE_MARGEM_2, RSE_MARGEM_3, RSE_MARGEM_REST, RSE_MARGEM_REST_2, RSE_MARGEM_REST_3, RSE_TIPO, RSE_DATA_CARGA) SELECT ?, SER_CODIGO, ORG_CODIGO, ?, ?/100.00, (?/100.00)*0.8, (?/100.00)*0.5, 0.00, 0.00, 0.00, ?, CURRENT_TIMESTAMP FROM tb_orgao, tb_servidor WHERE ORG_IDENTIFICADOR=? AND SER_CPF=? AND SER_NOME=?"/> -->
+	<Parametro Nome="tb_registro_servidor_update" Valor="UPDATE tb_registro_servidor SET RSE_MARGEM=?, RSE_MARGEM_2=?, RSE_MARGEM_3=?, RSE_DATA_CARGA=CURRENT_TIMESTAMP WHERE RSE_MATRICULA=? AND ORG_CODIGO=(SELECT ORG_CODIGO FROM tb_orgao WHERE ORG_IDENTIFICADOR=?)"/>
+	<!--<Parametro Nome="tb_registro_servidor_delete" Valor="UPDATE tb_registro_servidor SET RSE_MARGEM=0, RSE_MARGEM_REST=0, RSE_TIPO='EXCLUIDO' WHERE RSE_MATRICULA=? AND ORG_CODIGO=(SELECT ORG_CODIGO FROM tb_orgao WHERE ORG_IDENTIFICADOR=?)"/> -->
+
+	<Coluna Nome="RSE_CODIGO"        Tipo="Chave Primaria"    IndiceInsert="1" IndiceUpdate="0" IndiceDelete="0" Tabela="tb_registro_servidor" Nulo="Nao"/>
+	<Coluna Nome="RSE_MATRICULA"     Tipo="Texto"             IndiceInsert="2" IndiceUpdate="5" IndiceDelete="1" Tabela="tb_registro_servidor" Nulo="Nao"/>
+	<Coluna Nome="RSE_MARGEM"        Tipo="Numerico"          IndiceInsert="3" IndiceUpdate="1" IndiceDelete="0" Tabela="tb_registro_servidor" Default="0.00"/>
+	<Coluna Nome="RSE_MARGEM_2"      Tipo="Numerico"          IndiceInsert="4" IndiceUpdate="2" IndiceDelete="0" Tabela="tb_registro_servidor" Default="0.00"/>
+	<Coluna Nome="RSE_MARGEM_3"      Tipo="Numerico"          IndiceInsert="5" IndiceUpdate="3" IndiceDelete="0" Tabela="tb_registro_servidor" Default="0.00"/>
+	<Coluna Nome="RSE_TIPO"          Tipo="Texto"             IndiceInsert="6" IndiceUpdate="4" IndiceDelete="0" Tabela="tb_registro_servidor" />
+   <Coluna Nome="ORG_IDENTIFICADOR" Tipo="Texto"             IndiceInsert="7" IndiceUpdate="6" IndiceDelete="2" Tabela="tb_registro_servidor" Nulo="Nao"/>
+	<Coluna Nome="SER_CPF"           Tipo="Texto"             IndiceInsert="8" IndiceUpdate="0" IndiceDelete="0" Tabela="tb_registro_servidor" Nulo="Nao"/>
+	<Coluna Nome="SER_NOME"          Tipo="Texto"             IndiceInsert="9" IndiceUpdate="0" IndiceDelete="0" Tabela="tb_registro_servidor" Nulo="Nao"/>
+
+	<!--<Parametro Nome="tb_margem_registro_servidor_insert" Valor="INSERT INTO tb_margem_registro_servidor (RSE_CODIGO, MAR_CODIGO, MRS_MARGEM, MRS_MARGEM_REST, MRS_MARGEM_USADA) SELECT RSE_CODIGO, '101', ?, ?, 0 FROM tb_orgao, tb_registro_servidor WHERE tb_registro_servidor.ORG_CODIGO=tb_orgao.ORG_CODIGO AND ORG_IDENTIFICADOR=? AND RSE_MATRICULA=?"/>
+	<Parametro Nome="tb_margem_registro_servidor_update" Valor="UPDATE tb_margem_registro_servidor, tb_registro_servidor, tb_orgao SET MRS_MARGEM=? WHERE tb_registro_servidor.RSE_CODIGO=tb_margem_registro_servidor.RSE_CODIGO AND tb_registro_servidor.ORG_CODIGO=tb_orgao.ORG_CODIGO AND ORG_IDENTIFICADOR=? AND RSE_MATRICULA=? AND MAR_CODIGO='101'"/>
+
+	<Coluna Nome="RSE_MARGEM"        Tipo="Numerico"          IndiceInsert="1" IndiceUpdate="1" IndiceDelete="0" Tabela="tb_margem_registro_servidor" Default="0.00"/>
+	<Coluna Nome="RSE_MARGEM"        Tipo="Numerico"          IndiceInsert="2" IndiceUpdate="0" IndiceDelete="0" Tabela="tb_margem_registro_servidor" Default="0.00"/>
+        <Coluna Nome="ORG_IDENTIFICADOR" Tipo="Texto"             IndiceInsert="3" IndiceUpdate="2" IndiceDelete="0" Tabela="tb_margem_registro_servidor" Nulo="Nao"/>
+	<Coluna Nome="RSE_MATRICULA"     Tipo="Texto"             IndiceInsert="4" IndiceUpdate="3" IndiceDelete="0" Tabela="tb_margem_registro_servidor" Nulo="Nao"/>-->
+
+        <!--<Parametro Nome="tb_margem_registro_servidor_insert" Valor="INSERT INTO tb_margem_registro_servidor (RSE_CODIGO, MAR_CODIGO, MRS_MARGEM, MRS_MARGEM_REST, MRS_MARGEM_USADA) SELECT RSE_CODIGO, '102', ?, ?, 0 FROM tb_orgao, tb_registro_servidor WHERE tb_registro_servidor.ORG_CODIGO=tb_orgao.ORG_CODIGO AND ORG_IDENTIFICADOR=? AND RSE_MATRICULA=?"/>
+	<Parametro Nome="tb_margem_registro_servidor_update" Valor="UPDATE tb_margem_registro_servidor, tb_registro_servidor, tb_orgao SET MRS_MARGEM=? WHERE tb_registro_servidor.RSE_CODIGO=tb_margem_registro_servidor.RSE_CODIGO AND tb_registro_servidor.ORG_CODIGO=tb_orgao.ORG_CODIGO AND ORG_IDENTIFICADOR=? AND RSE_MATRICULA=? AND MAR_CODIGO='102'"/>
+
+	<Coluna Nome="RSE_MARGEM_2"        Tipo="Numerico"          IndiceInsert="1" IndiceUpdate="1" IndiceDelete="0" Tabela="tb_margem_registro_servidor" Default="0.00"/>
+	<Coluna Nome="RSE_MARGEM_2"        Tipo="Numerico"          IndiceInsert="2" IndiceUpdate="0" IndiceDelete="0" Tabela="tb_margem_registro_servidor" Default="0.00"/>
+        <Coluna Nome="ORG_IDENTIFICADOR" Tipo="Texto"             IndiceInsert="3" IndiceUpdate="2" IndiceDelete="0" Tabela="tb_margem_registro_servidor" Nulo="Nao"/>
+	<Coluna Nome="RSE_MATRICULA"     Tipo="Texto"             IndiceInsert="4" IndiceUpdate="3" IndiceDelete="0" Tabela="tb_margem_registro_servidor" Nulo="Nao"/>-->
+
+        <!--<Parametro Nome="tb_margem_registro_servidor_insert" Valor="INSERT INTO tb_margem_registro_servidor (RSE_CODIGO, MAR_CODIGO, MRS_MARGEM, MRS_MARGEM_REST, MRS_MARGEM_USADA) SELECT RSE_CODIGO, '103', ?, ?, 0 FROM tb_orgao, tb_registro_servidor WHERE tb_registro_servidor.ORG_CODIGO=tb_orgao.ORG_CODIGO AND ORG_IDENTIFICADOR=? AND RSE_MATRICULA=?"/>
+	<Parametro Nome="tb_margem_registro_servidor_update" Valor="UPDATE tb_margem_registro_servidor, tb_registro_servidor, tb_orgao SET MRS_MARGEM=? WHERE tb_registro_servidor.RSE_CODIGO=tb_margem_registro_servidor.RSE_CODIGO AND tb_registro_servidor.ORG_CODIGO=tb_orgao.ORG_CODIGO AND ORG_IDENTIFICADOR=? AND RSE_MATRICULA=? AND MAR_CODIGO='103'"/>
+
+	<Coluna Nome="RSE_MARGEM_3"        Tipo="Numerico"          IndiceInsert="1" IndiceUpdate="1" IndiceDelete="0" Tabela="tb_margem_registro_servidor" Default="0.00"/>
+	<Coluna Nome="RSE_MARGEM_3"        Tipo="Numerico"          IndiceInsert="2" IndiceUpdate="0" IndiceDelete="0" Tabela="tb_margem_registro_servidor" Default="0.00"/>
+        <Coluna Nome="ORG_IDENTIFICADOR" Tipo="Texto"             IndiceInsert="3" IndiceUpdate="2" IndiceDelete="0" Tabela="tb_margem_registro_servidor" Nulo="Nao"/>
+	<Coluna Nome="RSE_MATRICULA"     Tipo="Texto"             IndiceInsert="4" IndiceUpdate="3" IndiceDelete="0" Tabela="tb_margem_registro_servidor" Nulo="Nao"/>-->
+
+</Documento>

@@ -1,0 +1,6 @@
+-- DESENV-12560
+INSERT INTO tb_tipo_param_sist_consignante (TPC_CODIGO, GPS_CODIGO, TPC_DESCRICAO, TPC_DOMINIO, TPC_VLR_DEFAULT, TPC_SUP_CONSULTA, TPC_SUP_ALTERA, TPC_CSE_CONSULTA, TPC_CSE_ALTERA)
+VALUES ('687', NULL, 'Habilita criptografia de URLs', 'SN', 'N', 'N', 'N', 'N', 'N');
+
+INSERT INTO tb_param_sist_consignante (TPC_CODIGO, CSE_CODIGO, PSI_VLR)
+VALUES ('687', '1', 'N');

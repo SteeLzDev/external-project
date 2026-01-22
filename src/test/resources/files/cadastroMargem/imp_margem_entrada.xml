@@ -1,0 +1,11 @@
+<Documento>	
+        <Atributo Nome="__ACAO__"           Inicio="0"   Tamanho="1"/>
+	<Atributo Nome="SER_CPF"           Inicio="1"   Tamanho="11"/>
+	<Atributo Nome="SER_NOME"          Inicio="12" Tamanho="50"/>	
+   <Atributo Nome="ORG_IDENTIFICADOR" Inicio="62" Tamanho="9" Complemento="0" Alinhamento="Direita"/>
+	<Atributo Nome="RSE_MATRICULA"     Inicio="71" Tamanho="12" Complemento="0" Alinhamento="Direita"/>
+	<Atributo Nome="RSE_MARGEM"        Inicio="83" Tamanho="11" Complemento="0" Alinhamento="Direita"/>
+	<Atributo Nome="RSE_MARGEM_2"      Inicio="94" Tamanho="11" Complemento="0" Alinhamento="Direita"/>
+	<Atributo Nome="RSE_MARGEM_3"      Inicio="105" Tamanho="11" Complemento="0" Alinhamento="Direita"/>
+	<Atributo Nome="MRS_MARGEM_101"    Inicio="116" Tamanho="11" Complemento="0" Alinhamento="Direita"/>
+</Documento>

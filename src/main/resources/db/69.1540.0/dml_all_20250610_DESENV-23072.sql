@@ -1,0 +1,2 @@
+INSERT INTO tb_tipo_param_sist_consignante (TPC_CODIGO, TPC_DESCRICAO, TPC_DOMINIO, TPC_VLR_DEFAULT, TPC_CSE_ALTERA, TPC_CSE_CONSULTA, TPC_SUP_ALTERA, TPC_SUP_CONSULTA, GPS_CODIGO)
+VALUES ('1005', 'Classe de calculadora de Banner de Margem para exibição do cálculo no portal do servidor', 'ALFA', NULL, 'N', 'N', 'N', 'N', NULL);

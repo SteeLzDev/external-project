@@ -1,0 +1,12 @@
+-- DESENV-8994
+
+INSERT INTO tb_tipo_param_sist_consignante (TPC_CODIGO, GPS_CODIGO, TPC_DESCRICAO, TPC_DOMINIO, TPC_CSE_ALTERA, TPC_CSE_CONSULTA, TPC_VLR_DEFAULT, TPC_SUP_ALTERA, TPC_SUP_CONSULTA)
+VALUES ('593', NULL, 'URL do serviço de antivirus para verificação dos arquivos enviados ao sistema', 'ALFA', 'N', 'N', 'N', 'N', 'N');
+
+-- INSERT INTO tb_param_sist_consignante (TPC_CODIGO, CSE_CODIGO, PSI_VLR) VALUES ('593', '1', 'http:// 52.67.222.78:8080/scan');
+
+INSERT INTO tb_tipo_param_sist_consignante (TPC_CODIGO, GPS_CODIGO, TPC_DESCRICAO, TPC_DOMINIO, TPC_CSE_ALTERA, TPC_CSE_CONSULTA, TPC_VLR_DEFAULT, TPC_SUP_ALTERA, TPC_SUP_CONSULTA) 
+VALUES ('596', NULL, 'Habilita verificação de vírus nos arquivos enviados via upload', 'SN', 'N', 'N', 'N', 'N', 'N');
+
+INSERT INTO tb_param_sist_consignante (TPC_CODIGO, CSE_CODIGO, PSI_VLR)
+VALUES ('596', '1', 'N');
